@@ -1,0 +1,156 @@
+name: Pull Request
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-pull_request
+  cancel-in-progress: true
+
+jobs:
+  actionlint:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check workflow files
+        run: |
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint -color
+        shell: bash
+
+  changed-files:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    outputs:
+      app_any_changed: ${{ steps.changed-files.outputs.app_any_changed == 'true' }}
+      firebase_any_changed: ${{ steps.changed-files.outputs.firebase_any_changed == 'true' }}
+    steps:
+      - uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files_yaml: |
+            app:
+              - app/**
+            firebase:
+              - firebase/**
+
+  check_app:
+    needs: changed-files
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      matrix:
+        script:
+          - build_runner-build.sh
+          - dart-analyze.sh
+          - dart-fix.sh
+          - dart-format.sh
+          - test.sh
+
+    env:
+      execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
+
+    steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2.0.0
+        if: ${{ env.execute == 'true' }}
+        with:
+          comment_on_pr: false
+
+      ### Set up ###
+      - uses: actions/checkout@v4
+        if: ${{ env.execute == 'true' }}
+
+      - uses: kuhnroyal/flutter-fvm-config-action/config@v3
+        if: ${{ env.execute == 'true' }}
+        id: fvm-config-action
+        with:
+          path: app/.fvmrc
+
+      - name: Setup Flutter
+        if: ${{ env.execute == 'true' }}
+        uses: subosito/flutter-action@v2.18.0
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: "flutter-:os:-:channel:-:version:-:arch:"
+          pub-cache-key: "flutter-pub-:os:-:channel:-:version:-:arch:"
+
+      - name: Flutter bootstrap
+        if: ${{ env.execute == 'true' }}
+        run: |
+          .github/workflows/flutter_bootstrap.sh
+
+      ### Run script ###
+      - name: Run script
+        if: ${{ env.execute == 'true' }}
+        working-directory: app
+        run: |
+          ./scripts/${{ matrix.script }}
+        env:
+          USE_FVM: false
+
+  check_firebase:
+    needs: changed-files
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+
+    env:
+      execute: ${{ needs.changed-files.outputs.firebase_any_changed == 'true' }}
+
+    steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2.0.0
+        if: ${{ env.execute == 'true' }}
+        with:
+          comment_on_pr: false
+
+      ### Setup ###
+      - uses: actions/checkout@v4
+        if: ${{ env.execute == 'true' }}
+
+      - name: Authenticate to Google Cloud
+        if: ${{ env.execute == 'true' }}
+        uses: google-github-actions/auth@v2.1.7
+        with:
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER_STG }}
+          service_account: ${{ vars.SERVICE_ACCOUNT_STG }}
+
+      - name: Setup Node.js environment
+        if: ${{ env.execute == 'true' }}
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version-file: firebase/functions/package.json
+
+      - name: Firebase bootstrap
+        if: ${{ env.execute == 'true' }}
+        run: |
+          .github/workflows/firebase_bootstrap.sh
+
+      - name: Install dependencies
+        if: ${{ env.execute == 'true' }}
+        working-directory: firebase/functions
+        run: npm ci
+
+      ### Test ###
+      - name: Test
+        if: ${{ env.execute == 'true' }}
+        working-directory: firebase
+        run: |
+          ./firebase_emulators_test.sh

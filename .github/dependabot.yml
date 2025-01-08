@@ -1,0 +1,84 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/app"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+    groups:
+      firebase:
+        patterns:
+          - "firebase_*"
+
+      freezed:
+        patterns:
+          - "freezed_annotation"
+          - "freezed"
+          - "json_annotation"
+          - "json_serializable"
+
+      riverpod:
+        patterns:
+          - "hooks_riverpod"
+          - "riverpod_*"
+
+      slang:
+        patterns:
+          - "slang"
+          - "slang_flutter"
+          - "slang_build_runner"
+
+      talker:
+        patterns:
+          - "talker"
+          - "talker_*"
+
+      info_plus:
+        patterns:
+          - "*_info_plus"
+
+  - package-ecosystem: "npm"
+    directory: "/firebase/functions"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+    groups:
+      jest:
+        patterns:
+          - "@swc/jest"
+          - "@types/jest"
+          - "jest"
+
+      tsconfig:
+        patterns:
+          - "@tsconfig/*"
+
+      eslint:
+        patterns:
+          - "@types/eslint"
+          - "eslint"
+          - "eslint-plugin-*"
+          - "typescript-eslint"
+
+      firebase:
+        patterns:
+          - "firebase-*"
+
+      lodash:
+        patterns:
+          - "lodash"
+          - "@types/lodash"

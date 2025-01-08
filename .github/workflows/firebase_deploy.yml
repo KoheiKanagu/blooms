@@ -1,0 +1,91 @@
+name: Firebase Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Environment"
+        required: true
+        options:
+          - stg
+          - prod
+
+run-name: Firebase Deploy ${{ inputs.environment }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.environment }}
+  cancel-in-progress: true
+
+env:
+  WORKLOAD_IDENTITY_PROVIDER: ${{ inputs.environment == 'prod' && vars.WORKLOAD_IDENTITY_PROVIDER_PROD || vars.WORKLOAD_IDENTITY_PROVIDER_STG }}
+  SERVICE_ACCOUNT: ${{ inputs.environment == 'prod' && vars.SERVICE_ACCOUNT_PROD || vars.SERVICE_ACCOUNT_STG }}
+
+jobs:
+  deploy:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+
+    steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2.0.0
+        with:
+          comment_on_pr: false
+
+      - uses: actions/checkout@v4
+
+      ### Setup Firebase CLI ###
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2.1.7
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version-file: functions/package.json
+
+      - name: Firebase bootstrap
+        run: |
+          .github/workflows/firebase_bootstrap.sh
+
+      - run: |
+          firebase use ${{ inputs.environment }} --debug
+
+      - name: Install dependencies
+        working-directory: functions
+        run: npm ci
+
+      ### Setup Flutter ###
+      - uses: kuhnroyal/flutter-fvm-config-action/config@v3
+        id: fvm-config-action
+        with:
+          path: app/.fvmrc
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2.18.0
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: "flutter-:os:-:channel:-:version:-:arch:"
+          pub-cache-key: "flutter-pub-:os:-:channel:-:version:-:arch:"
+
+      - name: Flutter bootstrap
+        run: |
+          .github/workflows/flutter_bootstrap.sh
+
+      ### Flutter Build ###
+      - run: |
+          ./scripts/flutter-build-web.sh
+        working-directory: app
+
+      ### Deploy ###
+      - name: Firebase Deploy
+        run: |
+          firebase deploy --force --except extensions

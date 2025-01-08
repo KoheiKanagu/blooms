@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyC1P5CUilbvB3gFZf5Khehp3vvZyA2VJbg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>696006522566</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.kingu.BLOOMS.stg</string>
+	<key>PROJECT_ID</key>
+	<string>blooms-stg</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blooms-stg.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:696006522566:ios:9f01318fb72f1da001c9c7</string>
+</dict>
+</plist>

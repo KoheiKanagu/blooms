@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "blooms-stg",
+    "stg": "blooms-stg",
+    "prod": "blooms-prod-43d74"
+  }
+}
