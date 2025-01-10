@@ -83,7 +83,7 @@ jobs:
 
       ### Flutter Build ###
       - run: |
-          ./scripts/flutter-build-web.sh
+          ./scripts/flutter-build-web.sh --flavor ${{ inputs.environment }}
         working-directory: app
 
       ### Deploy ###
