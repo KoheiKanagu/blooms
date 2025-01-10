@@ -67,5 +67,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'blooms-prod-43d74.firebasestorage.app',
     iosBundleId: 'dev.kingu.BLOOMS',
   );
-
 }
