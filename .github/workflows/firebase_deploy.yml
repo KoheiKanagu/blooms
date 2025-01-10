@@ -85,6 +85,8 @@ jobs:
       - run: |
           ./scripts/flutter-build-web.sh --flavor ${{ inputs.environment }}
         working-directory: app
+        env:
+          USE_FVM: false
 
       ### Deploy ###
       - name: Firebase Deploy
