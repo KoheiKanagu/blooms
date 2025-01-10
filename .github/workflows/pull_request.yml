@@ -94,6 +94,11 @@ jobs:
         run: |
           .github/workflows/flutter_bootstrap.sh
 
+      - name: Install dependencies
+        working-directory: app
+        run: |
+          dart pub get
+
       ### Run script ###
       - name: Run script
         if: ${{ env.execute == 'true' }}
