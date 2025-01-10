@@ -5,6 +5,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,9 @@ Future<void> main() async {
       AppEnv.prod => prod_firebase.DefaultFirebaseOptions.currentPlatform,
     },
   );
+
+  // for debugging
+  // ignore: avoid_print
   print(appEnv);
 
   await FirebaseAppCheck.instance.activate(
@@ -25,9 +29,16 @@ Future<void> main() async {
   );
 
   final user = await FirebaseAuth.instance.signInAnonymously();
+
+  // for debugging
+  // ignore: avoid_print
   print(user.user?.uid);
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
