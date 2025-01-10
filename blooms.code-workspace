@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "app"
+    },
+    {
+      "path": "firebase"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2
+  }
+}

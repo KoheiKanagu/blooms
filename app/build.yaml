@@ -1,0 +1,44 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - require_trailing_commas
+            - non_constant_identifier_names
+            - require_trailing_commas
+            - cast_nullable_to_non_nullable
+            - lines_longer_than_80_chars
+            - unnecessary_null_checks
+            - strict_raw_type
+        generate_for:
+          include:
+            - lib/features/*/domain/**.dart
+            - lib/features/*/application/**.dart
+            - lib/i18n/**.dart
+            - lib/routing/**.dart
+            - lib/gen/faceSheet/**.dart
+            - lib/utils/**.dart
+      json_serializable:
+        options:
+          checked: true
+          explicit_to_json: true
+          include_if_null: true
+      riverpod_generator:
+        generate_for:
+          exclude:
+            - "test/mocks/*.dart"
+      slang_build_runner:
+        options:
+          base_locale: ja
+          fallback_strategy: base_locale
+          translate_var: i18n
+          flat_map: false
+          timestamp: false
+          statistics: false
+          output_directory: lib/gen
+
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable

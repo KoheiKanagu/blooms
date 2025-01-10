@@ -1,0 +1,62 @@
+{
+  "flutter": {
+    "platforms": {
+      "ios": {
+        "buildConfigurations": {
+          "Debug-prod": {
+            "projectId": "blooms-prod-43d74",
+            "appId": "1:492016627549:ios:8c389ddc0c9e9e531142b4",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/prod/GoogleService-Info.plist"
+          },
+          "Release-prod": {
+            "projectId": "blooms-prod-43d74",
+            "appId": "1:492016627549:ios:8c389ddc0c9e9e531142b4",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/prod/GoogleService-Info.plist"
+          },
+          "Profile-prod": {
+            "projectId": "blooms-prod-43d74",
+            "appId": "1:492016627549:ios:8c389ddc0c9e9e531142b4",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/prod/GoogleService-Info.plist"
+          },
+          "Debug-stg": {
+            "projectId": "blooms-stg",
+            "appId": "1:696006522566:ios:9f01318fb72f1da001c9c7",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/stg/GoogleService-Info.plist"
+          },
+          "Release-stg": {
+            "projectId": "blooms-stg",
+            "appId": "1:696006522566:ios:9f01318fb72f1da001c9c7",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/stg/GoogleService-Info.plist"
+          },
+          "Profile-stg": {
+            "projectId": "blooms-stg",
+            "appId": "1:696006522566:ios:9f01318fb72f1da001c9c7",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/stg/GoogleService-Info.plist"
+          }
+        }
+      },
+      "dart": {
+        "lib/constants/firebase_options_prod.dart": {
+          "projectId": "blooms-prod-43d74",
+          "configurations": {
+            "ios": "1:492016627549:ios:8c389ddc0c9e9e531142b4",
+            "web": "1:492016627549:web:a6b4b0c1588398211142b4"
+          }
+        },
+        "lib/constants/firebase_options_stg.dart": {
+          "projectId": "blooms-stg",
+          "configurations": {
+            "ios": "1:696006522566:ios:9f01318fb72f1da001c9c7",
+            "web": "1:696006522566:web:5dfaf4fc7571e5c901c9c7"
+          }
+        }
+      }
+    }
+  }
+}
