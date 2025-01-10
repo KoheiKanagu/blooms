@@ -48,7 +48,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.1.0
         with:
-          node-version-file: functions/package.json
+          node-version-file: firebase/functions/package.json
 
       - name: Firebase bootstrap
         run: |
@@ -56,9 +56,10 @@ jobs:
 
       - run: |
           firebase use ${{ inputs.environment }} --debug
+        working-directory: firebase
 
       - name: Install dependencies
-        working-directory: functions
+        working-directory: firebase/functions
         run: npm ci
 
       ### Setup Flutter ###
@@ -82,10 +83,13 @@ jobs:
 
       ### Flutter Build ###
       - run: |
-          ./scripts/flutter-build-web.sh
+          ./scripts/flutter-build-web.sh --flavor ${{ inputs.environment }}
         working-directory: app
+        env:
+          USE_FVM: false
 
       ### Deploy ###
       - name: Firebase Deploy
+        working-directory: firebase
         run: |
           firebase deploy --force --except extensions
