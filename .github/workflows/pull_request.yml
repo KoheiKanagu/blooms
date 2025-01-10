@@ -50,6 +50,7 @@ jobs:
       contents: read
       actions: read
     strategy:
+      fail-fast: false
       matrix:
         script:
           - build_runner-build.sh
