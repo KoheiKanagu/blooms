@@ -16,20 +16,25 @@ paths:
               schema:
                 properties:
                   createdAt:
-                    description: 作成日時. Timestamp
+                    description: 作成日時 Timestamp
                     type: object
+                    nullable: true
                   updatedAt:
-                    description: 更新日時. Timestamp
+                    description: 更新日時 Timestamp
                     type: object
+                    nullable: true
                   deletedAt:
-                    description: 削除日時. Timestamp
+                    description: 削除日時 Timestamp
                     type: object
+                    nullable: true
                   reportTime:
-                    description: レポートして欲しい目安の時間. Timestamp
+                    description: レポートして欲しい目安の時間 Timestamp
                     type: object
+                    nullable: true
                   weatherLocation:
                     description: 気象情報を取得する地域
                     type: string
+                    nullable: true
 
   /conditions_v1/{uid}/{documentId}:
     get:
@@ -41,32 +46,41 @@ paths:
               schema:
                 properties:
                   createdAt:
-                    description: 作成日時. Timestamp
+                    description: 作成日時 Timestamp
                     type: object
+                    nullable: true
                   updatedAt:
-                    description: 更新日時. Timestamp
+                    description: 更新日時 Timestamp
                     type: object
+                    nullable: true
                   deletedAt:
-                    description: 削除日時. Timestamp
+                    description: 削除日時 Timestamp
                     type: object
+                    nullable: true
                   type:
                     description: コンディションの種類
                     type: string
+                    default: unknown
                     enum:
+                      - unknown
                       - subjective
                       - photo
                   attachments:
                     description: 添付ファイルのgs://パス
                     type: array
+                    default: []
                     items:
                       type: string
                       example: gs://bucket/path/to/file
                   state:
                     description: attachmentsの解析で処理が必要な場合の状態
                     type: string
+                    default: unknown
                     enum:
-                      - success
+                      - unknown
+                      - pending
                       - inProgress
+                      - success
                       - failure
                   record:
                     description: 記録
@@ -83,16 +97,19 @@ paths:
               schema:
                 properties:
                   createdAt:
-                    description: 作成日時. Timestamp
+                    description: 作成日時 Timestamp
                     type: object
+                    nullable: true
                   updatedAt:
-                    description: 更新日時. Timestamp
+                    description: 更新日時 Timestamp
                     type: object
+                    nullable: true
                   deletedAt:
-                    description: 削除日時. Timestamp
+                    description: 削除日時 Timestamp
                     type: object
+                    nullable: true
                   targetDate:
-                    description: 何日を対象にしたレポートか. Timestamp
+                    description: 何日を対象にしたレポートか Timestamp
                     type: object
                   prompt:
                     description: Geminiによるレポートの生成のプロンプトのファイルパス
@@ -101,6 +118,7 @@ paths:
                   type:
                     description: レポートの種類
                     type: string
+                    default: last1day
                     enum:
                       - last1day
                       - last7days
