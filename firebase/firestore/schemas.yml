@@ -1,0 +1,121 @@
+openapi: 3.0.3
+
+info:
+  title: Firestore Schemas
+  version: 1.0.0
+  description: Firestore のスキーマ定義
+
+paths:
+  /users_v1/{uid}:
+    get:
+      responses:
+        "200":
+          description: ユーザー情報
+          content:
+            application/json:
+              schema:
+                properties:
+                  createdAt:
+                    description: 作成日時. Timestamp
+                    type: object
+                  updatedAt:
+                    description: 更新日時. Timestamp
+                    type: object
+                  deletedAt:
+                    description: 削除日時. Timestamp
+                    type: object
+                  reportTime:
+                    description: レポートして欲しい目安の時間. Timestamp
+                    type: object
+                  weatherLocation:
+                    description: 気象情報を取得する地域
+                    type: string
+
+  /conditions_v1/{uid}/{documentId}:
+    get:
+      responses:
+        "200":
+          description: 体調などの主観的なコンディション
+          content:
+            application/json:
+              schema:
+                properties:
+                  createdAt:
+                    description: 作成日時. Timestamp
+                    type: object
+                  updatedAt:
+                    description: 更新日時. Timestamp
+                    type: object
+                  deletedAt:
+                    description: 削除日時. Timestamp
+                    type: object
+                  type:
+                    description: コンディションの種類
+                    type: string
+                    enum:
+                      - subjective
+                      - photo
+                  attachments:
+                    description: 添付ファイルのgs://パス
+                    type: array
+                    items:
+                      type: string
+                      example: gs://bucket/path/to/file
+                  state:
+                    description: attachmentsの解析で処理が必要な場合の状態
+                    type: string
+                    enum:
+                      - success
+                      - inProgress
+                      - failure
+                  record:
+                    description: 記録
+                    type: string
+                    example: 頭痛がする
+
+  /reports_v1/{uid}/{documentId}:
+    get:
+      responses:
+        "200":
+          description: Geminiが生成したレポート
+          content:
+            application/json:
+              schema:
+                properties:
+                  createdAt:
+                    description: 作成日時. Timestamp
+                    type: object
+                  updatedAt:
+                    description: 更新日時. Timestamp
+                    type: object
+                  deletedAt:
+                    description: 削除日時. Timestamp
+                    type: object
+                  targetDate:
+                    description: 何日を対象にしたレポートか. Timestamp
+                    type: object
+                  prompt:
+                    description: Geminiによるレポートの生成のプロンプトのファイルパス
+                    type: string
+                    example: gs://bucket/path/to/file
+                  type:
+                    description: レポートの種類
+                    type: string
+                    enum:
+                      - last1day
+                      - last7days
+                      - last14days
+                      - last21days
+                      - last28days
+                  subjectiveConditionTendency:
+                    description: 主観的な状態の傾向
+                    type: string
+                  objectiveConditionTendency:
+                    description: 客観的な状態の傾向
+                    type: string
+                  analysisResult:
+                    description: 分析結果
+                    type: string
+                  advice:
+                    description: アドバイス
+                    type: string
