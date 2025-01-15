@@ -8,6 +8,24 @@ part of 'firebase_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$firebaseFirestoreHash() => r'eca974fdc891fcd3f9586742678f47582b20adec';
+
+/// See also [firebaseFirestore].
+@ProviderFor(firebaseFirestore)
+final firebaseFirestoreProvider =
+    AutoDisposeProvider<FirebaseFirestore>.internal(
+  firebaseFirestore,
+  name: r'firebaseFirestoreProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseFirestoreHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FirebaseFirestoreRef = AutoDisposeProviderRef<FirebaseFirestore>;
 String _$firebaseCrashlyticsHash() =>
     r'011819a5f3ce1923a2df677a4d83544b648711e6';
 

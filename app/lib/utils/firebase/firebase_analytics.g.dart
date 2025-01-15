@@ -27,7 +27,7 @@ final firebaseAnalyticsProvider =
 // ignore: unused_element
 typedef FirebaseAnalyticsRef = AutoDisposeProviderRef<FirebaseAnalytics>;
 String _$firebaseAnalyticsControllerHash() =>
-    r'27e7794be7927e8a409328676e14b870a0afe472';
+    r'073ad6e12add7930eee9027154332953770c888c';
 
 /// See also [FirebaseAnalyticsController].
 @ProviderFor(FirebaseAnalyticsController)
