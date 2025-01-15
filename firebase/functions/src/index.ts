@@ -1,7 +1,15 @@
+import * as admin from 'firebase-admin';
+import { initializeFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions';
-import * as logger from 'firebase-functions/logger';
-import { onRequest } from 'firebase-functions/v2/https';
+import * as f from 'firebase-functions/v1';
 
+const app = admin.initializeApp();
+
+initializeFirestore(app, {
+  preferRest: true,
+});
+
+// for v2
 setGlobalOptions({
   region: 'asia-northeast1',
   minInstances: 0,
@@ -10,7 +18,16 @@ setGlobalOptions({
   enforceAppCheck: true,
 });
 
-export const helloWorld = onRequest((_, response) => {
-  logger.info('Hello logs!', { structuredData: true });
-  response.send('Hello from Firebase!');
-});
+// for v1
+export function functions(): f.FunctionBuilder {
+  return f
+    .runWith({
+      memory: '256MB',
+      timeoutSeconds: 10,
+      failurePolicy: true,
+      enforceAppCheck: true,
+    })
+    .region('asia-northeast1');
+}
+
+export { onCreateAuthUser } from './onCreateAuthUser';
