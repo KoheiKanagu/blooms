@@ -78,41 +78,5 @@ final packageInfoAppNameProvider = AutoDisposeProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PackageInfoAppNameRef = AutoDisposeProviderRef<String>;
-String _$packageInfoPackageNameHash() =>
-    r'1bc859516fbdc5cfa901f11852b3600fa762a2d6';
-
-/// See also [packageInfoPackageName].
-@ProviderFor(packageInfoPackageName)
-final packageInfoPackageNameProvider = AutoDisposeProvider<String>.internal(
-  packageInfoPackageName,
-  name: r'packageInfoPackageNameProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$packageInfoPackageNameHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef PackageInfoPackageNameRef = AutoDisposeProviderRef<String>;
-String _$packageInfoInstallerStoreHash() =>
-    r'cac060677ffb9b1ed78cce814b6904f25742ecb5';
-
-/// See also [packageInfoInstallerStore].
-@ProviderFor(packageInfoInstallerStore)
-final packageInfoInstallerStoreProvider = AutoDisposeProvider<String?>.internal(
-  packageInfoInstallerStore,
-  name: r'packageInfoInstallerStoreProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$packageInfoInstallerStoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef PackageInfoInstallerStoreRef = AutoDisposeProviderRef<String?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

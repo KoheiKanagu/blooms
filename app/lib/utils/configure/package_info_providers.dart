@@ -29,15 +29,3 @@ String packageInfoAppName(
   Ref ref,
 ) =>
     ref.watch(packageInfoProvider).requireValue.appName;
-
-@riverpod
-String packageInfoPackageName(
-  Ref ref,
-) =>
-    ref.watch(packageInfoProvider).requireValue.packageName;
-
-@riverpod
-String? packageInfoInstallerStore(
-  Ref ref,
-) =>
-    ref.watch(packageInfoProvider).requireValue.installerStore;
