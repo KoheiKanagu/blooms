@@ -117,3 +117,20 @@ Future<void> firebaseUserSignOut(
   await ref.watch(firebaseAuthProvider).signOut();
   logger.debug('signOut success');
 }
+
+/// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する
+///
+/// Firebase Authの認証情報はiCloudでバックアップされるため、
+/// アプリを再インストールしたり、別の端末であっても認証情報が復元されてしまう可能性がある
+@riverpod
+Future<void> firebaseUserSignOutWhenFirstRun(Ref ref) async {
+  final preferences = ref.watch(sharedPreferencesProvider).requireValue;
+  const key = 'isFirstRun';
+
+  final firstRun = preferences.getBool(key) ?? true;
+
+  if (firstRun) {
+    await ref.watch(firebaseAuthProvider).signOut();
+    await preferences.setBool(key, false);
+  }
+}

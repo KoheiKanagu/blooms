@@ -125,5 +125,29 @@ final firebaseUserSignOutProvider = AutoDisposeFutureProvider<void>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirebaseUserSignOutRef = AutoDisposeFutureProviderRef<void>;
+String _$firebaseUserSignOutWhenFirstRunHash() =>
+    r'1d7b6a036890f10d371fb65d48d47e20a79fb5c5';
+
+/// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する
+///
+/// Firebase Authの認証情報はiCloudでバックアップされるため、
+/// アプリを再インストールしたり、別の端末であっても認証情報が復元されてしまう可能性がある
+///
+/// Copied from [firebaseUserSignOutWhenFirstRun].
+@ProviderFor(firebaseUserSignOutWhenFirstRun)
+final firebaseUserSignOutWhenFirstRunProvider =
+    AutoDisposeFutureProvider<void>.internal(
+  firebaseUserSignOutWhenFirstRun,
+  name: r'firebaseUserSignOutWhenFirstRunProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseUserSignOutWhenFirstRunHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FirebaseUserSignOutWhenFirstRunRef = AutoDisposeFutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,5 +1,4 @@
-// ignore_for_file: avoid_print
-
+import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
 import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
@@ -47,4 +46,7 @@ Future<void> appStartup(Ref ref) async {
     ref.watch(sharedPreferencesProvider.future),
     ref.watch(packageInfoProvider.future),
   ]);
+
+  // sharedPreferencesProviderが初期化されている必要があるので後から初期化
+  await ref.watch(firebaseUserSignOutWhenFirstRunProvider.future);
 }
