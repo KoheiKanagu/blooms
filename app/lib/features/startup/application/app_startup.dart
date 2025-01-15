@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:blooms/utils/configure/package_info_providers.dart';
+import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,9 @@ part 'app_startup.g.dart';
 @riverpod
 Future<void> appStartup(Ref ref) async {
   ref.onDispose(() {
-    ref.invalidate(packageInfoProvider);
+    ref
+      ..invalidate(sharedPreferencesProvider)
+      ..invalidate(packageInfoProvider);
   });
 
   /// error handling
@@ -41,6 +44,7 @@ Future<void> appStartup(Ref ref) async {
         .setAnalyticsCollectionEnabled(kReleaseMode),
     // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
     ref.watch(firebaseAuthProvider).authStateChanges().first,
+    ref.watch(sharedPreferencesProvider.future),
     ref.watch(packageInfoProvider.future),
   ]);
 }
