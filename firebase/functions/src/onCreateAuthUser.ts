@@ -1,11 +1,11 @@
 import { firestore } from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions/v1';
-import { functions } from '.';
+import { functionsV1 } from '.';
 import { User, userConverter, UserEndOfDayReportTime } from './models/user';
 import { CollectionPath } from './utils/collectionPath';
 
-export const onCreateAuthUser = functions()
+export const onCreateAuthUser = functionsV1()
   .auth
   .user()
   .onCreate(async (user, context) => {
@@ -14,7 +14,7 @@ export const onCreateAuthUser = functions()
     const eventAgeMs = Date.now() - Date.parse(context.timestamp);
     const eventMaxAgeMs = 1000 * 60 * 3; // 3 minutes
     if (eventAgeMs > eventMaxAgeMs) {
-      logger.error('Event is too old to process.');
+      console.log(`Dropping event ${context.eventId} with age[ms]: ${eventAgeMs}`);
       return;
     }
 

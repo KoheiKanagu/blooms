@@ -19,7 +19,7 @@ setGlobalOptions({
 });
 
 // for v1
-export function functions(): f.FunctionBuilder {
+export function functionsV1(): f.FunctionBuilder {
   return f
     .runWith({
       memory: '256MB',
