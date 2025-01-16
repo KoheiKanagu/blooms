@@ -10,7 +10,7 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   const factory User({
-    required UserEndOfDayReportTime reportTime,
+    required UserEndOfDayReportTime endOfDayReportTime,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,

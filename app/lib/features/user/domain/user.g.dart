@@ -13,8 +13,8 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
       json,
       ($checkedConvert) {
         final val = _$UserImpl(
-          reportTime: $checkedConvert(
-              'reportTime',
+          endOfDayReportTime: $checkedConvert(
+              'endOfDayReportTime',
               (v) =>
                   UserEndOfDayReportTime.fromJson(v as Map<String, dynamic>)),
           createdAt: $checkedConvert(
@@ -32,7 +32,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'reportTime': instance.reportTime.toJson(),
+      'endOfDayReportTime': instance.endOfDayReportTime.toJson(),
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
