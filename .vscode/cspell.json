@@ -1,0 +1,27 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+    "assets/icon/BLOOMS.graphite",
+    "app/ios/Podfile",
+    "app/ios/Pods/**",
+    "app/ios/Flutter/**",
+    "app/ios/Runner/**",
+    "app/ios/*.xcodeproj",
+    "app/ios/*.xcworkspace",
+    "app/ios/*/GoogleService-Info.plist",
+    "app/ios/ci_scripts/*",
+    "app/lib/constants/app_env.dart",
+    "app/lib/constants/firebase_options_stg.dart",
+    "app/lib/constants/firebase_options_prod.dart",
+    "firebase/functions/node_modules/**",
+  ],
+  "words": [
+    "firestore",
+    "flutterfire",
+    "fvmrc",
+    "kingu",
+    "predeploy",
+    "riverpod",
+    "Zenn"
+  ]
+}
