@@ -3,6 +3,7 @@ import 'package:blooms/constants/firebase_options_prod.dart' as prod_firebase;
 import 'package:blooms/constants/firebase_options_stg.dart' as stg_firebase;
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/routing/application/my_go_router.dart';
+import 'package:blooms/theme/my_theme.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +44,6 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(myGoRouterProvider);
 
-    final light = ThemeData.light(
-      useMaterial3: true,
-    ).copyWith(
-      primaryColor: const Color(0xFF3C8789),
-    );
-
     return MaterialApp.router(
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: const [
@@ -57,8 +52,7 @@ class MyApp extends HookConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       routerConfig: router,
-      themeMode: ThemeMode.light,
-      theme: light,
+      theme: myLightThemeData,
     );
   }
 }
