@@ -12,5 +12,16 @@
   ],
   "settings": {
     "editor.tabSize": 2
+  },
+  "extensions": {
+    "recommendations": [
+      "streetsidesoftware.code-spell-checker",
+      "dart-code.dart-code",
+      "dart-code.flutter",
+      "orta.vscode-jest",
+      "dbaeumer.vscode-eslint",
+      "editorconfig.editorconfig",
+      "davidanson.vscode-markdownlint",
+    ]
   }
 }
