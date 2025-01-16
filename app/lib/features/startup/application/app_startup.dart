@@ -40,14 +40,14 @@ Future<void> appStartup(Ref ref) async {
         FirebaseAppCheck.instance.activate(
           appleProvider: AppleProvider.debug,
           webProvider: ReCaptchaEnterpriseProvider(
-            '6LeLdLIqAAAAAMocNQ2gFaKivHKyulD_rpBCFVJt',
+            kReCaptchaV3SiteKey,
           ),
         ),
       if (kAppEnvProd)
         FirebaseAppCheck.instance.activate(
           appleProvider: AppleProvider.appAttest,
           webProvider: ReCaptchaEnterpriseProvider(
-            '6Ld9ZrIqAAAAANziKJDpmNHbbDOKbd6h1N2E6Fee',
+            kReCaptchaV3SiteKey,
           ),
         ),
     ],
