@@ -14,7 +14,7 @@ export const onCreateAuthUser = functionsV1()
     const eventAgeMs = Date.now() - Date.parse(context.timestamp);
     const eventMaxAgeMs = 1000 * 60 * 3; // 3 minutes
     if (eventAgeMs > eventMaxAgeMs) {
-      console.log(`Dropping event ${context.eventId} with age[ms]: ${eventAgeMs}`);
+      console.warn(`Dropping event ${context.eventId} with age[ms]: ${eventAgeMs}`);
       return;
     }
 
