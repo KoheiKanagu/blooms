@@ -1,8 +1,10 @@
+import 'package:blooms/constants/app_env.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
 import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -30,6 +32,26 @@ Future<void> appStartup(Ref ref) async {
         );
     return true;
   };
+
+  /// initialize AppCheck
+  await Future.wait(
+    [
+      if (kAppEnvStg)
+        FirebaseAppCheck.instance.activate(
+          appleProvider: AppleProvider.debug,
+          webProvider: ReCaptchaEnterpriseProvider(
+            '6LeLdLIqAAAAAMocNQ2gFaKivHKyulD_rpBCFVJt',
+          ),
+        ),
+      if (kAppEnvProd)
+        FirebaseAppCheck.instance.activate(
+          appleProvider: AppleProvider.appAttest,
+          webProvider: ReCaptchaEnterpriseProvider(
+            '6Ld9ZrIqAAAAANziKJDpmNHbbDOKbd6h1N2E6Fee',
+          ),
+        ),
+    ],
+  );
 
   /// initialize
   await Future.wait([
