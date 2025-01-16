@@ -22,7 +22,10 @@ export const userConverter: FirestoreDataConverter<User> = {
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
     deletedAt: user.deletedAt,
-    reportTime: user.endOfDayReportTime,
+    endOfDayReportTime: {
+      hour: user.endOfDayReportTime.hour,
+      minute: user.endOfDayReportTime.minute,
+    },
     weatherLocation: user.weatherLocation,
   }),
   fromFirestore: snapshot => new User(
