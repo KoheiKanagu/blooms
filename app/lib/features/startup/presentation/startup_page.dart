@@ -12,8 +12,8 @@ class AppStartupWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(appStartupProvider).when(
-          data: (_) => const SizedBox.shrink(),
+    return ref.watch(appStartupProvider).maybeWhen(
+          orElse: () => const AppStartupLoadingWidget(),
           error: (error, trace) {
             logger.error(error, trace);
 
@@ -22,7 +22,6 @@ class AppStartupWidget extends HookConsumerWidget {
               onRetry: () => ref.invalidate(appStartupProvider),
             );
           },
-          loading: () => const AppStartupLoadingWidget(),
         );
   }
 }
@@ -36,8 +35,10 @@ class AppStartupLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: const Center(
-        child: CircularProgressIndicator.adaptive(),
+      body: Center(
+        child: CircularProgressIndicator.adaptive(
+          backgroundColor: Theme.of(context).colorScheme.onError,
+        ),
       ),
     );
   }
@@ -54,17 +55,26 @@ class AppStartupErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               i18n.an_unexpected_error_occurred,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onError,
+                  ),
             ),
             const Gap(16),
-            ElevatedButton(
+            TextButton(
               onPressed: onRetry,
-              child: Text(i18n.retry),
+              child: Text(
+                i18n.retry,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
+              ),
             ),
           ],
         ),
