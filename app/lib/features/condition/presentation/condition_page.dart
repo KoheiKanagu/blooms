@@ -1,4 +1,5 @@
-import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
+import 'package:blooms/features/authentication/application/auth_providers.dart';
+import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,11 +13,21 @@ class ConditionPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await ref.read(firebaseUserSignOutProvider.future);
-          },
-          child: const Text('sign out'),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                await ref.read(authSignOutProvider.future);
+              },
+              child: const Text('sign out'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ref.read(userDeleteProvider.future);
+              },
+              child: const Text('user delete'),
+            ),
+          ],
         ),
       ),
     );

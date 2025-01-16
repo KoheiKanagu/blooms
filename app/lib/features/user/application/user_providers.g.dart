@@ -9,7 +9,7 @@ part of 'user_providers.dart';
 // **************************************************************************
 
 String _$userCollectionReferenceHash() =>
-    r'53b4d81d91080caa031bb5ab48e15e66084c3899';
+    r'99ba79dc5f6b448535aa54b9be9de654514f37a5';
 
 /// See also [userCollectionReference].
 @ProviderFor(userCollectionReference)
@@ -29,7 +29,7 @@ final userCollectionReferenceProvider =
 typedef UserCollectionReferenceRef
     = AutoDisposeProviderRef<CollectionReference<User>>;
 String _$userDocumentSnapshotHash() =>
-    r'0819feb0eb14e41023de9556b8ec29cfe4c13598';
+    r'f626dd4605c1537ddd8c78d16679a60894c26d02';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -185,21 +185,37 @@ class _UserDocumentSnapshotProviderElement
   String get uid => (origin as UserDocumentSnapshotProvider).uid;
 }
 
-String _$userControllerHash() => r'26dc553de0fa5f393d7c3fb7b11d7de048a4b3aa';
+String _$userDeleteHash() => r'7be94a947bfb417dbe0562403c4245df9552a852';
 
-/// See also [UserController].
-@ProviderFor(UserController)
-final userControllerProvider = AutoDisposeNotifierProvider<UserController,
-    Raw<Future<UserControllerData>>>.internal(
-  UserController.new,
-  name: r'userControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userControllerHash,
+/// See also [userDelete].
+@ProviderFor(userDelete)
+final userDeleteProvider = AutoDisposeFutureProvider<void>.internal(
+  userDelete,
+  name: r'userDeleteProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userDeleteHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UserController = AutoDisposeNotifier<Raw<Future<UserControllerData>>>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UserDeleteRef = AutoDisposeFutureProviderRef<void>;
+String _$userHash() => r'9e15d0b0f2c01d7be55fb7aeb8ec502ebf5f69ab';
+
+/// See also [user].
+@ProviderFor(user)
+final userProvider = AutoDisposeStreamProvider<UserDocument?>.internal(
+  user,
+  name: r'userProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UserRef = AutoDisposeStreamProviderRef<UserDocument?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

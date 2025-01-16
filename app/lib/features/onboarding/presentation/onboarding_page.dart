@@ -1,4 +1,4 @@
-import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
+import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,11 +12,21 @@ class OnboardingPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await ref.read(firebaseUserSignInProvider.future);
-          },
-          child: const Text('sign in'),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                await ref.read(authSignInProvider.future);
+              },
+              child: const Text('sign in'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ref.read(authSignOutProvider.future);
+              },
+              child: const Text('sign out'),
+            ),
+          ],
         ),
       ),
     );

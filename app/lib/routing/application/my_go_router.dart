@@ -75,7 +75,8 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
           onboarding_route.OnboardingPageRoute.path,
         ].any((e) => e == state.fullPath);
 
-        if (refreshListenable.createdUserDocument) {
+        if (refreshListenable.signedIn &&
+            refreshListenable.createdUserDocument) {
           // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
           if (isUnauthorizedRoute) {
             return condition_route.ConditionPageRoute.path;
@@ -95,10 +96,10 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
       },
       observers: [
         MyNavigatorObserver(
-          ref.watch(firebaseCrashlyticsProvider),
+          ref.read(firebaseCrashlyticsProvider),
         ),
         FirebaseAnalyticsObserver(
-          analytics: ref.watch(firebaseAnalyticsProvider),
+          analytics: ref.read(firebaseAnalyticsProvider),
         ),
       ],
       debugLogDiagnostics: kDebugMode,

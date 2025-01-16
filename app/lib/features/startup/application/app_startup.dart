@@ -1,5 +1,5 @@
 import 'package:blooms/constants/app_env.dart';
-import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
+import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
 import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
@@ -22,10 +22,10 @@ Future<void> appStartup(Ref ref) async {
 
   /// error handling
   FlutterError.onError =
-      ref.watch(firebaseCrashlyticsProvider).recordFlutterFatalError;
+      ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    ref.watch(firebaseCrashlyticsProvider).recordError(
+    ref.read(firebaseCrashlyticsProvider).recordError(
           error,
           stack,
           fatal: true,
@@ -57,18 +57,18 @@ Future<void> appStartup(Ref ref) async {
   await Future.wait([
     // リリースモードの場合のみCrashlyticsを有効化
     ref
-        .watch(firebaseCrashlyticsProvider)
+        .read(firebaseCrashlyticsProvider)
         .setCrashlyticsCollectionEnabled(kReleaseMode),
     // リリースモードの場合のみAnalyticsを有効化
     ref
-        .watch(firebaseAnalyticsProvider)
+        .read(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
     // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
-    ref.watch(firebaseAuthProvider).authStateChanges().first,
-    ref.watch(sharedPreferencesProvider.future),
-    ref.watch(packageInfoProvider.future),
+    ref.read(firebaseAuthProvider).authStateChanges().first,
+    ref.read(sharedPreferencesProvider.future),
+    ref.read(packageInfoProvider.future),
   ]);
 
   // sharedPreferencesProviderが初期化されている必要があるので後から初期化
-  await ref.watch(firebaseUserSignOutWhenFirstRunProvider.future);
+  await ref.read(authSignOutWhenFirstRunProvider.future);
 }
