@@ -48,7 +48,6 @@ final talkerRiverpodObserver = TalkerRiverpodObserver(
       if (!kAppEnvProd) {
         final hidden = {
           'firebaseUserProvider',
-          'firebaseUserIdTokenResultProvider',
         };
 
         //　機密情報が含まれるため、[kAppEnvProd]の場合はログを抑制
