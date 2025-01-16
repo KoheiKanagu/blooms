@@ -48,7 +48,7 @@ Future<bool> firebaseUserIsSignedIn(
 
 /// サインインをした後、Userドキュメントが取得できるまで待つ
 @riverpod
-Future<void> firebaseSignIn(
+Future<void> firebaseUserSignIn(
   Ref ref,
 ) async {
   logger.debug('signIn');

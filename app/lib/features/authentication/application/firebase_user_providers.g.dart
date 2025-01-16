@@ -70,25 +70,26 @@ final firebaseUserIsSignedInProvider = AutoDisposeFutureProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirebaseUserIsSignedInRef = AutoDisposeFutureProviderRef<bool>;
-String _$firebaseSignInHash() => r'3b3c91ef52d393b9b8aa9a48e07df80e296c0333';
+String _$firebaseUserSignInHash() =>
+    r'de986dc9b6f9c631fa50f5899690358e09fdbecf';
 
 /// サインインをした後、Userドキュメントが取得できるまで待つ
 ///
-/// Copied from [firebaseSignIn].
-@ProviderFor(firebaseSignIn)
-final firebaseSignInProvider = AutoDisposeFutureProvider<void>.internal(
-  firebaseSignIn,
-  name: r'firebaseSignInProvider',
+/// Copied from [firebaseUserSignIn].
+@ProviderFor(firebaseUserSignIn)
+final firebaseUserSignInProvider = AutoDisposeFutureProvider<void>.internal(
+  firebaseUserSignIn,
+  name: r'firebaseUserSignInProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$firebaseSignInHash,
+      : _$firebaseUserSignInHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseSignInRef = AutoDisposeFutureProviderRef<void>;
+typedef FirebaseUserSignInRef = AutoDisposeFutureProviderRef<void>;
 String _$firebaseUserDeleteHash() =>
     r'109596b562658ba31ec1f87dbf4b6ce70a835f85';
 
