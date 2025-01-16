@@ -35,17 +35,6 @@ Future<String?> firebaseUserUid(
       ),
     );
 
-/// サインインしているかどうか
-@riverpod
-Future<bool> firebaseUserIsSignedIn(
-  Ref ref,
-) =>
-    ref.watch(
-      firebaseUserUidProvider.selectAsync(
-        (value) => value != null,
-      ),
-    );
-
 /// サインインをした後、Userドキュメントが取得できるまで待つ
 @riverpod
 Future<void> firebaseUserSignIn(
@@ -77,10 +66,14 @@ Future<void> firebaseUserSignIn(
   logger.debug('await user document');
   // Cloud FunctionsでUserドキュメントが作成されるまで待つ
   await ref.watch(userDocumentSnapshotProvider(uid).future).catchError(
-        (_, __) => throw Exception('not found user document: $uid'),
-      );
+    (_, __) async {
+      logger.warning('error. signOut and throw error');
+      await ref.watch(firebaseUserSignOutProvider.future);
+      throw Exception('not found user document: $uid');
+    },
+  );
 
-  logger.debug('signIn success');
+  logger.debug('signIn succeeded');
 }
 
 @riverpod
@@ -95,7 +88,7 @@ Future<void> firebaseUserDelete(
   await ref.watch(userControllerProvider.notifier).delete();
 
   await ref.watch(firebaseUserSignOutProvider.future);
-  logger.debug('deleteUser success');
+  logger.debug('deleteUser succeeded');
 }
 
 @riverpod
@@ -115,7 +108,7 @@ Future<void> firebaseUserSignOut(
   );
 
   await ref.watch(firebaseAuthProvider).signOut();
-  logger.debug('signOut success');
+  logger.debug('signOut succeeded');
 }
 
 /// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する

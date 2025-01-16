@@ -75,7 +75,7 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
           onboarding_route.OnboardingPageRoute.path,
         ].any((e) => e == state.fullPath);
 
-        if (refreshListenable.signedIn) {
+        if (refreshListenable.createdUserDocument) {
           // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
           if (isUnauthorizedRoute) {
             return condition_route.ConditionPageRoute.path;

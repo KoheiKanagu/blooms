@@ -1,7 +1,7 @@
 import 'dart:core';
 
-import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/startup/application/app_startup.dart';
+import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +13,7 @@ part 'my_go_router_listenable.g.dart';
 @freezed
 class MyGoRouterListenable with _$MyGoRouterListenable {
   const factory MyGoRouterListenable({
-    @Default(false) bool signedIn,
+    @Default(false) bool createdUserDocument,
     AsyncValue<void>? appStartupState,
   }) = _MyGoRouterListenable;
 }
@@ -36,15 +36,14 @@ Raw<ValueNotifier<MyGoRouterListenable>> refreshListenable(Ref ref) {
       },
     )
     ..listen(
-      // Firebase Authでのサインイン状態を監視
-      firebaseUserIsSignedInProvider,
-      (_, next) {
-        final value = next.value;
-        if (value != null) {
-          listenable.value = listenable.value.copyWith(
-            signedIn: value,
-          );
-        }
+      userControllerProvider,
+      (_, next) async {
+        // FirestoreにUserドキュメントが作成されるまで待つ
+        await next;
+
+        listenable.value = listenable.value.copyWith(
+          createdUserDocument: true,
+        );
       },
     )
     ..onDispose(listenable.dispose);
