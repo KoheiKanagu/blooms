@@ -22,6 +22,7 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
               $checkedConvert('objectiveConditionTendency', (v) => v as String),
           analysisResult: $checkedConvert('analysisResult', (v) => v as String),
           advice: $checkedConvert('advice', (v) => v as String),
+          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
@@ -43,6 +44,7 @@ Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
       'objectiveConditionTendency': instance.objectiveConditionTendency,
       'analysisResult': instance.analysisResult,
       'advice': instance.advice,
+      'subjectUid': instance.subjectUid,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),

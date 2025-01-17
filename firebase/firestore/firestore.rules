@@ -18,25 +18,25 @@ service cloud.firestore {
       allow get, update:
         if isOwner(uid);
 
-      // only the user can update their own data
+      // only the user can create their own data
       allow create:
         if isAuthenticated() && request.auth.uid == uid;
     }
 
-    match /conditions_v1/{uid}/{document=**} {
+    match /conditions_v1/{document=**} {
       // only the user can read and write their own data
-      allow get, list:
-        if isOwner(uid);
+      allow get, list, update:
+        if isAuthenticated() && resource.data.createdBy == request.auth.uid;
 
-      // only the user can update their own data
-      allow create, update:
-        if isOwner(uid);
+      // only the user can create their own data
+      allow create:
+        if isAuthenticated() && request.resource.data.createdBy == request.auth.uid;
     }
 
-    match /reports_v1/{uid}/{document=**} {
-      // only the user can read and write their own data
+    match /reports_v1/{document=**} {
+      // only the user can read their own data
       allow get, list:
-        if isOwner(uid);
+        if isAuthenticated() && resource.data.subjectUid == request.auth.uid;
     }
   }
 }

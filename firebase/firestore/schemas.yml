@@ -44,7 +44,7 @@ paths:
                     type: string
                     nullable: true
 
-  /conditions_v1/{uid}/{documentId}:
+  /conditions_v1/{documentId}:
     get:
       responses:
         "200":
@@ -65,6 +65,9 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
+                  createdBy:
+                    description: 作成者のUID
+                    type: string
                   type:
                     description: コンディションの種類
                     type: string
@@ -95,7 +98,7 @@ paths:
                     type: string
                     example: 頭痛がする
 
-  /reports_v1/{uid}/{documentId}:
+  /reports_v1/{documentId}:
     get:
       responses:
         "200":
@@ -116,6 +119,9 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
+                  subjectUid:
+                    description: レポートの対象のユーザーのUID
+                    type: string
                   targetDate:
                     description: 何日を対象にしたレポートか Timestamp
                     type: object

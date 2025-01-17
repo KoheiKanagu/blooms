@@ -11,6 +11,9 @@ part 'condition.g.dart';
 @freezed
 class Condition with _$Condition {
   const factory Condition({
+    /// 作成者
+    required String createdBy,
+
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
@@ -28,14 +31,20 @@ class Condition with _$Condition {
     String? record,
   }) = _Condition;
 
-  factory Condition.subjective({required String record}) => Condition(
-    record: record,
-    type: ConditionType.subjective,
-    attachments: [],
-    state: ConditionState.success,
-  );
+  factory Condition.subjective({required String uid, required String record}) =>
+      Condition(
+        createdBy: uid,
+        record: record,
+        type: ConditionType.subjective,
+        attachments: [],
+        state: ConditionState.success,
+      );
 
-  factory Condition.photo({required List<String> attachments}) => Condition(
+  factory Condition.photo({
+    required String uid,
+    required List<String> attachments,
+  }) => Condition(
+    createdBy: uid,
     type: ConditionType.photo,
     attachments: attachments,
     state: ConditionState.pending,
