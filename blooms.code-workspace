@@ -11,7 +11,13 @@
     }
   ],
   "settings": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "search.exclude": {
+      "/public/**": true,
+      "**/*.freezed.dart": true,
+      "**/*.g.dart": true,
+      "assets/icon/*": true
+    },
   },
   "extensions": {
     "recommendations": [
