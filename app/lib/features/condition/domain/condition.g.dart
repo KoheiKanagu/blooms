@@ -14,6 +14,7 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$ConditionImpl(
+          createdBy: $checkedConvert('createdBy', (v) => v as String),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
@@ -43,6 +44,7 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ConditionImplToJson(_$ConditionImpl instance) =>
     <String, dynamic>{
+      'createdBy': instance.createdBy,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),

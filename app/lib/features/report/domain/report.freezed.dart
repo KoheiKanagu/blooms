@@ -37,6 +37,9 @@ mixin _$Report {
 
   /// アドバイス
   String get advice => throw _privateConstructorUsedError;
+
+  /// レポートの対象者のUID
+  String get subjectUid => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -69,6 +72,7 @@ abstract class $ReportCopyWith<$Res> {
       String objectiveConditionTendency,
       String analysisResult,
       String advice,
+      String subjectUid,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
@@ -96,6 +100,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? objectiveConditionTendency = null,
     Object? analysisResult = null,
     Object? advice = null,
+    Object? subjectUid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -125,6 +130,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
       advice: null == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
+              as String,
+      subjectUid: null == subjectUid
+          ? _value.subjectUid
+          : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -160,6 +169,7 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
       String objectiveConditionTendency,
       String analysisResult,
       String advice,
+      String subjectUid,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
@@ -185,6 +195,7 @@ class __$$ReportImplCopyWithImpl<$Res>
     Object? objectiveConditionTendency = null,
     Object? analysisResult = null,
     Object? advice = null,
+    Object? subjectUid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -214,6 +225,10 @@ class __$$ReportImplCopyWithImpl<$Res>
       advice: null == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
+              as String,
+      subjectUid: null == subjectUid
+          ? _value.subjectUid
+          : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -245,6 +260,7 @@ class _$ReportImpl implements _Report {
       required this.objectiveConditionTendency,
       required this.analysisResult,
       required this.advice,
+      required this.subjectUid,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
       @TimestampConverter() this.deletedAt,
@@ -276,6 +292,10 @@ class _$ReportImpl implements _Report {
   /// アドバイス
   @override
   final String advice;
+
+  /// レポートの対象者のUID
+  @override
+  final String subjectUid;
   @override
   @TimestampConverter()
   final Timestamp? createdAt;
@@ -293,7 +313,7 @@ class _$ReportImpl implements _Report {
 
   @override
   String toString() {
-    return 'Report(prompt: $prompt, reportType: $reportType, subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, targetDate: $targetDate)';
+    return 'Report(prompt: $prompt, reportType: $reportType, subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice, subjectUid: $subjectUid, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, targetDate: $targetDate)';
   }
 
   @override
@@ -315,6 +335,8 @@ class _$ReportImpl implements _Report {
             (identical(other.analysisResult, analysisResult) ||
                 other.analysisResult == analysisResult) &&
             (identical(other.advice, advice) || other.advice == advice) &&
+            (identical(other.subjectUid, subjectUid) ||
+                other.subjectUid == subjectUid) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -335,6 +357,7 @@ class _$ReportImpl implements _Report {
       objectiveConditionTendency,
       analysisResult,
       advice,
+      subjectUid,
       createdAt,
       updatedAt,
       deletedAt,
@@ -364,6 +387,7 @@ abstract class _Report implements Report {
       required final String objectiveConditionTendency,
       required final String analysisResult,
       required final String advice,
+      required final String subjectUid,
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
       @TimestampConverter() final Timestamp? deletedAt,
@@ -394,6 +418,10 @@ abstract class _Report implements Report {
   /// アドバイス
   @override
   String get advice;
+
+  /// レポートの対象者のUID
+  @override
+  String get subjectUid;
   @override
   @TimestampConverter()
   Timestamp? get createdAt;

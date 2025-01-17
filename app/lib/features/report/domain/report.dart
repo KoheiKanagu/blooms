@@ -27,6 +27,9 @@ class Report with _$Report {
 
     /// アドバイス
     required String advice,
+
+    /// レポートの対象者のUID
+    required String subjectUid,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
