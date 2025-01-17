@@ -1,5 +1,6 @@
 import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class MyNavigatorObserver extends NavigatorObserver {
@@ -38,13 +39,15 @@ class MyNavigatorObserver extends NavigatorObserver {
     final previousRouteName = '${previousRoute?.settings.name}';
     final previousRouteArguments = '${previousRoute?.settings.arguments}';
 
-    // Crashlyticsへのエラーレポートが発生した際に、どこの画面で発生したか追跡しやすくする
-    firebaseCrashlytics
-      ..setCustomKey('route', routeName)
-      ..setCustomKey('routeArguments', routeArguments)
-      ..setCustomKey('previousRoute', previousRouteName)
-      ..setCustomKey('previousRouteArguments', previousRouteArguments)
-      ..setCustomKey('didPush', didPush);
+    if (!kIsWeb) {
+      // Crashlyticsへのエラーレポートが発生した際に、どこの画面で発生したか追跡しやすくする
+      firebaseCrashlytics
+        ..setCustomKey('route', routeName)
+        ..setCustomKey('routeArguments', routeArguments)
+        ..setCustomKey('previousRoute', previousRouteName)
+        ..setCustomKey('previousRouteArguments', previousRouteArguments)
+        ..setCustomKey('didPush', didPush);
+    }
 
     logger.verbose(
       {

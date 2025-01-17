@@ -56,9 +56,10 @@ Future<void> appStartup(Ref ref) async {
   /// initialize
   await Future.wait([
     // リリースモードの場合のみCrashlyticsを有効化
-    ref
-        .read(firebaseCrashlyticsProvider)
-        .setCrashlyticsCollectionEnabled(kReleaseMode),
+    if (!kIsWeb)
+      ref
+          .read(firebaseCrashlyticsProvider)
+          .setCrashlyticsCollectionEnabled(kReleaseMode),
     // リリースモードの場合のみAnalyticsを有効化
     ref
         .read(firebaseAnalyticsProvider)
