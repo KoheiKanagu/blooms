@@ -29,5 +29,6 @@ done
 rm -rf ../firebase/public
 
 flutter build web \
+  --wasm \
   --dart-define FLUTTER_APP_FLAVOR="$flavor" \
   --output ../firebase/public/
