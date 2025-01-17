@@ -4,28 +4,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class MyNavigatorObserver extends NavigatorObserver {
-  MyNavigatorObserver(
-    this.firebaseCrashlytics,
-  );
+  MyNavigatorObserver(this.firebaseCrashlytics);
 
   final FirebaseCrashlytics firebaseCrashlytics;
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _setCustomKey(
-      route: route,
-      previousRoute: previousRoute,
-      didPush: false,
-    );
+    _setCustomKey(route: route, previousRoute: previousRoute, didPush: false);
   }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _setCustomKey(
-      route: route,
-      previousRoute: previousRoute,
-      didPush: true,
-    );
+    _setCustomKey(route: route, previousRoute: previousRoute, didPush: true);
   }
 
   void _setCustomKey({
@@ -49,14 +39,12 @@ class MyNavigatorObserver extends NavigatorObserver {
         ..setCustomKey('didPush', didPush);
     }
 
-    logger.verbose(
-      {
-        'route': routeName,
-        'routeArguments': routeArguments,
-        'previousRoute': previousRouteName,
-        'previousRouteArguments': previousRouteArguments,
-        'didPush': didPush,
-      },
-    );
+    logger.verbose({
+      'route': routeName,
+      'routeArguments': routeArguments,
+      'previousRoute': previousRouteName,
+      'previousRouteArguments': previousRouteArguments,
+      'didPush': didPush,
+    });
   }
 }

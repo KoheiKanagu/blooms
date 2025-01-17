@@ -1,6 +1,5 @@
 enum ConditionType {
   unknown,
   subjective,
-  photo,
-  ;
+  photo, //
 }

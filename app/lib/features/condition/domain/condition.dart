@@ -28,34 +28,24 @@ class Condition with _$Condition {
     String? record,
   }) = _Condition;
 
-  factory Condition.subjective({
-    required String record,
-  }) =>
-      Condition(
-        record: record,
-        type: ConditionType.subjective,
-        attachments: [],
-        state: ConditionState.success,
-      );
+  factory Condition.subjective({required String record}) => Condition(
+    record: record,
+    type: ConditionType.subjective,
+    attachments: [],
+    state: ConditionState.success,
+  );
 
-  factory Condition.photo({
-    required List<String> attachments,
-  }) =>
-      Condition(
-        type: ConditionType.photo,
-        attachments: attachments,
-        state: ConditionState.pending,
-      );
+  factory Condition.photo({required List<String> attachments}) => Condition(
+    type: ConditionType.photo,
+    attachments: attachments,
+    state: ConditionState.pending,
+  );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
 
   static FromFirestore<Condition> get fromFirestore =>
-      (snapshot, _) => Condition.fromJson(
-            snapshot.data() ?? {},
-          );
+      (snapshot, _) => Condition.fromJson(snapshot.data() ?? {});
 
   static ToFirestore<Condition> get toFirestore =>
-      (data, _) => TimestampConverter.updateServerTimestamp(
-            data.toJson(),
-          );
+      (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 }

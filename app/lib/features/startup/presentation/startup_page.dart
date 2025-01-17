@@ -6,13 +6,13 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppStartupWidget extends HookConsumerWidget {
-  const AppStartupWidget({
-    super.key,
-  });
+  const AppStartupWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(appStartupProvider).maybeWhen(
+    return ref
+        .watch(appStartupProvider)
+        .maybeWhen(
           orElse: () => const AppStartupLoadingWidget(),
           error: (error, trace) {
             logger.error(error, trace);
@@ -27,9 +27,7 @@ class AppStartupWidget extends HookConsumerWidget {
 }
 
 class AppStartupLoadingWidget extends StatelessWidget {
-  const AppStartupLoadingWidget({
-    super.key,
-  });
+  const AppStartupLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +43,7 @@ class AppStartupLoadingWidget extends StatelessWidget {
 }
 
 class AppStartupErrorWidget extends StatelessWidget {
-  const AppStartupErrorWidget({
-    required this.onRetry,
-    super.key,
-  });
+  const AppStartupErrorWidget({required this.onRetry, super.key});
 
   final VoidCallback onRetry;
 
@@ -63,8 +58,8 @@ class AppStartupErrorWidget extends StatelessWidget {
             Text(
               i18n.an_unexpected_error_occurred,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onError,
-                  ),
+                color: Theme.of(context).colorScheme.onError,
+              ),
             ),
             const Gap(16),
             TextButton(
@@ -72,8 +67,8 @@ class AppStartupErrorWidget extends StatelessWidget {
               child: Text(
                 i18n.retry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onError,
-                    ),
+                  color: Theme.of(context).colorScheme.onError,
+                ),
               ),
             ),
           ],

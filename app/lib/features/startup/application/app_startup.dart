@@ -25,33 +25,25 @@ Future<void> appStartup(Ref ref) async {
       ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    ref.read(firebaseCrashlyticsProvider).recordError(
-          error,
-          stack,
-          fatal: true,
-        );
+    ref
+        .read(firebaseCrashlyticsProvider)
+        .recordError(error, stack, fatal: true);
     return true;
   };
 
   /// initialize AppCheck
-  await Future.wait(
-    [
-      if (kAppEnvStg)
-        FirebaseAppCheck.instance.activate(
-          appleProvider: AppleProvider.debug,
-          webProvider: ReCaptchaEnterpriseProvider(
-            kReCaptchaV3SiteKey,
-          ),
-        ),
-      if (kAppEnvProd)
-        FirebaseAppCheck.instance.activate(
-          appleProvider: AppleProvider.appAttest,
-          webProvider: ReCaptchaEnterpriseProvider(
-            kReCaptchaV3SiteKey,
-          ),
-        ),
-    ],
-  );
+  await Future.wait([
+    if (kAppEnvStg)
+      FirebaseAppCheck.instance.activate(
+        appleProvider: AppleProvider.debug,
+        webProvider: ReCaptchaEnterpriseProvider(kReCaptchaV3SiteKey),
+      ),
+    if (kAppEnvProd)
+      FirebaseAppCheck.instance.activate(
+        appleProvider: AppleProvider.appAttest,
+        webProvider: ReCaptchaEnterpriseProvider(kReCaptchaV3SiteKey),
+      ),
+  ]);
 
   /// initialize
   await Future.wait([

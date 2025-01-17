@@ -22,12 +22,8 @@ class User with _$User {
   factory User.fromJson(Json json) => _$UserFromJson(json);
 
   static FromFirestore<User> get fromFirestore =>
-      (snapshot, _) => User.fromJson(
-            snapshot.data() ?? {},
-          );
+      (snapshot, _) => User.fromJson(snapshot.data() ?? {});
 
   static ToFirestore<User> get toFirestore =>
-      (data, _) => TimestampConverter.updateServerTimestamp(
-            data.toJson(),
-          );
+      (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 }

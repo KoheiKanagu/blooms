@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 
 part 'startup_page_route.g.dart';
 
-@TypedGoRoute<AppStartupPageRoute>(
-  path: AppStartupPageRoute.path,
-)
+@TypedGoRoute<AppStartupPageRoute>(path: AppStartupPageRoute.path)
 class AppStartupPageRoute extends GoRouteData {
   const AppStartupPageRoute();
 
@@ -14,9 +12,6 @@ class AppStartupPageRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(
-      child: AppStartupWidget(),
-      name: path,
-    );
+    return const NoTransitionPage(child: AppStartupWidget(), name: path);
   }
 }

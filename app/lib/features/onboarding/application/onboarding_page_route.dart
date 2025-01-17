@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 
 part 'onboarding_page_route.g.dart';
 
-@TypedGoRoute<OnboardingPageRoute>(
-  path: OnboardingPageRoute.path,
-)
+@TypedGoRoute<OnboardingPageRoute>(path: OnboardingPageRoute.path)
 class OnboardingPageRoute extends GoRouteData {
   const OnboardingPageRoute();
 

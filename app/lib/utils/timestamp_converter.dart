@@ -22,10 +22,7 @@ class TimestampConverter extends JsonConverter<Timestamp?, dynamic> {
     }
 
     if (json is Map) {
-      return Timestamp(
-        json['_seconds'] as int,
-        json['_nanoseconds'] as int,
-      );
+      return Timestamp(json['_seconds'] as int, json['_nanoseconds'] as int);
     }
 
     throw Exception();

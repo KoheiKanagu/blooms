@@ -4,28 +4,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'package_info_providers.g.dart';
 
-@Riverpod(
-  keepAlive: true,
-)
-Future<PackageInfo> packageInfo(
-  Ref ref,
-) =>
-    PackageInfo.fromPlatform();
+@Riverpod(keepAlive: true)
+Future<PackageInfo> packageInfo(Ref ref) => PackageInfo.fromPlatform();
 
 @riverpod
-int packageInfoBuildNumber(
-  Ref ref,
-) =>
+int packageInfoBuildNumber(Ref ref) =>
     int.tryParse(ref.read(packageInfoProvider).requireValue.buildNumber) ?? 0;
 
 @riverpod
-String packageInfoVersion(
-  Ref ref,
-) =>
+String packageInfoVersion(Ref ref) =>
     ref.read(packageInfoProvider).requireValue.version;
 
 @riverpod
-String packageInfoAppName(
-  Ref ref,
-) =>
+String packageInfoAppName(Ref ref) =>
     ref.read(packageInfoProvider).requireValue.appName;
