@@ -16,15 +16,13 @@ Future<void> authSignIn(Ref ref) async {
   logger.debug('signIn');
 
   // 初期化が完了するまで待つ
-  final current =
-      await ref.read(firebaseAuthProvider).authStateChanges().first;
+  final current = await ref.read(firebaseAuthProvider).authStateChanges().first;
 
   final String uid;
   if (current == null) {
     logger.info('not signed in');
 
-    final credential =
-        await ref.read(firebaseAuthProvider).signInAnonymously();
+    final credential = await ref.read(firebaseAuthProvider).signInAnonymously();
     uid = credential.user?.uid ?? '';
   } else {
     logger.info('already signed in');
