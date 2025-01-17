@@ -36,30 +36,27 @@ Future<void> authSignIn(Ref ref) async {
 
   logger.debug('await user document');
   // Cloud FunctionsでUserドキュメントが作成されるまで待つ
-  await ref.read(userDocumentSnapshotProvider(uid).future).catchError(
-    (_, __) async {
-      logger.warning('error. signOut and throw error');
-      await ref.read(authSignOutProvider.future);
-      throw Exception('not found user document: $uid');
-    },
-  );
+  await ref.read(userDocumentSnapshotProvider(uid).future).catchError((
+    _,
+    _,
+  ) async {
+    logger.warning('error. signOut and throw error');
+    await ref.read(authSignOutProvider.future);
+    throw Exception('not found user document: $uid');
+  });
 
   logger.debug('signIn succeeded');
 }
 
 @riverpod
 Future<void> authSignOut(Ref ref) async {
-  await ref.read(firebaseAnalyticsProvider).logEvent(
-        name: 'sign_out',
-      );
+  await ref.read(firebaseAnalyticsProvider).logEvent(name: 'sign_out');
 
   logger.debug('clear local data');
-  await Future.wait(
-    [
-      ref.read(sharedPreferencesProvider).requireValue.clear(),
-      ref.read(firebaseAnalyticsControllerProvider).resetAnalyticsData(),
-    ],
-  );
+  await Future.wait([
+    ref.read(sharedPreferencesProvider).requireValue.clear(),
+    ref.read(firebaseAnalyticsControllerProvider).resetAnalyticsData(),
+  ]);
 
   await ref.read(firebaseAuthProvider).signOut();
   logger.debug('signOut succeeded');

@@ -32,18 +32,14 @@ Raw<ValueNotifier<MyGoRouterListenable>> refreshListenable(Ref ref) {
       // アプリの初期化状態を監視
       appStartupProvider,
       (_, next) {
-        listenable.value = listenable.value.copyWith(
-          appStartupState: next,
-        );
+        listenable.value = listenable.value.copyWith(appStartupState: next);
       },
     )
     ..listen(
       // FirebaseUserのuidが取得できるまで待つ
       firebaseUserUidProvider.select((e) => e.value),
       (_, uid) async {
-        listenable.value = listenable.value.copyWith(
-          signedIn: uid != null,
-        );
+        listenable.value = listenable.value.copyWith(signedIn: uid != null);
       },
     )
     ..listen(

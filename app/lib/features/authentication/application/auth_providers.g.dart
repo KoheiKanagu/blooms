@@ -8,7 +8,7 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authSignInHash() => r'16fc684fd1130f3926f75f932f00e5fa291dc7d4';
+String _$authSignInHash() => r'fbc32790638f8eb1069d454cfdf29db1576d32b0';
 
 /// サインインをした後、Userドキュメントが取得できるまで待つ
 ///

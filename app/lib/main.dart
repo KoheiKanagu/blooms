@@ -26,19 +26,12 @@ Future<void> main() async {
   Intl.defaultLocale = locale.languageCode;
 
   runApp(
-    ProviderScope(
-      observers: [
-        talkerRiverpodObserver,
-      ],
-      child: const MyApp(),
-    ),
+    ProviderScope(observers: [talkerRiverpodObserver], child: const MyApp()),
   );
 }
 
 class MyApp extends HookConsumerWidget {
-  const MyApp({
-    super.key,
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

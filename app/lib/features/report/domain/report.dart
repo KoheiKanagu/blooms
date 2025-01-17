@@ -38,12 +38,8 @@ class Report with _$Report {
   factory Report.fromJson(Json json) => _$ReportFromJson(json);
 
   static FromFirestore<Report> get fromFirestore =>
-      (snapshot, _) => Report.fromJson(
-            snapshot.data() ?? {},
-          );
+      (snapshot, _) => Report.fromJson(snapshot.data() ?? {});
 
   static ToFirestore<Report> get toFirestore =>
-      (data, _) => TimestampConverter.updateServerTimestamp(
-            data.toJson(),
-          );
+      (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 }

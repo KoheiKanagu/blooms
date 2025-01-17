@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 
 part 'condition_page_route.g.dart';
 
-@TypedGoRoute<ConditionPageRoute>(
-  path: ConditionPageRoute.path,
-)
+@TypedGoRoute<ConditionPageRoute>(path: ConditionPageRoute.path)
 class ConditionPageRoute extends GoRouteData {
   const ConditionPageRoute();
 

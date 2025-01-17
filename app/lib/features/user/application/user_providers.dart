@@ -15,29 +15,21 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'user_providers.g.dart';
 
 @riverpod
-CollectionReference<User> userCollectionReference(
-  Ref ref,
-) =>
-    ref
-        .read(firebaseFirestoreProvider)
-        .collection(CollectionPath.kUsers)
-        .withConverter(
-          fromFirestore: User.fromFirestore,
-          toFirestore: User.toFirestore,
-        );
+CollectionReference<User> userCollectionReference(Ref ref) => ref
+    .read(firebaseFirestoreProvider)
+    .collection(CollectionPath.kUsers)
+    .withConverter(
+      fromFirestore: User.fromFirestore,
+      toFirestore: User.toFirestore,
+    );
 
 @riverpod
-Stream<DocumentSnapshot<User>> userDocumentSnapshot(
-  Ref ref,
-  String uid,
-) =>
+Stream<DocumentSnapshot<User>> userDocumentSnapshot(Ref ref, String uid) =>
     ref.read(userCollectionReferenceProvider).doc(uid).snapshots();
 
 @riverpod
 Future<void> userDelete(Ref ref) async {
-  await ref.read(firebaseAnalyticsProvider).logEvent(
-        name: 'user_delete',
-      );
+  await ref.read(firebaseAnalyticsProvider).logEvent(name: 'user_delete');
 
   logger.debug('add deletedAt');
 
@@ -48,20 +40,13 @@ Future<void> userDelete(Ref ref) async {
 
   final (:reference, :user) = results;
 
-  await reference.update(
-    TimestampConverter.addDeletedAt(
-      user.toJson(),
-    ),
-  );
+  await reference.update(TimestampConverter.addDeletedAt(user.toJson()));
 
   await ref.read(authSignOutProvider.future);
   logger.debug('userDelete succeeded');
 }
 
-typedef UserDocument = ({
-  DocumentReference<User> reference,
-  User user,
-});
+typedef UserDocument = ({DocumentReference<User> reference, User user});
 
 @riverpod
 Stream<UserDocument?> user(Ref ref) async* {
@@ -73,10 +58,7 @@ Stream<UserDocument?> user(Ref ref) async* {
     if (user == null) {
       yield null;
     } else {
-      yield (
-        user: user,
-        reference: snapshot.reference,
-      );
+      yield (user: user, reference: snapshot.reference);
     }
   }
 }
