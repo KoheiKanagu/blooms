@@ -20,16 +20,14 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  UserEndOfDayReportTime get endOfDayReportTime =>
+      throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get updatedAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get deletedAt => throw _privateConstructorUsedError;
-
-  /// レポートして欲しい目安の時間
-  @TimestampConverter()
-  Timestamp? get reportTime => throw _privateConstructorUsedError;
 
   /// 気象情報を取得する地域
   String? get weatherLocation => throw _privateConstructorUsedError;
@@ -49,11 +47,13 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {@TimestampConverter() Timestamp? createdAt,
+      {UserEndOfDayReportTime endOfDayReportTime,
+      @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? reportTime,
       String? weatherLocation});
+
+  $UserEndOfDayReportTimeCopyWith<$Res> get endOfDayReportTime;
 }
 
 /// @nodoc
@@ -71,13 +71,17 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? endOfDayReportTime = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? reportTime = freezed,
     Object? weatherLocation = freezed,
   }) {
     return _then(_value.copyWith(
+      endOfDayReportTime: null == endOfDayReportTime
+          ? _value.endOfDayReportTime
+          : endOfDayReportTime // ignore: cast_nullable_to_non_nullable
+              as UserEndOfDayReportTime,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -90,15 +94,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      reportTime: freezed == reportTime
-          ? _value.reportTime
-          : reportTime // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
       weatherLocation: freezed == weatherLocation
           ? _value.weatherLocation
           : weatherLocation // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserEndOfDayReportTimeCopyWith<$Res> get endOfDayReportTime {
+    return $UserEndOfDayReportTimeCopyWith<$Res>(_value.endOfDayReportTime,
+        (value) {
+      return _then(_value.copyWith(endOfDayReportTime: value) as $Val);
+    });
   }
 }
 
@@ -110,11 +121,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@TimestampConverter() Timestamp? createdAt,
+      {UserEndOfDayReportTime endOfDayReportTime,
+      @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? reportTime,
       String? weatherLocation});
+
+  @override
+  $UserEndOfDayReportTimeCopyWith<$Res> get endOfDayReportTime;
 }
 
 /// @nodoc
@@ -129,13 +143,17 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? endOfDayReportTime = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? reportTime = freezed,
     Object? weatherLocation = freezed,
   }) {
     return _then(_$UserImpl(
+      endOfDayReportTime: null == endOfDayReportTime
+          ? _value.endOfDayReportTime
+          : endOfDayReportTime // ignore: cast_nullable_to_non_nullable
+              as UserEndOfDayReportTime,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -147,10 +165,6 @@ class __$$UserImplCopyWithImpl<$Res>
       deletedAt: freezed == deletedAt
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      reportTime: freezed == reportTime
-          ? _value.reportTime
-          : reportTime // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
       weatherLocation: freezed == weatherLocation
           ? _value.weatherLocation
@@ -164,15 +178,17 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {@TimestampConverter() this.createdAt,
+      {required this.endOfDayReportTime,
+      @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
       @TimestampConverter() this.deletedAt,
-      @TimestampConverter() this.reportTime,
       this.weatherLocation});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
+  @override
+  final UserEndOfDayReportTime endOfDayReportTime;
   @override
   @TimestampConverter()
   final Timestamp? createdAt;
@@ -183,18 +199,13 @@ class _$UserImpl implements _User {
   @TimestampConverter()
   final Timestamp? deletedAt;
 
-  /// レポートして欲しい目安の時間
-  @override
-  @TimestampConverter()
-  final Timestamp? reportTime;
-
   /// 気象情報を取得する地域
   @override
   final String? weatherLocation;
 
   @override
   String toString() {
-    return 'User(createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, reportTime: $reportTime, weatherLocation: $weatherLocation)';
+    return 'User(endOfDayReportTime: $endOfDayReportTime, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, weatherLocation: $weatherLocation)';
   }
 
   @override
@@ -202,22 +213,22 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
+            (identical(other.endOfDayReportTime, endOfDayReportTime) ||
+                other.endOfDayReportTime == endOfDayReportTime) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.deletedAt, deletedAt) ||
                 other.deletedAt == deletedAt) &&
-            (identical(other.reportTime, reportTime) ||
-                other.reportTime == reportTime) &&
             (identical(other.weatherLocation, weatherLocation) ||
                 other.weatherLocation == weatherLocation));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, createdAt, updatedAt, deletedAt,
-      reportTime, weatherLocation);
+  int get hashCode => Object.hash(runtimeType, endOfDayReportTime, createdAt,
+      updatedAt, deletedAt, weatherLocation);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -237,14 +248,16 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {@TimestampConverter() final Timestamp? createdAt,
+      {required final UserEndOfDayReportTime endOfDayReportTime,
+      @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
       @TimestampConverter() final Timestamp? deletedAt,
-      @TimestampConverter() final Timestamp? reportTime,
       final String? weatherLocation}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
+  @override
+  UserEndOfDayReportTime get endOfDayReportTime;
   @override
   @TimestampConverter()
   Timestamp? get createdAt;
@@ -254,11 +267,6 @@ abstract class _User implements User {
   @override
   @TimestampConverter()
   Timestamp? get deletedAt;
-
-  /// レポートして欲しい目安の時間
-  @override
-  @TimestampConverter()
-  Timestamp? get reportTime;
 
   /// 気象情報を取得する地域
   @override

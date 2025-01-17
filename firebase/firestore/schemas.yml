@@ -27,10 +27,18 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
-                  reportTime:
-                    description: レポートして欲しい目安の時間 Timestamp
+                  endOfDayReportTime:
+                    description: 1日の終わりのレポートの作成目安時刻。UTC
                     type: object
-                    nullable: true
+                    properties:
+                      hour:
+                        description: 時
+                        type: integer
+                        example: 21
+                      minute:
+                        description: 分
+                        type: integer
+                        example: 0
                   weatherLocation:
                     description: 気象情報を取得する地域
                     type: string

@@ -15,7 +15,7 @@ service cloud.firestore {
 
     match /users_v1/{uid} {
       // only the user can read and write their own data
-      allow get:
+      allow get, update:
         if isOwner(uid);
 
       // only the user can update their own data

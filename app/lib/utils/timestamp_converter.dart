@@ -60,4 +60,12 @@ class TimestampConverter extends JsonConverter<Timestamp?, dynamic> {
       },
     );
   }
+
+  static Json addDeletedAt(Json json) {
+    final result = Map<String, dynamic>.from(json);
+
+    result['deletedAt'] = FieldValue.serverTimestamp();
+
+    return result;
+  }
 }
