@@ -5,8 +5,8 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0
 
 environment:
-  sdk: 3.7.0-209.1.beta
-  flutter: 3.28.0-0.1.pre
+  sdk: 3.6.1
+  flutter: 3.27.2
 
 dependencies:
   adaptive_dialog: ^2.4.0
