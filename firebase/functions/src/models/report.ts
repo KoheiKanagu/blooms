@@ -1,6 +1,7 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
 export type ReportType = 'last1day' | 'last7days' | 'last14days' | 'last21days' | 'last28days';
+export type ReportState = 'unknown' | 'pending' | 'inProgress' | 'success' | 'failure';
 
 export class Report {
   constructor(
@@ -9,12 +10,13 @@ export class Report {
     readonly deletedAt: Timestamp | null,
     readonly subjectUid: string,
     readonly targetDate: Timestamp,
-    readonly prompt: string,
-    readonly type: ReportType,
+    readonly prompt: string | null,
+    readonly type: ReportType = 'last1day',
     readonly subjectiveConditionTendency: string,
     readonly objectiveConditionTendency: string,
     readonly analysisResult: string,
     readonly advice: string,
+    readonly state: ReportState = 'unknown',
   ) { }
 }
 
@@ -31,6 +33,7 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     objectiveConditionTendency: report.objectiveConditionTendency,
     analysisResult: report.analysisResult,
     advice: report.advice,
+    state: report.state,
   }),
   fromFirestore: snapshot => new Report(
     snapshot.get('createdAt') as Timestamp,
@@ -38,11 +41,12 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     snapshot.get('deletedAt') as Timestamp | null,
     snapshot.get('subjectUid') as string,
     snapshot.get('targetDate') as Timestamp,
-    snapshot.get('prompt') as string,
-    snapshot.get('type') as ReportType,
+    snapshot.get('prompt') as string | null,
+    (snapshot.get('type') as ReportType) ?? 'last1day',
     snapshot.get('subjectiveConditionTendency') as string,
     snapshot.get('objectiveConditionTendency') as string,
     snapshot.get('analysisResult') as string,
     snapshot.get('advice') as string,
+    (snapshot.get('state') as ReportState) ?? 'unknown',
   ),
 };

@@ -128,6 +128,7 @@ paths:
                   prompt:
                     description: Geminiによるレポートの生成のプロンプトのファイルパス
                     type: string
+                    nullable: true
                     example: gs://bucket/path/to/file
                   type:
                     description: レポートの種類
@@ -142,12 +143,26 @@ paths:
                   subjectiveConditionTendency:
                     description: 主観的な状態の傾向
                     type: string
+                    nullable: true
                   objectiveConditionTendency:
                     description: 客観的な状態の傾向
                     type: string
+                    nullable: true
                   analysisResult:
                     description: 分析結果
                     type: string
+                    nullable: true
                   advice:
                     description: アドバイス
                     type: string
+                    nullable: true
+                  state:
+                    description: Geminiでの処理の状態
+                    type: string
+                    default: unknown
+                    enum:
+                      - unknown
+                      - pending
+                      - inProgress
+                      - success
+                      - failure

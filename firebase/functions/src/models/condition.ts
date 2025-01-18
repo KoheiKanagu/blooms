@@ -32,9 +32,9 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('updatedAt') as Timestamp,
     snapshot.get('deletedAt') as Timestamp | null,
     snapshot.get('createdBy') as string,
-    snapshot.get('type') as ConditionType,
+    (snapshot.get('type') as ConditionType) ?? 'unknown',
     snapshot.get('attachments') as string[],
-    snapshot.get('state') as ConditionState,
+    (snapshot.get('state') as ConditionState) ?? 'unknown',
     snapshot.get('record') as string | null,
   ),
 };

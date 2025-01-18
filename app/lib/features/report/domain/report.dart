@@ -1,3 +1,4 @@
+import 'package:blooms/features/report/domain/report_state.dart';
 import 'package:blooms/features/report/domain/report_type.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -10,26 +11,29 @@ part 'report.g.dart';
 @freezed
 class Report with _$Report {
   const factory Report({
-    /// Geminiによるレポートの生成のプロンプトのファイルパス
-    required String prompt,
-
     /// レポートの種類
-    required ReportType reportType,
-
-    /// 主観的な状態の傾向
-    required String subjectiveConditionTendency,
-
-    /// 客観的な状態の傾向
-    required String objectiveConditionTendency,
-
-    /// 分析結果
-    required String analysisResult,
-
-    /// アドバイス
-    required String advice,
+    required ReportType type,
 
     /// レポートの対象者のUID
     required String subjectUid,
+
+    /// Geminiによるレポートの生成のプロンプトのファイルパス
+    String? prompt,
+
+    /// 主観的な状態の傾向
+    String? subjectiveConditionTendency,
+
+    /// 客観的な状態の傾向
+    String? objectiveConditionTendency,
+
+    /// 分析結果
+    String? analysisResult,
+
+    /// アドバイス
+    String? advice,
+
+    /// Geminiでの処理の状態
+    @Default(ReportState.unknown) ReportState state,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,

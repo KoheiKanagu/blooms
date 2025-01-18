@@ -13,16 +13,22 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
       json,
       ($checkedConvert) {
         final val = _$ReportImpl(
-          prompt: $checkedConvert('prompt', (v) => v as String),
-          reportType: $checkedConvert(
-              'reportType', (v) => $enumDecode(_$ReportTypeEnumMap, v)),
-          subjectiveConditionTendency: $checkedConvert(
-              'subjectiveConditionTendency', (v) => v as String),
-          objectiveConditionTendency:
-              $checkedConvert('objectiveConditionTendency', (v) => v as String),
-          analysisResult: $checkedConvert('analysisResult', (v) => v as String),
-          advice: $checkedConvert('advice', (v) => v as String),
+          type: $checkedConvert(
+              'type', (v) => $enumDecode(_$ReportTypeEnumMap, v)),
           subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+          prompt: $checkedConvert('prompt', (v) => v as String?),
+          subjectiveConditionTendency: $checkedConvert(
+              'subjectiveConditionTendency', (v) => v as String?),
+          objectiveConditionTendency: $checkedConvert(
+              'objectiveConditionTendency', (v) => v as String?),
+          analysisResult:
+              $checkedConvert('analysisResult', (v) => v as String?),
+          advice: $checkedConvert('advice', (v) => v as String?),
+          state: $checkedConvert(
+              'state',
+              (v) =>
+                  $enumDecodeNullable(_$ReportStateEnumMap, v) ??
+                  ReportState.unknown),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
@@ -38,13 +44,14 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
 
 Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
     <String, dynamic>{
+      'type': _$ReportTypeEnumMap[instance.type]!,
+      'subjectUid': instance.subjectUid,
       'prompt': instance.prompt,
-      'reportType': _$ReportTypeEnumMap[instance.reportType]!,
       'subjectiveConditionTendency': instance.subjectiveConditionTendency,
       'objectiveConditionTendency': instance.objectiveConditionTendency,
       'analysisResult': instance.analysisResult,
       'advice': instance.advice,
-      'subjectUid': instance.subjectUid,
+      'state': _$ReportStateEnumMap[instance.state]!,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
@@ -57,4 +64,12 @@ const _$ReportTypeEnumMap = {
   ReportType.last14days: 'last14days',
   ReportType.last21days: 'last21days',
   ReportType.last28days: 'last28days',
+};
+
+const _$ReportStateEnumMap = {
+  ReportState.unknown: 'unknown',
+  ReportState.pending: 'pending',
+  ReportState.inProgress: 'inProgress',
+  ReportState.success: 'success',
+  ReportState.failure: 'failure',
 };
