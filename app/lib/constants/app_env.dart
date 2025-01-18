@@ -15,6 +15,11 @@ final kReCaptchaV3SiteKey = switch (appEnv) {
   AppEnv.prod => '6Ld9ZrIqAAAAANziKJDpmNHbbDOKbd6h1N2E6Fee',
 };
 
+final kKeychainGroup = switch (appEnv) {
+  AppEnv.stg => '4XBP3H82S7.dev.kingu.BLOOMS.stg.keychain-group',
+  AppEnv.prod => '4XBP3H82S7.dev.kingu.BLOOMS.keychain-group',
+};
+
 enum AppEnv {
   stg,
   prod, //
