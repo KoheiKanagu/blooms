@@ -29,70 +29,72 @@ BuildContext? get rootContext =>
 
 @riverpod
 GoRouter myGoRouter(Ref ref) => GoRouter(
-  navigatorKey: rootNavigatorKey,
-  routes: [
-    ...startup_route.$appRoutes,
-    ...onboarding_route.$appRoutes,
-    ...condition_route.$appRoutes,
-  ],
-  errorBuilder: (context, state) {
-    logger.handle(state.error.toString(), StackTrace.current, {
-      'name': state.name,
-      'fullPath': state.fullPath,
-      'pathParameters': state.pathParameters,
-      'queryParameters': state.uri.queryParameters,
-      'location': state.uri,
-      'queryParametersAll': state.uri.queryParametersAll,
-    });
+      navigatorKey: rootNavigatorKey,
+      routes: [
+        ...startup_route.$appRoutes,
+        ...onboarding_route.$appRoutes,
+        ...condition_route.$appRoutes,
+      ],
+      errorBuilder: (context, state) {
+        logger.handle(state.error.toString(), StackTrace.current, {
+          'name': state.name,
+          'fullPath': state.fullPath,
+          'pathParameters': state.pathParameters,
+          'queryParameters': state.uri.queryParameters,
+          'location': state.uri,
+          'queryParametersAll': state.uri.queryParametersAll,
+        });
 
-    return const AppStartupLoadingWidget();
-  },
-  refreshListenable: ref.watch(refreshListenableProvider),
-  redirect: (context, state) async {
-    final refreshListenable = ref.read(refreshListenableProvider).value;
+        return const AppStartupLoadingWidget();
+      },
+      refreshListenable: ref.watch(refreshListenableProvider),
+      redirect: (context, state) async {
+        final refreshListenable = ref.read(refreshListenableProvider).value;
 
-    final appStartupState =
-        refreshListenable.appStartupState ?? const AsyncLoading();
+        final appStartupState =
+            refreshListenable.appStartupState ?? const AsyncLoading();
 
-    // 初期化が完了するのを待つ
-    if (appStartupState.isLoading || appStartupState.hasError) {
-      return startup_route.AppStartupPageRoute.path;
-    }
+        // 初期化が完了するのを待つ
+        if (appStartupState.isLoading || appStartupState.hasError) {
+          return startup_route.AppStartupPageRoute.path;
+        }
 
-    // _initialLocation判定で複雑化するので、一旦オンボーディングに遷移させる
-    // すぐにredirectが呼ばれるので実際には画面は表示されない
-    // 実際の遷移先は以後の処理で決定される
-    if (state.fullPath == _initialLocation) {
-      return onboarding_route.OnboardingPageRoute.path;
-    }
+        // _initialLocation判定で複雑化するので、一旦オンボーディングに遷移させる
+        // すぐにredirectが呼ばれるので実際には画面は表示されない
+        // 実際の遷移先は以後の処理で決定される
+        if (state.fullPath == _initialLocation) {
+          return onboarding_route.OnboardingPageRoute.path;
+        }
 
-    // 未サインインで到達できる画面かどうか
-    final isUnauthorizedRoute = [
-      onboarding_route.OnboardingPageRoute.path,
-    ].any((e) => e == state.fullPath);
+        // 未サインインで到達できる画面かどうか
+        final isUnauthorizedRoute = [
+          onboarding_route.OnboardingPageRoute.path,
+        ].any((e) => e == state.fullPath);
 
-    if (refreshListenable.signedIn && refreshListenable.createdUserDocument) {
-      // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
-      if (isUnauthorizedRoute) {
-        return condition_route.ConditionPageRoute.path;
-      }
+        if (refreshListenable.signedIn &&
+            refreshListenable.createdUserDocument) {
+          // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
+          if (isUnauthorizedRoute) {
+            return condition_route.ConditionPageRoute.path;
+          }
 
-      // サインイン済みの場合は何もしない
-      return null;
-    } else {
-      // 未サインイン状態でも遷移できるページの場合は何もしない
-      if (isUnauthorizedRoute) {
-        return null;
-      } else {
-        // 未サインイン状態で遷移できないページの場合はオンボーディング画面に遷移
-        return onboarding_route.OnboardingPageRoute.path;
-      }
-    }
-  },
-  observers: [
-    MyNavigatorObserver(ref.read(firebaseCrashlyticsProvider)),
-    FirebaseAnalyticsObserver(analytics: ref.read(firebaseAnalyticsProvider)),
-  ],
-  debugLogDiagnostics: kDebugMode,
-  initialLocation: _initialLocation,
-);
+          // サインイン済みの場合は何もしない
+          return null;
+        } else {
+          // 未サインイン状態でも遷移できるページの場合は何もしない
+          if (isUnauthorizedRoute) {
+            return null;
+          } else {
+            // 未サインイン状態で遷移できないページの場合はオンボーディング画面に遷移
+            return onboarding_route.OnboardingPageRoute.path;
+          }
+        }
+      },
+      observers: [
+        MyNavigatorObserver(ref.read(firebaseCrashlyticsProvider)),
+        FirebaseAnalyticsObserver(
+            analytics: ref.read(firebaseAnalyticsProvider)),
+      ],
+      debugLogDiagnostics: kDebugMode,
+      initialLocation: _initialLocation,
+    );
