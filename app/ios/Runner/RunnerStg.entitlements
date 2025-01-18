@@ -6,5 +6,9 @@
 	<string>development</string>
 	<key>com.apple.developer.devicecheck.appattest-environment</key>
 	<string>development</string>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)dev.kingu.BLOOMS.stg.keychain-group</string>
+	</array>
 </dict>
 </plist>

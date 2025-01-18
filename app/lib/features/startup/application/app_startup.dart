@@ -56,12 +56,17 @@ Future<void> appStartup(Ref ref) async {
     ref
         .read(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
-    // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
-    ref.read(firebaseAuthProvider).authStateChanges().first,
     ref.read(sharedPreferencesProvider.future),
     ref.read(packageInfoProvider.future),
+    ref.read(firebaseAuthProvider).setSettings(
+          userAccessGroup: kKeychainGroup,
+        ),
   ]);
 
-  // sharedPreferencesProviderが初期化されている必要があるので後から初期化
-  await ref.read(authSignOutWhenFirstRunProvider.future);
+  await Future.wait([
+    // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
+    ref.read(firebaseAuthProvider).authStateChanges().first,
+    // sharedPreferencesProviderが初期化されている必要があるので後から初期化
+    ref.read(authSignOutWhenFirstRunProvider.future),
+  ]);
 }
