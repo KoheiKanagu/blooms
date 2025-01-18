@@ -13,7 +13,9 @@ class ConditionPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('今日の体調'),
+      ),
       drawer: Drawer(
         child: ListView(
           children: [
