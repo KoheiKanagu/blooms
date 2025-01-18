@@ -10,9 +10,7 @@ class AppStartupWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref
-        .watch(appStartupProvider)
-        .maybeWhen(
+    return ref.watch(appStartupProvider).maybeWhen(
           orElse: () => const AppStartupLoadingWidget(),
           error: (error, trace) {
             logger.error(error, trace);
@@ -58,8 +56,8 @@ class AppStartupErrorWidget extends StatelessWidget {
             Text(
               i18n.an_unexpected_error_occurred,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onError,
-              ),
+                    color: Theme.of(context).colorScheme.onError,
+                  ),
             ),
             const Gap(16),
             TextButton(
@@ -67,8 +65,8 @@ class AppStartupErrorWidget extends StatelessWidget {
               child: Text(
                 i18n.retry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onError,
-                ),
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
               ),
             ),
           ],

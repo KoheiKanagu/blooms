@@ -38,7 +38,7 @@ Future<void> authSignIn(Ref ref) async {
   // Cloud FunctionsでUserドキュメントが作成されるまで待つ
   await ref.read(userDocumentSnapshotProvider(uid).future).catchError((
     _,
-    _,
+    __,
   ) async {
     logger.warning('error. signOut and throw error');
     await ref.read(authSignOutProvider.future);

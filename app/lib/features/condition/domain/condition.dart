@@ -13,7 +13,6 @@ class Condition with _$Condition {
   const factory Condition({
     /// 作成者
     required String createdBy,
-
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
@@ -43,12 +42,13 @@ class Condition with _$Condition {
   factory Condition.photo({
     required String uid,
     required List<String> attachments,
-  }) => Condition(
-    createdBy: uid,
-    type: ConditionType.photo,
-    attachments: attachments,
-    state: ConditionState.pending,
-  );
+  }) =>
+      Condition(
+        createdBy: uid,
+        type: ConditionType.photo,
+        attachments: attachments,
+        state: ConditionState.pending,
+      );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
 
