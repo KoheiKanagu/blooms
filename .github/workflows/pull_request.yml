@@ -149,3 +149,44 @@ jobs:
         working-directory: firebase
         run: |
           ./firebase_emulators_test.sh
+
+  check_firestore:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+
+    steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2.0.0
+        with:
+          comment_on_pr: false
+
+      ### Setup ###
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2.1.7
+        with:
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER_STG }}
+          service_account: ${{ vars.SERVICE_ACCOUNT_STG }}
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version-file: firebase/functions/package.json
+
+      - name: Firebase bootstrap
+        run: |
+          .github/workflows/firebase_bootstrap.sh
+
+      ### Check ###
+      - name: Export Firestore indexes
+        working-directory: firebase
+        run: |
+          ./scripts/export_firestore_indexes.sh
+
+      - run: |
+          git diff --exit-code
