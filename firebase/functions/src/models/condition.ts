@@ -1,7 +1,7 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
 export type ConditionType = 'unknown' | 'subjective' | 'photo';
-export type ConditionState = 'unknown' | 'pending' | 'inProgress' | 'success' | 'failure';
+export type ConditionState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export class Condition {
   constructor(
@@ -34,7 +34,7 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('createdBy') as string,
     (snapshot.get('type') as ConditionType) ?? 'unknown',
     snapshot.get('attachments') as string[],
-    (snapshot.get('state') as ConditionState) ?? 'unknown',
+    (snapshot.get('state') as ConditionState) ?? 'pending',
     snapshot.get('record') as string | null,
   ),
 };

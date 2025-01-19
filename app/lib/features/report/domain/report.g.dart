@@ -28,7 +28,7 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
               'state',
               (v) =>
                   $enumDecodeNullable(_$ReportStateEnumMap, v) ??
-                  ReportState.unknown),
+                  ReportState.pending),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
@@ -67,7 +67,6 @@ const _$ReportTypeEnumMap = {
 };
 
 const _$ReportStateEnumMap = {
-  ReportState.unknown: 'unknown',
   ReportState.pending: 'pending',
   ReportState.inProgress: 'inProgress',
   ReportState.success: 'success',

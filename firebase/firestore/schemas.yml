@@ -86,9 +86,8 @@ paths:
                   state:
                     description: attachmentsの解析で処理が必要な場合の状態
                     type: string
-                    default: unknown
+                    default: pending
                     enum:
-                      - unknown
                       - pending
                       - inProgress
                       - success
@@ -159,9 +158,8 @@ paths:
                   state:
                     description: Geminiでの処理の状態
                     type: string
-                    default: unknown
+                    default: pending
                     enum:
-                      - unknown
                       - pending
                       - inProgress
                       - success

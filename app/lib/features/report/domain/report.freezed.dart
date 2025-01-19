@@ -276,7 +276,7 @@ class _$ReportImpl implements _Report {
       this.objectiveConditionTendency,
       this.analysisResult,
       this.advice,
-      this.state = ReportState.unknown,
+      this.state = ReportState.pending,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
       @TimestampConverter() this.deletedAt,

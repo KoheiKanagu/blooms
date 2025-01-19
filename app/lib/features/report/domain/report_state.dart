@@ -1,5 +1,4 @@
 enum ReportState {
-  unknown,
   pending,
   inProgress,
   success,

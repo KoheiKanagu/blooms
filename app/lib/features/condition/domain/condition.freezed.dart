@@ -216,7 +216,7 @@ class _$ConditionImpl implements _Condition {
       @TimestampConverter() this.deletedAt,
       this.type = ConditionType.unknown,
       final List<String> attachments = const [],
-      this.state = ConditionState.unknown,
+      this.state = ConditionState.pending,
       this.record})
       : _attachments = attachments;
 

@@ -1,7 +1,7 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
 export type ReportType = 'last1day' | 'last7days' | 'last14days' | 'last21days' | 'last28days';
-export type ReportState = 'unknown' | 'pending' | 'inProgress' | 'success' | 'failure';
+export type ReportState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export class Report {
   constructor(
@@ -16,7 +16,7 @@ export class Report {
     readonly objectiveConditionTendency: string,
     readonly analysisResult: string,
     readonly advice: string,
-    readonly state: ReportState = 'unknown',
+    readonly state: ReportState = 'pending',
   ) { }
 }
 
@@ -47,6 +47,6 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     snapshot.get('objectiveConditionTendency') as string,
     snapshot.get('analysisResult') as string,
     snapshot.get('advice') as string,
-    (snapshot.get('state') as ReportState) ?? 'unknown',
+    (snapshot.get('state') as ReportState) ?? 'pending',
   ),
 };

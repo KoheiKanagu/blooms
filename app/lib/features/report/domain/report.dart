@@ -33,7 +33,7 @@ class Report with _$Report {
     String? advice,
 
     /// Geminiでの処理の状態
-    @Default(ReportState.unknown) ReportState state,
+    @Default(ReportState.pending) ReportState state,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
