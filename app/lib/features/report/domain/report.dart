@@ -38,8 +38,8 @@ class Report with _$Report {
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
 
-    /// 何日を対象にしたレポートか
-    @TimestampConverter() Timestamp? targetDate,
+    /// レポートを作成開始する日時。この日からN日前のレポート
+    @TimestampConverter() Timestamp? startAt,
   }) = _Report;
 
   factory Report.fromJson(Json json) => _$ReportFromJson(json);

@@ -121,8 +121,8 @@ paths:
                   subjectUid:
                     description: レポートの対象のユーザーのUID
                     type: string
-                  targetDate:
-                    description: 何日を対象にしたレポートか Timestamp
+                  startAt:
+                    description: レポートを作成開始する日時。この日からN日前のレポート Timestamp
                     type: object
                   prompt:
                     description: Geminiによるレポートの生成のプロンプトのファイルパス

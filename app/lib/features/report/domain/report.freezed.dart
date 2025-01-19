@@ -50,9 +50,9 @@ mixin _$Report {
   @TimestampConverter()
   Timestamp? get deletedAt => throw _privateConstructorUsedError;
 
-  /// 何日を対象にしたレポートか
+  /// レポートを作成開始する日時。この日からN日前のレポート
   @TimestampConverter()
-  Timestamp? get targetDate => throw _privateConstructorUsedError;
+  Timestamp? get startAt => throw _privateConstructorUsedError;
 
   /// Serializes this Report to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -80,7 +80,7 @@ abstract class $ReportCopyWith<$Res> {
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? targetDate});
+      @TimestampConverter() Timestamp? startAt});
 }
 
 /// @nodoc
@@ -109,7 +109,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? targetDate = freezed,
+    Object? startAt = freezed,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -156,9 +156,9 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      targetDate: freezed == targetDate
-          ? _value.targetDate
-          : targetDate // ignore: cast_nullable_to_non_nullable
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
     ) as $Val);
   }
@@ -183,7 +183,7 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? targetDate});
+      @TimestampConverter() Timestamp? startAt});
 }
 
 /// @nodoc
@@ -210,7 +210,7 @@ class __$$ReportImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? targetDate = freezed,
+    Object? startAt = freezed,
   }) {
     return _then(_$ReportImpl(
       type: null == type
@@ -257,9 +257,9 @@ class __$$ReportImplCopyWithImpl<$Res>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      targetDate: freezed == targetDate
-          ? _value.targetDate
-          : targetDate // ignore: cast_nullable_to_non_nullable
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
     ));
   }
@@ -280,7 +280,7 @@ class _$ReportImpl implements _Report {
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
       @TimestampConverter() this.deletedAt,
-      @TimestampConverter() this.targetDate});
+      @TimestampConverter() this.startAt});
 
   factory _$ReportImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportImplFromJson(json);
@@ -327,14 +327,14 @@ class _$ReportImpl implements _Report {
   @TimestampConverter()
   final Timestamp? deletedAt;
 
-  /// 何日を対象にしたレポートか
+  /// レポートを作成開始する日時。この日からN日前のレポート
   @override
   @TimestampConverter()
-  final Timestamp? targetDate;
+  final Timestamp? startAt;
 
   @override
   String toString() {
-    return 'Report(type: $type, subjectUid: $subjectUid, prompt: $prompt, subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, targetDate: $targetDate)';
+    return 'Report(type: $type, subjectUid: $subjectUid, prompt: $prompt, subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, startAt: $startAt)';
   }
 
   @override
@@ -364,8 +364,7 @@ class _$ReportImpl implements _Report {
                 other.updatedAt == updatedAt) &&
             (identical(other.deletedAt, deletedAt) ||
                 other.deletedAt == deletedAt) &&
-            (identical(other.targetDate, targetDate) ||
-                other.targetDate == targetDate));
+            (identical(other.startAt, startAt) || other.startAt == startAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -383,7 +382,7 @@ class _$ReportImpl implements _Report {
       createdAt,
       updatedAt,
       deletedAt,
-      targetDate);
+      startAt);
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
@@ -414,7 +413,7 @@ abstract class _Report implements Report {
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
       @TimestampConverter() final Timestamp? deletedAt,
-      @TimestampConverter() final Timestamp? targetDate}) = _$ReportImpl;
+      @TimestampConverter() final Timestamp? startAt}) = _$ReportImpl;
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$ReportImpl.fromJson;
 
@@ -459,10 +458,10 @@ abstract class _Report implements Report {
   @TimestampConverter()
   Timestamp? get deletedAt;
 
-  /// 何日を対象にしたレポートか
+  /// レポートを作成開始する日時。この日からN日前のレポート
   @override
   @TimestampConverter()
-  Timestamp? get targetDate;
+  Timestamp? get startAt;
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
