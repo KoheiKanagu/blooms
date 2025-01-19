@@ -12,5 +12,5 @@ export const onReportDocumentCreated = onDocumentCreated(`${CollectionPath.REPOR
   }
 
   const report = reportConverter.fromFirestore(snapshot);
-  await createGeminiReport(report);
+  await createGeminiReport(snapshot.ref, report);
 });

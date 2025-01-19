@@ -30,7 +30,7 @@ export const reportScheduler = onSchedule({
 
     const report = doc.data();
 
-    await createGeminiReport(report);
+    await createGeminiReport(doc.ref, report);
 
     // 次のReportを取得
     nextReport = await query.startAfter(doc).get();
