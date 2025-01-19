@@ -132,13 +132,13 @@ paths:
                   type:
                     description: レポートの種類
                     type: string
-                    default: last1day
+                    default: past1day
                     enum:
-                      - last1day
-                      - last7days
-                      - last14days
-                      - last21days
-                      - last28days
+                      - past1day
+                      - past7days
+                      - past14days
+                      - past21days
+                      - past28days
                   subjectiveConditionTendency:
                     description: 主観的な状態の傾向
                     type: string

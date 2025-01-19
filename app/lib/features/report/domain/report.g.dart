@@ -59,11 +59,11 @@ Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
     };
 
 const _$ReportTypeEnumMap = {
-  ReportType.last1day: 'last1day',
-  ReportType.last7days: 'last7days',
-  ReportType.last14days: 'last14days',
-  ReportType.last21days: 'last21days',
-  ReportType.last28days: 'last28days',
+  ReportType.past1day: 'past1day',
+  ReportType.past7days: 'past7days',
+  ReportType.past14days: 'past14days',
+  ReportType.past21days: 'past21days',
+  ReportType.past28days: 'past28days',
 };
 
 const _$ReportStateEnumMap = {

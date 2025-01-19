@@ -1,6 +1,6 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
-export type ReportType = 'last1day' | 'last7days' | 'last14days' | 'last21days' | 'last28days';
+export type ReportType = 'past1day' | 'past7days' | 'past14days' | 'past21days' | 'past28days';
 export type ReportState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export class Report {
@@ -11,7 +11,7 @@ export class Report {
     readonly subjectUid: string,
     readonly startAt: Timestamp,
     readonly prompt: string | null,
-    readonly type: ReportType = 'last1day',
+    readonly type: ReportType = 'past1day',
     readonly subjectiveConditionTendency: string,
     readonly objectiveConditionTendency: string,
     readonly analysisResult: string,
@@ -42,7 +42,7 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     snapshot.get('subjectUid') as string,
     snapshot.get('startAt') as Timestamp,
     snapshot.get('prompt') as string | null,
-    (snapshot.get('type') as ReportType) ?? 'last1day',
+    (snapshot.get('type') as ReportType) ?? 'past1day',
     snapshot.get('subjectiveConditionTendency') as string,
     snapshot.get('objectiveConditionTendency') as string,
     snapshot.get('analysisResult') as string,

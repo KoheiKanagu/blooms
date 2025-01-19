@@ -1,7 +1,7 @@
 enum ReportType {
-  last1day,
-  last7days,
-  last14days,
-  last21days,
-  last28days, //
+  past1day,
+  past7days,
+  past14days,
+  past21days,
+  past28days, //
 }
