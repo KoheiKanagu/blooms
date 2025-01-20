@@ -3,6 +3,13 @@ import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/fi
 export type ReportType = 'past1day' | 'past7days' | 'past14days' | 'past21days' | 'past28days';
 export type ReportState = 'pending' | 'inProgress' | 'success' | 'failure';
 
+export interface ReportContent {
+  subjectiveConditionTendency: string | null;
+  objectiveConditionTendency: string | null;
+  analysisResult: string | null;
+  advice: string | null;
+}
+
 export class Report {
   constructor(
     readonly createdAt: Timestamp | FieldValue,
@@ -12,10 +19,7 @@ export class Report {
     readonly startAt: Timestamp,
     readonly prompt: string | null,
     readonly type: ReportType = 'past1day',
-    readonly subjectiveConditionTendency: string,
-    readonly objectiveConditionTendency: string,
-    readonly analysisResult: string,
-    readonly advice: string,
+    readonly content: ReportContent | null,
     readonly state: ReportState = 'pending',
   ) { }
 }
@@ -29,10 +33,7 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     startAt: report.startAt,
     prompt: report.prompt,
     type: report.type,
-    subjectiveConditionTendency: report.subjectiveConditionTendency,
-    objectiveConditionTendency: report.objectiveConditionTendency,
-    analysisResult: report.analysisResult,
-    advice: report.advice,
+    content: report.content,
     state: report.state,
   }),
   fromFirestore: snapshot => new Report(
@@ -43,10 +44,7 @@ export const reportConverter: FirestoreDataConverter<Report> = {
     snapshot.get('startAt') as Timestamp,
     snapshot.get('prompt') as string | null,
     (snapshot.get('type') as ReportType) ?? 'past1day',
-    snapshot.get('subjectiveConditionTendency') as string,
-    snapshot.get('objectiveConditionTendency') as string,
-    snapshot.get('analysisResult') as string,
-    snapshot.get('advice') as string,
+    snapshot.get('content') as ReportContent | null,
     (snapshot.get('state') as ReportState) ?? 'pending',
   ),
 };

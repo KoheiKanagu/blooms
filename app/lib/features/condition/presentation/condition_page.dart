@@ -1,8 +1,13 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
+import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
+import 'package:blooms/features/report/application/report_providers.dart';
+import 'package:blooms/features/report/domain/report.dart';
+import 'package:blooms/features/report/domain/report_type.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,6 +35,21 @@ class ConditionPage extends HookConsumerWidget {
                 await ref.read(userDeleteProvider.future);
               },
               child: const Text('user delete'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                final uid = await ref.read(firebaseUserUidProvider.future);
+
+                final report = Report(
+                  type: ReportType.past14days,
+                  subjectUid: uid!,
+                  startAt: Timestamp.now(),
+                );
+
+                await ref.read(reportCollectionReferenceProvider).add(report);
+              },
+              child: const Text('create report'),
             ),
           ],
         ),

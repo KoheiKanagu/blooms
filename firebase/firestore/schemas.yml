@@ -101,7 +101,7 @@ paths:
     get:
       responses:
         "200":
-          description: Geminiが生成したレポート
+          description: LLMが生成したレポート
           content:
             application/json:
               schema:
@@ -125,7 +125,7 @@ paths:
                     description: レポートを作成開始する日時。この日からN日前のレポート Timestamp
                     type: object
                   prompt:
-                    description: Geminiによるレポートの生成のプロンプトのファイルパス
+                    description: LLMによるレポート生成プロンプトのファイルパス
                     type: string
                     nullable: true
                     example: gs://bucket/path/to/file
@@ -139,24 +139,29 @@ paths:
                       - past14days
                       - past21days
                       - past28days
-                  subjectiveConditionTendency:
-                    description: 主観的な状態の傾向
-                    type: string
+                  content:
+                    description: レポートの内容
+                    type: object
                     nullable: true
-                  objectiveConditionTendency:
-                    description: 客観的な状態の傾向
-                    type: string
-                    nullable: true
-                  analysisResult:
-                    description: 分析結果
-                    type: string
-                    nullable: true
-                  advice:
-                    description: アドバイス
-                    type: string
-                    nullable: true
+                    properties:
+                      subjectiveConditionTendency:
+                        description: 主観的な状態の傾向
+                        type: string
+                        nullable: true
+                      objectiveConditionTendency:
+                        description: 客観的な状態の傾向
+                        type: string
+                        nullable: true
+                      analysisResult:
+                        description: 分析結果
+                        type: string
+                        nullable: true
+                      advice:
+                        description: アドバイス
+                        type: string
+                        nullable: true
                   state:
-                    description: Geminiでの処理の状態
+                    description: LLMでの処理の状態
                     type: string
                     default: pending
                     enum:

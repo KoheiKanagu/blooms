@@ -1,8 +1,8 @@
 import { logger } from 'firebase-functions';
 import { onDocumentCreated } from 'firebase-functions/firestore';
-import { reportConverter } from './models/report';
-import { createGeminiReport } from './services/reportService';
-import { CollectionPath } from './utils/collectionPath';
+import { CollectionPath } from '../../utils/collectionPath';
+import { createGeminiReport } from './application/reportService';
+import { reportConverter } from './domain/report';
 
 export const onReportDocumentCreated = onDocumentCreated(`${CollectionPath.REPORTS}/{documentId}`, async (event) => {
   const snapshot = event.data;

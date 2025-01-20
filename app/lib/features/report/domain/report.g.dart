@@ -17,13 +17,11 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
               'type', (v) => $enumDecode(_$ReportTypeEnumMap, v)),
           subjectUid: $checkedConvert('subjectUid', (v) => v as String),
           prompt: $checkedConvert('prompt', (v) => v as String?),
-          subjectiveConditionTendency: $checkedConvert(
-              'subjectiveConditionTendency', (v) => v as String?),
-          objectiveConditionTendency: $checkedConvert(
-              'objectiveConditionTendency', (v) => v as String?),
-          analysisResult:
-              $checkedConvert('analysisResult', (v) => v as String?),
-          advice: $checkedConvert('advice', (v) => v as String?),
+          content: $checkedConvert(
+              'content',
+              (v) => v == null
+                  ? null
+                  : ReportContent.fromJson(v as Map<String, dynamic>)),
           state: $checkedConvert(
               'state',
               (v) =>
@@ -47,10 +45,7 @@ Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
       'type': _$ReportTypeEnumMap[instance.type]!,
       'subjectUid': instance.subjectUid,
       'prompt': instance.prompt,
-      'subjectiveConditionTendency': instance.subjectiveConditionTendency,
-      'objectiveConditionTendency': instance.objectiveConditionTendency,
-      'analysisResult': instance.analysisResult,
-      'advice': instance.advice,
+      'content': instance.content?.toJson(),
       'state': _$ReportStateEnumMap[instance.state]!,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),

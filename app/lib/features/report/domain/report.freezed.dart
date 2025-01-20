@@ -26,22 +26,13 @@ mixin _$Report {
   /// レポートの対象者のUID
   String get subjectUid => throw _privateConstructorUsedError;
 
-  /// Geminiによるレポートの生成のプロンプトのファイルパス
+  /// LLMによるレポートの生成のプロンプトのファイルパス
   String? get prompt => throw _privateConstructorUsedError;
 
-  /// 主観的な状態の傾向
-  String? get subjectiveConditionTendency => throw _privateConstructorUsedError;
+  /// レポートの内容
+  ReportContent? get content => throw _privateConstructorUsedError;
 
-  /// 客観的な状態の傾向
-  String? get objectiveConditionTendency => throw _privateConstructorUsedError;
-
-  /// 分析結果
-  String? get analysisResult => throw _privateConstructorUsedError;
-
-  /// アドバイス
-  String? get advice => throw _privateConstructorUsedError;
-
-  /// Geminiでの処理の状態
+  /// LLMでの処理の状態
   ReportState get state => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
@@ -72,15 +63,14 @@ abstract class $ReportCopyWith<$Res> {
       {ReportType type,
       String subjectUid,
       String? prompt,
-      String? subjectiveConditionTendency,
-      String? objectiveConditionTendency,
-      String? analysisResult,
-      String? advice,
+      ReportContent? content,
       ReportState state,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
       @TimestampConverter() Timestamp? startAt});
+
+  $ReportContentCopyWith<$Res>? get content;
 }
 
 /// @nodoc
@@ -101,10 +91,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? type = null,
     Object? subjectUid = null,
     Object? prompt = freezed,
-    Object? subjectiveConditionTendency = freezed,
-    Object? objectiveConditionTendency = freezed,
-    Object? analysisResult = freezed,
-    Object? advice = freezed,
+    Object? content = freezed,
     Object? state = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -124,22 +111,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String?,
-      subjectiveConditionTendency: freezed == subjectiveConditionTendency
-          ? _value.subjectiveConditionTendency
-          : subjectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      objectiveConditionTendency: freezed == objectiveConditionTendency
-          ? _value.objectiveConditionTendency
-          : objectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      analysisResult: freezed == analysisResult
-          ? _value.analysisResult
-          : analysisResult // ignore: cast_nullable_to_non_nullable
-              as String?,
-      advice: freezed == advice
-          ? _value.advice
-          : advice // ignore: cast_nullable_to_non_nullable
-              as String?,
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as ReportContent?,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -162,6 +137,20 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
               as Timestamp?,
     ) as $Val);
   }
+
+  /// Create a copy of Report
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ReportContentCopyWith<$Res>? get content {
+    if (_value.content == null) {
+      return null;
+    }
+
+    return $ReportContentCopyWith<$Res>(_value.content!, (value) {
+      return _then(_value.copyWith(content: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -175,15 +164,15 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
       {ReportType type,
       String subjectUid,
       String? prompt,
-      String? subjectiveConditionTendency,
-      String? objectiveConditionTendency,
-      String? analysisResult,
-      String? advice,
+      ReportContent? content,
       ReportState state,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt,
       @TimestampConverter() Timestamp? startAt});
+
+  @override
+  $ReportContentCopyWith<$Res>? get content;
 }
 
 /// @nodoc
@@ -202,10 +191,7 @@ class __$$ReportImplCopyWithImpl<$Res>
     Object? type = null,
     Object? subjectUid = null,
     Object? prompt = freezed,
-    Object? subjectiveConditionTendency = freezed,
-    Object? objectiveConditionTendency = freezed,
-    Object? analysisResult = freezed,
-    Object? advice = freezed,
+    Object? content = freezed,
     Object? state = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -225,22 +211,10 @@ class __$$ReportImplCopyWithImpl<$Res>
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String?,
-      subjectiveConditionTendency: freezed == subjectiveConditionTendency
-          ? _value.subjectiveConditionTendency
-          : subjectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      objectiveConditionTendency: freezed == objectiveConditionTendency
-          ? _value.objectiveConditionTendency
-          : objectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      analysisResult: freezed == analysisResult
-          ? _value.analysisResult
-          : analysisResult // ignore: cast_nullable_to_non_nullable
-              as String?,
-      advice: freezed == advice
-          ? _value.advice
-          : advice // ignore: cast_nullable_to_non_nullable
-              as String?,
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as ReportContent?,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -272,10 +246,7 @@ class _$ReportImpl implements _Report {
       {required this.type,
       required this.subjectUid,
       this.prompt,
-      this.subjectiveConditionTendency,
-      this.objectiveConditionTendency,
-      this.analysisResult,
-      this.advice,
+      this.content,
       this.state = ReportState.pending,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
@@ -293,27 +264,15 @@ class _$ReportImpl implements _Report {
   @override
   final String subjectUid;
 
-  /// Geminiによるレポートの生成のプロンプトのファイルパス
+  /// LLMによるレポートの生成のプロンプトのファイルパス
   @override
   final String? prompt;
 
-  /// 主観的な状態の傾向
+  /// レポートの内容
   @override
-  final String? subjectiveConditionTendency;
+  final ReportContent? content;
 
-  /// 客観的な状態の傾向
-  @override
-  final String? objectiveConditionTendency;
-
-  /// 分析結果
-  @override
-  final String? analysisResult;
-
-  /// アドバイス
-  @override
-  final String? advice;
-
-  /// Geminiでの処理の状態
+  /// LLMでの処理の状態
   @override
   @JsonKey()
   final ReportState state;
@@ -334,7 +293,7 @@ class _$ReportImpl implements _Report {
 
   @override
   String toString() {
-    return 'Report(type: $type, subjectUid: $subjectUid, prompt: $prompt, subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, startAt: $startAt)';
+    return 'Report(type: $type, subjectUid: $subjectUid, prompt: $prompt, content: $content, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, startAt: $startAt)';
   }
 
   @override
@@ -346,17 +305,7 @@ class _$ReportImpl implements _Report {
             (identical(other.subjectUid, subjectUid) ||
                 other.subjectUid == subjectUid) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
-            (identical(other.subjectiveConditionTendency,
-                    subjectiveConditionTendency) ||
-                other.subjectiveConditionTendency ==
-                    subjectiveConditionTendency) &&
-            (identical(other.objectiveConditionTendency,
-                    objectiveConditionTendency) ||
-                other.objectiveConditionTendency ==
-                    objectiveConditionTendency) &&
-            (identical(other.analysisResult, analysisResult) ||
-                other.analysisResult == analysisResult) &&
-            (identical(other.advice, advice) || other.advice == advice) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -369,20 +318,8 @@ class _$ReportImpl implements _Report {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      type,
-      subjectUid,
-      prompt,
-      subjectiveConditionTendency,
-      objectiveConditionTendency,
-      analysisResult,
-      advice,
-      state,
-      createdAt,
-      updatedAt,
-      deletedAt,
-      startAt);
+  int get hashCode => Object.hash(runtimeType, type, subjectUid, prompt,
+      content, state, createdAt, updatedAt, deletedAt, startAt);
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
@@ -405,10 +342,7 @@ abstract class _Report implements Report {
       {required final ReportType type,
       required final String subjectUid,
       final String? prompt,
-      final String? subjectiveConditionTendency,
-      final String? objectiveConditionTendency,
-      final String? analysisResult,
-      final String? advice,
+      final ReportContent? content,
       final ReportState state,
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
@@ -425,27 +359,15 @@ abstract class _Report implements Report {
   @override
   String get subjectUid;
 
-  /// Geminiによるレポートの生成のプロンプトのファイルパス
+  /// LLMによるレポートの生成のプロンプトのファイルパス
   @override
   String? get prompt;
 
-  /// 主観的な状態の傾向
+  /// レポートの内容
   @override
-  String? get subjectiveConditionTendency;
+  ReportContent? get content;
 
-  /// 客観的な状態の傾向
-  @override
-  String? get objectiveConditionTendency;
-
-  /// 分析結果
-  @override
-  String? get analysisResult;
-
-  /// アドバイス
-  @override
-  String? get advice;
-
-  /// Geminiでの処理の状態
+  /// LLMでの処理の状態
   @override
   ReportState get state;
   @override

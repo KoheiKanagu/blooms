@@ -1,4 +1,4 @@
-import { getDateRange } from '../../src/services/reportService';
+import { getDateRange } from '../../../../src/features/report/application/reportService';
 
 describe('getDateRange', () => {
   // 2025-01-15 12:30:00

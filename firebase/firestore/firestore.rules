@@ -37,6 +37,9 @@ service cloud.firestore {
       // only the user can read their own data
       allow get, list:
         if isAuthenticated() && resource.data.subjectUid == request.auth.uid;
+
+      allow create:
+        if isAuthenticated() && request.resource.data.subjectUid == request.auth.uid;
     }
   }
 }

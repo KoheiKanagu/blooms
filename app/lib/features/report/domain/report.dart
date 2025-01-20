@@ -1,3 +1,4 @@
+import 'package:blooms/features/report/domain/report_content.dart';
 import 'package:blooms/features/report/domain/report_state.dart';
 import 'package:blooms/features/report/domain/report_type.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
@@ -17,22 +18,13 @@ class Report with _$Report {
     /// レポートの対象者のUID
     required String subjectUid,
 
-    /// Geminiによるレポートの生成のプロンプトのファイルパス
+    /// LLMによるレポートの生成のプロンプトのファイルパス
     String? prompt,
 
-    /// 主観的な状態の傾向
-    String? subjectiveConditionTendency,
+    /// レポートの内容
+    ReportContent? content,
 
-    /// 客観的な状態の傾向
-    String? objectiveConditionTendency,
-
-    /// 分析結果
-    String? analysisResult,
-
-    /// アドバイス
-    String? advice,
-
-    /// Geminiでの処理の状態
+    /// LLMでの処理の状態
     @Default(ReportState.pending) ReportState state,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,

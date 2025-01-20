@@ -1,11 +1,11 @@
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { onSchedule } from 'firebase-functions/scheduler';
-import { reportConverter } from './models/report';
-import { createGeminiReport } from './services/reportService';
-import { CollectionPath } from './utils/collectionPath';
+import { CollectionPath } from '../../utils/collectionPath';
+import { createGeminiReport } from './application/reportService';
+import { reportConverter } from './domain/report';
 
-export const reportScheduler = onSchedule({
+export const onReportSchedule = onSchedule({
   schedule: 'every 15 minutes from 20:00 to 23:45',
   timeoutSeconds: 540,
   timeZone: 'Asia/Tokyo',
