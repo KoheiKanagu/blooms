@@ -135,6 +135,8 @@ async function savePrompt(contents: Content[]): Promise<string> {
 }
 
 function setupGenerativeModel(): GenerativeModelPreview {
+  const today = new Date().toLocaleDateString('ja-JP');
+
   const vertexAI = new VertexAI({
     project: projectID.value(),
     location: 'us-central1',
@@ -213,8 +215,8 @@ function setupGenerativeModel(): GenerativeModelPreview {
         `あなたは妊婦の体調を分析するアナリストです。
 あなたの仕事はユーザが記録した主観的な体調についての体験と客観的なデータを組み合わせて分析し、パーソナライズされた分析結果を提供します。
 
-分析は20時ごろに実施されます。
-今日の日付は2025/01/15です。
+分析は夜に実施されます。
+今日の日付は${today}です。
 
 あなたの分析は次の内容を考慮する必要があります
 - ユーザを労うこと
