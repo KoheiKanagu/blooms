@@ -19,7 +19,7 @@ export async function requestGenerativeModel(conditions: Condition[]): Promise<{
 }> {
   const generativeModel = setupGenerativeModel();
 
-  const contents: Content[] = conditions.map<Content>((condition) => {
+  let contents: Content[] = conditions.map<Content>((condition) => {
     const date = (condition.createdAt as Timestamp).toDate().toLocaleString('ja-JP');
 
     return {
@@ -33,6 +33,20 @@ ${condition.record ?? ''}
       ],
     };
   });
+
+  // 空だとエラーになる
+  if (contents.length === 0) {
+    contents = [
+      {
+        role: 'system',
+        parts: [
+          {
+            text: 'No data',
+          },
+        ],
+      },
+    ];
+  }
 
   const result = await generativeModel.generateContent({
     contents: contents,
