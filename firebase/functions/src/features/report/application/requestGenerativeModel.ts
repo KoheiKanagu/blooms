@@ -38,7 +38,7 @@ ${condition.record ?? ''}
   if (contents.length === 0) {
     contents = [
       {
-        role: 'system',
+        role: 'user',
         parts: [
           {
             text: 'No data',
