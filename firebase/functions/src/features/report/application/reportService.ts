@@ -28,10 +28,10 @@ export async function createGeminiReport(
     return;
   }
 
-  // ReportのstateをinProgressに更新
-  await updateReportState(documentReference, 'inProgress');
-
   try {
+    // ReportのstateをinProgressに更新
+    await updateReportState(documentReference, 'inProgress');
+
     const { startDate, endDate } = getDateRange(
       report.type,
       startAt,
@@ -65,7 +65,8 @@ export async function createGeminiReport(
       error: String(error),
     });
     await updateReportState(documentReference, 'failure');
-    return;
+
+    throw error;
   }
 }
 
