@@ -31,5 +31,5 @@ export function functionsV1(): f.FunctionBuilder {
 }
 
 export { onReportDocumentCreated } from './features/report/onReportDocumentCreated';
-// export { onReportSchedule } from './features/report/onReportSchedule';
+export { onReportSchedule } from './features/report/onReportSchedule';
 export { onCreateAuthUser } from './onCreateAuthUser';
