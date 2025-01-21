@@ -80,7 +80,7 @@ async function requestGemini(conditions: Condition[], report: Report): Promise<R
       parts: [
         {
           text:
-            `${date}の体調:
+            `${date}の記録:
 ${condition.record ?? ''}
 `,
         },
