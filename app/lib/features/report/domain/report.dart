@@ -1,3 +1,5 @@
+import 'package:blooms/features/report/domain/report_content.dart';
+import 'package:blooms/features/report/domain/report_state.dart';
 import 'package:blooms/features/report/domain/report_type.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -10,32 +12,26 @@ part 'report.g.dart';
 @freezed
 class Report with _$Report {
   const factory Report({
-    /// Geminiによるレポートの生成のプロンプトのファイルパス
-    required String prompt,
-
     /// レポートの種類
-    required ReportType reportType,
-
-    /// 主観的な状態の傾向
-    required String subjectiveConditionTendency,
-
-    /// 客観的な状態の傾向
-    required String objectiveConditionTendency,
-
-    /// 分析結果
-    required String analysisResult,
-
-    /// アドバイス
-    required String advice,
+    required ReportType type,
 
     /// レポートの対象者のUID
     required String subjectUid,
+
+    /// 生成モデルによるレポートの生成のプロンプトのファイルパス
+    String? prompt,
+
+    /// レポートの内容
+    ReportContent? content,
+
+    /// 生成モデルでの処理の状態
+    @Default(ReportState.pending) ReportState state,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
 
-    /// 何日を対象にしたレポートか
-    @TimestampConverter() Timestamp? targetDate,
+    /// レポートを作成開始する日時。この日からN日前のレポート
+    @TimestampConverter() Timestamp? startAt,
   }) = _Report;
 
   factory Report.fromJson(Json json) => _$ReportFromJson(json);

@@ -1,4 +1,4 @@
-enum ConditionState {
+enum ReportState {
   pending,
   inProgress,
   success,

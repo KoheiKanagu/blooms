@@ -24,7 +24,7 @@ class Condition with _$Condition {
     @Default([]) List<String> attachments,
 
     /// attachmentsの解析で処理が必要な場合の状態
-    @Default(ConditionState.unknown) ConditionState state,
+    @Default(ConditionState.pending) ConditionState state,
 
     /// 記録
     String? record,
@@ -47,7 +47,6 @@ class Condition with _$Condition {
         createdBy: uid,
         type: ConditionType.photo,
         attachments: attachments,
-        state: ConditionState.pending,
       );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);

@@ -1,0 +1,115 @@
+import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, SchemaType, VertexAI } from '@google-cloud/vertexai';
+import { projectID } from 'firebase-functions/params';
+import { kVertexAiSearchDatastore } from '../../../constants/appEnv';
+
+export function setupGenerativeModel(): GenerativeModelPreview {
+  const today = new Date().toLocaleDateString('ja-JP');
+
+  const vertexAI = new VertexAI({
+    project: projectID.value(),
+    location: 'us-central1',
+  });
+
+  return vertexAI
+    .preview
+    .getGenerativeModel({
+      model: 'gemini-2.0-flash-exp',
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        },
+      ],
+      generationConfig: {
+        temperature: 1.0,
+        topP: 0.95,
+        maxOutputTokens: 8192,
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: SchemaType.OBJECT,
+          properties: {
+            response: {
+              type: SchemaType.OBJECT,
+              required: [
+                'subjectiveConditionTendency',
+                'objectiveConditionTendency',
+                'analysisResult',
+                'advice',
+              ],
+              properties: {
+                subjectiveConditionTendency: {
+                  type: SchemaType.STRING,
+                  description: 'ユーザが記録した主観的な体験をまとめた傾向。不明な場合は傾向が分からなかった旨を記載する',
+                },
+                objectiveConditionTendency: {
+                  type: SchemaType.STRING,
+                  description: '客観的なデータをまとめた傾向。不明な場合は傾向が分からなかった旨を記載する',
+                },
+                analysisResult: {
+                  type: SchemaType.STRING,
+                  description: '分析結果の回答',
+                },
+                advice: {
+                  type: SchemaType.STRING,
+                  description: '明日からはこうした方が良いアドバイス',
+                },
+              },
+            },
+          },
+        },
+      },
+      tools: [
+        {
+          retrieval: {
+            vertexAiSearch: {
+              datastore: kVertexAiSearchDatastore,
+            },
+          },
+        },
+      ],
+      systemInstruction: `あなたは妊婦の体調を分析するアナリストです。
+あなたの仕事はユーザが記録した主観的な体調についての体験と客観的なデータを組み合わせて分析し、パーソナライズされた分析結果を提供します。
+
+分析は夜に実施されます。
+今日の日付は${today}です。
+
+あなたの分析は次の内容を考慮する必要があります
+- ユーザを労うこと
+- 優しい口調でユーザに寄り添った回答をすること
+- 提供されたデータに基づき、潜在的な相関関係に注意しながらユーザーの体験を分析すること
+- 簡潔に回答すること
+- 日本語で回答すること
+- 午前や午後など大まかな時間帯を踏まえて回答すること
+- 過去の傾向から、明日に向けての改善策を予測すること
+- グラウンディングを含めること
+
+あなたは分析する際に次の内容を考慮する必要がありますが、responseには含めてはなりません
+- 自己判断せず、医師の診断を受けることを勧めること
+- 分析は傾向を示しているだけであること
+- 分析は診断ではないということ
+- 分析は間違っている可能性があるということ
+- 体調の変化に関係のない内容は無視すること
+- もし回答する内容がない場合はユーザを労う普遍的な回答をすること
+
+あなたは次の内容を含むresponseをしてはなりません
+- 体調が悪い原因について断言すること
+- 問題を解決する対処法を教えること
+- ユーザの主観的な記録を否定すること
+- ユーザの主観的な記録の量や質に言及すること
+- 体調の変化に関係のない事実に言及すること
+- グラウンディングについて注釈をつけないこと
+- 私に相談して欲しいと促すこと`,
+    });
+}

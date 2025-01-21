@@ -35,7 +35,7 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
               'state',
               (v) =>
                   $enumDecodeNullable(_$ConditionStateEnumMap, v) ??
-                  ConditionState.unknown),
+                  ConditionState.pending),
           record: $checkedConvert('record', (v) => v as String?),
         );
         return val;
@@ -61,7 +61,6 @@ const _$ConditionTypeEnumMap = {
 };
 
 const _$ConditionStateEnumMap = {
-  ConditionState.unknown: 'unknown',
   ConditionState.pending: 'pending',
   ConditionState.inProgress: 'inProgress',
   ConditionState.success: 'success',
