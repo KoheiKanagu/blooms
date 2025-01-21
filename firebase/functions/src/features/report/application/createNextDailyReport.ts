@@ -31,7 +31,7 @@ export async function createNextDailyReport(subjectUid: string, lastStartAt: Tim
   // lastStartAtの次の日のhourとminuteの時刻
   const nextStartAt = new Date(lastStartAt.toDate());
   nextStartAt.setDate(nextStartAt.getDate() + 1);
-  nextStartAt.setHours(hour, minute);
+  nextStartAt.setHours(hour, minute, 0, 0);
   logger.info(`Create next report at ${nextStartAt.toISOString()} for ${subjectUid}`, {
     subjectUid,
     nextStartAt: nextStartAt.toISOString(),
