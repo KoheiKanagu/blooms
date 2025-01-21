@@ -36,10 +36,14 @@ async function main(): Promise<void> {
     .collection(CollectionPath.CONDITIONS)
     .withConverter(conditionConverter);
 
+  const batch = admin.firestore().batch();
+
   for (const condition of conditions) {
     logger.debug(condition);
-    await collection.add(condition);
+    batch.create(collection.doc(), condition);
   }
+
+  await batch.commit();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
