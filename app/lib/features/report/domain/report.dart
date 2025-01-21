@@ -18,13 +18,13 @@ class Report with _$Report {
     /// レポートの対象者のUID
     required String subjectUid,
 
-    /// LLMによるレポートの生成のプロンプトのファイルパス
+    /// 生成モデルによるレポートの生成のプロンプトのファイルパス
     String? prompt,
 
     /// レポートの内容
     ReportContent? content,
 
-    /// LLMでの処理の状態
+    /// 生成モデルでの処理の状態
     @Default(ReportState.pending) ReportState state,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,

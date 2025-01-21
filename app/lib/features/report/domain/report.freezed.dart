@@ -26,13 +26,13 @@ mixin _$Report {
   /// レポートの対象者のUID
   String get subjectUid => throw _privateConstructorUsedError;
 
-  /// LLMによるレポートの生成のプロンプトのファイルパス
+  /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   String? get prompt => throw _privateConstructorUsedError;
 
   /// レポートの内容
   ReportContent? get content => throw _privateConstructorUsedError;
 
-  /// LLMでの処理の状態
+  /// 生成モデルでの処理の状態
   ReportState get state => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
@@ -264,7 +264,7 @@ class _$ReportImpl implements _Report {
   @override
   final String subjectUid;
 
-  /// LLMによるレポートの生成のプロンプトのファイルパス
+  /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   @override
   final String? prompt;
 
@@ -272,7 +272,7 @@ class _$ReportImpl implements _Report {
   @override
   final ReportContent? content;
 
-  /// LLMでの処理の状態
+  /// 生成モデルでの処理の状態
   @override
   @JsonKey()
   final ReportState state;
@@ -359,7 +359,7 @@ abstract class _Report implements Report {
   @override
   String get subjectUid;
 
-  /// LLMによるレポートの生成のプロンプトのファイルパス
+  /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   @override
   String? get prompt;
 
@@ -367,7 +367,7 @@ abstract class _Report implements Report {
   @override
   ReportContent? get content;
 
-  /// LLMでの処理の状態
+  /// 生成モデルでの処理の状態
   @override
   ReportState get state;
   @override

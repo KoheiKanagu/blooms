@@ -4,7 +4,7 @@ import { onSchedule } from 'firebase-functions/scheduler';
 import { userConverter } from '../../models/user';
 import { CollectionPath } from '../../utils/collectionPath';
 import { outSensitiveLog } from '../../utils/sensitive_log';
-import { createGeminiReport } from './application/reportApplications';
+import { updateReportContent } from './application/updateReportContent';
 import { Report, reportConverter } from './domain/report';
 
 /**
@@ -45,7 +45,7 @@ export const onReportSchedule = onSchedule({
     const report = doc.data();
 
     try {
-      await createGeminiReport(doc.ref, report);
+      await updateReportContent(doc.ref, report);
       await createNextDailyReport(report.subjectUid, report.startAt);
     } catch (error) {
       logger.error(`Failed to process report: ${doc.id}`, error);

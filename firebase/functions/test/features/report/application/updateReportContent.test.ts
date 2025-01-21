@@ -1,4 +1,6 @@
-import { getDateRange } from '../../../../src/features/report/application/reportService';
+import { Content } from '@google-cloud/vertexai';
+import { Timestamp } from 'firebase-admin/firestore';
+import { getDateRange } from '../../../../src/features/report/application/updateReportContent';
 
 describe('getDateRange', () => {
   // 2025-01-15 12:30:00
@@ -48,4 +50,26 @@ describe('getDateRange', () => {
       getDateRange('invalid_type', baseDate);
     }).toThrow('Unknown report type: invalid_type');
   });
+});
+
+it('example', () => {
+  const date = Timestamp.now().toDate().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+  //  .toLocaleTimeString('ja-JP');
+  console.log(date);
+
+  const record = 'ハロー';
+
+  const data: Content = {
+    role: 'user',
+    parts: [
+      {
+        text:
+          `${date}の体調:
+${record ?? ''}
+`,
+      },
+    ],
+  };
+
+  console.log(data);
 });

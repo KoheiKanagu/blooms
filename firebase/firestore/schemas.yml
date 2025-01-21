@@ -101,7 +101,7 @@ paths:
     get:
       responses:
         "200":
-          description: LLMが生成したレポート
+          description: 生成モデルが生成したレポート
           content:
             application/json:
               schema:
@@ -125,7 +125,7 @@ paths:
                     description: レポートを作成開始する日時。この日からN日前のレポート Timestamp
                     type: object
                   prompt:
-                    description: LLMによるレポート生成プロンプトのファイルパス
+                    description: 生成モデルによるレポート生成プロンプトのファイルパス
                     type: string
                     nullable: true
                     example: gs://bucket/path/to/file
@@ -161,7 +161,7 @@ paths:
                         type: string
                         nullable: true
                   state:
-                    description: LLMでの処理の状態
+                    description: 生成モデルでの処理の状態
                     type: string
                     default: pending
                     enum:
