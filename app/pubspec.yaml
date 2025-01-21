@@ -35,10 +35,10 @@ dependencies:
   shared_preferences: ^2.3.5
   slang: ^4.4.1
   slang_flutter: ^4.4.0
-  talker: ^4.6.1
-  talker_dio_logger: ^4.6.1
-  talker_flutter: ^4.6.1
-  talker_riverpod_logger: ^4.6.1
+  talker: ^4.6.5
+  talker_dio_logger: ^4.6.5
+  talker_flutter: ^4.6.5
+  talker_riverpod_logger: ^4.6.5
   url_launcher: ^6.3.1
 
 dev_dependencies:
