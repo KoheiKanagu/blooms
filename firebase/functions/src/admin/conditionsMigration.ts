@@ -8,35 +8,28 @@ import { adminInitializeAppStg } from './adminInitializeApp';
 // adminInitializeAppProd();
 adminInitializeAppStg();
 
-const raw: {
-  date: Date;
-  record: string;
-}[]
-  = [
-    { date: new Date('2025-01-21T10:00:00+09:00'), record: '頭痛がする' },
-  ];
+/**
+ * Firestoreにデータをインポートする
+ */
+async function main(): Promise<void> {
+  const raw: {
+    date: Date;
+    record: string;
+  }[]
+    = [
+      { date: new Date('2025-01-21T10:00:00+09:00'), record: '頭痛がする' },
+    ];
 
-function create(
-  date: Date,
-  record: string,
-): Condition {
-  return new Condition(
-    Timestamp.fromDate(date),
-    Timestamp.fromDate(date),
+  const conditions: Condition[] = raw.map(e => new Condition(
+    Timestamp.fromDate(e.date),
+    Timestamp.fromDate(e.date),
     null,
     'uid',
     'subjective',
     [],
     'success',
-    record,
-  );
-}
-
-/**
- * Firestoreにデータをインポートする
- */
-async function main(): Promise<void> {
-  const conditions: Condition[] = raw.map(e => create(e.date, e.record));
+    e.record,
+  ));
 
   const collection = admin
     .firestore()
