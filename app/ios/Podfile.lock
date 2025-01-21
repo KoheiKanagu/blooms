@@ -26,6 +26,9 @@ PODS:
   - Firebase/Messaging (11.6.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 11.6.0)
+  - Firebase/Storage (11.6.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 11.6.0)
   - firebase_analytics (11.4.0):
     - Firebase/Analytics (= 11.6.0)
     - firebase_core
@@ -48,6 +51,10 @@ PODS:
     - Flutter
   - firebase_messaging (15.2.0):
     - Firebase/Messaging (= 11.6.0)
+    - firebase_core
+    - Flutter
+  - firebase_storage (12.4.0):
+    - Firebase/Storage (= 11.6.0)
     - firebase_core
     - Flutter
   - FirebaseAnalytics (11.6.0):
@@ -148,6 +155,13 @@ PODS:
     - nanopb (~> 3.30910.0)
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (11.6.0)
+  - FirebaseStorage (11.6.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.6.0)
+    - FirebaseCoreExtension (~> 11.6.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - Flutter (1.0.0)
   - flutter_native_splash (2.4.3):
     - Flutter
@@ -233,6 +247,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
+  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.6.0`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -266,6 +281,7 @@ SPEC REPOS:
     - FirebaseRemoteConfigInterop
     - FirebaseSessions
     - FirebaseSharedSwift
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -291,6 +307,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_crashlytics/ios"
   firebase_messaging:
     :path: ".symlinks/plugins/firebase_messaging/ios"
+  firebase_storage:
+    :path: ".symlinks/plugins/firebase_storage/ios"
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
     :tag: 11.6.0
@@ -324,6 +342,7 @@ SPEC CHECKSUMS:
   firebase_core: 2337982fb78ee4d8d91e608b0a3d4f44346a93c8
   firebase_crashlytics: 3b6a9a9cbdc5ab92afaf9b206e52c79c2321a0d4
   firebase_messaging: f3bddfa28c2cad70b3341bf461e987a24efd28d6
+  firebase_storage: 6f87096e0769121a546fd7a46b16e2064846361c
   FirebaseAnalytics: 7114c698cac995602e3b1b96663473e50d54d6e7
   FirebaseAppCheck: 44803909e253d677481e9e16eb719b0f58a7ddc2
   FirebaseAppCheckInterop: 347aa09a805219a31249b58fc956888e9fcb314b
@@ -345,6 +364,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfigInterop: e75e348953352a000331eb77caf01e424248e176
   FirebaseSessions: 9529d14180868e29a8da164b3a729c036204918b
   FirebaseSharedSwift: a4e5dfca3e210633bb3a3dfb94176c019211948b
+  FirebaseStorage: 52fb65a69d3e87675186881a08e2a5db86452ace
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 6cad9122ea0fad137d23137dd14b937f3e90b145
   GoogleAppMeasurement: 6a9e6317b6a6d810ad03d4a66564ca6c4c5818a3
