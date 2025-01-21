@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:blooms/features/condition/application/condition_page_route.dart'
     as condition_route;
+import 'package:blooms/features/home/application/home_route.dart' as home_route;
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart'
     as onboarding_route;
 import 'package:blooms/features/startup/application/startup_page_route.dart'
@@ -34,6 +35,7 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
         ...startup_route.$appRoutes,
         ...onboarding_route.$appRoutes,
         ...condition_route.$appRoutes,
+        ...home_route.$appRoutes,
       ],
       errorBuilder: (context, state) {
         logger.handle(state.error.toString(), StackTrace.current, {
@@ -75,7 +77,7 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
             refreshListenable.createdUserDocument) {
           // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
           if (isUnauthorizedRoute) {
-            return condition_route.ConditionPageRoute.path;
+            return home_route.HomeTabRoute.path;
           }
 
           // サインイン済みの場合は何もしない
