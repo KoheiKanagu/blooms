@@ -5,13 +5,13 @@ import { Condition, conditionConverter } from '../models/condition';
 import { CollectionPath } from '../utils/collectionPath';
 import { adminInitializeAppStg } from './adminInitializeApp';
 
-// adminInitializeAppProd();
-adminInitializeAppStg();
-
 /**
  * Firestoreにデータをインポートする
  */
 async function main(): Promise<void> {
+  // adminInitializeAppProd();
+  adminInitializeAppStg();
+
   const raw: {
     date: Date;
     record: string;
