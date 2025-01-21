@@ -3,10 +3,10 @@ import { Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { Condition, conditionConverter } from '../models/condition';
 import { CollectionPath } from '../utils/collectionPath';
+import { adminInitializeAppStg } from './adminInitializeApp';
 
-// process.env['GOOGLE_APPLICATION_CREDENTIALS'] = '../secrets/blooms-prod-43d74-firebase-adminsdk-jh3i4-6dfb8d09a7.json';
-process.env['GOOGLE_APPLICATION_CREDENTIALS'] = '../secrets/blooms-stg-firebase-adminsdk-4o7mx-3947c5abfa.json';
-admin.initializeApp();
+// adminInitializeAppProd();
+adminInitializeAppStg();
 
 const raw: {
   date: Date;
