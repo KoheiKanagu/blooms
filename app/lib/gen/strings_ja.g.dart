@@ -34,5 +34,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	String get an_unexpected_error_occurred => '予期しないエラーが発生しました';
 	String get retry => '再試行';
-	String get hello => 'こんにちは';
+	String get condition => '体調';
+	String get report => 'レポート';
 }

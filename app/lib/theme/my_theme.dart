@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-final myLightThemeData = ThemeData.light(
-  useMaterial3: true,
-).copyWith(primaryColor: const Color(0xFF3C8789));
+const myLightThemeData = CupertinoThemeData(
+  brightness: Brightness.light,
+  primaryColor: Color(0xFF3C8789),
+);
