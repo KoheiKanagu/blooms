@@ -1,7 +1,7 @@
 import { logger } from 'firebase-functions';
 import { onDocumentCreated } from 'firebase-functions/firestore';
 import { CollectionPath } from '../../utils/collectionPath';
-import { createGeminiReport } from './application/reportService';
+import { createGeminiReport } from './application/reportApplications';
 import { reportConverter } from './domain/report';
 
 /**

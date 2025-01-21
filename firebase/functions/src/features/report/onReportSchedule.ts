@@ -4,7 +4,7 @@ import { onSchedule } from 'firebase-functions/scheduler';
 import { userConverter } from '../../models/user';
 import { CollectionPath } from '../../utils/collectionPath';
 import { outSensitiveLog } from '../../utils/sensitive_log';
-import { createGeminiReport } from './application/reportService';
+import { createGeminiReport } from './application/reportApplications';
 import { Report, reportConverter } from './domain/report';
 
 /**
