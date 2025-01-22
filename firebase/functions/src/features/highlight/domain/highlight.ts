@@ -4,10 +4,11 @@ export type HighlightType = 'past1day' | 'past7days' | 'past14days' | 'past21day
 export type HighlightState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export interface HighlightContent {
-  subjectiveConditionTendency: string | null;
-  objectiveConditionTendency: string | null;
-  analysisResult: string | null;
-  advice: string | null;
+  subjectiveTrend: string;
+  objectiveTrend: string;
+  analysisResult: string;
+  advice: string;
+  abstract: string;
 }
 
 export class Highlight {

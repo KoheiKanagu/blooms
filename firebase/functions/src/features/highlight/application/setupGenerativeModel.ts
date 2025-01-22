@@ -39,33 +39,33 @@ export function setupGenerativeModel(): GenerativeModelPreview {
         responseMimeType: 'application/json',
         responseSchema: {
           type: SchemaType.OBJECT,
+          required: [
+            'subjectiveTrend',
+            'objectiveTrend',
+            'analysisResult',
+            'advice',
+            'abstract',
+          ],
           properties: {
-            response: {
-              type: SchemaType.OBJECT,
-              required: [
-                'subjectiveConditionTendency',
-                'objectiveConditionTendency',
-                'analysisResult',
-                'advice',
-              ],
-              properties: {
-                subjectiveConditionTendency: {
-                  type: SchemaType.STRING,
-                  description: 'ユーザが記録した主観的な体験をまとめた傾向。不明な場合は傾向が分からなかった旨を記載する',
-                },
-                objectiveConditionTendency: {
-                  type: SchemaType.STRING,
-                  description: '客観的なデータをまとめた傾向。不明な場合は傾向が分からなかった旨を記載する',
-                },
-                analysisResult: {
-                  type: SchemaType.STRING,
-                  description: '分析結果の回答',
-                },
-                advice: {
-                  type: SchemaType.STRING,
-                  description: '明日からはこうした方が良いアドバイス',
-                },
-              },
+            subjectiveTrend: {
+              type: SchemaType.STRING,
+              description: '主観的なデータのトレンド。不明な場合は分からなかった旨を記載する',
+            },
+            objectiveTrend: {
+              type: SchemaType.STRING,
+              description: '客観的なデータのトレンド。不明な場合は分からなかった旨を記載する',
+            },
+            analysisResult: {
+              type: SchemaType.STRING,
+              description: '分析結果の回答',
+            },
+            advice: {
+              type: SchemaType.STRING,
+              description: '明日からはこうした方が良いアドバイス',
+            },
+            abstract: {
+              type: SchemaType.STRING,
+              description: '分析結果の要旨。簡潔にまとめ、労う文章は不要',
             },
           },
         },

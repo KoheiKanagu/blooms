@@ -15,13 +15,12 @@ _$HighlightContentImpl _$$HighlightContentImplFromJson(
       json,
       ($checkedConvert) {
         final val = _$HighlightContentImpl(
-          subjectiveConditionTendency: $checkedConvert(
-              'subjectiveConditionTendency', (v) => v as String?),
-          objectiveConditionTendency: $checkedConvert(
-              'objectiveConditionTendency', (v) => v as String?),
-          analysisResult:
-              $checkedConvert('analysisResult', (v) => v as String?),
-          advice: $checkedConvert('advice', (v) => v as String?),
+          subjectiveTrend:
+              $checkedConvert('subjectiveTrend', (v) => v as String),
+          objectiveTrend: $checkedConvert('objectiveTrend', (v) => v as String),
+          analysisResult: $checkedConvert('analysisResult', (v) => v as String),
+          advice: $checkedConvert('advice', (v) => v as String),
+          abstract: $checkedConvert('abstract', (v) => v as String),
         );
         return val;
       },
@@ -30,8 +29,9 @@ _$HighlightContentImpl _$$HighlightContentImplFromJson(
 Map<String, dynamic> _$$HighlightContentImplToJson(
         _$HighlightContentImpl instance) =>
     <String, dynamic>{
-      'subjectiveConditionTendency': instance.subjectiveConditionTendency,
-      'objectiveConditionTendency': instance.objectiveConditionTendency,
+      'subjectiveTrend': instance.subjectiveTrend,
+      'objectiveTrend': instance.objectiveTrend,
       'analysisResult': instance.analysisResult,
       'advice': instance.advice,
+      'abstract': instance.abstract,
     };

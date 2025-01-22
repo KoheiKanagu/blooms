@@ -143,21 +143,29 @@ paths:
                     description: ハイライトの内容
                     type: object
                     nullable: true
+                    required:
+                      - subjectiveTrend
+                      - objectiveTrend
+                      - analysisResult
+                      - advice
+                      - abstract
                     properties:
-                      subjectiveConditionTendency:
-                        description: 主観的な状態の傾向
+                      subjectiveTrend:
+                        description: 主観的なデータのトレンド
                         type: string
-                        nullable: true
-                      objectiveConditionTendency:
-                        description: 客観的な状態の傾向
+                      objectiveTrend:
+                        description: 客観的なデータのトレンド
                         type: string
-                        nullable: true
                       analysisResult:
                         description: 分析結果
                         type: string
                         nullable: true
                       advice:
                         description: アドバイス
+                        type: string
+                        nullable: true
+                      abstract:
+                        description: 分析結果の要旨
                         type: string
                         nullable: true
                   state:

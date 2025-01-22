@@ -7,17 +7,20 @@ part 'highlight_content.g.dart';
 @freezed
 class HighlightContent with _$HighlightContent {
   const factory HighlightContent({
-    /// 主観的な状態の傾向
-    String? subjectiveConditionTendency,
+    /// 主観的なデータのトレンド
+    required String subjectiveTrend,
 
-    /// 客観的な状態の傾向
-    String? objectiveConditionTendency,
+    /// 客観的なデータのトレンド
+    required String objectiveTrend,
 
     /// 分析結果
-    String? analysisResult,
+    required String analysisResult,
 
     /// アドバイス
-    String? advice,
+    required String advice,
+
+    /// 分析結果の要旨
+    required String abstract,
   }) = _HighlightContent;
 
   factory HighlightContent.fromJson(Json json) =>

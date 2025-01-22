@@ -20,17 +20,20 @@ HighlightContent _$HighlightContentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HighlightContent {
-  /// 主観的な状態の傾向
-  String? get subjectiveConditionTendency => throw _privateConstructorUsedError;
+  /// 主観的なデータのトレンド
+  String get subjectiveTrend => throw _privateConstructorUsedError;
 
-  /// 客観的な状態の傾向
-  String? get objectiveConditionTendency => throw _privateConstructorUsedError;
+  /// 客観的なデータのトレンド
+  String get objectiveTrend => throw _privateConstructorUsedError;
 
   /// 分析結果
-  String? get analysisResult => throw _privateConstructorUsedError;
+  String get analysisResult => throw _privateConstructorUsedError;
 
   /// アドバイス
-  String? get advice => throw _privateConstructorUsedError;
+  String get advice => throw _privateConstructorUsedError;
+
+  /// 分析結果の要旨
+  String get abstract => throw _privateConstructorUsedError;
 
   /// Serializes this HighlightContent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,10 +52,11 @@ abstract class $HighlightContentCopyWith<$Res> {
       _$HighlightContentCopyWithImpl<$Res, HighlightContent>;
   @useResult
   $Res call(
-      {String? subjectiveConditionTendency,
-      String? objectiveConditionTendency,
-      String? analysisResult,
-      String? advice});
+      {String subjectiveTrend,
+      String objectiveTrend,
+      String analysisResult,
+      String advice,
+      String abstract});
 }
 
 /// @nodoc
@@ -70,28 +74,33 @@ class _$HighlightContentCopyWithImpl<$Res, $Val extends HighlightContent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subjectiveConditionTendency = freezed,
-    Object? objectiveConditionTendency = freezed,
-    Object? analysisResult = freezed,
-    Object? advice = freezed,
+    Object? subjectiveTrend = null,
+    Object? objectiveTrend = null,
+    Object? analysisResult = null,
+    Object? advice = null,
+    Object? abstract = null,
   }) {
     return _then(_value.copyWith(
-      subjectiveConditionTendency: freezed == subjectiveConditionTendency
-          ? _value.subjectiveConditionTendency
-          : subjectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      objectiveConditionTendency: freezed == objectiveConditionTendency
-          ? _value.objectiveConditionTendency
-          : objectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      analysisResult: freezed == analysisResult
+      subjectiveTrend: null == subjectiveTrend
+          ? _value.subjectiveTrend
+          : subjectiveTrend // ignore: cast_nullable_to_non_nullable
+              as String,
+      objectiveTrend: null == objectiveTrend
+          ? _value.objectiveTrend
+          : objectiveTrend // ignore: cast_nullable_to_non_nullable
+              as String,
+      analysisResult: null == analysisResult
           ? _value.analysisResult
           : analysisResult // ignore: cast_nullable_to_non_nullable
-              as String?,
-      advice: freezed == advice
+              as String,
+      advice: null == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      abstract: null == abstract
+          ? _value.abstract
+          : abstract // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -105,10 +114,11 @@ abstract class _$$HighlightContentImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? subjectiveConditionTendency,
-      String? objectiveConditionTendency,
-      String? analysisResult,
-      String? advice});
+      {String subjectiveTrend,
+      String objectiveTrend,
+      String analysisResult,
+      String advice,
+      String abstract});
 }
 
 /// @nodoc
@@ -124,28 +134,33 @@ class __$$HighlightContentImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subjectiveConditionTendency = freezed,
-    Object? objectiveConditionTendency = freezed,
-    Object? analysisResult = freezed,
-    Object? advice = freezed,
+    Object? subjectiveTrend = null,
+    Object? objectiveTrend = null,
+    Object? analysisResult = null,
+    Object? advice = null,
+    Object? abstract = null,
   }) {
     return _then(_$HighlightContentImpl(
-      subjectiveConditionTendency: freezed == subjectiveConditionTendency
-          ? _value.subjectiveConditionTendency
-          : subjectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      objectiveConditionTendency: freezed == objectiveConditionTendency
-          ? _value.objectiveConditionTendency
-          : objectiveConditionTendency // ignore: cast_nullable_to_non_nullable
-              as String?,
-      analysisResult: freezed == analysisResult
+      subjectiveTrend: null == subjectiveTrend
+          ? _value.subjectiveTrend
+          : subjectiveTrend // ignore: cast_nullable_to_non_nullable
+              as String,
+      objectiveTrend: null == objectiveTrend
+          ? _value.objectiveTrend
+          : objectiveTrend // ignore: cast_nullable_to_non_nullable
+              as String,
+      analysisResult: null == analysisResult
           ? _value.analysisResult
           : analysisResult // ignore: cast_nullable_to_non_nullable
-              as String?,
-      advice: freezed == advice
+              as String,
+      advice: null == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      abstract: null == abstract
+          ? _value.abstract
+          : abstract // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -154,33 +169,38 @@ class __$$HighlightContentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HighlightContentImpl implements _HighlightContent {
   const _$HighlightContentImpl(
-      {this.subjectiveConditionTendency,
-      this.objectiveConditionTendency,
-      this.analysisResult,
-      this.advice});
+      {required this.subjectiveTrend,
+      required this.objectiveTrend,
+      required this.analysisResult,
+      required this.advice,
+      required this.abstract});
 
   factory _$HighlightContentImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightContentImplFromJson(json);
 
-  /// 主観的な状態の傾向
+  /// 主観的なデータのトレンド
   @override
-  final String? subjectiveConditionTendency;
+  final String subjectiveTrend;
 
-  /// 客観的な状態の傾向
+  /// 客観的なデータのトレンド
   @override
-  final String? objectiveConditionTendency;
+  final String objectiveTrend;
 
   /// 分析結果
   @override
-  final String? analysisResult;
+  final String analysisResult;
 
   /// アドバイス
   @override
-  final String? advice;
+  final String advice;
+
+  /// 分析結果の要旨
+  @override
+  final String abstract;
 
   @override
   String toString() {
-    return 'HighlightContent(subjectiveConditionTendency: $subjectiveConditionTendency, objectiveConditionTendency: $objectiveConditionTendency, analysisResult: $analysisResult, advice: $advice)';
+    return 'HighlightContent(subjectiveTrend: $subjectiveTrend, objectiveTrend: $objectiveTrend, analysisResult: $analysisResult, advice: $advice, abstract: $abstract)';
   }
 
   @override
@@ -188,23 +208,21 @@ class _$HighlightContentImpl implements _HighlightContent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HighlightContentImpl &&
-            (identical(other.subjectiveConditionTendency,
-                    subjectiveConditionTendency) ||
-                other.subjectiveConditionTendency ==
-                    subjectiveConditionTendency) &&
-            (identical(other.objectiveConditionTendency,
-                    objectiveConditionTendency) ||
-                other.objectiveConditionTendency ==
-                    objectiveConditionTendency) &&
+            (identical(other.subjectiveTrend, subjectiveTrend) ||
+                other.subjectiveTrend == subjectiveTrend) &&
+            (identical(other.objectiveTrend, objectiveTrend) ||
+                other.objectiveTrend == objectiveTrend) &&
             (identical(other.analysisResult, analysisResult) ||
                 other.analysisResult == analysisResult) &&
-            (identical(other.advice, advice) || other.advice == advice));
+            (identical(other.advice, advice) || other.advice == advice) &&
+            (identical(other.abstract, abstract) ||
+                other.abstract == abstract));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, subjectiveConditionTendency,
-      objectiveConditionTendency, analysisResult, advice);
+  int get hashCode => Object.hash(runtimeType, subjectiveTrend, objectiveTrend,
+      analysisResult, advice, abstract);
 
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
@@ -225,29 +243,34 @@ class _$HighlightContentImpl implements _HighlightContent {
 
 abstract class _HighlightContent implements HighlightContent {
   const factory _HighlightContent(
-      {final String? subjectiveConditionTendency,
-      final String? objectiveConditionTendency,
-      final String? analysisResult,
-      final String? advice}) = _$HighlightContentImpl;
+      {required final String subjectiveTrend,
+      required final String objectiveTrend,
+      required final String analysisResult,
+      required final String advice,
+      required final String abstract}) = _$HighlightContentImpl;
 
   factory _HighlightContent.fromJson(Map<String, dynamic> json) =
       _$HighlightContentImpl.fromJson;
 
-  /// 主観的な状態の傾向
+  /// 主観的なデータのトレンド
   @override
-  String? get subjectiveConditionTendency;
+  String get subjectiveTrend;
 
-  /// 客観的な状態の傾向
+  /// 客観的なデータのトレンド
   @override
-  String? get objectiveConditionTendency;
+  String get objectiveTrend;
 
   /// 分析結果
   @override
-  String? get analysisResult;
+  String get analysisResult;
 
   /// アドバイス
   @override
-  String? get advice;
+  String get advice;
+
+  /// 分析結果の要旨
+  @override
+  String get abstract;
 
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
