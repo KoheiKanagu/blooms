@@ -1,5 +1,6 @@
 import 'package:blooms/features/report/application/report_providers.dart';
 import 'package:blooms/features/report/domain/report.dart';
+import 'package:blooms/features/report/presentation/report_detail_page.dart';
 import 'package:blooms/features/report/presentation/report_page_list_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
@@ -33,7 +34,15 @@ class ReportPage extends HookConsumerWidget {
                 return ReportPageListTile(
                   report: report,
                   reportPeriod: reportPeriod,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute<void>(
+                        builder: (context) => ReportDetailPage(
+                          report: report,
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
             ),

@@ -1,4 +1,5 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/theme/my_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -27,16 +28,7 @@ class ConditionForm extends HookConsumerWidget {
     );
 
     return DecoratedBox(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: CupertinoColors.systemGrey
-                .resolveFrom(context)
-                .withOpacity(0.1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
+      decoration: MyDecoration.dropShadow(context),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Container(

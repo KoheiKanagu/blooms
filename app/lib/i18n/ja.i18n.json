@@ -5,6 +5,7 @@
   "report": {
     "report": "レポート",
     "onTheDay": "当日",
-    "pastDays": "過去${n}日間"
+    "pastDays": "過去${n}日間",
+    "xToY": "${x}から${y}"
   }
 }

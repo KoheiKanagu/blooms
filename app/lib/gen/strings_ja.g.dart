@@ -48,4 +48,5 @@ class TranslationsReportJa {
 	String get report => 'レポート';
 	String get onTheDay => '当日';
 	String pastDays({required Object n}) => '過去${n}日間';
+	String xToY({required Object x, required Object y}) => '${x}から${y}';
 }
