@@ -29,5 +29,5 @@ Future<Query<Report>> reportQuery(Ref ref) async {
       .read(reportCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('subjectUid', isEqualTo: uid)
-      .orderBy('startAt', descending: false);
+      .orderBy('startAt', descending: true);
 }

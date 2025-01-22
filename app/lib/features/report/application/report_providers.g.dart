@@ -28,7 +28,7 @@ final reportCollectionReferenceProvider =
 // ignore: unused_element
 typedef ReportCollectionReferenceRef
     = AutoDisposeProviderRef<CollectionReference<Report>>;
-String _$reportQueryHash() => r'd302030057065041c2969914699ecc031f07e790';
+String _$reportQueryHash() => r'92d77af4e7ee95c401432dac6039124980b71058';
 
 /// See also [reportQuery].
 @ProviderFor(reportQuery)
