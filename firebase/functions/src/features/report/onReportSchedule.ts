@@ -13,7 +13,7 @@ import { reportConverter } from './domain/report';
  * もし30分以内に処理できなかった場合は次回の実行時刻に処理されることになる
  */
 export const onReportSchedule = onSchedule({
-  schedule: 'every 30 minutes from 20:00 to 0:00',
+  schedule: '*/30 0,20-23 * * *', // 20時~0時の間、30分毎に実行
   timeoutSeconds: 29 * 60, // 29分
   timeZone: 'Asia/Tokyo',
 }, async () => {
