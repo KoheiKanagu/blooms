@@ -35,5 +35,15 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get an_unexpected_error_occurred => '予期しないエラーが発生しました';
 	String get retry => '再試行';
 	String get condition => '体調';
+	late final TranslationsReportJa report = TranslationsReportJa.internal(_root);
+}
+
+// Path: report
+class TranslationsReportJa {
+	TranslationsReportJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
 	String get report => 'レポート';
 }

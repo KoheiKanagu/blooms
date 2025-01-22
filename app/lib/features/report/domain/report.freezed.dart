@@ -26,6 +26,10 @@ mixin _$Report {
   /// レポートの対象者のUID
   String get subjectUid => throw _privateConstructorUsedError;
 
+  /// レポートを作成開始する日時。この日からN日前のレポート
+  @TimestampConverterNotNull()
+  Timestamp get startAt => throw _privateConstructorUsedError;
+
   /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   String? get prompt => throw _privateConstructorUsedError;
 
@@ -40,10 +44,6 @@ mixin _$Report {
   Timestamp? get updatedAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get deletedAt => throw _privateConstructorUsedError;
-
-  /// レポートを作成開始する日時。この日からN日前のレポート
-  @TimestampConverter()
-  Timestamp? get startAt => throw _privateConstructorUsedError;
 
   /// Serializes this Report to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,13 +62,13 @@ abstract class $ReportCopyWith<$Res> {
   $Res call(
       {ReportType type,
       String subjectUid,
+      @TimestampConverterNotNull() Timestamp startAt,
       String? prompt,
       ReportContent? content,
       ReportState state,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? startAt});
+      @TimestampConverter() Timestamp? deletedAt});
 
   $ReportContentCopyWith<$Res>? get content;
 }
@@ -90,13 +90,13 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
   $Res call({
     Object? type = null,
     Object? subjectUid = null,
+    Object? startAt = null,
     Object? prompt = freezed,
     Object? content = freezed,
     Object? state = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? startAt = freezed,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -107,6 +107,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
           ? _value.subjectUid
           : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
       prompt: freezed == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
@@ -130,10 +134,6 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
       deletedAt: freezed == deletedAt
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      startAt: freezed == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
     ) as $Val);
   }
@@ -163,13 +163,13 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
   $Res call(
       {ReportType type,
       String subjectUid,
+      @TimestampConverterNotNull() Timestamp startAt,
       String? prompt,
       ReportContent? content,
       ReportState state,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      @TimestampConverter() Timestamp? startAt});
+      @TimestampConverter() Timestamp? deletedAt});
 
   @override
   $ReportContentCopyWith<$Res>? get content;
@@ -190,13 +190,13 @@ class __$$ReportImplCopyWithImpl<$Res>
   $Res call({
     Object? type = null,
     Object? subjectUid = null,
+    Object? startAt = null,
     Object? prompt = freezed,
     Object? content = freezed,
     Object? state = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? startAt = freezed,
   }) {
     return _then(_$ReportImpl(
       type: null == type
@@ -207,6 +207,10 @@ class __$$ReportImplCopyWithImpl<$Res>
           ? _value.subjectUid
           : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
       prompt: freezed == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
@@ -231,27 +235,24 @@ class __$$ReportImplCopyWithImpl<$Res>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      startAt: freezed == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ReportImpl implements _Report {
+class _$ReportImpl extends _Report {
   const _$ReportImpl(
       {required this.type,
       required this.subjectUid,
+      @TimestampConverterNotNull() required this.startAt,
       this.prompt,
       this.content,
       this.state = ReportState.pending,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
-      @TimestampConverter() this.deletedAt,
-      @TimestampConverter() this.startAt});
+      @TimestampConverter() this.deletedAt})
+      : super._();
 
   factory _$ReportImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportImplFromJson(json);
@@ -263,6 +264,11 @@ class _$ReportImpl implements _Report {
   /// レポートの対象者のUID
   @override
   final String subjectUid;
+
+  /// レポートを作成開始する日時。この日からN日前のレポート
+  @override
+  @TimestampConverterNotNull()
+  final Timestamp startAt;
 
   /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   @override
@@ -286,14 +292,9 @@ class _$ReportImpl implements _Report {
   @TimestampConverter()
   final Timestamp? deletedAt;
 
-  /// レポートを作成開始する日時。この日からN日前のレポート
-  @override
-  @TimestampConverter()
-  final Timestamp? startAt;
-
   @override
   String toString() {
-    return 'Report(type: $type, subjectUid: $subjectUid, prompt: $prompt, content: $content, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, startAt: $startAt)';
+    return 'Report(type: $type, subjectUid: $subjectUid, startAt: $startAt, prompt: $prompt, content: $content, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -304,6 +305,7 @@ class _$ReportImpl implements _Report {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.subjectUid, subjectUid) ||
                 other.subjectUid == subjectUid) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.state, state) || other.state == state) &&
@@ -312,14 +314,13 @@ class _$ReportImpl implements _Report {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.deletedAt, deletedAt) ||
-                other.deletedAt == deletedAt) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt));
+                other.deletedAt == deletedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, type, subjectUid, prompt,
-      content, state, createdAt, updatedAt, deletedAt, startAt);
+  int get hashCode => Object.hash(runtimeType, type, subjectUid, startAt,
+      prompt, content, state, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
@@ -337,17 +338,18 @@ class _$ReportImpl implements _Report {
   }
 }
 
-abstract class _Report implements Report {
+abstract class _Report extends Report {
   const factory _Report(
       {required final ReportType type,
       required final String subjectUid,
+      @TimestampConverterNotNull() required final Timestamp startAt,
       final String? prompt,
       final ReportContent? content,
       final ReportState state,
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
-      @TimestampConverter() final Timestamp? deletedAt,
-      @TimestampConverter() final Timestamp? startAt}) = _$ReportImpl;
+      @TimestampConverter() final Timestamp? deletedAt}) = _$ReportImpl;
+  const _Report._() : super._();
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$ReportImpl.fromJson;
 
@@ -358,6 +360,11 @@ abstract class _Report implements Report {
   /// レポートの対象者のUID
   @override
   String get subjectUid;
+
+  /// レポートを作成開始する日時。この日からN日前のレポート
+  @override
+  @TimestampConverterNotNull()
+  Timestamp get startAt;
 
   /// 生成モデルによるレポートの生成のプロンプトのファイルパス
   @override
@@ -379,11 +386,6 @@ abstract class _Report implements Report {
   @override
   @TimestampConverter()
   Timestamp? get deletedAt;
-
-  /// レポートを作成開始する日時。この日からN日前のレポート
-  @override
-  @TimestampConverter()
-  Timestamp? get startAt;
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.

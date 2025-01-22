@@ -66,3 +66,27 @@ class TimestampConverter extends JsonConverter<Timestamp?, dynamic> {
     return result;
   }
 }
+
+class TimestampConverterNotNull extends JsonConverter<Timestamp, dynamic> {
+  const TimestampConverterNotNull();
+
+  @override
+  Timestamp fromJson(dynamic json) {
+    if (json is Timestamp) {
+      return json;
+    }
+
+    if (json is int) {
+      return Timestamp.fromMillisecondsSinceEpoch(json);
+    }
+
+    if (json is Map) {
+      return Timestamp(json['_seconds'] as int, json['_nanoseconds'] as int);
+    }
+
+    throw Exception();
+  }
+
+  @override
+  Timestamp toJson(Timestamp object) => object;
+}

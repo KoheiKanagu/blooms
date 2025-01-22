@@ -25,7 +25,7 @@ class HomeTab extends HookConsumerWidget {
             icon: const Icon(
               CupertinoIcons.doc_text_fill,
             ),
-            label: i18n.report,
+            label: i18n.report.report,
           ),
         ],
       ),
