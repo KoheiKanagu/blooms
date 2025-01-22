@@ -5,6 +5,7 @@ import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'report.freezed.dart';
 part 'report.g.dart';
@@ -18,6 +19,9 @@ class Report with _$Report {
     /// レポートの対象者のUID
     required String subjectUid,
 
+    /// レポートを作成開始する日時。この日からN日前のレポート
+    @TimestampConverterNotNull() required Timestamp startAt,
+
     /// 生成モデルによるレポートの生成のプロンプトのファイルパス
     String? prompt,
 
@@ -29,10 +33,9 @@ class Report with _$Report {
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
-
-    /// レポートを作成開始する日時。この日からN日前のレポート
-    @TimestampConverter() Timestamp? startAt,
   }) = _Report;
+
+  const Report._();
 
   factory Report.fromJson(Json json) => _$ReportFromJson(json);
 
@@ -41,4 +44,25 @@ class Report with _$Report {
 
   static ToFirestore<Report> get toFirestore =>
       (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
+
+  ({
+    String startDate,
+    String endDate,
+  }) get reportPeriod {
+    final format = DateFormat.MEd();
+
+    final startDate = format.format(startAt.toDate());
+    final endDate = format.format(
+      startAt.toDate().subtract(
+            Duration(
+              days: type.days,
+            ),
+          ),
+    );
+
+    return (
+      startDate: startDate,
+      endDate: endDate,
+    );
+  }
 }

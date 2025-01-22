@@ -1,4 +1,5 @@
 import 'package:blooms/constants/collection_path.dart';
+import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/report/domain/report.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,3 +16,18 @@ CollectionReference<Report> reportCollectionReference(Ref ref) => ref
       fromFirestore: Report.fromFirestore,
       toFirestore: Report.toFirestore,
     );
+
+@riverpod
+Future<Query<Report>> reportQuery(Ref ref) async {
+  final uid = await ref.watch(firebaseUserUidProvider.future);
+
+  if (uid == null) {
+    throw Exception('uid is null');
+  }
+
+  return ref
+      .read(reportCollectionReferenceProvider)
+      .where('deletedAt', isNull: true)
+      .where('subjectUid', isEqualTo: uid)
+      .orderBy('startAt', descending: true);
+}

@@ -16,6 +16,8 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
           type: $checkedConvert(
               'type', (v) => $enumDecode(_$ReportTypeEnumMap, v)),
           subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+          startAt: $checkedConvert(
+              'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
           prompt: $checkedConvert('prompt', (v) => v as String?),
           content: $checkedConvert(
               'content',
@@ -33,8 +35,6 @@ _$ReportImpl _$$ReportImplFromJson(Map<String, dynamic> json) => $checkedCreate(
               'updatedAt', (v) => const TimestampConverter().fromJson(v)),
           deletedAt: $checkedConvert(
               'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-          startAt: $checkedConvert(
-              'startAt', (v) => const TimestampConverter().fromJson(v)),
         );
         return val;
       },
@@ -44,13 +44,13 @@ Map<String, dynamic> _$$ReportImplToJson(_$ReportImpl instance) =>
     <String, dynamic>{
       'type': _$ReportTypeEnumMap[instance.type]!,
       'subjectUid': instance.subjectUid,
+      'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
       'prompt': instance.prompt,
       'content': instance.content?.toJson(),
       'state': _$ReportStateEnumMap[instance.state]!,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
-      'startAt': const TimestampConverter().toJson(instance.startAt),
     };
 
 const _$ReportTypeEnumMap = {

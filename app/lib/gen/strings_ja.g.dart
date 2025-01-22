@@ -34,5 +34,31 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	String get an_unexpected_error_occurred => '予期しないエラーが発生しました';
 	String get retry => '再試行';
-	String get hello => 'こんにちは';
+	String get condition => '体調';
+	late final TranslationsReportJa report = TranslationsReportJa.internal(_root);
+}
+
+// Path: report
+class TranslationsReportJa {
+	TranslationsReportJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get report => 'レポート';
+	String get onTheDay => '当日';
+	String pastDays({required Object n}) => '過去${n}日間';
+	String xToY({required Object x, required Object y}) => '${x}から${y}';
+	late final TranslationsReportStateJa state = TranslationsReportStateJa.internal(_root);
+}
+
+// Path: report.state
+class TranslationsReportStateJa {
+	TranslationsReportStateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get pending => 'トレンド分析を待っています';
+	String get failure => '失敗しました';
 }

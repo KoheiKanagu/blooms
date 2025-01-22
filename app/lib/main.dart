@@ -6,7 +6,7 @@ import 'package:blooms/routing/application/my_go_router.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +37,7 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(myGoRouterProvider);
 
-    return MaterialApp.router(
+    return CupertinoApp.router(
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: const [
         GlobalCupertinoLocalizations.delegate,
