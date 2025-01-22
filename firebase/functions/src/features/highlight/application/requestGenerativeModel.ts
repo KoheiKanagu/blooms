@@ -55,12 +55,7 @@ ${condition.record ?? ''}
   const response = result.response.candidates![0]!.content.parts[0]!.text ?? '{}';
   // responseの形式は定義しており、従っていなかった場合は400エラーになるのでnullチェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
-  const content = JSON.parse(response) as {
-    subjectiveConditionTendency: string;
-    objectiveConditionTendency: string;
-    analysisResult: string;
-    advice: string;
-  };
+  const content = JSON.parse(response) as HighlightContent;
   outSensitiveLog(`content:`, content);
 
   const gsPrompt = await savePrompt(contents);
