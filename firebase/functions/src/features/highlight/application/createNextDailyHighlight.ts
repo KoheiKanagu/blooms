@@ -51,7 +51,7 @@ export async function createNextDailyHighlight(subjectUid: string, lastStartAt: 
   };
 
   const result = await getFirestore()
-    .collection(CollectionPath.REPORTS)
+    .collection(CollectionPath.HIGHLIGHTS)
     .withConverter(highlightConverter)
     .add(newHighlight);
 

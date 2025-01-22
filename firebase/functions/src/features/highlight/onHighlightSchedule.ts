@@ -23,7 +23,7 @@ export const onHighlightSchedule = onSchedule({
 
   // 対象のHighlightを探す
   const query = getFirestore()
-    .collection(CollectionPath.REPORTS)
+    .collection(CollectionPath.HIGHLIGHTS)
     .withConverter(highlightConverter)
     .where('deletedAt', '==', null)
     .where('state', '==', 'pending')

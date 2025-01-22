@@ -7,7 +7,7 @@ import { highlightConverter } from './domain/highlight';
 /**
  * Highlightドキュメントが作成されたとき、生成モデルでConditionsを解析してハイライトの内容を作成する。
  */
-export const onHighlightDocumentCreated = onDocumentCreated(`${CollectionPath.REPORTS}/{documentId}`, async (event) => {
+export const onHighlightDocumentCreated = onDocumentCreated(`${CollectionPath.HIGHLIGHTS}/{documentId}`, async (event) => {
   const snapshot = event.data;
   if (snapshot == undefined) {
     logger.error(`Snapshot is undefined. Skip processing.`);
