@@ -3,6 +3,8 @@
   "retry": "再試行",
   "condition": "体調",
   "report": {
-    "report": "レポート"
+    "report": "レポート",
+    "onTheDay": "当日",
+    "pastDays": "過去${n}日間"
   }
 }

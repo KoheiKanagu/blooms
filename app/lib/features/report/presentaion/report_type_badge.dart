@@ -1,4 +1,5 @@
 import 'package:blooms/features/report/domain/report_type.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 
 class ReportTypeBadge extends StatelessWidget {
@@ -13,7 +14,6 @@ class ReportTypeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton.tinted(
       sizeStyle: CupertinoButtonSize.small,
-      padding: EdgeInsets.zero,
       color: switch (type) {
         ReportType.past1day => CupertinoColors.systemGreen.resolveFrom(context),
         ReportType.past7days => CupertinoColors.systemBlue.resolveFrom(context),
@@ -24,7 +24,14 @@ class ReportTypeBadge extends StatelessWidget {
         ReportType.past28days => CupertinoColors.systemRed.resolveFrom(context),
       },
       child: Text(
-        type.days.toString(),
+        switch (type) {
+          ReportType.past1day => i18n.report.onTheDay,
+          ReportType.past7days ||
+          ReportType.past14days ||
+          ReportType.past21days ||
+          ReportType.past28days =>
+            i18n.report.pastDays(n: type.days),
+        },
       ),
       onPressed: () {},
     );
