@@ -27,8 +27,8 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
-                  endOfDayReportTime:
-                    description: 1日の終わりのレポートの作成目安時刻。UTC
+                  dailyHighlightTime:
+                    description: 1日の終わりのハイライトの作成目安時刻。UTC
                     type: object
                     properties:
                       hour:
@@ -97,11 +97,11 @@ paths:
                     type: string
                     example: 頭痛がする
 
-  /reports_v1/{documentId}:
+  /highlights_v1/{documentId}:
     get:
       responses:
         "200":
-          description: 生成モデルが生成したレポート
+          description: 生成モデルが生成したハイライト
           content:
             application/json:
               schema:
@@ -119,18 +119,18 @@ paths:
                     type: object
                     nullable: true
                   subjectUid:
-                    description: レポートの対象のユーザーのUID
+                    description: ハイライトの対象のユーザーのUID
                     type: string
                   startAt:
-                    description: レポートを作成開始する日時。この日からN日前のレポート Timestamp
+                    description: ハイライトを作成開始する日時。この日からN日前のハイライト Timestamp
                     type: object
                   prompt:
-                    description: 生成モデルによるレポート生成プロンプトのファイルパス
+                    description: 生成モデルによるハイライト生成プロンプトのファイルパス
                     type: string
                     nullable: true
                     example: gs://bucket/path/to/file
                   type:
-                    description: レポートの種類
+                    description: ハイライトの種類
                     type: string
                     default: past1day
                     enum:
@@ -140,7 +140,7 @@ paths:
                       - past21days
                       - past28days
                   content:
-                    description: レポートの内容
+                    description: ハイライトの内容
                     type: object
                     nullable: true
                     properties:

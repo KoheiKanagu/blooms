@@ -1,6 +1,6 @@
 import { Content } from '@google-cloud/vertexai';
 import { Timestamp } from 'firebase-admin/firestore';
-import { getDateRange } from '../../../../src/features/report/application/updateReportContent';
+import { getDateRange } from '../../../../src/features/highlight/application/updateHighlightContent';
 
 describe('getDateRange', () => {
   // 2025-01-15 12:30:00
@@ -45,10 +45,10 @@ describe('getDateRange', () => {
     expect(endDate).toEqual(new Date(2025, 0, 15, 23, 59, 59));
   });
 
-  it('不明なレポートタイプの場合はエラーを投げること', () => {
+  it('不明なハイライトタイプの場合はエラーを投げること', () => {
     expect(() => {
       getDateRange('invalid_type', baseDate);
-    }).toThrow('Unknown report type: invalid_type');
+    }).toThrow('Unknown highlight type: invalid_type');
   });
 });
 

@@ -1,4 +1,4 @@
-import 'package:blooms/features/user/domain/user_end_of_day_report_time.dart';
+import 'package:blooms/features/user/domain/user_daily_highlight_time.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +10,7 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   const factory User({
-    required UserEndOfDayReportTime endOfDayReportTime,
+    required UserDailyHighlightTime dailyHighlightTime,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
