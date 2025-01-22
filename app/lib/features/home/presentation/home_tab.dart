@@ -1,5 +1,5 @@
 import 'package:blooms/features/condition/presentation/condition_page.dart';
-import 'package:blooms/features/report/presentaion/report_page.dart';
+import 'package:blooms/features/report/presentation/report_page.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

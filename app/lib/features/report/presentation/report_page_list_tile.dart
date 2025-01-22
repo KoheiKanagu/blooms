@@ -1,6 +1,6 @@
 import 'package:blooms/features/report/domain/report.dart';
 import 'package:blooms/features/report/domain/report_type.dart';
-import 'package:blooms/features/report/presentaion/report_type_badge.dart';
+import 'package:blooms/features/report/presentation/report_type_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 

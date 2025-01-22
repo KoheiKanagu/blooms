@@ -1,6 +1,6 @@
 import 'package:blooms/features/report/application/report_providers.dart';
 import 'package:blooms/features/report/domain/report.dart';
-import 'package:blooms/features/report/presentaion/report_page_list_tile.dart';
+import 'package:blooms/features/report/presentation/report_page_list_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
