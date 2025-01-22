@@ -6,6 +6,10 @@
     "report": "レポート",
     "onTheDay": "当日",
     "pastDays": "過去${n}日間",
-    "xToY": "${x}から${y}"
+    "xToY": "${x}から${y}",
+    "state": {
+      "pending": "トレンド分析を待っています",
+      "failure": "失敗しました"
+    }
   }
 }
