@@ -35,26 +35,26 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get an_unexpected_error_occurred => '予期しないエラーが発生しました';
 	String get retry => '再試行';
 	String get condition => '体調';
-	late final TranslationsReportJa report = TranslationsReportJa.internal(_root);
+	late final TranslationsHighlightJa highlight = TranslationsHighlightJa.internal(_root);
 }
 
-// Path: report
-class TranslationsReportJa {
-	TranslationsReportJa.internal(this._root);
+// Path: highlight
+class TranslationsHighlightJa {
+	TranslationsHighlightJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get report => 'レポート';
+	String get highlight => 'ハイライト';
 	String get onTheDay => '当日';
 	String pastDays({required Object n}) => '過去${n}日間';
 	String xToY({required Object x, required Object y}) => '${x}から${y}';
-	late final TranslationsReportStateJa state = TranslationsReportStateJa.internal(_root);
+	late final TranslationsHighlightStateJa state = TranslationsHighlightStateJa.internal(_root);
 }
 
-// Path: report.state
-class TranslationsReportStateJa {
-	TranslationsReportStateJa.internal(this._root);
+// Path: highlight.state
+class TranslationsHighlightStateJa {
+	TranslationsHighlightStateJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 

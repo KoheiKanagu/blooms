@@ -33,7 +33,7 @@ service cloud.firestore {
         if isAuthenticated() && request.resource.data.createdBy == request.auth.uid;
     }
 
-    match /reports_v1/{document=**} {
+    match /highlights_v1/{document=**} {
       // only the user can read their own data
       allow get, list:
         if isAuthenticated() && resource.data.subjectUid == request.auth.uid;

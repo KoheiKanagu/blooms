@@ -45,7 +45,7 @@
       ]
     },
     {
-      "collectionGroup": "reports_v1",
+      "collectionGroup": "highlights_v1",
       "queryScope": "COLLECTION",
       "fields": [
         {

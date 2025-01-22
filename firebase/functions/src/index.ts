@@ -30,6 +30,6 @@ export function functionsV1(): f.FunctionBuilder {
     .region('asia-northeast1');
 }
 
-export { onReportDocumentCreated } from './features/report/onReportDocumentCreated';
-export { onReportSchedule } from './features/report/onReportSchedule';
+export { onHighlightDocumentCreated } from './features/highlight/onHighlightDocumentCreated';
+export { onHighlightSchedule } from './features/highlight/onHighlightSchedule';
 export { onCreateAuthUser } from './onCreateAuthUser';
