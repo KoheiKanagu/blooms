@@ -32,7 +32,7 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
       .where('deletedAt', isNull: true)
       .where('createdBy', isEqualTo: uid)
       .where('type', isEqualTo: ConditionType.subjective.name)
-      .orderBy('createdAt', descending: false);
+      .orderBy('createdAt', descending: true);
 }
 
 @riverpod
