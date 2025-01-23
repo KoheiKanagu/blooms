@@ -1,86 +1,124 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
-import 'package:blooms/features/highlight/presentation/highlight_state_badge.dart';
-import 'package:blooms/features/highlight/presentation/highlight_type_badge.dart';
+import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
+import 'package:blooms/features/highlight/presentation/highlight_page_list_tile_title.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HighlightPageListTile extends StatelessWidget {
+class HighlightPageListTile extends HookConsumerWidget {
   const HighlightPageListTile({
+    required this.documentId,
     required this.highlight,
-    required this.highlightPeriod,
-    required this.onPressed,
     super.key,
   });
 
+  final String documentId;
+
   final Highlight highlight;
 
-  final ({
-    String endDate,
-    String startDate,
-  }) highlightPeriod;
-
-  final VoidCallback onPressed;
-
   @override
-  Widget build(BuildContext context) {
-    return CupertinoListSection.insetGrouped(
-      children: [
-        CupertinoListTile.notched(
-          backgroundColor:
-              CupertinoColors.systemBackground.resolveFrom(context),
-          title: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-            ),
-            child: Column(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () async {
+        final state = highlight.state;
+
+        switch (state) {
+          case HighlightState.pending:
+            await showOkAlertDialog(
+              context: context,
+              title: i18n.highlight.state.pending,
+              message: i18n.highlight.state.pendingDescription,
+              style: AdaptiveStyle.iOS,
+            );
+          case HighlightState.inProgress:
+            await showOkAlertDialog(
+              context: context,
+              title: i18n.highlight.state.inProgress,
+              message: i18n.highlight.state.inProgressDescription,
+              style: AdaptiveStyle.iOS,
+            );
+          case HighlightState.success:
+            await Navigator.of(context).push(
+              CupertinoPageRoute<void>(
+                builder: (context) => HighlightDetailPage(
+                  highlight: highlight,
+                ),
+              ),
+            );
+          case HighlightState.failure:
+            final result = await showConfirmationDialog(
+              context: context,
+              title: i18n.highlight.state.failure,
+              style: AdaptiveStyle.iOS,
+              actions: [
+                AlertDialogAction(
+                  key: 'delete',
+                  label: i18n.highlight.deleteHighlight,
+                  isDestructiveAction: true,
+                  isDefaultAction: true,
+                ),
+              ],
+            );
+            if (result == 'delete') {
+              await ref.read(
+                highlightDeleteProvider(documentId: documentId).future,
+              );
+            }
+        }
+      },
+      child: CupertinoListSection.insetGrouped(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 4,
+        ),
+        additionalDividerMargin: 0,
+        dividerMargin: 0,
+        children: [
+          CupertinoListTile.notched(
+            backgroundColor:
+                CupertinoColors.systemBackground.resolveFrom(context),
+            title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  // TODO: summary
-                  '午前中に眠気、喉の痛み、食欲の増加が確認されました。',
-                  maxLines: 10,
+                HighlightPageListTileTitle(
+                  state: highlight.state,
+                  type: highlight.type,
                 ),
                 const Gap(8),
-                HighlightTypeBadge(highlight.type),
-                HighlightStateBadge(highlight.state),
+                Text(
+                  highlight.type == HighlightType.past1day
+                      ? highlight.highlightPeriod.endDate
+                      : i18n.highlight.xToY(
+                          x: highlight.highlightPeriod.startDate,
+                          y: highlight.highlightPeriod.endDate,
+                        ),
+                  style:
+                      CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                ),
               ],
             ),
           ),
-          trailing: Row(
-            children: [
-              Column(
+          if (highlight.state == HighlightState.success)
+            CupertinoListTile.notched(
+              title: Column(
                 children: [
                   Text(
-                    highlightPeriod.startDate,
-                    style:
-                        CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                              fontSize: 14,
-                              color: CupertinoColors.label.resolveFrom(context),
-                            ),
+                    highlight.content?.abstract ?? '',
+                    maxLines: 10,
                   ),
-                  Visibility(
-                    visible: highlight.type != HighlightType.past1day,
-                    child: Text(
-                      highlightPeriod.endDate,
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .textStyle
-                          .copyWith(
-                            fontSize: 14,
-                            color: CupertinoColors.secondaryLabel
-                                .resolveFrom(context),
-                          ),
-                    ),
-                  ),
+                  const Gap(8),
                 ],
               ),
-              const Icon(CupertinoIcons.forward),
-            ],
-          ),
-          onTap: onPressed,
-        ),
-      ],
+            ),
+        ],
+      ),
     );
   }
 }

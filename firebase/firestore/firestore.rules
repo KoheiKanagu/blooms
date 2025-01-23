@@ -40,6 +40,13 @@ service cloud.firestore {
 
       allow create:
         if isAuthenticated() && request.resource.data.subjectUid == request.auth.uid;
+
+      // only the user can update their own data
+      allow update:
+        if isAuthenticated() && resource.data.subjectUid == request.auth.uid
+          // only allow updating the 'deletedAt' field
+          && request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['deletedAt']);
     }
   }
 }

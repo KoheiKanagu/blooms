@@ -48,8 +48,20 @@ class TranslationsHighlightJa {
 	String get highlight => 'ハイライト';
 	String get onTheDay => '当日';
 	String pastDays({required Object n}) => '過去${n}日間';
-	String xToY({required Object x, required Object y}) => '${x}から${y}';
+	String xToY({required Object x, required Object y}) => '${x} から ${y}';
 	late final TranslationsHighlightStateJa state = TranslationsHighlightStateJa.internal(_root);
+	String get createNewHighlight => '新しいハイライトを作成';
+	String get past1day => '当日';
+	String get past7days => '過去7日間';
+	String get past14days => '過去14日間';
+	String get past21days => '過去21日間';
+	String get past28days => '過去28日間';
+	String onTheDayTarget({required Object date}) => '${date} が対象';
+	String get oneDayConditionSummary => '1日分の体調の記録をまとめます';
+	String xToYTarget({required Object x, required Object y}) => '${x} から ${y} が対象';
+	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
+	String get createHighlight => 'ハイライトを作成する';
+	String get deleteHighlight => 'ハイライトを削除する';
 }
 
 // Path: highlight.state
@@ -60,5 +72,9 @@ class TranslationsHighlightStateJa {
 
 	// Translations
 	String get pending => 'トレンド分析を待っています';
-	String get failure => '失敗しました';
+	String get pendingDescription => 'もうすぐ開始されます。しばらくお待ちください';
+	String get inProgress => 'トレンド分析中です';
+	String get inProgressDescription => 'しばらくお待ちください';
+	String get failure => 'トレンド分析に失敗しました';
+	String get failureDescription => '何らかのエラーが発生したため、トレンド分析できませんでした';
 }

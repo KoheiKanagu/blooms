@@ -35,6 +35,17 @@ class Highlight with _$Highlight {
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Highlight;
 
+  factory Highlight.create({
+    required HighlightType type,
+    required String subjectUid,
+    required Timestamp startAt,
+  }) =>
+      Highlight(
+        type: type,
+        subjectUid: subjectUid,
+        startAt: startAt,
+      );
+
   const Highlight._();
 
   factory Highlight.fromJson(Json json) => _$HighlightFromJson(json);
@@ -49,16 +60,16 @@ class Highlight with _$Highlight {
     String startDate,
     String endDate,
   }) get highlightPeriod {
-    final format = DateFormat.MEd();
+    final format = DateFormat.MMMEd();
 
-    final startDate = format.format(startAt.toDate());
-    final endDate = format.format(
+    final startDate = format.format(
       startAt.toDate().subtract(
             Duration(
               days: type.days,
             ),
           ),
     );
+    final endDate = format.format(startAt.toDate());
 
     return (
       startDate: startDate,

@@ -1,3 +1,6 @@
+import 'package:blooms/gen/strings.g.dart';
+import 'package:clock/clock.dart';
+
 enum HighlightType {
   past1day,
   past7days,
@@ -19,5 +22,21 @@ enum HighlightType {
       case HighlightType.past28days:
         return 28;
     }
+  }
+
+  String get localizedName {
+    return switch (this) {
+      HighlightType.past1day => i18n.highlight.past1day,
+      HighlightType.past7days => i18n.highlight.past7days,
+      HighlightType.past14days => i18n.highlight.past14days,
+      HighlightType.past21days => i18n.highlight.past21days,
+      HighlightType.past28days => i18n.highlight.past28days,
+    };
+  }
+
+  DateTime get pastDate {
+    final now = clock.now();
+    return DateTime(now.year, now.month, now.day)
+        .subtract(Duration(days: days));
   }
 }

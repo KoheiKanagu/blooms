@@ -13,10 +13,12 @@ class HighlightDetailTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoListSection.insetGrouped(
-      children: const [
+      children: [
         CupertinoListTile(
+          // TODO: content
           title: Text(
-            'TODO',
+            highlight.content.toString(),
+            maxLines: 100,
           ),
         ),
       ],
