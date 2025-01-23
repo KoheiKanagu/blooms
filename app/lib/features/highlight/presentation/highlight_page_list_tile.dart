@@ -26,6 +26,10 @@ class HighlightPageListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoListSection.insetGrouped(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 4,
+      ),
       children: [
         CupertinoListTile.notched(
           backgroundColor:
