@@ -1,4 +1,5 @@
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_state_badge.dart';
 import 'package:blooms/features/highlight/presentation/highlight_type_badge.dart';
@@ -36,13 +37,26 @@ class HighlightPageListTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  highlight.content?.abstract ?? '',
-                  maxLines: 10,
+                Visibility(
+                  visible: highlight.state == HighlightState.success,
+                  child: Column(
+                    children: [
+                      Text(
+                        highlight.content?.abstract ?? '',
+                        maxLines: 10,
+                      ),
+                      const Gap(8),
+                    ],
+                  ),
                 ),
-                const Gap(8),
-                HighlightTypeBadge(highlight.type),
-                HighlightStateBadge(highlight.state),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    HighlightTypeBadge(highlight.type),
+                    HighlightStateBadge(highlight.state),
+                  ],
+                ),
               ],
             ),
           ),
@@ -74,10 +88,15 @@ class HighlightPageListTile extends StatelessWidget {
                   ),
                 ],
               ),
-              const Icon(CupertinoIcons.forward),
+              Icon(
+                CupertinoIcons.forward,
+                color: highlight.state == HighlightState.success
+                    ? CupertinoTheme.of(context).primaryColor
+                    : CupertinoColors.systemGrey4.resolveFrom(context),
+              ),
             ],
           ),
-          onTap: onPressed,
+          onTap: highlight.state == HighlightState.success ? onPressed : null,
         ),
       ],
     );

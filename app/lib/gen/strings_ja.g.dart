@@ -71,5 +71,6 @@ class TranslationsHighlightStateJa {
 
 	// Translations
 	String get pending => 'トレンド分析を待っています';
-	String get failure => '失敗しました';
+	String get inProgress => 'トレンド分析中です';
+	String get failure => 'トレンド分析に失敗しました';
 }

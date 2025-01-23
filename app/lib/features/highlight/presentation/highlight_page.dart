@@ -22,9 +22,7 @@ class HighlightPage extends HookConsumerWidget {
       ),
       child: ref.watch(highlightQueryProvider).maybeWhen(
             orElse: () => const CircularProgressIndicator.adaptive(),
-            data: (query) {
-              return HighlightPageList(query: query);
-            },
+            data: (query) => HighlightPageList(query: query),
           ),
     );
   }

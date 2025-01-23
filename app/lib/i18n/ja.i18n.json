@@ -9,7 +9,8 @@
     "xToY": "${x}から${y}",
     "state": {
       "pending": "トレンド分析を待っています",
-      "failure": "失敗しました"
+      "inProgress": "トレンド分析中です",
+      "failure": "トレンド分析に失敗しました"
     },
     "createNewHighlight": "新しいハイライトを作成",
     "past1day": "当日",

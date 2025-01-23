@@ -12,26 +12,34 @@ class HighlightStateBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: CupertinoButton.tinted(
-        sizeStyle: CupertinoButtonSize.small,
-        color: switch (state) {
-          HighlightState.pending =>
-            CupertinoColors.systemGrey.resolveFrom(context),
-          HighlightState.inProgress =>
-            CupertinoColors.systemGrey.resolveFrom(context),
-          HighlightState.success =>
-            CupertinoColors.systemGreen.resolveFrom(context),
-          HighlightState.failure =>
-            CupertinoColors.systemRed.resolveFrom(context),
-        },
-        child: switch (state) {
-          HighlightState.pending => Text(i18n.highlight.state.pending),
-          HighlightState.inProgress => const CupertinoActivityIndicator(),
-          HighlightState.success => const SizedBox.shrink(),
-          HighlightState.failure => Text(i18n.highlight.state.failure),
-        },
-        onPressed: () {},
+    return Visibility(
+      visible: state != HighlightState.success,
+      child: IgnorePointer(
+        child: CupertinoButton.tinted(
+          sizeStyle: CupertinoButtonSize.small,
+          color: switch (state) {
+            HighlightState.pending =>
+              CupertinoColors.systemGrey.resolveFrom(context),
+            HighlightState.inProgress =>
+              CupertinoColors.systemGrey.resolveFrom(context),
+            HighlightState.success => null,
+            HighlightState.failure =>
+              CupertinoColors.systemRed.resolveFrom(context),
+          },
+          child: switch (state) {
+            HighlightState.pending => Text(i18n.highlight.state.pending),
+            HighlightState.inProgress => Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(i18n.highlight.state.inProgress),
+                  const CupertinoActivityIndicator(),
+                ],
+              ),
+            HighlightState.success => const SizedBox.shrink(),
+            HighlightState.failure => Text(i18n.highlight.state.failure),
+          },
+          onPressed: () {},
+        ),
       ),
     );
   }
