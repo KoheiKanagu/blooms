@@ -35,16 +35,6 @@ class Highlight with _$Highlight {
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Highlight;
 
-  const Highlight._();
-
-  factory Highlight.fromJson(Json json) => _$HighlightFromJson(json);
-
-  static FromFirestore<Highlight> get fromFirestore =>
-      (snapshot, _) => Highlight.fromJson(snapshot.data() ?? {});
-
-  static ToFirestore<Highlight> get toFirestore =>
-      (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
-
   factory Highlight.create({
     required HighlightType type,
     required String subjectUid,
@@ -55,6 +45,16 @@ class Highlight with _$Highlight {
         subjectUid: subjectUid,
         startAt: startAt,
       );
+
+  const Highlight._();
+
+  factory Highlight.fromJson(Json json) => _$HighlightFromJson(json);
+
+  static FromFirestore<Highlight> get fromFirestore =>
+      (snapshot, _) => Highlight.fromJson(snapshot.data() ?? {});
+
+  static ToFirestore<Highlight> get toFirestore =>
+      (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 
   ({
     String startDate,
