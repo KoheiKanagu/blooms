@@ -1,27 +1,76 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
-import 'package:blooms/features/highlight/presentation/highlight_state_label.dart';
-import 'package:blooms/features/highlight/presentation/highlight_type_label.dart';
+import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
+import 'package:blooms/features/highlight/presentation/highlight_page_list_tile_title.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HighlightPageListTile extends StatelessWidget {
+class HighlightPageListTile extends HookConsumerWidget {
   const HighlightPageListTile({
+    required this.documentId,
     required this.highlight,
-    required this.onPressed,
     super.key,
   });
 
+  final String documentId;
+
   final Highlight highlight;
 
-  final VoidCallback onPressed;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: highlight.state == HighlightState.success ? onPressed : null,
+      onTap: () async {
+        final state = highlight.state;
+
+        switch (state) {
+          case HighlightState.pending:
+            await showOkAlertDialog(
+              context: context,
+              title: i18n.highlight.state.pending,
+              message: i18n.highlight.state.pendingDescription,
+              style: AdaptiveStyle.iOS,
+            );
+          case HighlightState.inProgress:
+            await showOkAlertDialog(
+              context: context,
+              title: i18n.highlight.state.inProgress,
+              message: i18n.highlight.state.inProgressDescription,
+              style: AdaptiveStyle.iOS,
+            );
+          case HighlightState.success:
+            await Navigator.of(context).push(
+              CupertinoPageRoute<void>(
+                builder: (context) => HighlightDetailPage(
+                  highlight: highlight,
+                ),
+              ),
+            );
+          case HighlightState.failure:
+            final result = await showConfirmationDialog(
+              context: context,
+              title: i18n.highlight.state.failure,
+              style: AdaptiveStyle.iOS,
+              actions: [
+                AlertDialogAction(
+                  key: 'delete',
+                  label: i18n.highlight.deleteHighlight,
+                  isDestructiveAction: true,
+                  isDefaultAction: true,
+                ),
+              ],
+            );
+            if (result == 'delete') {
+              await ref.read(
+                highlightDeleteProvider(documentId: documentId).future,
+              );
+            }
+        }
+      },
       child: CupertinoListSection.insetGrouped(
         margin: const EdgeInsets.symmetric(
           horizontal: 20,
@@ -36,19 +85,10 @@ class HighlightPageListTile extends StatelessWidget {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    HighlightTypeLabel(highlight.type),
-                    const Spacer(),
-                    Icon(
-                      CupertinoIcons.forward,
-                      color: highlight.state == HighlightState.success
-                          ? CupertinoColors.systemGrey2.resolveFrom(context)
-                          : CupertinoColors.systemGrey5.resolveFrom(context),
-                    ),
-                  ],
+                HighlightPageListTileTitle(
+                  state: highlight.state,
+                  type: highlight.type,
                 ),
-                HighlightStateLabel(highlight.state),
                 const Gap(8),
                 Text(
                   highlight.type == HighlightType.past1day

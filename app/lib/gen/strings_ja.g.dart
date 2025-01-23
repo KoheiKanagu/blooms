@@ -61,6 +61,7 @@ class TranslationsHighlightJa {
 	String xToYTarget({required Object x, required Object y}) => '${x} から ${y} が対象';
 	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
 	String get createHighlight => 'ハイライトを作成する';
+	String get deleteHighlight => 'ハイライトを削除する';
 }
 
 // Path: highlight.state
@@ -71,6 +72,9 @@ class TranslationsHighlightStateJa {
 
 	// Translations
 	String get pending => 'トレンド分析を待っています';
+	String get pendingDescription => 'もうすぐ開始されます。しばらくお待ちください';
 	String get inProgress => 'トレンド分析中です';
+	String get inProgressDescription => 'しばらくお待ちください';
 	String get failure => 'トレンド分析に失敗しました';
+	String get failureDescription => '何らかのエラーが発生したため、トレンド分析できませんでした';
 }

@@ -196,5 +196,135 @@ class _HighlightCreateProviderElement
   @override
   HighlightType get type => (origin as HighlightCreateProvider).type;
 }
+
+String _$highlightDeleteHash() => r'260028c23eaa1ca4c9e487a2bb3e053d6824ca07';
+
+/// See also [highlightDelete].
+@ProviderFor(highlightDelete)
+const highlightDeleteProvider = HighlightDeleteFamily();
+
+/// See also [highlightDelete].
+class HighlightDeleteFamily extends Family<AsyncValue<void>> {
+  /// See also [highlightDelete].
+  const HighlightDeleteFamily();
+
+  /// See also [highlightDelete].
+  HighlightDeleteProvider call({
+    required String documentId,
+  }) {
+    return HighlightDeleteProvider(
+      documentId: documentId,
+    );
+  }
+
+  @override
+  HighlightDeleteProvider getProviderOverride(
+    covariant HighlightDeleteProvider provider,
+  ) {
+    return call(
+      documentId: provider.documentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'highlightDeleteProvider';
+}
+
+/// See also [highlightDelete].
+class HighlightDeleteProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [highlightDelete].
+  HighlightDeleteProvider({
+    required String documentId,
+  }) : this._internal(
+          (ref) => highlightDelete(
+            ref as HighlightDeleteRef,
+            documentId: documentId,
+          ),
+          from: highlightDeleteProvider,
+          name: r'highlightDeleteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$highlightDeleteHash,
+          dependencies: HighlightDeleteFamily._dependencies,
+          allTransitiveDependencies:
+              HighlightDeleteFamily._allTransitiveDependencies,
+          documentId: documentId,
+        );
+
+  HighlightDeleteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.documentId,
+  }) : super.internal();
+
+  final String documentId;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(HighlightDeleteRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: HighlightDeleteProvider._internal(
+        (ref) => create(ref as HighlightDeleteRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        documentId: documentId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _HighlightDeleteProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is HighlightDeleteProvider && other.documentId == documentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, documentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin HighlightDeleteRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `documentId` of this provider.
+  String get documentId;
+}
+
+class _HighlightDeleteProviderElement
+    extends AutoDisposeFutureProviderElement<void> with HighlightDeleteRef {
+  _HighlightDeleteProviderElement(super.provider);
+
+  @override
+  String get documentId => (origin as HighlightDeleteProvider).documentId;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

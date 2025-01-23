@@ -1,6 +1,5 @@
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page.dart';
-import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_page_list_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/routing/application/my_go_router.dart';
@@ -57,19 +56,12 @@ class HighlightPageList extends HookConsumerWidget {
 
               return SliverList.builder(
                 itemBuilder: (context, index) {
-                  final highlight = snapshot.docs[index].data();
+                  final snap = snapshot.docs[index];
+                  final highlight = snap.data();
 
                   return HighlightPageListTile(
+                    documentId: snap.id,
                     highlight: highlight,
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        CupertinoPageRoute<void>(
-                          builder: (context) => HighlightDetailPage(
-                            highlight: highlight,
-                          ),
-                        ),
-                      );
-                    },
                   );
                 },
                 itemCount: snapshot.docs.length,

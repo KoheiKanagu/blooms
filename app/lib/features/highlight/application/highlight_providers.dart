@@ -1,4 +1,5 @@
 import 'package:blooms/constants/collection_path.dart';
+import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
@@ -52,4 +53,15 @@ Future<void> highlightCreate(
   );
 
   await ref.read(highlightCollectionReferenceProvider).add(data);
+}
+
+@riverpod
+Future<void> highlightDelete(
+  Ref ref, {
+  required String documentId,
+}) async {
+  await ref
+      .read(highlightCollectionReferenceProvider)
+      .doc(documentId)
+      .update(deletedAt);
 }
