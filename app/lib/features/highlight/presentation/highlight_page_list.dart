@@ -58,11 +58,9 @@ class HighlightPageList extends HookConsumerWidget {
               return SliverList.builder(
                 itemBuilder: (context, index) {
                   final highlight = snapshot.docs[index].data();
-                  final highlightPeriod = highlight.highlightPeriod;
 
                   return HighlightPageListTile(
                     highlight: highlight,
-                    highlightPeriod: highlightPeriod,
                     onPressed: () {
                       Navigator.of(context).push(
                         CupertinoPageRoute<void>(

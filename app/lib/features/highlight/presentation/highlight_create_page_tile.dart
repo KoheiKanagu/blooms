@@ -1,4 +1,5 @@
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
+import 'package:blooms/features/highlight/presentation/highlight_type_label.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,20 +41,11 @@ class HighlightCreatePageTile extends HookConsumerWidget {
         dividerMargin: 0,
         children: [
           CupertinoListTile.notched(
-            title: Text(
-              switch (type) {
-                HighlightType.past1day => i18n.highlight.past1day,
-                HighlightType.past7days => i18n.highlight.past7days,
-                HighlightType.past14days => i18n.highlight.past14days,
-                HighlightType.past21days => i18n.highlight.past21days,
-                HighlightType.past28days => i18n.highlight.past28days,
-              },
-              style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
-            ),
+            title: HighlightTypeLabel(type),
             subtitle: Text(
               subtitleText(),
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
               maxLines: 10,
             ),
@@ -77,7 +69,7 @@ class HighlightCreatePageTile extends HookConsumerWidget {
   }
 
   String subtitleText() {
-    final format = DateFormat.yMMMEd();
+    final format = DateFormat.MMMEd();
 
     final nowDate = format.format(clock.now());
     final pastDate = format.format(type.pastDate);

@@ -2,8 +2,8 @@ import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 
-class HighlightStateBadge extends StatelessWidget {
-  const HighlightStateBadge(
+class HighlightStateLabel extends StatelessWidget {
+  const HighlightStateLabel(
     this.state, {
     super.key,
   });

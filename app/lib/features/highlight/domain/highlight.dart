@@ -60,16 +60,16 @@ class Highlight with _$Highlight {
     String startDate,
     String endDate,
   }) get highlightPeriod {
-    final format = DateFormat.MEd();
+    final format = DateFormat.MMMEd();
 
-    final startDate = format.format(startAt.toDate());
-    final endDate = format.format(
+    final startDate = format.format(
       startAt.toDate().subtract(
             Duration(
               days: type.days,
             ),
           ),
     );
+    final endDate = format.format(startAt.toDate());
 
     return (
       startDate: startDate,

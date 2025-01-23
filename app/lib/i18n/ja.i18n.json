@@ -6,7 +6,7 @@
     "highlight": "ハイライト",
     "onTheDay": "当日",
     "pastDays": "過去${n}日間",
-    "xToY": "${x}から${y}",
+    "xToY": "${x} から ${y}",
     "state": {
       "pending": "トレンド分析を待っています",
       "inProgress": "トレンド分析中です",
@@ -18,9 +18,9 @@
     "past14days": "過去14日間",
     "past21days": "過去21日間",
     "past28days": "過去28日間",
-    "onTheDayTarget": "${date} が対象です",
+    "onTheDayTarget": "${date} が対象",
     "oneDayConditionSummary": "1日分の体調の記録をまとめます",
-    "xToYTarget": "${x} から ${y} が対象です",
+    "xToYTarget": "${x} から ${y} が対象",
     "nDaysConditionSummary": "${n}の体調の記録をまとめます",
     "createHighlight": "ハイライトを作成する"
   }
