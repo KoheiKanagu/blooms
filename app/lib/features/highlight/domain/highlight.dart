@@ -45,6 +45,17 @@ class Highlight with _$Highlight {
   static ToFirestore<Highlight> get toFirestore =>
       (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 
+  factory Highlight.create({
+    required HighlightType type,
+    required String subjectUid,
+    required Timestamp startAt,
+  }) =>
+      Highlight(
+        type: type,
+        subjectUid: subjectUid,
+        startAt: startAt,
+      );
+
   ({
     String startDate,
     String endDate,

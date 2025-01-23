@@ -10,6 +10,17 @@
     "state": {
       "pending": "トレンド分析を待っています",
       "failure": "失敗しました"
-    }
+    },
+    "createNewHighlight": "新しいハイライトを作成",
+    "past1day": "当日",
+    "past7days": "過去7日間",
+    "past14days": "過去14日間",
+    "past21days": "過去21日間",
+    "past28days": "過去28日間",
+    "onTheDayTarget": "${date} が対象です",
+    "oneDayConditionSummary": "1日分の体調の記録をまとめます",
+    "xToYTarget": "${x} から ${y} が対象です",
+    "nDaysConditionSummary": "${n}の体調の記録をまとめます",
+    "createHighlight": "ハイライトを作成する"
   }
 }

@@ -36,9 +36,8 @@ class HighlightPageListTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  // TODO: summary
-                  '午前中に眠気、喉の痛み、食欲の増加が確認されました。',
+                Text(
+                  highlight.content?.abstract ?? '',
                   maxLines: 10,
                 ),
                 const Gap(8),
