@@ -1,6 +1,7 @@
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightTypeLabel extends StatelessWidget {
   const HighlightTypeLabel(
@@ -38,4 +39,22 @@ class HighlightTypeLabel extends StatelessWidget {
           ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'HighlightTypeLabel',
+  type: HighlightTypeLabel,
+)
+Widget highlightTypeLabel(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: ListView(
+      children: const [
+        HighlightTypeLabel(HighlightType.past1day),
+        HighlightTypeLabel(HighlightType.past7days),
+        HighlightTypeLabel(HighlightType.past14days),
+        HighlightTypeLabel(HighlightType.past21days),
+        HighlightTypeLabel(HighlightType.past28days),
+      ],
+    ),
+  );
 }
