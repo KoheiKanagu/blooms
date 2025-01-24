@@ -54,8 +54,15 @@ class HighlightPageList extends HookConsumerWidget {
                 );
               }
 
+              final itemCount = snapshot.docs.length;
               return SliverList.builder(
+                itemCount: itemCount,
                 itemBuilder: (context, index) {
+                  final isLastItem = index + 1 == itemCount;
+                  if (isLastItem && snapshot.hasMore) {
+                    snapshot.fetchMore();
+                  }
+
                   final snap = snapshot.docs[index];
                   final highlight = snap.data();
 
@@ -64,7 +71,6 @@ class HighlightPageList extends HookConsumerWidget {
                     highlight: highlight,
                   );
                 },
-                itemCount: snapshot.docs.length,
               );
             },
           ),
