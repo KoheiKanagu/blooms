@@ -8,17 +8,23 @@ import 'package:intl/intl.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 
 class ConditionBubble extends HookConsumerWidget {
-  const ConditionBubble({
+  ConditionBubble({
     required this.documentId,
     required this.createdAt,
     required this.record,
     required this.showDateTime,
     super.key,
-  });
+  }) {
+    final date = DateFormat.MMMEd().format(createdAt);
+    final time = DateFormat.Hm().format(createdAt);
+    createdAtString = '$date $time';
+  }
 
   final String documentId;
 
   final DateTime createdAt;
+
+  late final String createdAtString;
 
   final String record;
 
@@ -32,13 +38,12 @@ class ConditionBubble extends HookConsumerWidget {
         Visibility(
           visible: showDateTime,
           child: Text(
-            // DateTime
-            // ignore: lines_longer_than_80_chars
-            '${DateFormat.MMMEd().format(createdAt)} ${DateFormat.Hm().format(createdAt)}',
+            createdAtString,
             textAlign: TextAlign.center,
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                   color: CupertinoColors.secondaryLabel,
                   fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
           ),
         ),
@@ -63,6 +68,26 @@ class ConditionBubble extends HookConsumerWidget {
                   ),
                 ),
               ],
+            ),
+            previewBuilder: (context, child) => Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 8,
+                children: [
+                  Text(
+                    createdAtString,
+                    textAlign: TextAlign.center,
+                    style:
+                        CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                              color: CupertinoColors.label,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                  ),
+                  child,
+                ],
+              ),
             ),
             child: Container(
               padding: const EdgeInsets.symmetric(
