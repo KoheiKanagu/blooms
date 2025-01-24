@@ -1,8 +1,6 @@
-import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
-import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:blooms/utils/my_logger.dart';
@@ -10,7 +8,6 @@ import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_down_button/pull_down_button.dart';
 
 class ConditionPage extends HookConsumerWidget {
   const ConditionPage({
@@ -24,27 +21,6 @@ class ConditionPage extends HookConsumerWidget {
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
         middle: Text(i18n.condition),
-        trailing: PullDownButton(
-          itemBuilder: (context) => [
-            PullDownMenuItem(
-              onTap: () {
-                ref.read(authSignOutProvider.future);
-              },
-              title: 'Sign out',
-            ),
-            PullDownMenuItem(
-              onTap: () {
-                ref.read(userDeleteProvider.future);
-              },
-              title: 'User delete',
-            ),
-          ],
-          buttonBuilder: (context, showMenu) => CupertinoButton(
-            onPressed: showMenu,
-            padding: EdgeInsets.zero,
-            child: const Icon(CupertinoIcons.ellipsis_circle),
-          ),
-        ),
       ),
       child: ref.watch(conditionQueryProvider).maybeWhen(
             orElse: () => const CircularProgressIndicator.adaptive(),
