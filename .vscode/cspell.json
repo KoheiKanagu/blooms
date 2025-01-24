@@ -13,7 +13,7 @@
     "app/lib/constants/app_env.dart",
     "app/lib/constants/firebase_options_stg.dart",
     "app/lib/constants/firebase_options_prod.dart",
-    "firebase/functions/node_modules/**",
+    "firebase/functions/node_modules/**"
   ],
   "words": [
     "firestore",
@@ -22,6 +22,7 @@
     "kingu",
     "predeploy",
     "riverpod",
+    "widgetbook",
     "Zenn"
   ]
 }

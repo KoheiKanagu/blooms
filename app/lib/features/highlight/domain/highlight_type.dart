@@ -1,5 +1,4 @@
 import 'package:blooms/gen/strings.g.dart';
-import 'package:clock/clock.dart';
 
 enum HighlightType {
   past1day,
@@ -34,9 +33,8 @@ enum HighlightType {
     };
   }
 
-  DateTime get pastDate {
-    final now = clock.now();
-    return DateTime(now.year, now.month, now.day)
+  DateTime pastDate(DateTime today) {
+    return DateTime(today.year, today.month, today.day)
         .subtract(Duration(days: days));
   }
 }

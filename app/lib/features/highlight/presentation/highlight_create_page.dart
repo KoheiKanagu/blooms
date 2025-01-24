@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightCreatePage extends HookConsumerWidget {
   const HighlightCreatePage({
@@ -73,4 +74,14 @@ class HighlightCreatePage extends HookConsumerWidget {
       ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'HighlightCreatePage',
+  type: HighlightCreatePage,
+)
+Widget highlightCreatePage(BuildContext context) {
+  return const CupertinoPageScaffold(
+    child: HighlightCreatePage(),
+  );
 }

@@ -21,5 +21,11 @@
       ],
       "program": "lib/main.dart"
     },
+    {
+      "name": "Widgetbook",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/widgetbook/main.dart"
+    }
   ]
 }
