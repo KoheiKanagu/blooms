@@ -3,5 +3,18 @@
     "default": "blooms-stg",
     "stg": "blooms-stg",
     "prod": "blooms-prod-43d74"
-  }
+  },
+  "targets": {
+    "blooms-stg": {
+      "hosting": {
+        "app": [
+          "blooms-stg"
+        ],
+        "widgetbook": [
+          "blooms-widgetbook-stg"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

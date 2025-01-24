@@ -1,2 +1,3 @@
-firebase/public
+firebase/hosting/public
+firebase/hosting/widgetbook
 firebase/secrets/*.json
