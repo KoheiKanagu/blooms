@@ -1,6 +1,5 @@
 import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
-import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
@@ -24,7 +23,7 @@ class ConditionPage extends HookConsumerWidget {
       backgroundColor:
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('今日の体調'),
+        middle: Text(i18n.condition),
         trailing: PullDownButton(
           itemBuilder: (context) => [
             PullDownMenuItem(
@@ -52,43 +51,76 @@ class ConditionPage extends HookConsumerWidget {
             data: (query) => SafeArea(
               bottom: MediaQuery.of(context).viewInsets.bottom < 50,
               child: Scaffold(
-                body: FirestoreListView<Condition>.separated(
+                body: FirestoreQueryBuilder(
                   query: query,
-                  reverse: true,
-                  padding: const EdgeInsets.only(
-                    // FloatingActionButton分のpadding
-                    bottom: 96,
-                  ),
-                  errorBuilder: (context, error, stackTrace) {
-                    logger.error(error, stackTrace);
+                  builder: (context, snapshot, _) {
+                    if (snapshot.isFetching) {
+                      if (snapshot.hasError) {
+                        logger.error(snapshot.error);
 
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(i18n.anUnexpectedErrorOccurred),
-                          Text(i18n.pleaseRestartTheAppLater),
-                        ],
-                      ),
-                    );
-                  },
-                  itemBuilder: (context, snapshot) {
-                    final condition = snapshot.data();
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(i18n.anUnexpectedErrorOccurred),
+                              Text(i18n.pleaseRestartTheAppLater),
+                            ],
+                          ),
+                        );
+                      }
 
-                    final createdAt = condition.createdAt?.toDate();
-                    final record = condition.record;
-                    if (createdAt == null || record == null) {
-                      return const SizedBox.shrink();
+                      return const Center(
+                        child: CupertinoActivityIndicator(),
+                      );
                     }
 
-                    return ConditionBubble(
-                      documentId: snapshot.id,
-                      createdAt: createdAt,
-                      record: record,
+                    final itemCount = snapshot.docs.length;
+
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                        // FloatingActionButton分のpadding
+                        bottom: 96,
+                      ),
+                      reverse: true,
+                      itemCount: itemCount,
+                      itemBuilder: (context, index) {
+                        final isLastItem = index + 1 == itemCount;
+                        if (isLastItem && snapshot.hasMore) {
+                          snapshot.fetchMore();
+                        }
+
+                        final snap = snapshot.docs[index];
+                        final condition = snap.data();
+
+                        final createdAt = condition.createdAt?.toDate();
+                        final record = condition.record;
+                        if (createdAt == null || record == null) {
+                          return const SizedBox.shrink();
+                        }
+
+                        // 一つ前のindexのsnapshotのcreatedAtと比較して1時間以上経過していたら
+                        // 日時を表示する
+                        final existPreview = index + 1 < itemCount;
+                        final previewCreatedAt = existPreview
+                            ? snapshot.docs[index + 1]
+                                .data()
+                                .createdAt
+                                ?.toDate()
+                            : null;
+                        final showDateTime = previewCreatedAt == null ||
+                            createdAt.difference(previewCreatedAt).inHours >= 1;
+
+                        return ConditionBubble(
+                          documentId: snap.id,
+                          createdAt: createdAt,
+                          record: record,
+                          showDateTime: showDateTime,
+                        );
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 16,
+                      ),
                     );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 16);
                   },
                 ),
                 floatingActionButton: Container(
