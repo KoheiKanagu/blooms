@@ -9,8 +9,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:blooms/features/highlight/presentation/highlight_type_label.dart'
+import 'package:blooms/features/highlight/presentation/highlight_create_page_tile.dart'
     as _i2;
+import 'package:blooms/features/highlight/presentation/highlight_type_label.dart'
+    as _i3;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -24,12 +26,19 @@ final directories = <_i1.WidgetbookNode>[
             name: 'presentation',
             children: [
               _i1.WidgetbookLeafComponent(
+                name: 'HighlightCreatePageTile',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'HighlightCreatePageTile',
+                  builder: _i2.highlightCreatePageTile,
+                ),
+              ),
+              _i1.WidgetbookLeafComponent(
                 name: 'HighlightTypeLabel',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'HighlightTypeLabel',
-                  builder: _i2.highlightTypeLabel,
+                  builder: _i3.highlightTypeLabel,
                 ),
-              )
+              ),
             ],
           )
         ],

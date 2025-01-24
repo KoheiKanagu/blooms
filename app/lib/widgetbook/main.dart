@@ -3,10 +3,13 @@ import 'package:blooms/theme/my_theme.dart';
 import 'package:blooms/widgetbook/main.directories.g.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-void main() {
+Future<void> main() async {
+  Intl.defaultLocale = AppLocale.ja.languageCode;
+
   // Riverpod is not needed
   // ignore: missing_provider_scope
   runApp(
@@ -43,6 +46,7 @@ class WidgetbookApp extends StatelessWidget {
         TextScaleAddon(),
         LocalizationAddon(
           locales: AppLocaleUtils.supportedLocales,
+          initialLocale: AppLocale.ja.flutterLocale,
           localizationsDelegates: [
             GlobalCupertinoLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
