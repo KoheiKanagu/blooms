@@ -1,5 +1,5 @@
 {
-  "an_unexpected_error_occurred": "予期しないエラーが発生しました",
+  "anUnexpectedErrorOccurred": "予期しないエラーが発生しました",
   "pleaseRestartTheAppLater": "しばらくしてからアプリを再起動してください",
   "retry": "再試行",
   "condition": "体調",
