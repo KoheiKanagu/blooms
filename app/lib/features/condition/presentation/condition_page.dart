@@ -1,6 +1,7 @@
 import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -51,7 +52,7 @@ class ConditionPage extends HookConsumerWidget {
             data: (query) => SafeArea(
               bottom: MediaQuery.of(context).viewInsets.bottom < 50,
               child: Scaffold(
-                body: FirestoreListView<Condition>(
+                body: FirestoreListView<Condition>.separated(
                   query: query,
                   reverse: true,
                   padding: const EdgeInsets.only(
@@ -74,12 +75,19 @@ class ConditionPage extends HookConsumerWidget {
                   itemBuilder: (context, snapshot) {
                     final condition = snapshot.data();
 
-                    return CupertinoListTile(
-                      title: Text(condition.record ?? ''),
-                      subtitle: Text(
-                        condition.createdAt?.toDate().toIso8601String() ?? '',
-                      ),
+                    final createdAt = condition.createdAt?.toDate();
+                    final record = condition.record;
+                    if (createdAt == null || record == null) {
+                      return const SizedBox.shrink();
+                    }
+
+                    return ConditionBubble(
+                      createdAt: createdAt,
+                      record: record,
                     );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 16);
                   },
                 ),
                 floatingActionButton: Container(
