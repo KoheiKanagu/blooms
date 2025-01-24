@@ -54,7 +54,7 @@ class AppStartupErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              i18n.an_unexpected_error_occurred,
+              i18n.anUnexpectedErrorOccurred,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Theme.of(context).colorScheme.onError,
                   ),

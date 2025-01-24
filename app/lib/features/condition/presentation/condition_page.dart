@@ -65,7 +65,7 @@ class ConditionPage extends HookConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(i18n.an_unexpected_error_occurred),
+                          Text(i18n.anUnexpectedErrorOccurred),
                           Text(i18n.pleaseRestartTheAppLater),
                         ],
                       ),
