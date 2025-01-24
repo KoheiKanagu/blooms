@@ -7,6 +7,8 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 void main() {
+  // Riverpod is not needed
+  // ignore: missing_provider_scope
   runApp(
     const WidgetbookApp(),
   );
