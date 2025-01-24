@@ -82,6 +82,7 @@ class ConditionPage extends HookConsumerWidget {
                     }
 
                     return ConditionBubble(
+                      documentId: snapshot.id,
                       createdAt: createdAt,
                       record: record,
                     );
