@@ -1,14 +1,17 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_page_list_tile_title.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightPageListTile extends HookConsumerWidget {
   const HighlightPageListTile({
@@ -121,4 +124,106 @@ class HighlightPageListTile extends HookConsumerWidget {
       ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'pending',
+  type: HighlightPageListTile,
+)
+Widget highlightPageListTile(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: ListView(
+      children: HighlightType.values
+          .map(
+            (type) => HighlightPageListTile(
+              documentId: 'documentId',
+              highlight: Highlight(
+                type: type,
+                subjectUid: 'subjectUid',
+                startAt: Timestamp.now(),
+              ),
+            ),
+          )
+          .toList(),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'inProgress',
+  type: HighlightPageListTile,
+)
+Widget highlightPageListTileInProgress(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: ListView(
+      children: HighlightType.values
+          .map(
+            (type) => HighlightPageListTile(
+              documentId: 'documentId',
+              highlight: Highlight(
+                type: type,
+                subjectUid: 'subjectUid',
+                startAt: Timestamp.now(),
+                state: HighlightState.inProgress,
+              ),
+            ),
+          )
+          .toList(),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'success',
+  type: HighlightPageListTile,
+)
+Widget highlightPageListTileSuccess(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: ListView(
+      children: HighlightType.values
+          .map(
+            (type) => HighlightPageListTile(
+              documentId: 'documentId',
+              highlight: Highlight(
+                type: type,
+                subjectUid: 'subjectUid',
+                startAt: Timestamp.now(),
+                state: HighlightState.success,
+                content: const HighlightContent(
+                  subjectiveTrend: 'subjectiveTrend',
+                  objectiveTrend: 'objectiveTrend',
+                  analysisResult: 'analysisResult',
+                  advice: 'advice',
+                  abstract: 'abstract',
+                ),
+              ),
+            ),
+          )
+          .toList(),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'failure',
+  type: HighlightPageListTile,
+)
+Widget highlightPageListTileFailure(BuildContext context) {
+  return CupertinoPageScaffold(
+    child: ListView(
+      children: HighlightType.values
+          .map(
+            (type) => HighlightPageListTile(
+              documentId: 'documentId',
+              highlight: Highlight(
+                type: type,
+                subjectUid: 'subjectUid',
+                startAt: Timestamp.now(),
+                state: HighlightState.failure,
+              ),
+            ),
+          )
+          .toList(),
+    ),
+  );
 }
