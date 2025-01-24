@@ -46,7 +46,7 @@ final conditionQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ConditionQueryRef = AutoDisposeFutureProviderRef<Query<Condition>>;
-String _$conditionDeleteHash() => r'cefe0c4927890c81f53ddc2b4df9776fdbfb6934';
+String _$conditionDeleteHash() => r'b2ce26c517f0740d9e55d4847e3a52b6c84cd7a1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -80,10 +80,10 @@ class ConditionDeleteFamily extends Family<AsyncValue<void>> {
 
   /// See also [conditionDelete].
   ConditionDeleteProvider call({
-    required QueryDocumentSnapshot<Condition> snapshot,
+    required String documentId,
   }) {
     return ConditionDeleteProvider(
-      snapshot: snapshot,
+      documentId: documentId,
     );
   }
 
@@ -92,7 +92,7 @@ class ConditionDeleteFamily extends Family<AsyncValue<void>> {
     covariant ConditionDeleteProvider provider,
   ) {
     return call(
-      snapshot: provider.snapshot,
+      documentId: provider.documentId,
     );
   }
 
@@ -115,11 +115,11 @@ class ConditionDeleteFamily extends Family<AsyncValue<void>> {
 class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
   /// See also [conditionDelete].
   ConditionDeleteProvider({
-    required QueryDocumentSnapshot<Condition> snapshot,
+    required String documentId,
   }) : this._internal(
           (ref) => conditionDelete(
             ref as ConditionDeleteRef,
-            snapshot: snapshot,
+            documentId: documentId,
           ),
           from: conditionDeleteProvider,
           name: r'conditionDeleteProvider',
@@ -130,7 +130,7 @@ class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
           dependencies: ConditionDeleteFamily._dependencies,
           allTransitiveDependencies:
               ConditionDeleteFamily._allTransitiveDependencies,
-          snapshot: snapshot,
+          documentId: documentId,
         );
 
   ConditionDeleteProvider._internal(
@@ -140,10 +140,10 @@ class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.snapshot,
+    required this.documentId,
   }) : super.internal();
 
-  final QueryDocumentSnapshot<Condition> snapshot;
+  final String documentId;
 
   @override
   Override overrideWith(
@@ -158,7 +158,7 @@ class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        snapshot: snapshot,
+        documentId: documentId,
       ),
     );
   }
@@ -170,13 +170,13 @@ class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
 
   @override
   bool operator ==(Object other) {
-    return other is ConditionDeleteProvider && other.snapshot == snapshot;
+    return other is ConditionDeleteProvider && other.documentId == documentId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, snapshot.hashCode);
+    hash = _SystemHash.combine(hash, documentId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -185,8 +185,8 @@ class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin ConditionDeleteRef on AutoDisposeFutureProviderRef<void> {
-  /// The parameter `snapshot` of this provider.
-  QueryDocumentSnapshot<Condition> get snapshot;
+  /// The parameter `documentId` of this provider.
+  String get documentId;
 }
 
 class _ConditionDeleteProviderElement
@@ -194,8 +194,7 @@ class _ConditionDeleteProviderElement
   _ConditionDeleteProviderElement(super.provider);
 
   @override
-  QueryDocumentSnapshot<Condition> get snapshot =>
-      (origin as ConditionDeleteProvider).snapshot;
+  String get documentId => (origin as ConditionDeleteProvider).documentId;
 }
 
 String _$conditionCreateSubjectiveHash() =>

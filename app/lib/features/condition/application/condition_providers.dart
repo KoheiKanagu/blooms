@@ -1,9 +1,9 @@
 import 'package:blooms/constants/collection_path.dart';
+import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/domain/condition_type.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
-import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -38,11 +38,12 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
 @riverpod
 Future<void> conditionDelete(
   Ref ref, {
-  required QueryDocumentSnapshot<Condition> snapshot,
+  required String documentId,
 }) async {
-  await snapshot.reference.update(
-    TimestampConverter.addDeletedAt(snapshot.data().toJson()),
-  );
+  await ref
+      .read(conditionCollectionReferenceProvider)
+      .doc(documentId)
+      .update(deletedAt);
 }
 
 @riverpod
