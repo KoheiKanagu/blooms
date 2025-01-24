@@ -42,7 +42,6 @@ class WidgetbookApp extends StatelessWidget {
             Devices.ios.iPhoneSE,
             Devices.ios.iPhone13ProMax,
           ],
-          initialDevice: Devices.ios.iPhone13ProMax,
         ),
         TextScaleAddon(),
         LocalizationAddon(
