@@ -3,7 +3,9 @@ import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
+import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,19 @@ class ConditionPage extends HookConsumerWidget {
                     // FloatingActionButton分のpadding
                     bottom: 96,
                   ),
+                  errorBuilder: (context, error, stackTrace) {
+                    logger.error(error, stackTrace);
+
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(i18n.an_unexpected_error_occurred),
+                          Text(i18n.pleaseRestartTheAppLater),
+                        ],
+                      ),
+                    );
+                  },
                   itemBuilder: (context, snapshot) {
                     final condition = snapshot.data();
 
