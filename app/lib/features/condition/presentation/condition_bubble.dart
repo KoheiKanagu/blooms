@@ -33,7 +33,6 @@ class ConditionBubble extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Visibility(
           visible: showDateTime,
@@ -47,64 +46,71 @@ class ConditionBubble extends HookConsumerWidget {
                 ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 64,
-            right: 16,
-          ),
-          child: ContextMenuWidget(
-            menuProvider: (_) => Menu(
-              children: [
-                MenuAction(
-                  callback: () {
-                    ref.read(
-                      conditionDeleteProvider(documentId: documentId).future,
-                    );
-                  },
-                  title: MaterialLocalizations.of(context).deleteButtonTooltip,
-                  image: MenuImage.icon(CupertinoIcons.delete),
-                  attributes: const MenuActionAttributes(
-                    destructive: true,
-                  ),
-                ),
-              ],
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 64,
+              right: 16,
             ),
-            previewBuilder: (context, child) => Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                spacing: 8,
+            child: ContextMenuWidget(
+              menuProvider: (_) => Menu(
                 children: [
-                  Text(
-                    createdAtString,
-                    textAlign: TextAlign.center,
-                    style:
-                        CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                              color: CupertinoColors.label,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
+                  MenuAction(
+                    callback: () {
+                      ref.read(
+                        conditionDeleteProvider(documentId: documentId).future,
+                      );
+                    },
+                    title:
+                        MaterialLocalizations.of(context).deleteButtonTooltip,
+                    image: MenuImage.icon(CupertinoIcons.delete),
+                    attributes: const MenuActionAttributes(
+                      destructive: true,
+                    ),
                   ),
-                  child,
                 ],
               ),
-            ),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 28,
-                vertical: 10,
-              ),
-              decoration: BoxDecoration(
-                color: myColorPink2,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: MyDecoration.dropShadow(context).boxShadow,
-              ),
-              child: Text(
-                record,
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      color: CupertinoColors.white,
-                      fontWeight: FontWeight.bold,
+              previewBuilder: (context, child) => Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: 8,
+                  children: [
+                    Text(
+                      createdAtString,
+                      textAlign: TextAlign.center,
+                      style: CupertinoTheme.of(context)
+                          .textTheme
+                          .textStyle
+                          .copyWith(
+                            color: CupertinoColors.label,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
+                    child,
+                  ],
+                ),
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                decoration: BoxDecoration(
+                  color: myColorPink2,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: MyDecoration.dropShadow(context).boxShadow,
+                ),
+                child: Text(
+                  record,
+                  style:
+                      CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                            color: CupertinoColors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                ),
               ),
             ),
           ),
