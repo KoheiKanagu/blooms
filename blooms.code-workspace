@@ -13,7 +13,7 @@
   "settings": {
     "editor.tabSize": 2,
     "search.exclude": {
-      "/public/**": true,
+      "/hosting/**": true,
       "**/*.freezed.dart": true,
       "**/*.g.dart": true,
       "assets/icon/*": true
