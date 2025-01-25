@@ -4,6 +4,7 @@ import 'package:blooms/theme/my_decoration.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 
@@ -55,10 +56,14 @@ class ConditionBubble extends HookConsumerWidget {
               menuProvider: (_) => Menu(
                 children: [
                   MenuAction(
-                    callback: () {
-                      ref.read(
-                        conditionDeleteProvider(documentId: documentId).future,
-                      );
+                    callback: () async {
+                      await Future.wait([
+                        ref.read(
+                          conditionDeleteProvider(documentId: documentId)
+                              .future,
+                        ),
+                        HapticFeedback.heavyImpact(),
+                      ]);
                     },
                     title:
                         MaterialLocalizations.of(context).deleteButtonTooltip,
