@@ -1,5 +1,5 @@
 import 'package:blooms/features/home/presentation/home_tab.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 part 'home_route.g.dart';
@@ -13,7 +13,10 @@ class HomeTabRoute extends GoRouteData {
   static const path = '/home';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const HomeTab();
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CupertinoPage(
+      child: const HomeTab(),
+      name: state.matchedLocation,
+    );
   }
 }
