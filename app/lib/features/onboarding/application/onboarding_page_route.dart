@@ -1,5 +1,5 @@
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 part 'onboarding_page_route.g.dart';
@@ -11,7 +11,10 @@ class OnboardingPageRoute extends GoRouteData {
   static const path = '/onboarding';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const OnboardingPage();
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CupertinoPage(
+      child: const OnboardingPage(),
+      name: state.matchedLocation,
+    );
   }
 }

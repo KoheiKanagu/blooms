@@ -1,5 +1,5 @@
 import 'package:blooms/features/startup/presentation/startup_page.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 part 'startup_page_route.g.dart';
