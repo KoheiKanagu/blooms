@@ -18,16 +18,17 @@ class HomeTab extends HookConsumerWidget {
     return CupertinoTabScaffold(
       resizeToAvoidBottomInset: false,
       tabBar: CupertinoTabBar(
+        iconSize: 28,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: _wrapIcon(
               CupertinoIcons.heart_fill,
             ),
             label: i18n.condition,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.doc_text_fill,
+            icon: _wrapIcon(
+              CupertinoIcons.star_fill,
             ),
             label: i18n.highlight.highlight,
           ),
@@ -53,6 +54,15 @@ class HomeTab extends HookConsumerWidget {
           _ => throw UnimplementedError()
         };
       },
+    );
+  }
+
+  Widget _wrapIcon(IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 4,
+      ),
+      child: Icon(icon),
     );
   }
 }
