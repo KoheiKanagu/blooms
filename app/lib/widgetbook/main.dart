@@ -3,6 +3,7 @@ import 'package:blooms/theme/my_theme.dart';
 import 'package:blooms/widgetbook/main.directories.g.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -10,10 +11,10 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Future<void> main() async {
   Intl.defaultLocale = AppLocale.ja.languageCode;
 
-  // Riverpod is not needed
-  // ignore: missing_provider_scope
   runApp(
-    const WidgetbookApp(),
+    const ProviderScope(
+      child: WidgetbookApp(),
+    ),
   );
 }
 
@@ -33,6 +34,10 @@ class WidgetbookApp extends StatelessWidget {
             const WidgetbookTheme(
               name: 'Light',
               data: myLightThemeData,
+            ),
+            const WidgetbookTheme(
+              name: 'Dark',
+              data: myDarkThemeData,
             ),
           ],
         ),

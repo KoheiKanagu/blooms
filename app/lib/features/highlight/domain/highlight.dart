@@ -56,10 +56,7 @@ class Highlight with _$Highlight {
   static ToFirestore<Highlight> get toFirestore =>
       (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 
-  ({
-    String startDate,
-    String endDate,
-  }) get highlightPeriod {
+  HighlightPeriod get highlightPeriod {
     final format = DateFormat.MMMEd();
 
     final startDate = format.format(
@@ -77,3 +74,8 @@ class Highlight with _$Highlight {
     );
   }
 }
+
+typedef HighlightPeriod = ({
+  String startDate,
+  String endDate,
+});

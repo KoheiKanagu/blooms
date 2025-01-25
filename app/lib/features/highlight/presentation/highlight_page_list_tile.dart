@@ -5,11 +5,10 @@ import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
-import 'package:blooms/features/highlight/presentation/highlight_page_list_tile_title.dart';
+import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -26,11 +25,18 @@ class HighlightPageListTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
+    return HighlightTile(
+      type: highlight.type,
+      state: highlight.state,
+      description: highlight.type == HighlightType.past1day
+          ? highlight.highlightPeriod.endDate
+          : i18n.highlight.xToY(
+              x: highlight.highlightPeriod.startDate,
+              y: highlight.highlightPeriod.endDate,
+            ),
+      contentText: highlight.content?.abstract,
       onTap: () async {
-        final state = highlight.state;
-
-        switch (state) {
+        switch (highlight.state) {
           case HighlightState.pending:
             await showOkAlertDialog(
               context: context,
@@ -74,54 +80,6 @@ class HighlightPageListTile extends HookConsumerWidget {
             }
         }
       },
-      child: CupertinoListSection.insetGrouped(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 4,
-        ),
-        additionalDividerMargin: 0,
-        dividerMargin: 0,
-        children: [
-          CupertinoListTile.notched(
-            backgroundColor:
-                CupertinoColors.systemBackground.resolveFrom(context),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HighlightPageListTileTitle(
-                  state: highlight.state,
-                  type: highlight.type,
-                ),
-                const Gap(8),
-                Text(
-                  highlight.type == HighlightType.past1day
-                      ? highlight.highlightPeriod.endDate
-                      : i18n.highlight.xToY(
-                          x: highlight.highlightPeriod.startDate,
-                          y: highlight.highlightPeriod.endDate,
-                        ),
-                  style:
-                      CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                ),
-              ],
-            ),
-          ),
-          if (highlight.state == HighlightState.success)
-            CupertinoListTile.notched(
-              title: Column(
-                children: [
-                  Text(
-                    highlight.content?.abstract ?? '',
-                    maxLines: 10,
-                  ),
-                  const Gap(8),
-                ],
-              ),
-            ),
-        ],
-      ),
     );
   }
 }
