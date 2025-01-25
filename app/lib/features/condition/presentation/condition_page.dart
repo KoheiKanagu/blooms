@@ -1,11 +1,11 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/presentation/condition_page_list.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/theme/my_date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class ConditionPage extends HookConsumerWidget {
   const ConditionPage({
@@ -29,8 +29,7 @@ class ConditionPage extends HookConsumerWidget {
               onItemDisplayed: (value) {
                 final createdAt = value.createdAt?.toDate();
                 if (createdAt != null) {
-                  final date = DateFormat.MMMEd().format(createdAt);
-                  title.value = date;
+                  title.value = myDateFormat(createdAt);
                 }
               },
             ),

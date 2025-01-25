@@ -1,9 +1,9 @@
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/theme/my_date_format.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -38,10 +38,8 @@ class HighlightCreatePageTile extends StatelessWidget {
   }
 
   String descriptionText() {
-    final format = DateFormat.MMMEd();
-
-    final nowDate = format.format(today);
-    final pastDate = format.format(type.pastDate(today));
+    final nowDate = myDateFormat(today);
+    final pastDate = myDateFormat(type.pastDate(today));
 
     return switch (type) {
       HighlightType.past1day => i18n.highlight.onTheDayTarget(date: nowDate),
