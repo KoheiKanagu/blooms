@@ -1,9 +1,5 @@
 import 'dart:core';
 
-import 'package:blooms/features/condition/application/condition_page_route.dart'
-    as condition_route;
-import 'package:blooms/features/highlight/application/highlight_route.dart'
-    as highlight_route;
 import 'package:blooms/features/home/application/home_route.dart' as home_route;
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart'
     as onboarding_route;
@@ -36,9 +32,7 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
       routes: [
         ...startup_route.$appRoutes,
         ...onboarding_route.$appRoutes,
-        ...condition_route.$appRoutes,
         ...home_route.$appRoutes,
-        ...highlight_route.$appRoutes,
       ],
       errorBuilder: (context, state) {
         logger.handle(state.error.toString(), StackTrace.current, {
