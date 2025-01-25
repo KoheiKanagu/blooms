@@ -26,15 +26,15 @@ class HighlightTypeLabel extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: switch (type) {
               HighlightType.past1day =>
-                CupertinoColors.systemGreen.resolveFrom(context),
-              HighlightType.past7days =>
-                CupertinoColors.systemBlue.resolveFrom(context),
-              HighlightType.past14days =>
-                CupertinoColors.systemPurple.resolveFrom(context),
-              HighlightType.past21days =>
-                CupertinoColors.systemOrange.resolveFrom(context),
-              HighlightType.past28days =>
                 CupertinoColors.systemRed.resolveFrom(context),
+              HighlightType.past7days =>
+                CupertinoColors.systemOrange.resolveFrom(context),
+              HighlightType.past14days =>
+                CupertinoColors.systemGreen.resolveFrom(context),
+              HighlightType.past21days =>
+                CupertinoColors.systemCyan.resolveFrom(context),
+              HighlightType.past28days =>
+                CupertinoColors.systemPurple.resolveFrom(context),
             },
           ),
     );
