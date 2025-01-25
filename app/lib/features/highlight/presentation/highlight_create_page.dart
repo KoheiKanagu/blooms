@@ -15,6 +15,8 @@ class HighlightCreatePage extends HookConsumerWidget {
     super.key,
   });
 
+  static const path = '/highlight_create';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedType = useState<HighlightType>(

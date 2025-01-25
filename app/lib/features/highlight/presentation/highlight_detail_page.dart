@@ -10,6 +10,8 @@ class HighlightDetailPage extends HookConsumerWidget {
     super.key,
   });
 
+  static const path = '/highlight_detail';
+
   final Highlight highlight;
 
   @override

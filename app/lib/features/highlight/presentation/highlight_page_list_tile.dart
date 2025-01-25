@@ -80,6 +80,9 @@ class HighlightPageListTile extends HookConsumerWidget {
                   builder: (context) => HighlightDetailPage(
                     highlight: highlight,
                   ),
+                  settings: const RouteSettings(
+                    name: HighlightDetailPage.path,
+                  ),
                 ),
               );
             case HighlightState.failure:

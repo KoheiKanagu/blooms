@@ -29,14 +29,25 @@ class HomeTab extends HookConsumerWidget {
           ),
         ],
       ),
-      tabBuilder: (context, index) => switch (index) {
-        0 => CupertinoTabView(
-            builder: (context) => const ConditionPage(),
+      tabBuilder: (context, index) {
+        final navigatorObservers = [
+          MyNavigatorObserver(ref.watch(firebaseCrashlyticsProvider)),
+          FirebaseAnalyticsObserver(
+            analytics: ref.watch(firebaseAnalyticsProvider),
           ),
-        1 => CupertinoTabView(
-            builder: (context) => const HighlightPage(),
-          ),
-        _ => throw UnimplementedError()
+        ];
+
+        return switch (index) {
+          0 => CupertinoTabView(
+              builder: (context) => const ConditionPage(),
+              navigatorObservers: navigatorObservers,
+            ),
+          1 => CupertinoTabView(
+              builder: (context) => const HighlightPage(),
+              navigatorObservers: navigatorObservers,
+            ),
+          _ => throw UnimplementedError()
+        };
       },
     );
   }
