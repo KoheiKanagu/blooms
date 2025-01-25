@@ -1,6 +1,8 @@
 import 'package:blooms/features/condition/presentation/condition_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_page.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/utils/firebase/firebase_analytics.dart';
+import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:blooms/utils/my_navigator_observer.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/cupertino.dart';
