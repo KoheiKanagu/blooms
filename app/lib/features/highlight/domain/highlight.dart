@@ -1,11 +1,11 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
+import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'highlight.freezed.dart';
 part 'highlight.g.dart';
@@ -57,16 +57,14 @@ class Highlight with _$Highlight {
       (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 
   HighlightPeriod get highlightPeriod {
-    final format = DateFormat.MMMEd();
-
-    final startDate = format.format(
+    final startDate = myDateFormat(
       startAt.toDate().subtract(
             Duration(
               days: type.days,
             ),
           ),
     );
-    final endDate = format.format(startAt.toDate());
+    final endDate = myDateFormat(startAt.toDate());
 
     return (
       startDate: startDate,

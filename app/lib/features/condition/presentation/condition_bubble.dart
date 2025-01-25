@@ -1,10 +1,10 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 
 class ConditionBubble extends HookConsumerWidget {
@@ -15,9 +15,7 @@ class ConditionBubble extends HookConsumerWidget {
     required this.showDateTime,
     super.key,
   }) {
-    final date = DateFormat.MMMEd().format(createdAt);
-    final time = DateFormat.Hm().format(createdAt);
-    createdAtString = '$date $time';
+    createdAtString = myDateTimeFormat(createdAt);
   }
 
   final String documentId;
