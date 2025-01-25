@@ -35,6 +35,7 @@ dependencies:
   package_info_plus: ^8.1.3
   pull_down_button: ^0.10.2
   riverpod_annotation: ^2.6.1
+  scrollview_observer: ^1.25.0
   shared_preferences: ^2.3.5
   slang: ^4.4.1
   slang_flutter: ^4.4.0

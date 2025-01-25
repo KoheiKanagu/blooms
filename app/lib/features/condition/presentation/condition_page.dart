@@ -3,7 +3,9 @@ import 'package:blooms/features/condition/presentation/condition_page_list.dart'
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class ConditionPage extends HookConsumerWidget {
   const ConditionPage({
@@ -12,15 +14,26 @@ class ConditionPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final title = useState(i18n.condition);
+
     return CupertinoPageScaffold(
       backgroundColor:
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
-        middle: Text(i18n.condition),
+        middle: Text(title.value),
       ),
       child: ref.watch(conditionQueryProvider).maybeWhen(
             orElse: () => const CircularProgressIndicator.adaptive(),
-            data: ConditionPageList.new,
+            data: (query) => ConditionPageList(
+              query,
+              onItemDisplayed: (value) {
+                final createdAt = value.createdAt?.toDate();
+                if (createdAt != null) {
+                  final date = DateFormat.MMMEd().format(createdAt);
+                  title.value = date;
+                }
+              },
+            ),
           ),
     );
   }
