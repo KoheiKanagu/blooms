@@ -41,7 +41,7 @@ class HighlightCreatePageTile extends StatelessWidget {
             width: selected ? 2 : 0,
           ),
           borderRadius: BorderRadius.circular(20),
-          color: CupertinoColors.systemBackground.resolveFrom(context),
+          color: CupertinoColors.secondarySystemBackground.resolveFrom(context),
         ),
         additionalDividerMargin: 0,
         dividerMargin: 0,
