@@ -34,6 +34,9 @@ class HighlightPageList extends HookConsumerWidget {
                       CupertinoPageRoute<void>(
                         builder: (context) => const HighlightCreatePage(),
                         fullscreenDialog: true,
+                        settings: const RouteSettings(
+                          name: HighlightCreatePage.path,
+                        ),
                       ),
                     );
                   },

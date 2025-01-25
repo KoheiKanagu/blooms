@@ -96,9 +96,9 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
         }
       },
       observers: [
-        MyNavigatorObserver(ref.read(firebaseCrashlyticsProvider)),
+        MyNavigatorObserver(ref.watch(firebaseCrashlyticsProvider)),
         FirebaseAnalyticsObserver(
-          analytics: ref.read(firebaseAnalyticsProvider),
+          analytics: ref.watch(firebaseAnalyticsProvider),
         ),
       ],
       debugLogDiagnostics: kDebugMode,
