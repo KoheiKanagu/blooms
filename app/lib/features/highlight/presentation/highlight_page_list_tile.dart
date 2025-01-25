@@ -9,7 +9,10 @@ import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:super_context_menu/super_context_menu.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightPageListTile extends HookConsumerWidget {
@@ -25,61 +28,82 @@ class HighlightPageListTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return HighlightTile(
-      type: highlight.type,
-      state: highlight.state,
-      description: highlight.type == HighlightType.past1day
-          ? highlight.highlightPeriod.endDate
-          : i18n.highlight.xToY(
-              x: highlight.highlightPeriod.startDate,
-              y: highlight.highlightPeriod.endDate,
+    return ContextMenuWidget(
+      menuProvider: (_) => Menu(
+        children: [
+          MenuAction(
+            callback: () async {
+              await Future.wait([
+                ref.read(
+                  highlightDeleteProvider(documentId: documentId).future,
+                ),
+                HapticFeedback.heavyImpact(),
+              ]);
+            },
+            title: MaterialLocalizations.of(context).deleteButtonTooltip,
+            image: MenuImage.icon(CupertinoIcons.delete),
+            attributes: const MenuActionAttributes(
+              destructive: true,
             ),
-      contentText: highlight.content?.abstract,
-      onTap: () async {
-        switch (highlight.state) {
-          case HighlightState.pending:
-            await showOkAlertDialog(
-              context: context,
-              title: i18n.highlight.state.pending,
-              message: i18n.highlight.state.pendingDescription,
-              style: AdaptiveStyle.iOS,
-            );
-          case HighlightState.inProgress:
-            await showOkAlertDialog(
-              context: context,
-              title: i18n.highlight.state.inProgress,
-              message: i18n.highlight.state.inProgressDescription,
-              style: AdaptiveStyle.iOS,
-            );
-          case HighlightState.success:
-            await Navigator.of(context).push(
-              CupertinoPageRoute<void>(
-                builder: (context) => HighlightDetailPage(
-                  highlight: highlight,
-                ),
+          ),
+        ],
+      ),
+      child: HighlightTile(
+        type: highlight.type,
+        state: highlight.state,
+        description: highlight.type == HighlightType.past1day
+            ? highlight.highlightPeriod.endDate
+            : i18n.highlight.xToY(
+                x: highlight.highlightPeriod.startDate,
+                y: highlight.highlightPeriod.endDate,
               ),
-            );
-          case HighlightState.failure:
-            final result = await showConfirmationDialog(
-              context: context,
-              title: i18n.highlight.state.failure,
-              style: AdaptiveStyle.iOS,
-              actions: [
-                AlertDialogAction(
-                  key: 'delete',
-                  label: i18n.highlight.deleteHighlight,
-                  isDestructiveAction: true,
-                  isDefaultAction: true,
-                ),
-              ],
-            );
-            if (result == 'delete') {
-              await ref.read(
-                highlightDeleteProvider(documentId: documentId).future,
+        contentText: highlight.content?.abstract,
+        onTap: () async {
+          switch (highlight.state) {
+            case HighlightState.pending:
+              await showOkAlertDialog(
+                context: context,
+                title: i18n.highlight.state.pending,
+                message: i18n.highlight.state.pendingDescription,
+                style: AdaptiveStyle.iOS,
               );
-            }
-        }
-      },
+            case HighlightState.inProgress:
+              await showOkAlertDialog(
+                context: context,
+                title: i18n.highlight.state.inProgress,
+                message: i18n.highlight.state.inProgressDescription,
+                style: AdaptiveStyle.iOS,
+              );
+            case HighlightState.success:
+              await Navigator.of(context).push(
+                CupertinoPageRoute<void>(
+                  builder: (context) => HighlightDetailPage(
+                    highlight: highlight,
+                  ),
+                ),
+              );
+            case HighlightState.failure:
+              final result = await showConfirmationDialog(
+                context: context,
+                title: i18n.highlight.state.failure,
+                style: AdaptiveStyle.iOS,
+                actions: [
+                  AlertDialogAction(
+                    key: 'delete',
+                    label: i18n.highlight.deleteHighlight,
+                    isDestructiveAction: true,
+                    isDefaultAction: true,
+                  ),
+                ],
+              );
+              if (result == 'delete') {
+                await ref.read(
+                  highlightDeleteProvider(documentId: documentId).future,
+                );
+              }
+          }
+        },
+      ),
     );
   }
 }
