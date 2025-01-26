@@ -19,6 +19,7 @@ import 'package:blooms/features/highlight/presentation/highlight_type_label.dart
     as _i5;
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart'
     as _i6;
+import 'package:blooms/features/startup/presentation/startup_page.dart' as _i7;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -90,6 +91,30 @@ final directories = <_i1.WidgetbookNode>[
                   builder: _i6.onboardingPage,
                 ),
               )
+            ],
+          )
+        ],
+      ),
+      _i1.WidgetbookFolder(
+        name: 'startup',
+        children: [
+          _i1.WidgetbookFolder(
+            name: 'presentation',
+            children: [
+              _i1.WidgetbookLeafComponent(
+                name: 'AppStartupErrorWidget',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'AppStartupErrorWidget',
+                  builder: _i7.startupPageError,
+                ),
+              ),
+              _i1.WidgetbookLeafComponent(
+                name: 'AppStartupLoadingWidget',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'AppStartupLoadingWidget',
+                  builder: _i7.startupPage,
+                ),
+              ),
             ],
           )
         ],
