@@ -1,9 +1,10 @@
 import 'package:blooms/features/startup/application/app_startup.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/my_logger.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class AppStartupWidget extends HookConsumerWidget {
   const AppStartupWidget({super.key});
@@ -29,11 +30,11 @@ class AppStartupLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Center(
-        child: CircularProgressIndicator.adaptive(
-          backgroundColor: Theme.of(context).colorScheme.onError,
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoTheme.of(context).primaryColor,
+      child: const Center(
+        child: CupertinoActivityIndicator(
+          color: CupertinoColors.white,
         ),
       ),
     );
@@ -47,31 +48,48 @@ class AppStartupErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Center(
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoTheme.of(context).primaryColor,
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               i18n.anUnexpectedErrorOccurred,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onError,
+              style: CupertinoTheme.of(context)
+                  .textTheme
+                  .navTitleTextStyle
+                  .copyWith(
+                    color: CupertinoColors.white,
                   ),
             ),
             const Gap(16),
-            TextButton(
+            CupertinoButton(
               onPressed: onRetry,
-              child: Text(
-                i18n.retry,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onError,
-                    ),
-              ),
+              color: CupertinoColors.white,
+              child: Text(i18n.retry),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'AppStartupLoadingWidget',
+  type: AppStartupLoadingWidget,
+)
+Widget startupPage(BuildContext context) {
+  return const AppStartupLoadingWidget();
+}
+
+@widgetbook.UseCase(
+  name: 'AppStartupErrorWidget',
+  type: AppStartupErrorWidget,
+)
+Widget startupPageError(BuildContext context) {
+  return AppStartupErrorWidget(
+    onRetry: () {},
+  );
 }
