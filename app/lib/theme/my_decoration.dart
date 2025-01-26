@@ -7,7 +7,7 @@ class MyDecoration {
             color: CupertinoColors.systemGrey
                 .resolveFrom(context)
                 .withOpacity(0.1),
-            blurRadius: 8,
+            blurRadius: 2,
           ),
         ],
       );

@@ -27,6 +27,8 @@ class ConditionPageList extends HookConsumerWidget {
     return SafeArea(
       bottom: MediaQuery.of(context).viewInsets.bottom < 50,
       child: Scaffold(
+        backgroundColor:
+            CupertinoColors.systemGroupedBackground.resolveFrom(context),
         body: FirestoreQueryBuilder(
           query: query,
           builder: (context, snapshot, _) {
