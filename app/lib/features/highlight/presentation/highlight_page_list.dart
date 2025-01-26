@@ -27,8 +27,7 @@ class HighlightPageList extends HookConsumerWidget {
               children: [
                 CupertinoListTile.notched(
                   title: Text(i18n.highlight.createNewHighlight),
-                  leading: const Icon(CupertinoIcons.star_fill),
-                  trailing: const Icon(CupertinoIcons.forward),
+                  leading: const Icon(CupertinoIcons.square_favorites_alt_fill),
                   onTap: () {
                     Navigator.of(rootContext!).push(
                       CupertinoPageRoute<void>(
