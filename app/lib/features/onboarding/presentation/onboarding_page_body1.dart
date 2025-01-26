@@ -1,7 +1,4 @@
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
-import 'package:blooms/gen/assets.gen.dart';
-import 'package:blooms/theme/my_decoration.dart';
-import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
@@ -43,9 +40,7 @@ class OnboardingPageBody1 extends StatelessWidget {
         const Gap(64),
         Text(
           'あなたの日々の体調の記録し、分析することで、体調の変化を深く理解しましょう。',
-          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: CupertinoTheme.of(context).textTheme.textStyle,
         ),
       ],
     );

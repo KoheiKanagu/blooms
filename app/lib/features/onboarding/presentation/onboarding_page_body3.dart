@@ -45,7 +45,7 @@ class OnboardingPageBody3 extends StatelessWidget {
           'BLOOMS独自のIDを発行して、あなたの記録を安全に保管します。',
           style: CupertinoTheme.of(context).textTheme.textStyle,
         ),
-        if (kIsWeb) ...[
+        if (!kIsWeb) ...[
           const Gap(16),
           Text.rich(
             TextSpan(
