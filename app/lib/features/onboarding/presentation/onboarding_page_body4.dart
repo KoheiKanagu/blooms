@@ -1,18 +1,23 @@
 import 'package:blooms/constants/my_url.dart';
+import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OnboardingPageBody4 extends StatelessWidget {
+class OnboardingPageBody4 extends HookConsumerWidget {
   const OnboardingPageBody4({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = useState(false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -32,8 +37,20 @@ class OnboardingPageBody4 extends StatelessWidget {
           FractionallySizedBox(
             widthFactor: 1,
             child: CupertinoButton.filled(
-              child: const Text('続ける'),
-              onPressed: () {},
+              child: progress.value
+                  ? const CupertinoActivityIndicator(
+                      color: CupertinoColors.white,
+                    )
+                  : Text(i18n.condition),
+              onPressed: () async {
+                if (progress.value) {
+                  return;
+                }
+
+                progress.value = true;
+
+                await ref.read(authSignInProvider.future);
+              },
             ),
           ),
           const Gap(32),

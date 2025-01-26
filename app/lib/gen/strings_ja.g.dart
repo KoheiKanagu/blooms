@@ -44,6 +44,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 		privacyPolicy('プライバシーポリシー'),
 		const TextSpan(text: 'に同意したものとみなされます。'),
 	]);
+	String get skip => 'スキップ';
+	String get kContinue => '続ける';
 }
 
 // Path: highlight

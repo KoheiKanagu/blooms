@@ -2,6 +2,7 @@ import 'package:blooms/features/onboarding/presentation/onboarding_page_body1.da
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body2.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body3.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body4.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,14 +19,27 @@ class OnboardingPage extends HookConsumerWidget {
     final pageController = usePageController();
 
     final bodyItems = [
-      const OnboardingPageBody4(),
       const OnboardingPageBody1(),
       const OnboardingPageBody2(),
       const OnboardingPageBody3(),
+      const OnboardingPageBody4(),
     ];
 
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(),
+      navigationBar: CupertinoNavigationBar(
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          sizeStyle: CupertinoButtonSize.small,
+          child: Text(i18n.skip),
+          onPressed: () {
+            pageController.animateToPage(
+              bodyItems.length - 1,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
+        ),
+      ),
       child: SafeArea(
         child: Column(
           children: [
@@ -41,9 +55,11 @@ class OnboardingPage extends HookConsumerWidget {
             SmoothPageIndicator(
               controller: pageController,
               count: bodyItems.length,
-              effect: SlideEffect(
+              effect: ColorTransitionEffect(
                 dotColor: CupertinoColors.systemGrey5.resolveFrom(context),
                 activeDotColor: myColorPink1.resolveFrom(context),
+                dotWidth: 10,
+                dotHeight: 10,
               ),
             ),
             const Gap(8),
