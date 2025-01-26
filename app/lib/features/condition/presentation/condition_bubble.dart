@@ -1,7 +1,6 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
-import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +38,7 @@ class ConditionBubble extends HookConsumerWidget {
             createdAtString,
             textAlign: TextAlign.center,
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: CupertinoColors.secondaryLabel,
+                  color: CupertinoColors.secondaryLabel.resolveFrom(context),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
@@ -87,7 +86,6 @@ class ConditionBubble extends HookConsumerWidget {
                           .textTheme
                           .textStyle
                           .copyWith(
-                            color: CupertinoColors.label,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -102,17 +100,14 @@ class ConditionBubble extends HookConsumerWidget {
                   vertical: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: myColorPink2,
+                  color: CupertinoColors.secondarySystemGroupedBackground
+                      .resolveFrom(context),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: MyDecoration.dropShadow(context).boxShadow,
                 ),
                 child: Text(
                   record,
-                  style:
-                      CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                            color: CupertinoColors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  style: CupertinoTheme.of(context).textTheme.textStyle,
                 ),
               ),
             ),

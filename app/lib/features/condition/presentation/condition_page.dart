@@ -17,8 +17,6 @@ class ConditionPage extends HookConsumerWidget {
     final title = useState(i18n.condition);
 
     return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
         middle: Text(title.value),
       ),
