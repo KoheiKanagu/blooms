@@ -1,5 +1,6 @@
 import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
+import 'package:blooms/features/onboarding/application/onboarding_providers.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,7 +42,7 @@ class OnboardingPageBody4 extends HookConsumerWidget {
                   ? const CupertinoActivityIndicator(
                       color: CupertinoColors.white,
                     )
-                  : Text(i18n.condition),
+                  : Text(i18n.kContinue),
               onPressed: () async {
                 if (progress.value) {
                   return;
@@ -49,6 +50,7 @@ class OnboardingPageBody4 extends HookConsumerWidget {
 
                 progress.value = true;
 
+                ref.read(onboardingCompleteProvider);
                 await ref.read(authSignInProvider.future);
               },
             ),
