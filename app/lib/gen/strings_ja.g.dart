@@ -37,6 +37,16 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get retry => '再試行';
 	String get condition => '体調';
 	late final TranslationsHighlightJa highlight = TranslationsHighlightJa.internal(_root);
+	TextSpan ackTerm({required InlineSpanBuilder termOfService, required InlineSpanBuilder privacyPolicy}) => TextSpan(children: [
+		const TextSpan(text: '本アプリの利用開始をもって'),
+		termOfService('利用規約'),
+		const TextSpan(text: 'と'),
+		privacyPolicy('プライバシーポリシー'),
+		const TextSpan(text: 'に同意したものとみなされます。'),
+	]);
+	String get skip => 'スキップ';
+	String get kContinue => '続ける';
+	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
 }
 
 // Path: highlight
@@ -63,6 +73,16 @@ class TranslationsHighlightJa {
 	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
+}
+
+// Path: onboarding
+class TranslationsOnboardingJa {
+	TranslationsOnboardingJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get letsGetStarted => 'さあ、はじめましょう';
 }
 
 // Path: highlight.state

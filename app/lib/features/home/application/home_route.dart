@@ -14,9 +14,14 @@ class HomeTabRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return CupertinoPage(
+    return CustomTransitionPage(
       child: const HomeTab(),
       name: state.matchedLocation,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
     );
   }
 }

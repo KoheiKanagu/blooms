@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:blooms/features/home/application/home_route.dart' as home_route;
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart'
     as onboarding_route;
+import 'package:blooms/features/onboarding/application/onboarding_providers.dart';
 import 'package:blooms/features/startup/application/startup_page_route.dart'
     as startup_route;
 import 'package:blooms/features/startup/presentation/startup_page.dart';
@@ -74,7 +75,13 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
             refreshListenable.createdUserDocument) {
           // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
           if (isUnauthorizedRoute) {
-            return home_route.HomeTabRoute.path;
+            // オンボーディングが完了している場合はホーム画面に遷移
+            final onboarding = ref.watch(onboardingIsCompletedProvider);
+            if (onboarding) {
+              return home_route.HomeTabRoute.path;
+            } else {
+              return onboarding_route.OnboardingPageRoute.path;
+            }
           }
 
           // サインイン済みの場合は何もしない

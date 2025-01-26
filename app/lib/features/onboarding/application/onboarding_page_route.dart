@@ -1,5 +1,5 @@
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 part 'onboarding_page_route.g.dart';
@@ -12,9 +12,14 @@ class OnboardingPageRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return CupertinoPage(
+    return CustomTransitionPage(
       child: const OnboardingPage(),
       name: state.matchedLocation,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
     );
   }
 }
