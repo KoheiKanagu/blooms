@@ -31,5 +31,8 @@
   },
   "ackTerm(rich)": "本アプリの利用開始をもって${termOfService(利用規約)}と${privacyPolicy(プライバシーポリシー)}に同意したものとみなされます。",
   "skip": "スキップ",
-  "continue": "続ける"
+  "continue": "続ける",
+  "onboarding": {
+    "letsGetStarted": "さあ、はじめましょう"
+  }
 }

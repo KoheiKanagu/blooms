@@ -28,7 +28,7 @@ class OnboardingPageBody4 extends HookConsumerWidget {
           const OnboardingAppIcon(),
           const Gap(32),
           Text(
-            'さあ、はじめましょう',
+            i18n.onboarding.letsGetStarted,
             style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
             textAlign: TextAlign.center,
           ),
