@@ -28,7 +28,7 @@ class HomeTab extends HookConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: _wrapIcon(
-              CupertinoIcons.star_fill,
+              CupertinoIcons.square_favorites_alt_fill,
             ),
             label: i18n.highlight.highlight,
           ),
