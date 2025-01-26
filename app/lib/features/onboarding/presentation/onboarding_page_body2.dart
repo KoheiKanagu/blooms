@@ -7,6 +7,7 @@ import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -77,6 +78,8 @@ class OnboardingPageBody2 extends StatelessWidget {
                             context: context,
                             style: AdaptiveStyle.iOS,
                             title: 'グラウンディングとは',
+                            cancelLabel:
+                                MaterialLocalizations.of(context).okButtonLabel,
                             message:
                                 '分析に利用する生成モデルは常に正しい知識を持っているわけではありません。そこで、正しい知識の資料を与えることで、生成モデルがより信頼された結果を出力するようにコントロールする手法です。',
                             actions: [
