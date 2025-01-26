@@ -46,6 +46,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	]);
 	String get skip => 'スキップ';
 	String get kContinue => '続ける';
+	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
 }
 
 // Path: highlight
@@ -72,6 +73,16 @@ class TranslationsHighlightJa {
 	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
+}
+
+// Path: onboarding
+class TranslationsOnboardingJa {
+	TranslationsOnboardingJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get letsGetStarted => 'さあ、はじめましょう';
 }
 
 // Path: highlight.state
