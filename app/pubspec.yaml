@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.3.5
   slang: ^4.4.1
   slang_flutter: ^4.4.0
+  smooth_page_indicator: ^1.2.0+3
   super_context_menu: ^0.8.24
   talker: ^4.6.5
   talker_dio_logger: ^4.6.5
