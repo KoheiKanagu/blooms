@@ -17,6 +17,7 @@ class OnboardingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageController = usePageController();
+    final visibleSkipButton = useState(false);
 
     final bodyItems = [
       const OnboardingPageBody1(),
@@ -25,19 +26,33 @@ class OnboardingPage extends HookConsumerWidget {
       const OnboardingPageBody4(),
     ];
 
+    useEffect(
+      () {
+        pageController.addListener(() {
+          // 最後のページではスキップボタンを表示しない
+          visibleSkipButton.value = pageController.page == bodyItems.length - 1;
+        });
+        return null;
+      },
+      [context],
+    );
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        trailing: CupertinoButton(
-          padding: EdgeInsets.zero,
-          sizeStyle: CupertinoButtonSize.small,
-          child: Text(i18n.skip),
-          onPressed: () {
-            pageController.animateToPage(
-              bodyItems.length - 1,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          },
+        trailing: Visibility(
+          visible: !visibleSkipButton.value,
+          child: CupertinoButton(
+            padding: EdgeInsets.zero,
+            sizeStyle: CupertinoButtonSize.small,
+            child: Text(i18n.skip),
+            onPressed: () {
+              pageController.animateToPage(
+                bodyItems.length - 1,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+          ),
         ),
       ),
       child: SafeArea(
