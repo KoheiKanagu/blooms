@@ -81,6 +81,8 @@ class OnboardingPageBody2 extends StatelessWidget {
                             cancelLabel:
                                 MaterialLocalizations.of(context).okButtonLabel,
                             message:
+                                // TODO: slang
+                                // ignore: lines_longer_than_80_chars
                                 '分析に利用する生成モデルは常に正しい知識を持っているわけではありません。そこで、正しい知識の資料を与えることで、生成モデルがより信頼された結果を出力するようにコントロールする手法です。',
                             actions: [
                               const SheetAction(
