@@ -12,10 +12,11 @@ import 'package:flutter/widgets.dart';
 class Assets {
   Assets._();
 
+  static const AssetGenImage blooms = AssetGenImage('assets/BLOOMS.webp');
   static const AssetGenImage icon = AssetGenImage('assets/icon.webp');
 
   /// List of all assets
-  static List<AssetGenImage> get values => [icon];
+  static List<AssetGenImage> get values => [blooms, icon];
 }
 
 class AssetGenImage {

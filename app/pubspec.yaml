@@ -73,6 +73,7 @@ flutter:
 
   assets:
     - assets/icon.webp
+    - assets/BLOOMS.webp
 
 flutter_native_splash:
   color: "#3C8789"

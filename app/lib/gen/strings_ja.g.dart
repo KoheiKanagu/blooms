@@ -37,6 +37,13 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get retry => '再試行';
 	String get condition => '体調';
 	late final TranslationsHighlightJa highlight = TranslationsHighlightJa.internal(_root);
+	TextSpan ackTerm({required InlineSpanBuilder termOfService, required InlineSpanBuilder privacyPolicy}) => TextSpan(children: [
+		const TextSpan(text: '本アプリの利用開始をもって'),
+		termOfService('利用規約'),
+		const TextSpan(text: 'と'),
+		privacyPolicy('プライバシーポリシー'),
+		const TextSpan(text: 'に同意したものとみなされます。'),
+	]);
 }
 
 // Path: highlight

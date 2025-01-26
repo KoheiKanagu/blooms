@@ -17,6 +17,8 @@ import 'package:blooms/features/highlight/presentation/highlight_page_list_tile.
     as _i4;
 import 'package:blooms/features/highlight/presentation/highlight_type_label.dart'
     as _i5;
+import 'package:blooms/features/onboarding/presentation/onboarding_page.dart'
+    as _i6;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -74,7 +76,24 @@ final directories = <_i1.WidgetbookNode>[
             ],
           )
         ],
-      )
+      ),
+      _i1.WidgetbookFolder(
+        name: 'onboarding',
+        children: [
+          _i1.WidgetbookFolder(
+            name: 'presentation',
+            children: [
+              _i1.WidgetbookLeafComponent(
+                name: 'OnboardingPage',
+                useCase: _i1.WidgetbookUseCase(
+                  name: 'OnboardingPage',
+                  builder: _i6.onboardingPage,
+                ),
+              )
+            ],
+          )
+        ],
+      ),
     ],
   )
 ];
