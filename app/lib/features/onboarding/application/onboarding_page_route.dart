@@ -14,6 +14,7 @@ class OnboardingPageRoute extends GoRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
       child: const OnboardingPage(),
+      name: state.matchedLocation,
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(
         opacity: animation,
