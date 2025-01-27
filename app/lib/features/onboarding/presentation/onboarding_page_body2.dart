@@ -1,15 +1,12 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
+import 'package:blooms/widgets/show_grounding_modal_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OnboardingPageBody2 extends StatelessWidget {
   const OnboardingPageBody2({
@@ -73,28 +70,8 @@ class OnboardingPageBody2 extends StatelessWidget {
                                 CupertinoColors.activeBlue.resolveFrom(context),
                           ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          final result = await showModalActionSheet(
-                            context: context,
-                            style: AdaptiveStyle.iOS,
-                            title: 'グラウンディングとは',
-                            cancelLabel:
-                                MaterialLocalizations.of(context).okButtonLabel,
-                            message:
-                                // TODO: slang
-                                // ignore: lines_longer_than_80_chars
-                                '分析に利用する生成モデルは常に正しい知識を持っているわけではありません。そこで、正しい知識の資料を与えることで、生成モデルがより信頼された結果を出力するようにコントロールする手法です。',
-                            actions: [
-                              const SheetAction(
-                                key: 'more',
-                                label: 'もっと詳しく',
-                              ),
-                            ],
-                          );
-
-                          if (result == 'more') {
-                            await launchUrl(MyUrl.grounding);
-                          }
+                        ..onTap = () {
+                          showGroundingModalSheet(context);
                         },
                     ),
                     const TextSpan(

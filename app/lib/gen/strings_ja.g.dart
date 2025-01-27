@@ -47,6 +47,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get skip => 'スキップ';
 	String get kContinue => '続ける';
 	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
+	String get grounding => 'グラウンディング';
 }
 
 // Path: highlight
@@ -61,18 +62,20 @@ class TranslationsHighlightJa {
 	String pastDays({required Object n}) => '過去${n}日間';
 	String xToY({required Object x, required Object y}) => '${x} から ${y}';
 	late final TranslationsHighlightStateJa state = TranslationsHighlightStateJa.internal(_root);
-	String get createNewHighlight => '新しいハイライトを作成';
+	late final TranslationsHighlightCreateNewHighlightJa createNewHighlight = TranslationsHighlightCreateNewHighlightJa.internal(_root);
 	String get past1day => '当日';
 	String get past7days => '過去7日間';
 	String get past14days => '過去14日間';
 	String get past21days => '過去21日間';
 	String get past28days => '過去28日間';
 	String onTheDayTarget({required Object date}) => '${date} が対象';
-	String get oneDayConditionSummary => '1日分の体調の記録をまとめます';
 	String xToYTarget({required Object x, required Object y}) => '${x} から ${y} が対象';
-	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
+	String nDaysConditionSummary({required Object n}) => '${n}の記録を基にしてハイライトを作成します';
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
+	late final TranslationsHighlightStyleJa style = TranslationsHighlightStyleJa.internal(_root);
+	String get unknownStyleContent => 'この形式は対応していません。アプリをバージョンアップしてください';
+	late final TranslationsHighlightFeaturesJa features = TranslationsHighlightFeaturesJa.internal(_root);
 }
 
 // Path: onboarding
@@ -98,4 +101,68 @@ class TranslationsHighlightStateJa {
 	String get inProgressDescription => 'しばらくお待ちください';
 	String get failure => 'トレンド分析に失敗しました';
 	String get failureDescription => '何らかのエラーが発生したため、トレンド分析できませんでした';
+}
+
+// Path: highlight.createNewHighlight
+class TranslationsHighlightCreateNewHighlightJa {
+	TranslationsHighlightCreateNewHighlightJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => '新しいハイライトを作成';
+	String get privateDescription1 => 'あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。';
+	String get professionalDescription1 => 'プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。';
+}
+
+// Path: highlight.style
+class TranslationsHighlightStyleJa {
+	TranslationsHighlightStyleJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get private => '自分用';
+	String get professional => 'プロ用';
+}
+
+// Path: highlight.features
+class TranslationsHighlightFeaturesJa {
+	TranslationsHighlightFeaturesJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get description => '作成される文章には次の特徴があります:';
+	late final TranslationsHighlightFeaturesPrivateJa private = TranslationsHighlightFeaturesPrivateJa.internal(_root);
+	late final TranslationsHighlightFeaturesProfessionalJa professional = TranslationsHighlightFeaturesProfessionalJa.internal(_root);
+}
+
+// Path: highlight.features.private
+class TranslationsHighlightFeaturesPrivateJa {
+	TranslationsHighlightFeaturesPrivateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get care => 'あなたに寄り添って体調を気遣う文体の文章が作成されます';
+	String get trend => 'あなたの体調に関連する何らかの傾向が見つかる可能性があります';
+	String get advice => '明日に向けてのアドバイスが提供されます';
+	TextSpan grounding({required InlineSpan grounding}) => TextSpan(children: [
+		grounding,
+		const TextSpan(text: 'を活用し、正しい内容となるように心がけます'),
+	]);
+	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
+}
+
+// Path: highlight.features.professional
+class TranslationsHighlightFeaturesProfessionalJa {
+	TranslationsHighlightFeaturesProfessionalJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get medical => '医師や助産師などに体調を相談したい際に活用できる文章が作成されます';
+	String get summary => '箇条書きで日々の体調に関する情報が簡潔にまとめられます';
+	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
 }

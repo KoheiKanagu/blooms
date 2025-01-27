@@ -139,35 +139,20 @@ paths:
                       - past14days
                       - past21days
                       - past28days
+                  style:
+                    description: ハイライトのスタイル
+                    type: string
+                    default: private
+                    enum:
+                      - private
+                      - professional
                   content:
                     description: ハイライトの内容
                     type: object
                     nullable: true
-                    required:
-                      - subjectiveTrend
-                      - objectiveTrend
-                      - analysisResult
-                      - advice
-                      - abstract
-                    properties:
-                      subjectiveTrend:
-                        description: 主観的なデータのトレンド
-                        type: string
-                      objectiveTrend:
-                        description: 客観的なデータのトレンド
-                        type: string
-                      analysisResult:
-                        description: 分析結果
-                        type: string
-                        nullable: true
-                      advice:
-                        description: アドバイス
-                        type: string
-                        nullable: true
-                      abstract:
-                        description: 分析結果の要旨
-                        type: string
-                        nullable: true
+                    oneOf:
+                      - $ref: "#/components/schemas/HighlightContentPrivate"
+                      - $ref: "#/components/schemas/HighlightContentProfessional"
                   state:
                     description: 生成モデルでの処理の状態
                     type: string
@@ -177,3 +162,53 @@ paths:
                       - inProgress
                       - success
                       - failure
+
+components:
+  schemas:
+    HighlightContentPrivate:
+      required:
+        - style
+        - subjectiveTrend
+        - objectiveTrend
+        - analysisResult
+        - advice
+        - abstract
+      properties:
+        style:
+          description: ハイライトのスタイル
+          type: string
+          default: private
+        subjectiveTrend:
+          description: 主観的なデータのトレンド
+          type: string
+        objectiveTrend:
+          description: 客観的なデータのトレンド
+          type: string
+        analysisResult:
+          description: 分析結果
+          type: string
+        advice:
+          description: アドバイス
+          type: string
+        abstract:
+          description: 分析結果の要旨
+          type: string
+
+    HighlightContentProfessional:
+      required:
+        - style
+        - analysisResults
+        - abstract
+      properties:
+        style:
+          description: ハイライトのスタイル
+          type: string
+          default: professional
+        analysisResults:
+          description: 分析結果
+          type: array
+          items:
+            type: string
+        abstract:
+          description: 分析結果の要旨
+          type: string

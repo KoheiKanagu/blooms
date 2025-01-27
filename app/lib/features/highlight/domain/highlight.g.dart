@@ -19,6 +19,11 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
           subjectUid: $checkedConvert('subjectUid', (v) => v as String),
           startAt: $checkedConvert(
               'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
+          style: $checkedConvert(
+              'style',
+              (v) =>
+                  $enumDecodeNullable(_$HighlightStyleEnumMap, v) ??
+                  HighlightStyle.private),
           prompt: $checkedConvert('prompt', (v) => v as String?),
           content: $checkedConvert(
               'content',
@@ -46,6 +51,7 @@ Map<String, dynamic> _$$HighlightImplToJson(_$HighlightImpl instance) =>
       'type': _$HighlightTypeEnumMap[instance.type]!,
       'subjectUid': instance.subjectUid,
       'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
+      'style': _$HighlightStyleEnumMap[instance.style]!,
       'prompt': instance.prompt,
       'content': instance.content?.toJson(),
       'state': _$HighlightStateEnumMap[instance.state]!,
@@ -60,6 +66,11 @@ const _$HighlightTypeEnumMap = {
   HighlightType.past14days: 'past14days',
   HighlightType.past21days: 'past21days',
   HighlightType.past28days: 'past28days',
+};
+
+const _$HighlightStyleEnumMap = {
+  HighlightStyle.private: 'private',
+  HighlightStyle.professional: 'professional',
 };
 
 const _$HighlightStateEnumMap = {

@@ -2,6 +2,7 @@ import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:clock/clock.dart';
@@ -37,9 +38,10 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
 
 @riverpod
 Future<void> highlightCreate(
-  Ref ref,
-  HighlightType type,
-) async {
+  Ref ref, {
+  required HighlightType type,
+  required HighlightStyle style,
+}) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
 
   if (uid == null) {
@@ -48,6 +50,7 @@ Future<void> highlightCreate(
 
   final data = Highlight.create(
     type: type,
+    style: style,
     subjectUid: uid,
     startAt: Timestamp.fromDate(clock.now()),
   );
