@@ -2,7 +2,7 @@ import { Timestamp } from '@google-cloud/firestore';
 import { Content } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContent, HighlightStyle } from '../domain/highlight';
+import { HighlightContentForOwn, HighlightContentForProfessional, HighlightStyle } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -14,7 +14,7 @@ import { setupGenerativeModel } from './setupGenerativeModel';
  * @returns
  */
 export async function requestGenerativeModel(conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
-  content: HighlightContent;
+  content: HighlightContentForOwn | HighlightContentForProfessional;
   prompt: string;
 }> {
   const generativeModel = setupGenerativeModel(highlightStyle);
@@ -56,12 +56,12 @@ ${condition.record ?? ''}
   const response = result.response.candidates![0]!.content.parts[0]!.text ?? '{}';
   // responseの形式は定義しており、従っていなかった場合は400エラーになるのでnullチェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
-  const content = JSON.parse(response) as HighlightContent;
+  const content = JSON.parse(response) as unknown;
   outSensitiveLog(`content:`, content);
 
   const gsPrompt = await savePrompt(contents);
   return {
-    content: content,
+    content: content as HighlightContentForOwn | HighlightContentForProfessional,
     prompt: gsPrompt,
   };
 }
