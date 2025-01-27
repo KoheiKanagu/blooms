@@ -3,7 +3,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
-  - cloud_firestore (5.6.1):
+  - cloud_firestore (5.6.2):
     - Firebase/Firestore (= 11.6.0)
     - firebase_core
     - Flutter
@@ -31,7 +31,7 @@ PODS:
   - Firebase/Storage (11.6.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.6.0)
-  - firebase_analytics (11.4.0):
+  - firebase_analytics (11.4.1):
     - Firebase/Analytics (= 11.6.0)
     - firebase_core
     - Flutter
@@ -40,22 +40,22 @@ PODS:
     - firebase_core
     - FirebaseAppCheck (~> 11.6.0)
     - Flutter
-  - firebase_auth (5.4.0):
+  - firebase_auth (5.4.1):
     - Firebase/Auth (= 11.6.0)
     - firebase_core
     - Flutter
-  - firebase_core (3.10.0):
+  - firebase_core (3.10.1):
     - Firebase/CoreOnly (= 11.6.0)
     - Flutter
-  - firebase_crashlytics (4.3.0):
+  - firebase_crashlytics (4.3.1):
     - Firebase/Crashlytics (= 11.6.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (15.2.0):
+  - firebase_messaging (15.2.1):
     - Firebase/Messaging (= 11.6.0)
     - firebase_core
     - Flutter
-  - firebase_storage (12.4.0):
+  - firebase_storage (12.4.1):
     - Firebase/Storage (= 11.6.0)
     - firebase_core
     - Flutter
@@ -349,16 +349,16 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
-  cloud_firestore: 9aa00dac1dc5d3cc93c8cb6515056b038779e06a
+  cloud_firestore: ad4e5097d52cb08257b37e31c272b2130f964934
   device_info_plus: 71ffc6ab7634ade6267c7a93088ed7e4f74e5896
   Firebase: 374a441a91ead896215703a674d58cdb3e9d772b
-  firebase_analytics: a5c6ef5a435d22870fe3cfdcb424f390f56ff752
+  firebase_analytics: 8ad276088e4f9ba7dfc8dd6be4ee93a29673dde1
   firebase_app_check: 90eb4529b913788337a7c68c5ff0b3b5eb490273
-  firebase_auth: ecd44c57a46c4942b58f13615e0bbb178ccff47a
-  firebase_core: 2337982fb78ee4d8d91e608b0a3d4f44346a93c8
-  firebase_crashlytics: 3b6a9a9cbdc5ab92afaf9b206e52c79c2321a0d4
-  firebase_messaging: f3bddfa28c2cad70b3341bf461e987a24efd28d6
-  firebase_storage: 6f87096e0769121a546fd7a46b16e2064846361c
+  firebase_auth: d60969911baf096763178412a28388c39f361e2d
+  firebase_core: d3deb82d05dac4bc13190f9d1770787fd6a1cda4
+  firebase_crashlytics: 4c7c77cf1825b70b031fef62e99441c3a423eaa2
+  firebase_messaging: f27e82019a98ef3ea7e744b5b366fcd6b83e7f86
+  firebase_storage: 55175cbb2ba4ab2ba9515b47d8d49f638649ce73
   FirebaseAnalytics: 7114c698cac995602e3b1b96663473e50d54d6e7
   FirebaseAppCheck: 44803909e253d677481e9e16eb719b0f58a7ddc2
   FirebaseAppCheckInterop: 347aa09a805219a31249b58fc956888e9fcb314b
