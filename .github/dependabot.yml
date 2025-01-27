@@ -20,6 +20,7 @@ updates:
       firebase:
         patterns:
           - "firebase_*"
+          - "cloud_firestore"
 
       freezed:
         patterns:
