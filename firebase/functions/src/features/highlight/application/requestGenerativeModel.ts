@@ -2,7 +2,7 @@ import { Timestamp } from '@google-cloud/firestore';
 import { Content } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentForOwn, HighlightContentForProfessional, HighlightStyle } from '../domain/highlight';
+import { HighlightContentPrivate, HighlightContentProfessional, HighlightStyle } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -14,7 +14,7 @@ import { setupGenerativeModel } from './setupGenerativeModel';
  * @returns
  */
 export async function requestGenerativeModel(conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
-  content: HighlightContentForOwn | HighlightContentForProfessional;
+  content: HighlightContentPrivate | HighlightContentProfessional;
   prompt: string;
 }> {
   const generativeModel = setupGenerativeModel(highlightStyle);
@@ -61,7 +61,7 @@ ${condition.record ?? ''}
 
   const gsPrompt = await savePrompt(contents);
   return {
-    content: content as HighlightContentForOwn | HighlightContentForProfessional,
+    content: content as HighlightContentPrivate | HighlightContentProfessional,
     prompt: gsPrompt,
   };
 }

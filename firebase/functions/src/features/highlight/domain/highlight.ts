@@ -2,10 +2,10 @@ import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/fi
 import { logger } from 'firebase-functions';
 
 export type HighlightType = 'past1day' | 'past7days' | 'past14days' | 'past21days' | 'past28days';
-export type HighlightStyle = 'forOwn' | 'forProfessional';
+export type HighlightStyle = 'private' | 'professional';
 export type HighlightState = 'pending' | 'inProgress' | 'success' | 'failure';
 
-export interface HighlightContentForOwn {
+export interface HighlightContentPrivate {
   style: HighlightStyle;
   subjectiveTrend: string;
   objectiveTrend: string;
@@ -14,7 +14,7 @@ export interface HighlightContentForOwn {
   abstract: string;
 }
 
-export interface HighlightContentForProfessional {
+export interface HighlightContentProfessional {
   style: HighlightStyle;
   analysisResults: string[];
   abstract: string;
@@ -29,8 +29,8 @@ export class Highlight {
     readonly startAt: Timestamp,
     readonly prompt: string | null,
     readonly type: HighlightType = 'past1day',
-    readonly style: HighlightStyle = 'forOwn',
-    readonly content: HighlightContentForOwn | HighlightContentForProfessional | null,
+    readonly style: HighlightStyle = 'private',
+    readonly content: HighlightContentPrivate | HighlightContentProfessional | null,
     readonly state: HighlightState = 'pending',
   ) { }
 }
@@ -55,13 +55,13 @@ export const highlightConverter: FirestoreDataConverter<Highlight> = {
     snapshot.get('startAt') as Timestamp,
     snapshot.get('prompt') as string | null,
     (snapshot.get('type') as HighlightType) ?? 'past1day',
-    (snapshot.get('style') as HighlightStyle) ?? 'forOwn',
+    (snapshot.get('style') as HighlightStyle) ?? 'private',
     highlightContentConverter(snapshot.get('content') as Record<string, unknown>),
     (snapshot.get('state') as HighlightState) ?? 'pending',
   ),
 };
 
-function highlightContentConverter(value: Record<string, unknown>): HighlightContentForOwn | HighlightContentForProfessional | null {
+function highlightContentConverter(value: Record<string, unknown>): HighlightContentPrivate | HighlightContentProfessional | null {
   if (value == null) {
     return null;
   }
@@ -69,7 +69,7 @@ function highlightContentConverter(value: Record<string, unknown>): HighlightCon
   const style = value['style'] as HighlightStyle | null;
 
   switch (style) {
-    case 'forOwn':
+    case 'private':
       return {
         style: style,
         subjectiveTrend: value['subjectiveTrend'] as string,
@@ -78,7 +78,7 @@ function highlightContentConverter(value: Record<string, unknown>): HighlightCon
         advice: value['advice'] as string,
         abstract: value['abstract'] as string,
       };
-    case 'forProfessional':
+    case 'professional':
       return {
         style: style,
         analysisResults: value['analysisResults'] as string[],

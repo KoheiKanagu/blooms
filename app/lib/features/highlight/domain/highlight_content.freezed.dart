@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 HighlightContent _$HighlightContentFromJson(Map<String, dynamic> json) {
   switch (json['style']) {
-    case 'forOwn':
-      return HighlightContentForOwn.fromJson(json);
-    case 'forProfessional':
-      return HighlightContentForProfessional.fromJson(json);
+    case 'private':
+      return HighlightContentPrivate.fromJson(json);
+    case 'professional':
+      return HighlightContentProfessional.fromJson(json);
 
     default:
       return HighlightContentEmpty.fromJson(json);
@@ -32,9 +32,9 @@ mixin _$HighlightContent {
   TResult when<TResult extends Object?>({
     required TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)
-        forOwn,
+        private,
     required TResult Function(List<String> analysisResults, String abstract)
-        forProfessional,
+        professional,
     required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,9 +42,9 @@ mixin _$HighlightContent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult? Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
@@ -52,32 +52,31 @@ mixin _$HighlightContent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HighlightContentForOwn value) forOwn,
-    required TResult Function(HighlightContentForProfessional value)
-        forProfessional,
+    required TResult Function(HighlightContentPrivate value) private,
+    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HighlightContentForOwn value)? forOwn,
-    TResult? Function(HighlightContentForProfessional value)? forProfessional,
+    TResult? Function(HighlightContentPrivate value)? private,
+    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HighlightContentForOwn value)? forOwn,
-    TResult Function(HighlightContentForProfessional value)? forProfessional,
+    TResult Function(HighlightContentPrivate value)? private,
+    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) =>
@@ -109,11 +108,11 @@ class _$HighlightContentCopyWithImpl<$Res, $Val extends HighlightContent>
 }
 
 /// @nodoc
-abstract class _$$HighlightContentForOwnImplCopyWith<$Res> {
-  factory _$$HighlightContentForOwnImplCopyWith(
-          _$HighlightContentForOwnImpl value,
-          $Res Function(_$HighlightContentForOwnImpl) then) =
-      __$$HighlightContentForOwnImplCopyWithImpl<$Res>;
+abstract class _$$HighlightContentPrivateImplCopyWith<$Res> {
+  factory _$$HighlightContentPrivateImplCopyWith(
+          _$HighlightContentPrivateImpl value,
+          $Res Function(_$HighlightContentPrivateImpl) then) =
+      __$$HighlightContentPrivateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {String subjectiveTrend,
@@ -124,12 +123,12 @@ abstract class _$$HighlightContentForOwnImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$HighlightContentForOwnImplCopyWithImpl<$Res>
-    extends _$HighlightContentCopyWithImpl<$Res, _$HighlightContentForOwnImpl>
-    implements _$$HighlightContentForOwnImplCopyWith<$Res> {
-  __$$HighlightContentForOwnImplCopyWithImpl(
-      _$HighlightContentForOwnImpl _value,
-      $Res Function(_$HighlightContentForOwnImpl) _then)
+class __$$HighlightContentPrivateImplCopyWithImpl<$Res>
+    extends _$HighlightContentCopyWithImpl<$Res, _$HighlightContentPrivateImpl>
+    implements _$$HighlightContentPrivateImplCopyWith<$Res> {
+  __$$HighlightContentPrivateImplCopyWithImpl(
+      _$HighlightContentPrivateImpl _value,
+      $Res Function(_$HighlightContentPrivateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HighlightContent
@@ -143,7 +142,7 @@ class __$$HighlightContentForOwnImplCopyWithImpl<$Res>
     Object? advice = null,
     Object? abstract = null,
   }) {
-    return _then(_$HighlightContentForOwnImpl(
+    return _then(_$HighlightContentPrivateImpl(
       subjectiveTrend: null == subjectiveTrend
           ? _value.subjectiveTrend
           : subjectiveTrend // ignore: cast_nullable_to_non_nullable
@@ -170,18 +169,18 @@ class __$$HighlightContentForOwnImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
-  const _$HighlightContentForOwnImpl(
+class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
+  const _$HighlightContentPrivateImpl(
       {required this.subjectiveTrend,
       required this.objectiveTrend,
       required this.analysisResult,
       required this.advice,
       required this.abstract,
       final String? $type})
-      : $type = $type ?? 'forOwn';
+      : $type = $type ?? 'private';
 
-  factory _$HighlightContentForOwnImpl.fromJson(Map<String, dynamic> json) =>
-      _$$HighlightContentForOwnImplFromJson(json);
+  factory _$HighlightContentPrivateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HighlightContentPrivateImplFromJson(json);
 
   /// 主観的なデータのトレンド
   @override
@@ -208,14 +207,14 @@ class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
 
   @override
   String toString() {
-    return 'HighlightContent.forOwn(subjectiveTrend: $subjectiveTrend, objectiveTrend: $objectiveTrend, analysisResult: $analysisResult, advice: $advice, abstract: $abstract)';
+    return 'HighlightContent.private(subjectiveTrend: $subjectiveTrend, objectiveTrend: $objectiveTrend, analysisResult: $analysisResult, advice: $advice, abstract: $abstract)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HighlightContentForOwnImpl &&
+            other is _$HighlightContentPrivateImpl &&
             (identical(other.subjectiveTrend, subjectiveTrend) ||
                 other.subjectiveTrend == subjectiveTrend) &&
             (identical(other.objectiveTrend, objectiveTrend) ||
@@ -237,21 +236,21 @@ class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$HighlightContentForOwnImplCopyWith<_$HighlightContentForOwnImpl>
-      get copyWith => __$$HighlightContentForOwnImplCopyWithImpl<
-          _$HighlightContentForOwnImpl>(this, _$identity);
+  _$$HighlightContentPrivateImplCopyWith<_$HighlightContentPrivateImpl>
+      get copyWith => __$$HighlightContentPrivateImplCopyWithImpl<
+          _$HighlightContentPrivateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)
-        forOwn,
+        private,
     required TResult Function(List<String> analysisResults, String abstract)
-        forProfessional,
+        professional,
     required TResult Function() empty,
   }) {
-    return forOwn(
+    return private(
         subjectiveTrend, objectiveTrend, analysisResult, advice, abstract);
   }
 
@@ -260,12 +259,12 @@ class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult? Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult? Function()? empty,
   }) {
-    return forOwn?.call(
+    return private?.call(
         subjectiveTrend, objectiveTrend, analysisResult, advice, abstract);
   }
 
@@ -274,14 +273,14 @@ class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
-    if (forOwn != null) {
-      return forOwn(
+    if (private != null) {
+      return private(
           subjectiveTrend, objectiveTrend, analysisResult, advice, abstract);
     }
     return orElse();
@@ -290,56 +289,55 @@ class _$HighlightContentForOwnImpl implements HighlightContentForOwn {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HighlightContentForOwn value) forOwn,
-    required TResult Function(HighlightContentForProfessional value)
-        forProfessional,
+    required TResult Function(HighlightContentPrivate value) private,
+    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) {
-    return forOwn(this);
+    return private(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HighlightContentForOwn value)? forOwn,
-    TResult? Function(HighlightContentForProfessional value)? forProfessional,
+    TResult? Function(HighlightContentPrivate value)? private,
+    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) {
-    return forOwn?.call(this);
+    return private?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HighlightContentForOwn value)? forOwn,
-    TResult Function(HighlightContentForProfessional value)? forProfessional,
+    TResult Function(HighlightContentPrivate value)? private,
+    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) {
-    if (forOwn != null) {
-      return forOwn(this);
+    if (private != null) {
+      return private(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HighlightContentForOwnImplToJson(
+    return _$$HighlightContentPrivateImplToJson(
       this,
     );
   }
 }
 
-abstract class HighlightContentForOwn implements HighlightContent {
-  const factory HighlightContentForOwn(
+abstract class HighlightContentPrivate implements HighlightContent {
+  const factory HighlightContentPrivate(
       {required final String subjectiveTrend,
       required final String objectiveTrend,
       required final String analysisResult,
       required final String advice,
-      required final String abstract}) = _$HighlightContentForOwnImpl;
+      required final String abstract}) = _$HighlightContentPrivateImpl;
 
-  factory HighlightContentForOwn.fromJson(Map<String, dynamic> json) =
-      _$HighlightContentForOwnImpl.fromJson;
+  factory HighlightContentPrivate.fromJson(Map<String, dynamic> json) =
+      _$HighlightContentPrivateImpl.fromJson;
 
   /// 主観的なデータのトレンド
   String get subjectiveTrend;
@@ -359,28 +357,28 @@ abstract class HighlightContentForOwn implements HighlightContent {
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HighlightContentForOwnImplCopyWith<_$HighlightContentForOwnImpl>
+  _$$HighlightContentPrivateImplCopyWith<_$HighlightContentPrivateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$HighlightContentForProfessionalImplCopyWith<$Res> {
-  factory _$$HighlightContentForProfessionalImplCopyWith(
-          _$HighlightContentForProfessionalImpl value,
-          $Res Function(_$HighlightContentForProfessionalImpl) then) =
-      __$$HighlightContentForProfessionalImplCopyWithImpl<$Res>;
+abstract class _$$HighlightContentProfessionalImplCopyWith<$Res> {
+  factory _$$HighlightContentProfessionalImplCopyWith(
+          _$HighlightContentProfessionalImpl value,
+          $Res Function(_$HighlightContentProfessionalImpl) then) =
+      __$$HighlightContentProfessionalImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> analysisResults, String abstract});
 }
 
 /// @nodoc
-class __$$HighlightContentForProfessionalImplCopyWithImpl<$Res>
+class __$$HighlightContentProfessionalImplCopyWithImpl<$Res>
     extends _$HighlightContentCopyWithImpl<$Res,
-        _$HighlightContentForProfessionalImpl>
-    implements _$$HighlightContentForProfessionalImplCopyWith<$Res> {
-  __$$HighlightContentForProfessionalImplCopyWithImpl(
-      _$HighlightContentForProfessionalImpl _value,
-      $Res Function(_$HighlightContentForProfessionalImpl) _then)
+        _$HighlightContentProfessionalImpl>
+    implements _$$HighlightContentProfessionalImplCopyWith<$Res> {
+  __$$HighlightContentProfessionalImplCopyWithImpl(
+      _$HighlightContentProfessionalImpl _value,
+      $Res Function(_$HighlightContentProfessionalImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HighlightContent
@@ -391,7 +389,7 @@ class __$$HighlightContentForProfessionalImplCopyWithImpl<$Res>
     Object? analysisResults = null,
     Object? abstract = null,
   }) {
-    return _then(_$HighlightContentForProfessionalImpl(
+    return _then(_$HighlightContentProfessionalImpl(
       analysisResults: null == analysisResults
           ? _value._analysisResults
           : analysisResults // ignore: cast_nullable_to_non_nullable
@@ -406,18 +404,18 @@ class __$$HighlightContentForProfessionalImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HighlightContentForProfessionalImpl
-    implements HighlightContentForProfessional {
-  const _$HighlightContentForProfessionalImpl(
+class _$HighlightContentProfessionalImpl
+    implements HighlightContentProfessional {
+  const _$HighlightContentProfessionalImpl(
       {required final List<String> analysisResults,
       required this.abstract,
       final String? $type})
       : _analysisResults = analysisResults,
-        $type = $type ?? 'forProfessional';
+        $type = $type ?? 'professional';
 
-  factory _$HighlightContentForProfessionalImpl.fromJson(
+  factory _$HighlightContentProfessionalImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$HighlightContentForProfessionalImplFromJson(json);
+      _$$HighlightContentProfessionalImplFromJson(json);
 
   /// 分析結果
   final List<String> _analysisResults;
@@ -439,14 +437,14 @@ class _$HighlightContentForProfessionalImpl
 
   @override
   String toString() {
-    return 'HighlightContent.forProfessional(analysisResults: $analysisResults, abstract: $abstract)';
+    return 'HighlightContent.professional(analysisResults: $analysisResults, abstract: $abstract)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HighlightContentForProfessionalImpl &&
+            other is _$HighlightContentProfessionalImpl &&
             const DeepCollectionEquality()
                 .equals(other._analysisResults, _analysisResults) &&
             (identical(other.abstract, abstract) ||
@@ -463,22 +461,22 @@ class _$HighlightContentForProfessionalImpl
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$HighlightContentForProfessionalImplCopyWith<
-          _$HighlightContentForProfessionalImpl>
-      get copyWith => __$$HighlightContentForProfessionalImplCopyWithImpl<
-          _$HighlightContentForProfessionalImpl>(this, _$identity);
+  _$$HighlightContentProfessionalImplCopyWith<
+          _$HighlightContentProfessionalImpl>
+      get copyWith => __$$HighlightContentProfessionalImplCopyWithImpl<
+          _$HighlightContentProfessionalImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)
-        forOwn,
+        private,
     required TResult Function(List<String> analysisResults, String abstract)
-        forProfessional,
+        professional,
     required TResult Function() empty,
   }) {
-    return forProfessional(analysisResults, abstract);
+    return professional(analysisResults, abstract);
   }
 
   @override
@@ -486,12 +484,12 @@ class _$HighlightContentForProfessionalImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult? Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult? Function()? empty,
   }) {
-    return forProfessional?.call(analysisResults, abstract);
+    return professional?.call(analysisResults, abstract);
   }
 
   @override
@@ -499,14 +497,14 @@ class _$HighlightContentForProfessionalImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
-    if (forProfessional != null) {
-      return forProfessional(analysisResults, abstract);
+    if (professional != null) {
+      return professional(analysisResults, abstract);
     }
     return orElse();
   }
@@ -514,53 +512,52 @@ class _$HighlightContentForProfessionalImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HighlightContentForOwn value) forOwn,
-    required TResult Function(HighlightContentForProfessional value)
-        forProfessional,
+    required TResult Function(HighlightContentPrivate value) private,
+    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) {
-    return forProfessional(this);
+    return professional(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HighlightContentForOwn value)? forOwn,
-    TResult? Function(HighlightContentForProfessional value)? forProfessional,
+    TResult? Function(HighlightContentPrivate value)? private,
+    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) {
-    return forProfessional?.call(this);
+    return professional?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HighlightContentForOwn value)? forOwn,
-    TResult Function(HighlightContentForProfessional value)? forProfessional,
+    TResult Function(HighlightContentPrivate value)? private,
+    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) {
-    if (forProfessional != null) {
-      return forProfessional(this);
+    if (professional != null) {
+      return professional(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HighlightContentForProfessionalImplToJson(
+    return _$$HighlightContentProfessionalImplToJson(
       this,
     );
   }
 }
 
-abstract class HighlightContentForProfessional implements HighlightContent {
-  const factory HighlightContentForProfessional(
+abstract class HighlightContentProfessional implements HighlightContent {
+  const factory HighlightContentProfessional(
       {required final List<String> analysisResults,
-      required final String abstract}) = _$HighlightContentForProfessionalImpl;
+      required final String abstract}) = _$HighlightContentProfessionalImpl;
 
-  factory HighlightContentForProfessional.fromJson(Map<String, dynamic> json) =
-      _$HighlightContentForProfessionalImpl.fromJson;
+  factory HighlightContentProfessional.fromJson(Map<String, dynamic> json) =
+      _$HighlightContentProfessionalImpl.fromJson;
 
   /// 分析結果
   List<String> get analysisResults;
@@ -571,8 +568,8 @@ abstract class HighlightContentForProfessional implements HighlightContent {
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HighlightContentForProfessionalImplCopyWith<
-          _$HighlightContentForProfessionalImpl>
+  _$$HighlightContentProfessionalImplCopyWith<
+          _$HighlightContentProfessionalImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -629,9 +626,9 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)
-        forOwn,
+        private,
     required TResult Function(List<String> analysisResults, String abstract)
-        forProfessional,
+        professional,
     required TResult Function() empty,
   }) {
     return empty();
@@ -642,9 +639,9 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult? Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult? Function()? empty,
   }) {
     return empty?.call();
@@ -655,9 +652,9 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String subjectiveTrend, String objectiveTrend,
             String analysisResult, String advice, String abstract)?
-        forOwn,
+        private,
     TResult Function(List<String> analysisResults, String abstract)?
-        forProfessional,
+        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -670,9 +667,8 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HighlightContentForOwn value) forOwn,
-    required TResult Function(HighlightContentForProfessional value)
-        forProfessional,
+    required TResult Function(HighlightContentPrivate value) private,
+    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) {
     return empty(this);
@@ -681,8 +677,8 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HighlightContentForOwn value)? forOwn,
-    TResult? Function(HighlightContentForProfessional value)? forProfessional,
+    TResult? Function(HighlightContentPrivate value)? private,
+    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) {
     return empty?.call(this);
@@ -691,8 +687,8 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HighlightContentForOwn value)? forOwn,
-    TResult Function(HighlightContentForProfessional value)? forProfessional,
+    TResult Function(HighlightContentPrivate value)? private,
+    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) {

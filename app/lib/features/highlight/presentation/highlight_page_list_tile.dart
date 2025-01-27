@@ -58,8 +58,8 @@ class HighlightPageListTile extends HookConsumerWidget {
                 y: highlight.highlightPeriod.endDate,
               ),
         contentText: switch (highlight.content) {
-          HighlightContentForOwn(:final abstract) => abstract,
-          HighlightContentForProfessional(:final abstract) => abstract,
+          HighlightContentPrivate(:final abstract) => abstract,
+          HighlightContentProfessional(:final abstract) => abstract,
           HighlightContentEmpty() || null => i18n.highlight.unknownStyleContent,
         },
         onTap: () async {
@@ -178,7 +178,7 @@ Widget highlightPageListTileSuccess(BuildContext context) {
                 subjectUid: 'subjectUid',
                 startAt: Timestamp.now(),
                 state: HighlightState.success,
-                content: const HighlightContent.forOwn(
+                content: const HighlightContent.private(
                   subjectiveTrend: 'subjectiveTrend',
                   objectiveTrend: 'objectiveTrend',
                   analysisResult: 'analysisResult',

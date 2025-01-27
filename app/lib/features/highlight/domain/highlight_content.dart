@@ -10,7 +10,7 @@ part 'highlight_content.g.dart';
   fallbackUnion: 'empty',
 )
 sealed class HighlightContent with _$HighlightContent {
-  const factory HighlightContent.forOwn({
+  const factory HighlightContent.private({
     /// 主観的なデータのトレンド
     required String subjectiveTrend,
 
@@ -25,15 +25,15 @@ sealed class HighlightContent with _$HighlightContent {
 
     /// 分析結果の要旨
     required String abstract,
-  }) = HighlightContentForOwn;
+  }) = HighlightContentPrivate;
 
-  const factory HighlightContent.forProfessional({
+  const factory HighlightContent.professional({
     /// 分析結果
     required List<String> analysisResults,
 
     /// 分析結果の要旨
     required String abstract,
-  }) = HighlightContentForProfessional;
+  }) = HighlightContentProfessional;
 
   const factory HighlightContent.empty() = HighlightContentEmpty;
 

@@ -5,9 +5,9 @@ void main() {
   group(
     'fromJson',
     () {
-      test('forOwn', () {
+      test('private', () {
         final json = {
-          'style': 'forOwn',
+          'style': 'private',
           'subjectiveTrend': 'subjectiveTrend',
           'objectiveTrend': 'objectiveTrend',
           'analysisResult': 'analysisResult',
@@ -19,7 +19,7 @@ void main() {
 
         expect(
           expected,
-          const HighlightContent.forOwn(
+          const HighlightContent.private(
             subjectiveTrend: 'subjectiveTrend',
             objectiveTrend: 'objectiveTrend',
             analysisResult: 'analysisResult',
@@ -29,9 +29,9 @@ void main() {
         );
       });
 
-      test('forProfessional', () {
+      test('professional', () {
         final json = {
-          'style': 'forProfessional',
+          'style': 'professional',
           'analysisResults': ['analysisResults'],
           'abstract': 'abstract',
         };
@@ -40,7 +40,7 @@ void main() {
 
         expect(
           expected,
-          const HighlightContent.forProfessional(
+          const HighlightContent.professional(
             analysisResults: ['analysisResults'],
             abstract: 'abstract',
           ),

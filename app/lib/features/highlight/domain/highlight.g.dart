@@ -23,7 +23,7 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
               'style',
               (v) =>
                   $enumDecodeNullable(_$HighlightStyleEnumMap, v) ??
-                  HighlightStyle.forOwn),
+                  HighlightStyle.private),
           prompt: $checkedConvert('prompt', (v) => v as String?),
           content: $checkedConvert(
               'content',
@@ -69,8 +69,8 @@ const _$HighlightTypeEnumMap = {
 };
 
 const _$HighlightStyleEnumMap = {
-  HighlightStyle.forOwn: 'forOwn',
-  HighlightStyle.forProfessional: 'forProfessional',
+  HighlightStyle.private: 'private',
+  HighlightStyle.professional: 'professional',
 };
 
 const _$HighlightStateEnumMap = {

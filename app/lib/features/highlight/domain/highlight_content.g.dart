@@ -8,13 +8,13 @@ part of 'highlight_content.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HighlightContentForOwnImpl _$$HighlightContentForOwnImplFromJson(
+_$HighlightContentPrivateImpl _$$HighlightContentPrivateImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$HighlightContentForOwnImpl',
+      r'_$HighlightContentPrivateImpl',
       json,
       ($checkedConvert) {
-        final val = _$HighlightContentForOwnImpl(
+        final val = _$HighlightContentPrivateImpl(
           subjectiveTrend:
               $checkedConvert('subjectiveTrend', (v) => v as String),
           objectiveTrend: $checkedConvert('objectiveTrend', (v) => v as String),
@@ -28,8 +28,8 @@ _$HighlightContentForOwnImpl _$$HighlightContentForOwnImplFromJson(
       fieldKeyMap: const {r'$type': 'style'},
     );
 
-Map<String, dynamic> _$$HighlightContentForOwnImplToJson(
-        _$HighlightContentForOwnImpl instance) =>
+Map<String, dynamic> _$$HighlightContentPrivateImplToJson(
+        _$HighlightContentPrivateImpl instance) =>
     <String, dynamic>{
       'subjectiveTrend': instance.subjectiveTrend,
       'objectiveTrend': instance.objectiveTrend,
@@ -39,25 +39,25 @@ Map<String, dynamic> _$$HighlightContentForOwnImplToJson(
       'style': instance.$type,
     };
 
-_$HighlightContentForProfessionalImpl
-    _$$HighlightContentForProfessionalImplFromJson(Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$HighlightContentForProfessionalImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$HighlightContentForProfessionalImpl(
-              analysisResults: $checkedConvert('analysisResults',
-                  (v) => (v as List<dynamic>).map((e) => e as String).toList()),
-              abstract: $checkedConvert('abstract', (v) => v as String),
-              $type: $checkedConvert('style', (v) => v as String?),
-            );
-            return val;
-          },
-          fieldKeyMap: const {r'$type': 'style'},
+_$HighlightContentProfessionalImpl _$$HighlightContentProfessionalImplFromJson(
+        Map<String, dynamic> json) =>
+    $checkedCreate(
+      r'_$HighlightContentProfessionalImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$HighlightContentProfessionalImpl(
+          analysisResults: $checkedConvert('analysisResults',
+              (v) => (v as List<dynamic>).map((e) => e as String).toList()),
+          abstract: $checkedConvert('abstract', (v) => v as String),
+          $type: $checkedConvert('style', (v) => v as String?),
         );
+        return val;
+      },
+      fieldKeyMap: const {r'$type': 'style'},
+    );
 
-Map<String, dynamic> _$$HighlightContentForProfessionalImplToJson(
-        _$HighlightContentForProfessionalImpl instance) =>
+Map<String, dynamic> _$$HighlightContentProfessionalImplToJson(
+        _$HighlightContentProfessionalImpl instance) =>
     <String, dynamic>{
       'analysisResults': instance.analysisResults,
       'abstract': instance.abstract,

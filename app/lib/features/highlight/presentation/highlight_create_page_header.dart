@@ -46,18 +46,16 @@ class HighlightCreatePageHeader extends StatelessWidget {
             spacing: 4,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: switch (style) {
-              HighlightStyle.forOwn => [
-                  Text(i18n.highlight.createNewHighlight.forOwnDescription1),
-                  Text(i18n.highlight.createNewHighlight.forOwnDescription2),
+              HighlightStyle.private => [
+                  Text(i18n.highlight.createNewHighlight.privateDescription1),
+                  Text(i18n.highlight.createNewHighlight.privateDescription2),
                 ],
-              HighlightStyle.forProfessional => [
+              HighlightStyle.professional => [
                   Text(
-                    i18n.highlight.createNewHighlight
-                        .forProfessionalDescription1,
+                    i18n.highlight.createNewHighlight.professionalDescription1,
                   ),
                   Text(
-                    i18n.highlight.createNewHighlight
-                        .forProfessionalDescription2,
+                    i18n.highlight.createNewHighlight.professionalDescription2,
                   ),
                 ]
             },

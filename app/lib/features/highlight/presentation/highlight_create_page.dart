@@ -21,12 +21,12 @@ class HighlightCreatePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedType = useState({
-      HighlightStyle.forOwn: HighlightType.past7days,
-      HighlightStyle.forProfessional: HighlightType.past28days,
+      HighlightStyle.private: HighlightType.past7days,
+      HighlightStyle.professional: HighlightType.past28days,
     });
 
     final selectedStyle = useState<HighlightStyle>(
-      HighlightStyle.forOwn,
+      HighlightStyle.private,
     );
 
     return ClipRRect(
@@ -62,16 +62,16 @@ class HighlightCreatePage extends HookConsumerWidget {
                 ),
                 child: CupertinoSlidingSegmentedControl(
                   children: {
-                    HighlightStyle.forOwn: Text(
-                      HighlightStyle.forOwn.localizedName,
+                    HighlightStyle.private: Text(
+                      HighlightStyle.private.localizedName,
                     ),
-                    HighlightStyle.forProfessional: Text(
-                      HighlightStyle.forProfessional.localizedName,
+                    HighlightStyle.professional: Text(
+                      HighlightStyle.professional.localizedName,
                     ),
                   },
                   groupValue: selectedStyle.value,
                   onValueChanged: (value) {
-                    selectedStyle.value = value ?? HighlightStyle.forOwn;
+                    selectedStyle.value = value ?? HighlightStyle.private;
                   },
                 ),
               ),
@@ -115,7 +115,7 @@ class _CreateTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: switch (selectedStyle) {
-        HighlightStyle.forOwn => HighlightType.values
+        HighlightStyle.private => HighlightType.values
             .map(
               (e) => HighlightCreatePageTile(
                 type: e,
@@ -126,7 +126,7 @@ class _CreateTiles extends StatelessWidget {
               ),
             )
             .toList(),
-        HighlightStyle.forProfessional => [
+        HighlightStyle.professional => [
             HighlightCreatePageTile(
               type: HighlightType.past28days,
               selected: true,

@@ -142,17 +142,17 @@ paths:
                   style:
                     description: ハイライトのスタイル
                     type: string
-                    default: forOwn
+                    default: private
                     enum:
-                      - forOwn
-                      - forProfessional
+                      - private
+                      - professional
                   content:
                     description: ハイライトの内容
                     type: object
                     nullable: true
                     oneOf:
-                      - $ref: "#/components/schemas/HighlightContentForOwn"
-                      - $ref: "#/components/schemas/HighlightContentForProfessional"
+                      - $ref: "#/components/schemas/HighlightContentPrivate"
+                      - $ref: "#/components/schemas/HighlightContentProfessional"
                   state:
                     description: 生成モデルでの処理の状態
                     type: string
@@ -165,7 +165,7 @@ paths:
 
 components:
   schemas:
-    HighlightContentForOwn:
+    HighlightContentPrivate:
       required:
         - style
         - subjectiveTrend
@@ -177,7 +177,7 @@ components:
         style:
           description: ハイライトのスタイル
           type: string
-          default: forOwn
+          default: private
         subjectiveTrend:
           description: 主観的なデータのトレンド
           type: string
@@ -194,7 +194,7 @@ components:
           description: 分析結果の要旨
           type: string
 
-    HighlightContentForProfessional:
+    HighlightContentProfessional:
       required:
         - style
         - analysisResults
@@ -203,7 +203,7 @@ components:
         style:
           description: ハイライトのスタイル
           type: string
-          default: forProfessional
+          default: professional
         analysisResults:
           description: 分析結果
           type: array

@@ -24,7 +24,7 @@ class Highlight with _$Highlight {
     @TimestampConverterNotNull() required Timestamp startAt,
 
     /// ハイライトのスタイル
-    @Default(HighlightStyle.forOwn) HighlightStyle style,
+    @Default(HighlightStyle.private) HighlightStyle style,
 
     /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
     String? prompt,

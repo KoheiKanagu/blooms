@@ -40,7 +40,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
   const today = new Date().toLocaleDateString('ja-JP');
 
   switch (highlightStyle) {
-    case 'forOwn':
+    case 'private':
       return {
         responseSchema: {
           type: SchemaType.OBJECT,
@@ -110,7 +110,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
         temperature: 1,
       };
 
-    case 'forProfessional':
+    case 'professional':
       return {
         responseSchema: {
           type: SchemaType.OBJECT,

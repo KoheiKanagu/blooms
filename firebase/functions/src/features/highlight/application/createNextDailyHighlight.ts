@@ -46,7 +46,7 @@ export async function createNextDailyHighlight(subjectUid: string, lastStartAt: 
     startAt: Timestamp.fromDate(nextStartAt),
     prompt: null,
     type: 'past1day',
-    style: 'forOwn',
+    style: 'private',
     content: null,
     state: 'pending',
   };

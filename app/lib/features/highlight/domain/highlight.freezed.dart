@@ -263,7 +263,7 @@ class _$HighlightImpl extends _Highlight {
       {required this.type,
       required this.subjectUid,
       @TimestampConverterNotNull() required this.startAt,
-      this.style = HighlightStyle.forOwn,
+      this.style = HighlightStyle.private,
       this.prompt,
       this.content,
       this.state = HighlightState.pending,
