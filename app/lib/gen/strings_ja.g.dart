@@ -73,6 +73,7 @@ class TranslationsHighlightJa {
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
 	late final TranslationsHighlightStyleJa style = TranslationsHighlightStyleJa.internal(_root);
+	String get unknownStyleContent => 'この形式は対応していません。アプリをバージョンアップしてください';
 }
 
 // Path: onboarding

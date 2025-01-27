@@ -63,3 +63,23 @@ Map<String, dynamic> _$$HighlightContentForProfessionalImplToJson(
       'abstract': instance.abstract,
       'style': instance.$type,
     };
+
+_$HighlightContentEmptyImpl _$$HighlightContentEmptyImplFromJson(
+        Map<String, dynamic> json) =>
+    $checkedCreate(
+      r'_$HighlightContentEmptyImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$HighlightContentEmptyImpl(
+          $type: $checkedConvert('style', (v) => v as String?),
+        );
+        return val;
+      },
+      fieldKeyMap: const {r'$type': 'style'},
+    );
+
+Map<String, dynamic> _$$HighlightContentEmptyImplToJson(
+        _$HighlightContentEmptyImpl instance) =>
+    <String, dynamic>{
+      'style': instance.$type,
+    };

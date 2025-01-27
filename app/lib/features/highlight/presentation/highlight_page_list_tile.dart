@@ -57,7 +57,11 @@ class HighlightPageListTile extends HookConsumerWidget {
                 x: highlight.highlightPeriod.startDate,
                 y: highlight.highlightPeriod.endDate,
               ),
-        contentText: highlight.content?.abstract,
+        contentText: switch (highlight.content) {
+          HighlightContentForOwn(:final abstract) => abstract,
+          HighlightContentForProfessional(:final abstract) => abstract,
+          HighlightContentEmpty() || null => i18n.highlight.unknownStyleContent,
+        },
         onTap: () async {
           switch (highlight.state) {
             case HighlightState.pending:

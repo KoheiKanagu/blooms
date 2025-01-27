@@ -23,15 +23,15 @@ mixin _$Highlight {
   /// ハイライトの種類
   HighlightType get type => throw _privateConstructorUsedError;
 
-  /// ハイライトのスタイル
-  HighlightStyle get style => throw _privateConstructorUsedError;
-
   /// ハイライトの対象者のUID
   String get subjectUid => throw _privateConstructorUsedError;
 
   /// ハイライトを作成開始する日時。この日からN日前のハイライト
   @TimestampConverterNotNull()
   Timestamp get startAt => throw _privateConstructorUsedError;
+
+  /// ハイライトのスタイル
+  HighlightStyle get style => throw _privateConstructorUsedError;
 
   /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
   String? get prompt => throw _privateConstructorUsedError;
@@ -65,9 +65,9 @@ abstract class $HighlightCopyWith<$Res> {
   @useResult
   $Res call(
       {HighlightType type,
-      HighlightStyle style,
       String subjectUid,
       @TimestampConverterNotNull() Timestamp startAt,
+      HighlightStyle style,
       String? prompt,
       HighlightContent? content,
       HighlightState state,
@@ -94,9 +94,9 @@ class _$HighlightCopyWithImpl<$Res, $Val extends Highlight>
   @override
   $Res call({
     Object? type = null,
-    Object? style = null,
     Object? subjectUid = null,
     Object? startAt = null,
+    Object? style = null,
     Object? prompt = freezed,
     Object? content = freezed,
     Object? state = null,
@@ -109,10 +109,6 @@ class _$HighlightCopyWithImpl<$Res, $Val extends Highlight>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as HighlightType,
-      style: null == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as HighlightStyle,
       subjectUid: null == subjectUid
           ? _value.subjectUid
           : subjectUid // ignore: cast_nullable_to_non_nullable
@@ -121,6 +117,10 @@ class _$HighlightCopyWithImpl<$Res, $Val extends Highlight>
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      style: null == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as HighlightStyle,
       prompt: freezed == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
@@ -173,9 +173,9 @@ abstract class _$$HighlightImplCopyWith<$Res>
   @useResult
   $Res call(
       {HighlightType type,
-      HighlightStyle style,
       String subjectUid,
       @TimestampConverterNotNull() Timestamp startAt,
+      HighlightStyle style,
       String? prompt,
       HighlightContent? content,
       HighlightState state,
@@ -201,9 +201,9 @@ class __$$HighlightImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
-    Object? style = null,
     Object? subjectUid = null,
     Object? startAt = null,
+    Object? style = null,
     Object? prompt = freezed,
     Object? content = freezed,
     Object? state = null,
@@ -216,10 +216,6 @@ class __$$HighlightImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as HighlightType,
-      style: null == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as HighlightStyle,
       subjectUid: null == subjectUid
           ? _value.subjectUid
           : subjectUid // ignore: cast_nullable_to_non_nullable
@@ -228,6 +224,10 @@ class __$$HighlightImplCopyWithImpl<$Res>
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as Timestamp,
+      style: null == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as HighlightStyle,
       prompt: freezed == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
@@ -261,9 +261,9 @@ class __$$HighlightImplCopyWithImpl<$Res>
 class _$HighlightImpl extends _Highlight {
   const _$HighlightImpl(
       {required this.type,
-      required this.style = HighlightStyle.forOwn,
       required this.subjectUid,
       @TimestampConverterNotNull() required this.startAt,
+      this.style = HighlightStyle.forOwn,
       this.prompt,
       this.content,
       this.state = HighlightState.pending,
@@ -279,11 +279,6 @@ class _$HighlightImpl extends _Highlight {
   @override
   final HighlightType type;
 
-  /// ハイライトのスタイル
-  @override
-  @JsonKey()
-  final HighlightStyle style;
-
   /// ハイライトの対象者のUID
   @override
   final String subjectUid;
@@ -292,6 +287,11 @@ class _$HighlightImpl extends _Highlight {
   @override
   @TimestampConverterNotNull()
   final Timestamp startAt;
+
+  /// ハイライトのスタイル
+  @override
+  @JsonKey()
+  final HighlightStyle style;
 
   /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
   @override
@@ -317,7 +317,7 @@ class _$HighlightImpl extends _Highlight {
 
   @override
   String toString() {
-    return 'Highlight(type: $type, style: $style, subjectUid: $subjectUid, startAt: $startAt, prompt: $prompt, content: $content, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Highlight(type: $type, subjectUid: $subjectUid, startAt: $startAt, style: $style, prompt: $prompt, content: $content, state: $state, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -326,10 +326,10 @@ class _$HighlightImpl extends _Highlight {
         (other.runtimeType == runtimeType &&
             other is _$HighlightImpl &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.style, style) || other.style == style) &&
             (identical(other.subjectUid, subjectUid) ||
                 other.subjectUid == subjectUid) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.style, style) || other.style == style) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.state, state) || other.state == state) &&
@@ -343,7 +343,7 @@ class _$HighlightImpl extends _Highlight {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, type, style, subjectUid, startAt,
+  int get hashCode => Object.hash(runtimeType, type, subjectUid, startAt, style,
       prompt, content, state, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of Highlight
@@ -365,9 +365,9 @@ class _$HighlightImpl extends _Highlight {
 abstract class _Highlight extends Highlight {
   const factory _Highlight(
       {required final HighlightType type,
-      required final HighlightStyle style,
       required final String subjectUid,
       @TimestampConverterNotNull() required final Timestamp startAt,
+      final HighlightStyle style,
       final String? prompt,
       final HighlightContent? content,
       final HighlightState state,
@@ -383,10 +383,6 @@ abstract class _Highlight extends Highlight {
   @override
   HighlightType get type;
 
-  /// ハイライトのスタイル
-  @override
-  HighlightStyle get style;
-
   /// ハイライトの対象者のUID
   @override
   String get subjectUid;
@@ -395,6 +391,10 @@ abstract class _Highlight extends Highlight {
   @override
   @TimestampConverterNotNull()
   Timestamp get startAt;
+
+  /// ハイライトのスタイル
+  @override
+  HighlightStyle get style;
 
   /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
   @override

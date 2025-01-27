@@ -36,7 +36,8 @@
     "style": {
       "forOwn": "自分用",
       "forProfessional": "プロ用"
-    }
+    },
+    "unknownStyleContent": "この形式は対応していません。アプリをバージョンアップしてください"
   },
   "ackTerm(rich)": "本アプリの利用開始をもって${termOfService(利用規約)}と${privacyPolicy(プライバシーポリシー)}に同意したものとみなされます。",
   "skip": "スキップ",

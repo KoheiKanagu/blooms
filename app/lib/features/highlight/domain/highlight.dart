@@ -17,14 +17,14 @@ class Highlight with _$Highlight {
     /// ハイライトの種類
     required HighlightType type,
 
-    /// ハイライトのスタイル
-    @Default(HighlightStyle.forOwn) required HighlightStyle style,
-
     /// ハイライトの対象者のUID
     required String subjectUid,
 
     /// ハイライトを作成開始する日時。この日からN日前のハイライト
     @TimestampConverterNotNull() required Timestamp startAt,
+
+    /// ハイライトのスタイル
+    @Default(HighlightStyle.forOwn) HighlightStyle style,
 
     /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
     String? prompt,

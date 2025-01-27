@@ -16,14 +16,14 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
         final val = _$HighlightImpl(
           type: $checkedConvert(
               'type', (v) => $enumDecode(_$HighlightTypeEnumMap, v)),
+          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+          startAt: $checkedConvert(
+              'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
           style: $checkedConvert(
               'style',
               (v) =>
                   $enumDecodeNullable(_$HighlightStyleEnumMap, v) ??
                   HighlightStyle.forOwn),
-          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
-          startAt: $checkedConvert(
-              'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
           prompt: $checkedConvert('prompt', (v) => v as String?),
           content: $checkedConvert(
               'content',
@@ -49,9 +49,9 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$HighlightImplToJson(_$HighlightImpl instance) =>
     <String, dynamic>{
       'type': _$HighlightTypeEnumMap[instance.type]!,
-      'style': _$HighlightStyleEnumMap[instance.style]!,
       'subjectUid': instance.subjectUid,
       'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
+      'style': _$HighlightStyleEnumMap[instance.style]!,
       'prompt': instance.prompt,
       'content': instance.content?.toJson(),
       'state': _$HighlightStateEnumMap[instance.state]!,

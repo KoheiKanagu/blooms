@@ -7,8 +7,9 @@ part 'highlight_content.g.dart';
 @Freezed(
   unionKey: 'style',
   unionValueCase: FreezedUnionCase.none,
+  fallbackUnion: 'empty',
 )
-class HighlightContent with _$HighlightContent {
+sealed class HighlightContent with _$HighlightContent {
   const factory HighlightContent.forOwn({
     /// 主観的なデータのトレンド
     required String subjectiveTrend,
@@ -24,7 +25,7 @@ class HighlightContent with _$HighlightContent {
 
     /// 分析結果の要旨
     required String abstract,
-  }) = _HighlightContentForOwn;
+  }) = HighlightContentForOwn;
 
   const factory HighlightContent.forProfessional({
     /// 分析結果
@@ -32,7 +33,9 @@ class HighlightContent with _$HighlightContent {
 
     /// 分析結果の要旨
     required String abstract,
-  }) = _HighlightContentForProfessional;
+  }) = HighlightContentForProfessional;
+
+  const factory HighlightContent.empty() = HighlightContentEmpty;
 
   factory HighlightContent.fromJson(Json json) =>
       _$HighlightContentFromJson(json);
