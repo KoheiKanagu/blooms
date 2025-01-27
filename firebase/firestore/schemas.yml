@@ -150,31 +150,9 @@ paths:
                     description: ハイライトの内容
                     type: object
                     nullable: true
-                    required:
-                      - subjectiveTrend
-                      - objectiveTrend
-                      - analysisResult
-                      - advice
-                      - abstract
-                    properties:
-                      subjectiveTrend:
-                        description: 主観的なデータのトレンド
-                        type: string
-                      objectiveTrend:
-                        description: 客観的なデータのトレンド
-                        type: string
-                      analysisResult:
-                        description: 分析結果
-                        type: string
-                        nullable: true
-                      advice:
-                        description: アドバイス
-                        type: string
-                        nullable: true
-                      abstract:
-                        description: 分析結果の要旨
-                        type: string
-                        nullable: true
+                    oneOf:
+                      - $ref: "#/components/schemas/HighlightContentForOwn"
+                      - $ref: "#/components/schemas/HighlightContentForProfessional"
                   state:
                     description: 生成モデルでの処理の状態
                     type: string
@@ -184,3 +162,53 @@ paths:
                       - inProgress
                       - success
                       - failure
+
+components:
+  schemas:
+    HighlightContentForOwn:
+      required:
+        - style
+        - subjectiveTrend
+        - objectiveTrend
+        - analysisResult
+        - advice
+        - abstract
+      properties:
+        style:
+          description: ハイライトのスタイル
+          type: string
+          default: forOwn
+        subjectiveTrend:
+          description: 主観的なデータのトレンド
+          type: string
+        objectiveTrend:
+          description: 客観的なデータのトレンド
+          type: string
+        analysisResult:
+          description: 分析結果
+          type: string
+        advice:
+          description: アドバイス
+          type: string
+        abstract:
+          description: 分析結果の要旨
+          type: string
+
+    HighlightContentForProfessional:
+      required:
+        - style
+        - analysisResults
+        - abstract
+      properties:
+        style:
+          description: ハイライトのスタイル
+          type: string
+          default: forProfessional
+        analysisResults:
+          description: 分析結果
+          type: array
+          items:
+            type: string
+        abstract:
+          description: 分析結果の要旨
+          type: string
