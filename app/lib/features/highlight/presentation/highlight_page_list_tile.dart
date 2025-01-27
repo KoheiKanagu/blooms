@@ -174,7 +174,7 @@ Widget highlightPageListTileSuccess(BuildContext context) {
                 subjectUid: 'subjectUid',
                 startAt: Timestamp.now(),
                 state: HighlightState.success,
-                content: const HighlightContent(
+                content: const HighlightContent.forOwn(
                   subjectiveTrend: 'subjectiveTrend',
                   objectiveTrend: 'objectiveTrend',
                   analysisResult: 'analysisResult',
