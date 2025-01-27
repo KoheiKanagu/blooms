@@ -4,9 +4,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'highlight_content.freezed.dart';
 part 'highlight_content.g.dart';
 
-@freezed
+@Freezed(
+  unionKey: 'style',
+  unionValueCase: FreezedUnionCase.none,
+)
 class HighlightContent with _$HighlightContent {
-  const factory HighlightContent({
+  const factory HighlightContent.forOwn({
     /// 主観的なデータのトレンド
     required String subjectiveTrend,
 
@@ -21,7 +24,15 @@ class HighlightContent with _$HighlightContent {
 
     /// 分析結果の要旨
     required String abstract,
-  }) = _HighlightContent;
+  }) = _HighlightContentForOwn;
+
+  const factory HighlightContent.forProfessional({
+    /// 分析結果
+    required List<String> analysisResults,
+
+    /// 分析結果の要旨
+    required String abstract,
+  }) = _HighlightContentForProfessional;
 
   factory HighlightContent.fromJson(Json json) =>
       _$HighlightContentFromJson(json);
