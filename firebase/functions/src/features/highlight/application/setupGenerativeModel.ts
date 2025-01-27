@@ -35,6 +35,7 @@ const tools: Tool[] = [
 function buildPrompt(highlightStyle: HighlightStyle): {
   responseSchema: ResponseSchema;
   systemInstruction: string;
+  temperature: number;
 } {
   const today = new Date().toLocaleDateString('ja-JP');
 
@@ -96,6 +97,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
     - 分析は間違っている可能性があるということ
     - 体調の変化に関係のない内容は無視すること
     - もし回答する内容がない場合はユーザを労う普遍的な回答をすること
+    - 名前、住所、電話番号などの個人情報に関連する内容は無視すること
 
     あなたは次の内容を含むresponseをしてはなりません
     - 体調が悪い原因について断言すること
@@ -105,6 +107,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
     - 体調の変化に関係のない事実に言及すること
     - グラウンディングについて注釈をつけないこと
     - 私に相談して欲しいと促すこと`,
+        temperature: 1,
       };
 
     case 'forProfessional':
@@ -140,6 +143,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
 - 淡々としたトーンで回答すること
 - 時系列順に回答すること
 - トピック毎に分けて簡潔に回答すること
+- 同じような内容が続く場合は、まとめて回答すること
 
 あなたは分析する際に次の内容を考慮する必要がありますが、responseには含めてはなりません
 - 自己判断せず、医師の診断を受けることを勧めること
@@ -148,6 +152,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
 - 分析は間違っている可能性があるということ
 - 体調の変化に関係のない内容は無視すること
 - もし回答する内容がない場合は普遍的な回答をすること
+- 名前、住所、電話番号などの個人情報に関連する内容は無視すること
 
 あなたは次の内容を含むresponseをしてはなりません
 - 体調が悪い原因について断言すること
@@ -157,6 +162,7 @@ function buildPrompt(highlightStyle: HighlightStyle): {
 - 体調の変化に関係のない事実に言及すること
 - グラウンディングについて注釈をつけないこと
 - 私に相談して欲しいと促すこと`,
+        temperature: 0,
       };
   }
 }
@@ -167,7 +173,7 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
     location: 'us-central1',
   });
 
-  const { responseSchema, systemInstruction } = buildPrompt(highlightStyle);
+  const { responseSchema, systemInstruction, temperature } = buildPrompt(highlightStyle);
 
   return vertexAI
     .preview
@@ -175,7 +181,7 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
       model: 'gemini-2.0-flash-exp',
       safetySettings: safetySetting,
       generationConfig: {
-        temperature: 1.0,
+        temperature: temperature,
         topP: 0.95,
         maxOutputTokens: 8192,
         responseMimeType: 'application/json',
