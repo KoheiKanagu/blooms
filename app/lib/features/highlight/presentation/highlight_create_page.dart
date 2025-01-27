@@ -158,8 +158,12 @@ class _BottomNavigationBar extends HookConsumerWidget {
         ),
         child: CupertinoButton.filled(
           onPressed: () async {
-            // TODO:
-            await ref.read(highlightCreateProvider(type).future);
+            await ref.read(
+              highlightCreateProvider(
+                type: type,
+                style: style,
+              ).future,
+            );
 
             if (context.mounted) {
               Navigator.of(context).pop();
