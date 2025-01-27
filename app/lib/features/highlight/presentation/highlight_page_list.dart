@@ -1,5 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page.dart';
+import 'package:blooms/features/highlight/presentation/highlight_icon.dart';
 import 'package:blooms/features/highlight/presentation/highlight_page_list_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/my_logger.dart';
@@ -27,7 +28,7 @@ class HighlightPageList extends HookConsumerWidget {
               children: [
                 CupertinoListTile.notched(
                   title: Text(i18n.highlight.createNewHighlight),
-                  leading: const Icon(CupertinoIcons.square_favorites_alt_fill),
+                  leading: const HighlightIcon(),
                   onTap: () {
                     showModalBottomSheet<void>(
                       context: context,
