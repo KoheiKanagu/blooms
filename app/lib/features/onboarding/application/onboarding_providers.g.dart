@@ -9,13 +9,13 @@ part of 'onboarding_providers.dart';
 // **************************************************************************
 
 String _$onboardingIsCompletedHash() =>
-    r'6575efffbe1d29f5e72d43845b21ed96d1b1605f';
+    r'157a97527c513163cd1ba52685ed77e325fb0600';
 
 /// オンボーディングが完了しているかどうか
 ///
 /// Copied from [onboardingIsCompleted].
 @ProviderFor(onboardingIsCompleted)
-final onboardingIsCompletedProvider = AutoDisposeProvider<bool>.internal(
+final onboardingIsCompletedProvider = AutoDisposeFutureProvider<bool>.internal(
   onboardingIsCompleted,
   name: r'onboardingIsCompletedProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -27,15 +27,15 @@ final onboardingIsCompletedProvider = AutoDisposeProvider<bool>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef OnboardingIsCompletedRef = AutoDisposeProviderRef<bool>;
+typedef OnboardingIsCompletedRef = AutoDisposeFutureProviderRef<bool>;
 String _$onboardingCompleteHash() =>
-    r'34fbe341ec86dcbd8f7426d88e8da881424d73f7';
+    r'020278280f8da90b6f5bcd76c10b206ba1c70489';
 
 /// オンボーディングが完了したことを記録
 ///
 /// Copied from [onboardingComplete].
 @ProviderFor(onboardingComplete)
-final onboardingCompleteProvider = AutoDisposeProvider<void>.internal(
+final onboardingCompleteProvider = AutoDisposeFutureProvider<void>.internal(
   onboardingComplete,
   name: r'onboardingCompleteProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -47,6 +47,6 @@ final onboardingCompleteProvider = AutoDisposeProvider<void>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef OnboardingCompleteRef = AutoDisposeProviderRef<void>;
+typedef OnboardingCompleteRef = AutoDisposeFutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

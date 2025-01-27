@@ -8,19 +8,17 @@ const _onboardingCompletedKey = 'onboardingCompleted';
 
 /// オンボーディングが完了しているかどうか
 @riverpod
-bool onboardingIsCompleted(Ref ref) {
+Future<bool> onboardingIsCompleted(Ref ref) async {
   return ref
-          .read(sharedPreferencesProvider)
-          .requireValue
-          .getBool(_onboardingCompletedKey) ??
-      false;
+      .read(sharedPreferencesProvider)
+      .getBool(_onboardingCompletedKey)
+      .then((e) => e ?? false);
 }
 
 /// オンボーディングが完了したことを記録
 @riverpod
-void onboardingComplete(Ref ref) {
-  ref
+Future<void> onboardingComplete(Ref ref) async {
+  return ref
       .read(sharedPreferencesProvider)
-      .requireValue
       .setBool(_onboardingCompletedKey, true);
 }

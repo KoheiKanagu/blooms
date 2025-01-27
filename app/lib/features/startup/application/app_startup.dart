@@ -1,7 +1,6 @@
 import 'package:blooms/constants/app_env.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
-import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -15,9 +14,7 @@ part 'app_startup.g.dart';
 @riverpod
 Future<void> appStartup(Ref ref) async {
   ref.onDispose(() {
-    ref
-      ..invalidate(sharedPreferencesProvider)
-      ..invalidate(packageInfoProvider);
+    ref.invalidate(packageInfoProvider);
   });
 
   /// error handling
@@ -56,17 +53,15 @@ Future<void> appStartup(Ref ref) async {
     ref
         .read(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
-    ref.read(sharedPreferencesProvider.future),
     ref.read(packageInfoProvider.future),
     ref.read(firebaseAuthProvider).setSettings(
           userAccessGroup: kKeychainGroup,
         ),
+    ref.read(authSignOutWhenFirstRunProvider.future),
   ]);
 
   await Future.wait([
     // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
     ref.read(firebaseAuthProvider).authStateChanges().first,
-    // sharedPreferencesProviderが初期化されている必要があるので後から初期化
-    ref.read(authSignOutWhenFirstRunProvider.future),
   ]);
 }
