@@ -48,7 +48,7 @@ export async function updateHighlightContent(
     outSensitiveLog(`conditions`, conditions);
 
     // 生成モデルにリクエストを送信
-    const { content, prompt } = await requestGenerativeModel(conditions);
+    const { content, prompt } = await requestGenerativeModel(conditions, highlight.style);
     const updatedHighlight: Highlight = {
       ...highlight,
       content: content,

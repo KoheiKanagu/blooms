@@ -2,21 +2,22 @@ import { Timestamp } from '@google-cloud/firestore';
 import { Content } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContent } from '../domain/highlight';
+import { HighlightContent, HighlightStyle } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
 /**
  * 生成モデルにリクエストを送信
  *
- * @param conditions
+ * @param conditions 解析対象のConditions
+ * @param highlightStyle 文体のスタイル
  * @returns
  */
-export async function requestGenerativeModel(conditions: Condition[]): Promise<{
+export async function requestGenerativeModel(conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
   content: HighlightContent;
   prompt: string;
 }> {
-  const generativeModel = setupGenerativeModel();
+  const generativeModel = setupGenerativeModel(highlightStyle);
 
   let contents: Content[] = conditions.map<Content>((condition) => {
     const date = (condition.createdAt as Timestamp).toDate().toLocaleString('ja-JP');
