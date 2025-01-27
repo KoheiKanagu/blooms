@@ -110,9 +110,9 @@ class TranslationsHighlightCreateNewHighlightJa {
 	// Translations
 	String get title => '新しいハイライトを作成';
 	String get privateDescription1 => 'あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。';
-	String get privateDescription2 => 'あなたに寄り添った口調の文章が作成されます。';
+	String get privateDescription2 => 'あなたに寄り添った文体の文章が作成されます。';
 	String get professionalDescription1 => 'プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。';
-	String get professionalDescription2 => '医師や助産師などに体調を相談したい場合に適した文章が作成されます。淡々とした口調の文章が作成されます。';
+	String get professionalDescription2 => '医師や助産師などに体調を相談したい場合に適した文章が作成されます。';
 }
 
 // Path: highlight.style

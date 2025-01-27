@@ -19,9 +19,9 @@
     "createNewHighlight": {
       "title": "新しいハイライトを作成",
       "privateDescription1": "あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。",
-      "privateDescription2": "あなたに寄り添った口調の文章が作成されます。",
+      "privateDescription2": "あなたに寄り添った文体の文章が作成されます。",
       "professionalDescription1": "プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。",
-      "professionalDescription2": "医師や助産師などに体調を相談したい場合に適した文章が作成されます。淡々とした口調の文章が作成されます。"
+      "professionalDescription2": "医師や助産師などに体調を相談したい場合に適した文章が作成されます。"
     },
     "past1day": "当日",
     "past7days": "過去7日間",
