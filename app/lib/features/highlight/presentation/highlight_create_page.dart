@@ -44,22 +44,20 @@ class HighlightCreatePage extends HookConsumerWidget {
           ),
           backgroundColor:
               CupertinoColors.systemGroupedBackground.resolveFrom(context),
-          child: SafeArea(
-            child: ListView(
-              children: [
-                const HighlightCreatePageHeader(),
-                const Gap(24),
-                ...HighlightType.values.map(
-                  (e) => HighlightCreatePageTile(
-                    type: e,
-                    selected: selectedType.value == e,
-                    onTap: () {
-                      selectedType.value = e;
-                    },
-                  ),
+          child: ListView(
+            children: [
+              const HighlightCreatePageHeader(),
+              const Gap(24),
+              ...HighlightType.values.map(
+                (e) => HighlightCreatePageTile(
+                  type: e,
+                  selected: selectedType.value == e,
+                  onTap: () {
+                    selectedType.value = e;
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: SafeArea(
