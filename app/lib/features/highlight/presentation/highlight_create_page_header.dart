@@ -1,3 +1,4 @@
+import 'package:blooms/features/highlight/presentation/highlight_icon.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,12 +20,9 @@ class HighlightCreatePageHeader extends StatelessWidget {
                 .resolveFrom(context),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(
-            CupertinoIcons.square_favorites_alt_fill,
-            size: 96,
-            shadows: [
-              MyDecoration.dropShadow(context).boxShadow!.first,
-            ],
+          child: const SizedBox.square(
+            dimension: 96,
+            child: HighlightIcon(),
           ),
         ),
         const Gap(16),
