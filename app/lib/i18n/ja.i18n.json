@@ -16,18 +16,27 @@
       "failure": "トレンド分析に失敗しました",
       "failureDescription": "何らかのエラーが発生したため、トレンド分析できませんでした"
     },
-    "createNewHighlight": "新しいハイライトを作成",
+    "createNewHighlight": {
+      "title": "新しいハイライトを作成",
+      "forOwnDescription1": "あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。",
+      "forOwnDescription2": "あなたに寄り添った口調の文章が作成されます。",
+      "forProfessionalDescription1": "プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。",
+      "forProfessionalDescription2": "医師や助産師などに体調を相談したい場合に適した文章が作成されます。淡々とした口調の文章が作成されます。"
+    },
     "past1day": "当日",
     "past7days": "過去7日間",
     "past14days": "過去14日間",
     "past21days": "過去21日間",
     "past28days": "過去28日間",
     "onTheDayTarget": "${date} が対象",
-    "oneDayConditionSummary": "1日分の体調の記録をまとめます",
     "xToYTarget": "${x} から ${y} が対象",
-    "nDaysConditionSummary": "${n}の体調の記録をまとめます",
+    "nDaysConditionSummary": "${n}の記録を基にしてハイライトを作成します",
     "createHighlight": "ハイライトを作成する",
-    "deleteHighlight": "ハイライトを削除する"
+    "deleteHighlight": "ハイライトを削除する",
+    "style": {
+      "forOwn": "自分用",
+      "forProfessional": "プロ用"
+    }
   },
   "ackTerm(rich)": "本アプリの利用開始をもって${termOfService(利用規約)}と${privacyPolicy(プライバシーポリシー)}に同意したものとみなされます。",
   "skip": "スキップ",

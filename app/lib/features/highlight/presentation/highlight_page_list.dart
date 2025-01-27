@@ -27,7 +27,7 @@ class HighlightPageList extends HookConsumerWidget {
             child: CupertinoListSection.insetGrouped(
               children: [
                 CupertinoListTile.notched(
-                  title: Text(i18n.highlight.createNewHighlight),
+                  title: Text(i18n.highlight.createNewHighlight.title),
                   leading: const HighlightIcon(),
                   onTap: () {
                     showModalBottomSheet<void>(

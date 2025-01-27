@@ -61,18 +61,18 @@ class TranslationsHighlightJa {
 	String pastDays({required Object n}) => '過去${n}日間';
 	String xToY({required Object x, required Object y}) => '${x} から ${y}';
 	late final TranslationsHighlightStateJa state = TranslationsHighlightStateJa.internal(_root);
-	String get createNewHighlight => '新しいハイライトを作成';
+	late final TranslationsHighlightCreateNewHighlightJa createNewHighlight = TranslationsHighlightCreateNewHighlightJa.internal(_root);
 	String get past1day => '当日';
 	String get past7days => '過去7日間';
 	String get past14days => '過去14日間';
 	String get past21days => '過去21日間';
 	String get past28days => '過去28日間';
 	String onTheDayTarget({required Object date}) => '${date} が対象';
-	String get oneDayConditionSummary => '1日分の体調の記録をまとめます';
 	String xToYTarget({required Object x, required Object y}) => '${x} から ${y} が対象';
-	String nDaysConditionSummary({required Object n}) => '${n}の体調の記録をまとめます';
+	String nDaysConditionSummary({required Object n}) => '${n}の記録を基にしてハイライトを作成します';
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
+	late final TranslationsHighlightStyleJa style = TranslationsHighlightStyleJa.internal(_root);
 }
 
 // Path: onboarding
@@ -98,4 +98,29 @@ class TranslationsHighlightStateJa {
 	String get inProgressDescription => 'しばらくお待ちください';
 	String get failure => 'トレンド分析に失敗しました';
 	String get failureDescription => '何らかのエラーが発生したため、トレンド分析できませんでした';
+}
+
+// Path: highlight.createNewHighlight
+class TranslationsHighlightCreateNewHighlightJa {
+	TranslationsHighlightCreateNewHighlightJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => '新しいハイライトを作成';
+	String get forOwnDescription1 => 'あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。';
+	String get forOwnDescription2 => 'あなたに寄り添った口調の文章が作成されます。';
+	String get forProfessionalDescription1 => 'プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。';
+	String get forProfessionalDescription2 => '医師や助産師などに体調を相談したい場合に適した文章が作成されます。淡々とした口調の文章が作成されます。';
+}
+
+// Path: highlight.style
+class TranslationsHighlightStyleJa {
+	TranslationsHighlightStyleJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get forOwn => '自分用';
+	String get forProfessional => 'プロ用';
 }

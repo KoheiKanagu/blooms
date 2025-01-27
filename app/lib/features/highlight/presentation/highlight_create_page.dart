@@ -1,4 +1,5 @@
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
+import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_header.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_tile.dart';
@@ -19,8 +20,13 @@ class HighlightCreatePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedType = useState<HighlightType>(
-      HighlightType.past7days,
+    final selectedType = useState({
+      HighlightStyle.forOwn: HighlightType.past7days,
+      HighlightStyle.forProfessional: HighlightType.past28days,
+    });
+
+    final selectedStyle = useState<HighlightStyle>(
+      HighlightStyle.forOwn,
     );
 
     return ClipRRect(
@@ -46,39 +52,121 @@ class HighlightCreatePage extends HookConsumerWidget {
               CupertinoColors.systemGroupedBackground.resolveFrom(context),
           child: ListView(
             children: [
-              const HighlightCreatePageHeader(),
+              HighlightCreatePageHeader(
+                style: selectedStyle.value,
+              ),
               const Gap(24),
-              ...HighlightType.values.map(
-                (e) => HighlightCreatePageTile(
-                  type: e,
-                  selected: selectedType.value == e,
-                  onTap: () {
-                    selectedType.value = e;
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: CupertinoSlidingSegmentedControl(
+                  children: {
+                    HighlightStyle.forOwn: Text(
+                      HighlightStyle.forOwn.localizedName,
+                    ),
+                    HighlightStyle.forProfessional: Text(
+                      HighlightStyle.forProfessional.localizedName,
+                    ),
+                  },
+                  groupValue: selectedStyle.value,
+                  onValueChanged: (value) {
+                    selectedStyle.value = value ?? HighlightStyle.forOwn;
                   },
                 ),
+              ),
+              const Gap(8),
+              _CreateTiles(
+                selectedType: selectedType.value[selectedStyle.value]!,
+                selectedStyle: selectedStyle.value,
+                onTap: (value) {
+                  selectedType.value = {
+                    ...selectedType.value,
+                    selectedStyle.value: value,
+                  };
+                },
               ),
             ],
           ),
         ),
-        bottomNavigationBar: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 16,
-            ),
-            child: CupertinoButton.filled(
-              onPressed: () async {
-                final type = selectedType.value;
-                await ref.read(highlightCreateProvider(type).future);
+        bottomNavigationBar: _BottomNavigationBar(
+          type: selectedType.value[selectedStyle.value]!,
+          style: selectedStyle.value,
+        ),
+      ),
+    );
+  }
+}
 
-                if (context.mounted) {
-                  Navigator.of(context).pop();
-                }
-              },
-              child: Text(
-                i18n.highlight.createHighlight,
+class _CreateTiles extends StatelessWidget {
+  const _CreateTiles({
+    required this.selectedType,
+    required this.selectedStyle,
+    required this.onTap,
+  });
+
+  final HighlightStyle selectedStyle;
+
+  final HighlightType selectedType;
+
+  final ValueChanged<HighlightType> onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: switch (selectedStyle) {
+        HighlightStyle.forOwn => HighlightType.values
+            .map(
+              (e) => HighlightCreatePageTile(
+                type: e,
+                selected: selectedType == e,
+                onTap: () {
+                  onTap(e);
+                },
               ),
+            )
+            .toList(),
+        HighlightStyle.forProfessional => [
+            HighlightCreatePageTile(
+              type: HighlightType.past28days,
+              selected: true,
+              onTap: () {},
             ),
+          ]
+      },
+    );
+  }
+}
+
+class _BottomNavigationBar extends HookConsumerWidget {
+  const _BottomNavigationBar({
+    required this.type,
+    required this.style,
+  });
+
+  final HighlightType type;
+
+  final HighlightStyle style;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        child: CupertinoButton.filled(
+          onPressed: () async {
+            // TODO:
+            await ref.read(highlightCreateProvider(type).future);
+
+            if (context.mounted) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Text(
+            i18n.highlight.createHighlight,
           ),
         ),
       ),
