@@ -22,15 +22,20 @@ const safetySetting: SafetySetting[] = [
   },
 ];
 
-const tools: Tool[] = [
-  {
-    retrieval: {
-      vertexAiSearch: {
-        datastore: kVertexAiSearchDatastore,
-      },
-    },
-  },
-];
+function tools(highlightStyle: HighlightStyle): Tool[] {
+  switch (highlightStyle) {
+    case 'private':
+      return [{
+        retrieval: {
+          vertexAiSearch: {
+            datastore: kVertexAiSearchDatastore,
+          },
+        },
+      }];
+    case 'professional':
+      return [];
+  }
+}
 
 function buildPrompt(highlightStyle: HighlightStyle): {
   responseSchema: ResponseSchema;
@@ -138,7 +143,6 @@ function buildPrompt(highlightStyle: HighlightStyle): {
 - 簡潔に回答すること
 - 日本語で回答すること
 - 午前や午後など大まかな時間帯を踏まえて回答すること
-- グラウンディングを含めること
 - 敬語を使うこと
 - 淡々としたトーンで回答すること
 - 時系列順に回答すること
@@ -160,7 +164,6 @@ function buildPrompt(highlightStyle: HighlightStyle): {
 - ユーザの主観的な記録を否定すること
 - ユーザの主観的な記録の量や質に言及すること
 - 体調の変化に関係のない事実に言及すること
-- グラウンディングについて注釈をつけないこと
 - 私に相談して欲しいと促すこと`,
         temperature: 0,
       };
@@ -187,7 +190,7 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
         responseMimeType: 'application/json',
         responseSchema: responseSchema,
       },
-      tools: tools,
+      tools: tools(highlightStyle),
       systemInstruction: systemInstruction,
     });
 }

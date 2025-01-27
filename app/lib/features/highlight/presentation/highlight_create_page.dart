@@ -3,6 +3,7 @@ import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_header.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_tile.dart';
+import 'package:blooms/features/highlight/presentation/highlight_style_features_list.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,10 @@ class HighlightCreatePage extends HookConsumerWidget {
           child: ListView(
             children: [
               HighlightCreatePageHeader(
+                style: selectedStyle.value,
+              ),
+              const Gap(16),
+              HighlightStyleFeaturesList(
                 style: selectedStyle.value,
               ),
               const Gap(24),
