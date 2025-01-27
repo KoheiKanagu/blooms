@@ -22,7 +22,7 @@ const safetySetting: SafetySetting[] = [
   },
 ];
 
-function tools(highlightStyle: HighlightStyle): Tool[] {
+function buildTools(highlightStyle: HighlightStyle): Tool[] {
   switch (highlightStyle) {
     case 'private':
       return [{
@@ -127,6 +127,9 @@ function buildPrompt(highlightStyle: HighlightStyle): {
             analysisResults: {
               type: SchemaType.ARRAY,
               description: '分析結果の回答。時系列順に沿って事実をトピック毎に分割して記入する',
+              items: {
+                type: SchemaType.STRING,
+              },
             },
             abstract: {
               type: SchemaType.STRING,
@@ -190,7 +193,7 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
         responseMimeType: 'application/json',
         responseSchema: responseSchema,
       },
-      tools: tools(highlightStyle),
+      tools: buildTools(highlightStyle),
       systemInstruction: systemInstruction,
     });
 }
