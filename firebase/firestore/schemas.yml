@@ -139,6 +139,13 @@ paths:
                       - past14days
                       - past21days
                       - past28days
+                  style:
+                    description: ハイライトのスタイル
+                    type: string
+                    default: forOwn
+                    enum:
+                      - forOwn
+                      - forProfessional
                   content:
                     description: ハイライトの内容
                     type: object

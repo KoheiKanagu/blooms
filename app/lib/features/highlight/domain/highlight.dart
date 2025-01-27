@@ -1,5 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
+import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
@@ -15,6 +16,9 @@ class Highlight with _$Highlight {
   const factory Highlight({
     /// ハイライトの種類
     required HighlightType type,
+
+    /// ハイライトのスタイル
+    @Default(HighlightStyle.forOwn) required HighlightStyle style,
 
     /// ハイライトの対象者のUID
     required String subjectUid,
@@ -37,11 +41,13 @@ class Highlight with _$Highlight {
 
   factory Highlight.create({
     required HighlightType type,
+    required HighlightStyle style,
     required String subjectUid,
     required Timestamp startAt,
   }) =>
       Highlight(
         type: type,
+        style: style,
         subjectUid: subjectUid,
         startAt: startAt,
       );

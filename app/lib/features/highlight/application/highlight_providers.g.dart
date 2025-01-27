@@ -46,7 +46,7 @@ final highlightQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HighlightQueryRef = AutoDisposeFutureProviderRef<Query<Highlight>>;
-String _$highlightCreateHash() => r'66866cf89919cf48edae4258540dc4a65b5c3281';
+String _$highlightCreateHash() => r'26a6e62abf12bc5b93221be377b4cf154b630bfa';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -79,11 +79,13 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
   const HighlightCreateFamily();
 
   /// See also [highlightCreate].
-  HighlightCreateProvider call(
-    HighlightType type,
-  ) {
+  HighlightCreateProvider call({
+    required HighlightType type,
+    required HighlightStyle style,
+  }) {
     return HighlightCreateProvider(
-      type,
+      type: type,
+      style: style,
     );
   }
 
@@ -92,7 +94,8 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
     covariant HighlightCreateProvider provider,
   ) {
     return call(
-      provider.type,
+      type: provider.type,
+      style: provider.style,
     );
   }
 
@@ -114,12 +117,14 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
 /// See also [highlightCreate].
 class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
   /// See also [highlightCreate].
-  HighlightCreateProvider(
-    HighlightType type,
-  ) : this._internal(
+  HighlightCreateProvider({
+    required HighlightType type,
+    required HighlightStyle style,
+  }) : this._internal(
           (ref) => highlightCreate(
             ref as HighlightCreateRef,
-            type,
+            type: type,
+            style: style,
           ),
           from: highlightCreateProvider,
           name: r'highlightCreateProvider',
@@ -131,6 +136,7 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
           allTransitiveDependencies:
               HighlightCreateFamily._allTransitiveDependencies,
           type: type,
+          style: style,
         );
 
   HighlightCreateProvider._internal(
@@ -141,9 +147,11 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.type,
+    required this.style,
   }) : super.internal();
 
   final HighlightType type;
+  final HighlightStyle style;
 
   @override
   Override overrideWith(
@@ -159,6 +167,7 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         type: type,
+        style: style,
       ),
     );
   }
@@ -170,13 +179,16 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
 
   @override
   bool operator ==(Object other) {
-    return other is HighlightCreateProvider && other.type == type;
+    return other is HighlightCreateProvider &&
+        other.type == type &&
+        other.style == style;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, type.hashCode);
+    hash = _SystemHash.combine(hash, style.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -187,6 +199,9 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
 mixin HighlightCreateRef on AutoDisposeFutureProviderRef<void> {
   /// The parameter `type` of this provider.
   HighlightType get type;
+
+  /// The parameter `style` of this provider.
+  HighlightStyle get style;
 }
 
 class _HighlightCreateProviderElement
@@ -195,6 +210,8 @@ class _HighlightCreateProviderElement
 
   @override
   HighlightType get type => (origin as HighlightCreateProvider).type;
+  @override
+  HighlightStyle get style => (origin as HighlightCreateProvider).style;
 }
 
 String _$highlightDeleteHash() => r'260028c23eaa1ca4c9e487a2bb3e053d6824ca07';
