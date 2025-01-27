@@ -26,7 +26,7 @@ final authSignInProvider = AutoDisposeFutureProvider<void>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthSignInRef = AutoDisposeFutureProviderRef<void>;
-String _$authSignOutHash() => r'4f59d19efb594a20ff4ab8db8f06b38721f07d38';
+String _$authSignOutHash() => r'55ec4cb43fd258f03c624d28ad03ed59923ba4d1';
 
 /// See also [authSignOut].
 @ProviderFor(authSignOut)
@@ -43,7 +43,7 @@ final authSignOutProvider = AutoDisposeFutureProvider<void>.internal(
 // ignore: unused_element
 typedef AuthSignOutRef = AutoDisposeFutureProviderRef<void>;
 String _$authSignOutWhenFirstRunHash() =>
-    r'48318489a0d9a739e50839657a124040b5edbbfc';
+    r'225923ad04a42f8200800511d4ae8db3e3336451';
 
 /// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する
 ///

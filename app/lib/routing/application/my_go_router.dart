@@ -76,7 +76,8 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
           // サインイン済みなのに、未サインインRouteの場合はホーム画面に遷移
           if (isUnauthorizedRoute) {
             // オンボーディングが完了している場合はホーム画面に遷移
-            final onboarding = ref.watch(onboardingIsCompletedProvider);
+            final onboarding =
+                await ref.watch(onboardingIsCompletedProvider.future);
             if (onboarding) {
               return home_route.HomeTabRoute.path;
             } else {

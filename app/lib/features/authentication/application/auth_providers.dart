@@ -54,7 +54,7 @@ Future<void> authSignOut(Ref ref) async {
 
   logger.debug('clear local data');
   await Future.wait([
-    ref.read(sharedPreferencesProvider).requireValue.clear(),
+    ref.read(sharedPreferencesProvider).clear(),
     ref.read(firebaseAnalyticsControllerProvider).resetAnalyticsData(),
   ]);
 
@@ -68,10 +68,10 @@ Future<void> authSignOut(Ref ref) async {
 /// アプリを再インストールしたり、別の端末であっても認証情報が復元されてしまう可能性がある
 @riverpod
 Future<void> authSignOutWhenFirstRun(Ref ref) async {
-  final preferences = ref.read(sharedPreferencesProvider).requireValue;
+  final preferences = ref.read(sharedPreferencesProvider);
   const key = 'isFirstRun';
 
-  final firstRun = preferences.getBool(key) ?? true;
+  final firstRun = await preferences.getBool(key).then((e) => e ?? true);
 
   if (firstRun) {
     await ref.read(firebaseAuthProvider).signOut();
