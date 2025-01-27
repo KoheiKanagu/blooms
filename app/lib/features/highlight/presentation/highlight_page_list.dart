@@ -2,11 +2,11 @@ import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_page_list_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
-import 'package:blooms/routing/application/my_go_router.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightPageList extends HookConsumerWidget {
@@ -29,13 +29,13 @@ class HighlightPageList extends HookConsumerWidget {
                   title: Text(i18n.highlight.createNewHighlight),
                   leading: const Icon(CupertinoIcons.square_favorites_alt_fill),
                   onTap: () {
-                    Navigator.of(rootContext!).push(
-                      CupertinoPageRoute<void>(
-                        builder: (context) => const HighlightCreatePage(),
-                        fullscreenDialog: true,
-                        settings: const RouteSettings(
-                          name: HighlightCreatePage.path,
-                        ),
+                    showModalBottomSheet<void>(
+                      context: context,
+                      useRootNavigator: true,
+                      isScrollControlled: true,
+                      builder: (context) => const FractionallySizedBox(
+                        heightFactor: 0.9,
+                        child: HighlightCreatePage(),
                       ),
                     );
                   },

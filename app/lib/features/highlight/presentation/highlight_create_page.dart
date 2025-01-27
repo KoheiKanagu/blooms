@@ -23,56 +23,63 @@ class HighlightCreatePage extends HookConsumerWidget {
       HighlightType.past7days,
     );
 
-    return Scaffold(
-      body: CupertinoPageScaffold(
-        backgroundColor:
-            CupertinoColors.systemGroupedBackground.resolveFrom(context),
-        child: SafeArea(
-          child: ListView(
-            children: [
-              const Gap(44), // CupertinoNavigationBarの高さと合わせる
-              const HighlightCreatePageHeader(),
-              const Gap(24),
-              ...HighlightType.values.map(
-                (e) => HighlightCreatePageTile(
-                  type: e,
-                  selected: selectedType.value == e,
-                  onTap: () {
-                    selectedType.value = e;
-                  },
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(12),
+        topRight: Radius.circular(12),
+      ),
+      child: Scaffold(
+        body: CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            trailing: CupertinoButton.tinted(
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              sizeStyle: CupertinoButtonSize.medium,
+              borderRadius: BorderRadius.circular(24),
+              child: const Icon(CupertinoIcons.xmark),
+            ),
+            automaticallyImplyLeading: false,
+          ),
+          backgroundColor:
+              CupertinoColors.systemGroupedBackground.resolveFrom(context),
+          child: SafeArea(
+            child: ListView(
+              children: [
+                const HighlightCreatePageHeader(),
+                const Gap(24),
+                ...HighlightType.values.map(
+                  (e) => HighlightCreatePageTile(
+                    type: e,
+                    selected: selectedType.value == e,
+                    onTap: () {
+                      selectedType.value = e;
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: CupertinoButton.tinted(
-        padding: EdgeInsets.zero,
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        sizeStyle: CupertinoButtonSize.medium,
-        borderRadius: BorderRadius.circular(24),
-        child: const Icon(CupertinoIcons.xmark),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
-          child: CupertinoButton.filled(
-            onPressed: () async {
-              final type = selectedType.value;
-              await ref.read(highlightCreateProvider(type).future);
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 16,
+            ),
+            child: CupertinoButton.filled(
+              onPressed: () async {
+                final type = selectedType.value;
+                await ref.read(highlightCreateProvider(type).future);
 
-              if (context.mounted) {
-                Navigator.of(context).pop();
-              }
-            },
-            child: Text(
-              i18n.highlight.createHighlight,
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text(
+                i18n.highlight.createHighlight,
+              ),
             ),
           ),
         ),
