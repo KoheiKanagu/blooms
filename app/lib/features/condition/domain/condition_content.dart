@@ -11,7 +11,7 @@ part 'condition_content.g.dart';
   unionValueCase: FreezedUnionCase.none,
   fallbackUnion: 'empty',
 )
-class ConditionContent with _$ConditionContent {
+sealed class ConditionContent with _$ConditionContent {
   /// テキストの記録
   const factory ConditionContent.text({
     required String text,
