@@ -343,5 +343,135 @@ class _HighlightDeleteProviderElement
   @override
   String get documentId => (origin as HighlightDeleteProvider).documentId;
 }
+
+String _$highlightPromptHash() => r'b5c2c20093600f1e127315e8c18a70a8d4efc524';
+
+/// See also [highlightPrompt].
+@ProviderFor(highlightPrompt)
+const highlightPromptProvider = HighlightPromptFamily();
+
+/// See also [highlightPrompt].
+class HighlightPromptFamily extends Family<AsyncValue<String?>> {
+  /// See also [highlightPrompt].
+  const HighlightPromptFamily();
+
+  /// See also [highlightPrompt].
+  HighlightPromptProvider call({
+    required String? gsFilePath,
+  }) {
+    return HighlightPromptProvider(
+      gsFilePath: gsFilePath,
+    );
+  }
+
+  @override
+  HighlightPromptProvider getProviderOverride(
+    covariant HighlightPromptProvider provider,
+  ) {
+    return call(
+      gsFilePath: provider.gsFilePath,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'highlightPromptProvider';
+}
+
+/// See also [highlightPrompt].
+class HighlightPromptProvider extends AutoDisposeFutureProvider<String?> {
+  /// See also [highlightPrompt].
+  HighlightPromptProvider({
+    required String? gsFilePath,
+  }) : this._internal(
+          (ref) => highlightPrompt(
+            ref as HighlightPromptRef,
+            gsFilePath: gsFilePath,
+          ),
+          from: highlightPromptProvider,
+          name: r'highlightPromptProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$highlightPromptHash,
+          dependencies: HighlightPromptFamily._dependencies,
+          allTransitiveDependencies:
+              HighlightPromptFamily._allTransitiveDependencies,
+          gsFilePath: gsFilePath,
+        );
+
+  HighlightPromptProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.gsFilePath,
+  }) : super.internal();
+
+  final String? gsFilePath;
+
+  @override
+  Override overrideWith(
+    FutureOr<String?> Function(HighlightPromptRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: HighlightPromptProvider._internal(
+        (ref) => create(ref as HighlightPromptRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        gsFilePath: gsFilePath,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<String?> createElement() {
+    return _HighlightPromptProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is HighlightPromptProvider && other.gsFilePath == gsFilePath;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, gsFilePath.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin HighlightPromptRef on AutoDisposeFutureProviderRef<String?> {
+  /// The parameter `gsFilePath` of this provider.
+  String? get gsFilePath;
+}
+
+class _HighlightPromptProviderElement
+    extends AutoDisposeFutureProviderElement<String?> with HighlightPromptRef {
+  _HighlightPromptProviderElement(super.provider);
+
+  @override
+  String? get gsFilePath => (origin as HighlightPromptProvider).gsFilePath;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

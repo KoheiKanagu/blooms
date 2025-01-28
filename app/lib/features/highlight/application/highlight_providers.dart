@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
@@ -67,4 +69,22 @@ Future<void> highlightDelete(
       .read(highlightCollectionReferenceProvider)
       .doc(documentId)
       .update(deletedAt);
+}
+
+@riverpod
+Future<String?> highlightPrompt(
+  Ref ref, {
+  required String? gsFilePath,
+}) async {
+  if (gsFilePath == null) {
+    return null;
+  }
+
+  final data =
+      await ref.read(firebaseStorageProvider).refFromURL(gsFilePath).getData();
+  if (data == null) {
+    return null;
+  }
+
+  return utf8.decode(data);
 }

@@ -30,7 +30,7 @@ async function main(): Promise<void> {
     .docs
     .map(e => e.data())
     .map(e => ({
-      日時: (e.createdAt as Timestamp).toDate().toLocaleString('ja-JP'),
+      日時: (e.createdAt as Timestamp).toDate().toISOString(),
       記録: (e.content as ConditionContentText).text,
     }));
 

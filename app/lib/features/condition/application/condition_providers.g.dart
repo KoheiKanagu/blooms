@@ -483,6 +483,138 @@ class _ConditionImageStorageReferenceProviderElement
       (origin as ConditionImageStorageReferenceProvider).fileName;
 }
 
+String _$conditionCreateImageHash() =>
+    r'11af638d485757eeb74ffade298ae3e65fbb0576';
+
+/// See also [conditionCreateImage].
+@ProviderFor(conditionCreateImage)
+const conditionCreateImageProvider = ConditionCreateImageFamily();
+
+/// See also [conditionCreateImage].
+class ConditionCreateImageFamily extends Family<AsyncValue<void>> {
+  /// See also [conditionCreateImage].
+  const ConditionCreateImageFamily();
+
+  /// See also [conditionCreateImage].
+  ConditionCreateImageProvider call({
+    required List<XFile> xFiles,
+  }) {
+    return ConditionCreateImageProvider(
+      xFiles: xFiles,
+    );
+  }
+
+  @override
+  ConditionCreateImageProvider getProviderOverride(
+    covariant ConditionCreateImageProvider provider,
+  ) {
+    return call(
+      xFiles: provider.xFiles,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'conditionCreateImageProvider';
+}
+
+/// See also [conditionCreateImage].
+class ConditionCreateImageProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [conditionCreateImage].
+  ConditionCreateImageProvider({
+    required List<XFile> xFiles,
+  }) : this._internal(
+          (ref) => conditionCreateImage(
+            ref as ConditionCreateImageRef,
+            xFiles: xFiles,
+          ),
+          from: conditionCreateImageProvider,
+          name: r'conditionCreateImageProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionCreateImageHash,
+          dependencies: ConditionCreateImageFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionCreateImageFamily._allTransitiveDependencies,
+          xFiles: xFiles,
+        );
+
+  ConditionCreateImageProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.xFiles,
+  }) : super.internal();
+
+  final List<XFile> xFiles;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(ConditionCreateImageRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ConditionCreateImageProvider._internal(
+        (ref) => create(ref as ConditionCreateImageRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        xFiles: xFiles,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _ConditionCreateImageProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ConditionCreateImageProvider && other.xFiles == xFiles;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, xFiles.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin ConditionCreateImageRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `xFiles` of this provider.
+  List<XFile> get xFiles;
+}
+
+class _ConditionCreateImageProviderElement
+    extends AutoDisposeFutureProviderElement<void>
+    with ConditionCreateImageRef {
+  _ConditionCreateImageProviderElement(super.provider);
+
+  @override
+  List<XFile> get xFiles => (origin as ConditionCreateImageProvider).xFiles;
+}
+
 String _$conditionAudioStorageReferenceHash() =>
     r'b92a571a34e6c51957d8cfa0c2166ee0fd95ebb2';
 
@@ -638,33 +770,33 @@ class _ConditionAudioStorageReferenceProviderElement
       (origin as ConditionAudioStorageReferenceProvider).fileName;
 }
 
-String _$conditionCreateImageHash() =>
-    r'aaf28891cac81520756ecb29835d9bd4d310ae15';
+String _$conditionCreateAudioHash() =>
+    r'a4ec503ffb4437c2efb9488aa365aedcf9e3010f';
 
-/// See also [conditionCreateImage].
-@ProviderFor(conditionCreateImage)
-const conditionCreateImageProvider = ConditionCreateImageFamily();
+/// See also [conditionCreateAudio].
+@ProviderFor(conditionCreateAudio)
+const conditionCreateAudioProvider = ConditionCreateAudioFamily();
 
-/// See also [conditionCreateImage].
-class ConditionCreateImageFamily extends Family<AsyncValue<void>> {
-  /// See also [conditionCreateImage].
-  const ConditionCreateImageFamily();
+/// See also [conditionCreateAudio].
+class ConditionCreateAudioFamily extends Family<AsyncValue<void>> {
+  /// See also [conditionCreateAudio].
+  const ConditionCreateAudioFamily();
 
-  /// See also [conditionCreateImage].
-  ConditionCreateImageProvider call({
-    required List<XFile> xFiles,
+  /// See also [conditionCreateAudio].
+  ConditionCreateAudioProvider call({
+    required XFile xFile,
   }) {
-    return ConditionCreateImageProvider(
-      xFiles: xFiles,
+    return ConditionCreateAudioProvider(
+      xFile: xFile,
     );
   }
 
   @override
-  ConditionCreateImageProvider getProviderOverride(
-    covariant ConditionCreateImageProvider provider,
+  ConditionCreateAudioProvider getProviderOverride(
+    covariant ConditionCreateAudioProvider provider,
   ) {
     return call(
-      xFiles: provider.xFiles,
+      xFile: provider.xFile,
     );
   }
 
@@ -680,75 +812,75 @@ class ConditionCreateImageFamily extends Family<AsyncValue<void>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'conditionCreateImageProvider';
+  String? get name => r'conditionCreateAudioProvider';
 }
 
-/// See also [conditionCreateImage].
-class ConditionCreateImageProvider extends AutoDisposeFutureProvider<void> {
-  /// See also [conditionCreateImage].
-  ConditionCreateImageProvider({
-    required List<XFile> xFiles,
+/// See also [conditionCreateAudio].
+class ConditionCreateAudioProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [conditionCreateAudio].
+  ConditionCreateAudioProvider({
+    required XFile xFile,
   }) : this._internal(
-          (ref) => conditionCreateImage(
-            ref as ConditionCreateImageRef,
-            xFiles: xFiles,
+          (ref) => conditionCreateAudio(
+            ref as ConditionCreateAudioRef,
+            xFile: xFile,
           ),
-          from: conditionCreateImageProvider,
-          name: r'conditionCreateImageProvider',
+          from: conditionCreateAudioProvider,
+          name: r'conditionCreateAudioProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$conditionCreateImageHash,
-          dependencies: ConditionCreateImageFamily._dependencies,
+                  : _$conditionCreateAudioHash,
+          dependencies: ConditionCreateAudioFamily._dependencies,
           allTransitiveDependencies:
-              ConditionCreateImageFamily._allTransitiveDependencies,
-          xFiles: xFiles,
+              ConditionCreateAudioFamily._allTransitiveDependencies,
+          xFile: xFile,
         );
 
-  ConditionCreateImageProvider._internal(
+  ConditionCreateAudioProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.xFiles,
+    required this.xFile,
   }) : super.internal();
 
-  final List<XFile> xFiles;
+  final XFile xFile;
 
   @override
   Override overrideWith(
-    FutureOr<void> Function(ConditionCreateImageRef provider) create,
+    FutureOr<void> Function(ConditionCreateAudioRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: ConditionCreateImageProvider._internal(
-        (ref) => create(ref as ConditionCreateImageRef),
+      override: ConditionCreateAudioProvider._internal(
+        (ref) => create(ref as ConditionCreateAudioRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        xFiles: xFiles,
+        xFile: xFile,
       ),
     );
   }
 
   @override
   AutoDisposeFutureProviderElement<void> createElement() {
-    return _ConditionCreateImageProviderElement(this);
+    return _ConditionCreateAudioProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ConditionCreateImageProvider && other.xFiles == xFiles;
+    return other is ConditionCreateAudioProvider && other.xFile == xFile;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, xFiles.hashCode);
+    hash = _SystemHash.combine(hash, xFile.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -756,18 +888,18 @@ class ConditionCreateImageProvider extends AutoDisposeFutureProvider<void> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ConditionCreateImageRef on AutoDisposeFutureProviderRef<void> {
-  /// The parameter `xFiles` of this provider.
-  List<XFile> get xFiles;
+mixin ConditionCreateAudioRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `xFile` of this provider.
+  XFile get xFile;
 }
 
-class _ConditionCreateImageProviderElement
+class _ConditionCreateAudioProviderElement
     extends AutoDisposeFutureProviderElement<void>
-    with ConditionCreateImageRef {
-  _ConditionCreateImageProviderElement(super.provider);
+    with ConditionCreateAudioRef {
+  _ConditionCreateAudioProviderElement(super.provider);
 
   @override
-  List<XFile> get xFiles => (origin as ConditionCreateImageProvider).xFiles;
+  XFile get xFile => (origin as ConditionCreateAudioProvider).xFile;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
