@@ -23,3 +23,15 @@ FirebaseMessaging firebaseMessaging(Ref ref) => FirebaseMessaging.instance;
 
 @riverpod
 FirebaseStorage firebaseStorage(Ref ref) => FirebaseStorage.instance;
+
+@riverpod
+Future<List<String>> firebaseStorageGsFileDownloadUrls(
+  Ref ref, {
+  required List<String> gsPaths,
+}) async {
+  return Future.wait(
+    gsPaths.map(
+      (e) => ref.read(firebaseStorageProvider).refFromURL(e).getDownloadURL(),
+    ),
+  );
+}
