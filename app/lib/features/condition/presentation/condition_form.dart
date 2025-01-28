@@ -1,4 +1,5 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -42,7 +43,7 @@ class ConditionForm extends HookConsumerWidget {
                 itemBuilder: (context) {
                   return [
                     PullDownMenuItem(
-                      title: 'カメラ',
+                      title: i18n.camera,
                       icon: CupertinoIcons.camera,
                       onTap: () async {
                         final xFile = await ImagePicker().pickImage(
@@ -65,7 +66,7 @@ class ConditionForm extends HookConsumerWidget {
                       },
                     ),
                     PullDownMenuItem(
-                      title: '写真',
+                      title: i18n.photoLibrary,
                       icon: CupertinoIcons.photo_fill,
                       onTap: () async {
                         final xFiles = await ImagePicker().pickMultiImage(

@@ -50,6 +50,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get grounding => 'グラウンディング';
 	String get today => '今日';
 	String get yesterday => '昨日';
+	String get camera => 'カメラ';
+	String get photoLibrary => '写真ライブラリ';
 }
 
 // Path: highlight
