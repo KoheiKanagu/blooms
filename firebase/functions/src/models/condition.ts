@@ -9,6 +9,7 @@ export class Condition {
     readonly updatedAt: Timestamp | FieldValue,
     readonly deletedAt: Timestamp | null,
     readonly createdBy: string,
+    readonly createdAtIso8601: string,
     readonly content: ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
   ) { }
 }
@@ -44,6 +45,7 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     updatedAt: condition.updatedAt,
     deletedAt: condition.deletedAt,
     createdBy: condition.createdBy,
+    timeZone: condition.createdAtIso8601,
     content: condition.content,
   }),
   fromFirestore: snapshot => new Condition(
@@ -51,6 +53,7 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('updatedAt') as Timestamp,
     snapshot.get('deletedAt') as Timestamp | null,
     snapshot.get('createdBy') as string,
+    snapshot.get('createdAtIso8601') as string,
     conditionContentConverter(snapshot.get('content') as Record<string, unknown>),
   ),
 };

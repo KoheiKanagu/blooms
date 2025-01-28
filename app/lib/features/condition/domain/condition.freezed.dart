@@ -25,6 +25,9 @@ mixin _$Condition {
 
   /// 内容
   ConditionContent get content => throw _privateConstructorUsedError;
+
+  /// ISO8601形式の作成日時
+  String get createdAtIso8601 => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -50,6 +53,7 @@ abstract class $ConditionCopyWith<$Res> {
   $Res call(
       {String createdBy,
       ConditionContent content,
+      String createdAtIso8601,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt});
@@ -74,6 +78,7 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
   $Res call({
     Object? createdBy = null,
     Object? content = null,
+    Object? createdAtIso8601 = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -87,6 +92,10 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as ConditionContent,
+      createdAtIso8601: null == createdAtIso8601
+          ? _value.createdAtIso8601
+          : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -124,6 +133,7 @@ abstract class _$$ConditionImplCopyWith<$Res>
   $Res call(
       {String createdBy,
       ConditionContent content,
+      String createdAtIso8601,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
       @TimestampConverter() Timestamp? deletedAt});
@@ -147,6 +157,7 @@ class __$$ConditionImplCopyWithImpl<$Res>
   $Res call({
     Object? createdBy = null,
     Object? content = null,
+    Object? createdAtIso8601 = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -160,6 +171,10 @@ class __$$ConditionImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as ConditionContent,
+      createdAtIso8601: null == createdAtIso8601
+          ? _value.createdAtIso8601
+          : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -182,6 +197,7 @@ class _$ConditionImpl implements _Condition {
   const _$ConditionImpl(
       {required this.createdBy,
       required this.content,
+      required this.createdAtIso8601,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
       @TimestampConverter() this.deletedAt});
@@ -196,6 +212,10 @@ class _$ConditionImpl implements _Condition {
   /// 内容
   @override
   final ConditionContent content;
+
+  /// ISO8601形式の作成日時
+  @override
+  final String createdAtIso8601;
   @override
   @TimestampConverter()
   final Timestamp? createdAt;
@@ -208,7 +228,7 @@ class _$ConditionImpl implements _Condition {
 
   @override
   String toString() {
-    return 'Condition(createdBy: $createdBy, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Condition(createdBy: $createdBy, content: $content, createdAtIso8601: $createdAtIso8601, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -219,6 +239,8 @@ class _$ConditionImpl implements _Condition {
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.createdAtIso8601, createdAtIso8601) ||
+                other.createdAtIso8601 == createdAtIso8601) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -229,8 +251,8 @@ class _$ConditionImpl implements _Condition {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, createdBy, content, createdAt, updatedAt, deletedAt);
+  int get hashCode => Object.hash(runtimeType, createdBy, content,
+      createdAtIso8601, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -252,6 +274,7 @@ abstract class _Condition implements Condition {
   const factory _Condition(
       {required final String createdBy,
       required final ConditionContent content,
+      required final String createdAtIso8601,
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
       @TimestampConverter() final Timestamp? deletedAt}) = _$ConditionImpl;
@@ -266,6 +289,10 @@ abstract class _Condition implements Condition {
   /// 内容
   @override
   ConditionContent get content;
+
+  /// ISO8601形式の作成日時
+  @override
+  String get createdAtIso8601;
   @override
   @TimestampConverter()
   Timestamp? get createdAt;

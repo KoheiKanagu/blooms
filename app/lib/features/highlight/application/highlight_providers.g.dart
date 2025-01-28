@@ -344,7 +344,7 @@ class _HighlightDeleteProviderElement
   String get documentId => (origin as HighlightDeleteProvider).documentId;
 }
 
-String _$highlightPromptHash() => r'b5c2c20093600f1e127315e8c18a70a8d4efc524';
+String _$highlightPromptHash() => r'd37ff1b9a35a6f31bae49101b98f63d8276fa9b2';
 
 /// See also [highlightPrompt].
 @ProviderFor(highlightPrompt)

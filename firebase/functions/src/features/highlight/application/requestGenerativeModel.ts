@@ -1,4 +1,3 @@
-import { Timestamp } from '@google-cloud/firestore';
 import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
@@ -21,7 +20,7 @@ export async function requestGenerativeModel(uid: string, conditions: Condition[
   const generativeModel = setupGenerativeModel(highlightStyle);
 
   let contents: Content[] = conditions.map<Content | null>((condition) => {
-    const date = (condition.createdAt as Timestamp).toDate().toLocaleString('ja-JP');
+    const date = condition.createdAtIso8601;
 
     let part: (TextPart | FileDataPart)[];
     switch (condition.content.type) {
