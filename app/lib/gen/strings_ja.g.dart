@@ -48,6 +48,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get kContinue => '続ける';
 	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
 	String get grounding => 'グラウンディング';
+	String get today => '今日';
+	String get yesterday => '昨日';
 }
 
 // Path: highlight

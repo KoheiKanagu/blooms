@@ -2,6 +2,7 @@ import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/presentation/condition_page_list.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,7 +15,7 @@ class ConditionPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final title = useState(i18n.condition);
+    final title = useState(i18n.today);
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -27,7 +28,11 @@ class ConditionPage extends HookConsumerWidget {
               onItemDisplayed: (value) {
                 final createdAt = value.createdAt?.toDate();
                 if (createdAt != null) {
-                  title.value = myDateFormat(createdAt);
+                  if (DateUtils.isSameDay(clock.now(), createdAt)) {
+                    title.value = i18n.today;
+                  } else {
+                    title.value = myDateFormat(createdAt);
+                  }
                 }
               },
             ),

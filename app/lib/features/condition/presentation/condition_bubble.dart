@@ -1,6 +1,8 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +17,17 @@ class ConditionBubble extends HookConsumerWidget {
     required this.showDateTime,
     super.key,
   }) {
-    createdAtString = myDateTimeFormat(createdAt);
+    final isToday = DateUtils.isSameDay(clock.now(), createdAt);
+    if (isToday) {
+      createdAtString = i18n.today;
+    } else if (DateUtils.isSameDay(
+      clock.now().subtract(const Duration(days: 1)),
+      createdAt,
+    )) {
+      createdAtString = i18n.yesterday;
+    } else {
+      createdAtString = myDateTimeFormat(createdAt);
+    }
   }
 
   final String documentId;
