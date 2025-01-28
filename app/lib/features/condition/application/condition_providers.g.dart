@@ -28,7 +28,7 @@ final conditionCollectionReferenceProvider =
 // ignore: unused_element
 typedef ConditionCollectionReferenceRef
     = AutoDisposeProviderRef<CollectionReference<Condition>>;
-String _$conditionQueryHash() => r'b21afc4d4f529573a18fc31105878ed4ef46f528';
+String _$conditionQueryHash() => r'5609586f5a79943fae85d4aa0860199bd015a9a1';
 
 /// See also [conditionQuery].
 @ProviderFor(conditionQuery)
@@ -197,33 +197,33 @@ class _ConditionDeleteProviderElement
   String get documentId => (origin as ConditionDeleteProvider).documentId;
 }
 
-String _$conditionCreateSubjectiveHash() =>
-    r'e1cd42e97ee68b58406e3b6710a8ee46cc3b33ed';
+String _$conditionCreateTextHash() =>
+    r'b55a9be5821d87cac1f32d5db9c00b4b3431050b';
 
-/// See also [conditionCreateSubjective].
-@ProviderFor(conditionCreateSubjective)
-const conditionCreateSubjectiveProvider = ConditionCreateSubjectiveFamily();
+/// See also [conditionCreateText].
+@ProviderFor(conditionCreateText)
+const conditionCreateTextProvider = ConditionCreateTextFamily();
 
-/// See also [conditionCreateSubjective].
-class ConditionCreateSubjectiveFamily extends Family<AsyncValue<void>> {
-  /// See also [conditionCreateSubjective].
-  const ConditionCreateSubjectiveFamily();
+/// See also [conditionCreateText].
+class ConditionCreateTextFamily extends Family<AsyncValue<void>> {
+  /// See also [conditionCreateText].
+  const ConditionCreateTextFamily();
 
-  /// See also [conditionCreateSubjective].
-  ConditionCreateSubjectiveProvider call({
-    required String record,
+  /// See also [conditionCreateText].
+  ConditionCreateTextProvider call({
+    required String text,
   }) {
-    return ConditionCreateSubjectiveProvider(
-      record: record,
+    return ConditionCreateTextProvider(
+      text: text,
     );
   }
 
   @override
-  ConditionCreateSubjectiveProvider getProviderOverride(
-    covariant ConditionCreateSubjectiveProvider provider,
+  ConditionCreateTextProvider getProviderOverride(
+    covariant ConditionCreateTextProvider provider,
   ) {
     return call(
-      record: provider.record,
+      text: provider.text,
     );
   }
 
@@ -239,76 +239,75 @@ class ConditionCreateSubjectiveFamily extends Family<AsyncValue<void>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'conditionCreateSubjectiveProvider';
+  String? get name => r'conditionCreateTextProvider';
 }
 
-/// See also [conditionCreateSubjective].
-class ConditionCreateSubjectiveProvider
-    extends AutoDisposeFutureProvider<void> {
-  /// See also [conditionCreateSubjective].
-  ConditionCreateSubjectiveProvider({
-    required String record,
+/// See also [conditionCreateText].
+class ConditionCreateTextProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [conditionCreateText].
+  ConditionCreateTextProvider({
+    required String text,
   }) : this._internal(
-          (ref) => conditionCreateSubjective(
-            ref as ConditionCreateSubjectiveRef,
-            record: record,
+          (ref) => conditionCreateText(
+            ref as ConditionCreateTextRef,
+            text: text,
           ),
-          from: conditionCreateSubjectiveProvider,
-          name: r'conditionCreateSubjectiveProvider',
+          from: conditionCreateTextProvider,
+          name: r'conditionCreateTextProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$conditionCreateSubjectiveHash,
-          dependencies: ConditionCreateSubjectiveFamily._dependencies,
+                  : _$conditionCreateTextHash,
+          dependencies: ConditionCreateTextFamily._dependencies,
           allTransitiveDependencies:
-              ConditionCreateSubjectiveFamily._allTransitiveDependencies,
-          record: record,
+              ConditionCreateTextFamily._allTransitiveDependencies,
+          text: text,
         );
 
-  ConditionCreateSubjectiveProvider._internal(
+  ConditionCreateTextProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.record,
+    required this.text,
   }) : super.internal();
 
-  final String record;
+  final String text;
 
   @override
   Override overrideWith(
-    FutureOr<void> Function(ConditionCreateSubjectiveRef provider) create,
+    FutureOr<void> Function(ConditionCreateTextRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: ConditionCreateSubjectiveProvider._internal(
-        (ref) => create(ref as ConditionCreateSubjectiveRef),
+      override: ConditionCreateTextProvider._internal(
+        (ref) => create(ref as ConditionCreateTextRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        record: record,
+        text: text,
       ),
     );
   }
 
   @override
   AutoDisposeFutureProviderElement<void> createElement() {
-    return _ConditionCreateSubjectiveProviderElement(this);
+    return _ConditionCreateTextProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ConditionCreateSubjectiveProvider && other.record == record;
+    return other is ConditionCreateTextProvider && other.text == text;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, record.hashCode);
+    hash = _SystemHash.combine(hash, text.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -316,18 +315,17 @@ class ConditionCreateSubjectiveProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ConditionCreateSubjectiveRef on AutoDisposeFutureProviderRef<void> {
-  /// The parameter `record` of this provider.
-  String get record;
+mixin ConditionCreateTextRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `text` of this provider.
+  String get text;
 }
 
-class _ConditionCreateSubjectiveProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with ConditionCreateSubjectiveRef {
-  _ConditionCreateSubjectiveProviderElement(super.provider);
+class _ConditionCreateTextProviderElement
+    extends AutoDisposeFutureProviderElement<void> with ConditionCreateTextRef {
+  _ConditionCreateTextProviderElement(super.provider);
 
   @override
-  String get record => (origin as ConditionCreateSubjectiveProvider).record;
+  String get text => (origin as ConditionCreateTextProvider).text;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

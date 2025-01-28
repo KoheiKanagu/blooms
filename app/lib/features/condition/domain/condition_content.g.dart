@@ -8,14 +8,14 @@ part of 'condition_content.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ConditionContentSubjectiveImpl _$$ConditionContentSubjectiveImplFromJson(
+_$ConditionContentTextImpl _$$ConditionContentTextImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$ConditionContentSubjectiveImpl',
+      r'_$ConditionContentTextImpl',
       json,
       ($checkedConvert) {
-        final val = _$ConditionContentSubjectiveImpl(
-          record: $checkedConvert('record', (v) => v as String),
+        final val = _$ConditionContentTextImpl(
+          text: $checkedConvert('text', (v) => v as String),
           $type: $checkedConvert('type', (v) => v as String?),
         );
         return val;
@@ -23,24 +23,24 @@ _$ConditionContentSubjectiveImpl _$$ConditionContentSubjectiveImplFromJson(
       fieldKeyMap: const {r'$type': 'type'},
     );
 
-Map<String, dynamic> _$$ConditionContentSubjectiveImplToJson(
-        _$ConditionContentSubjectiveImpl instance) =>
+Map<String, dynamic> _$$ConditionContentTextImplToJson(
+        _$ConditionContentTextImpl instance) =>
     <String, dynamic>{
-      'record': instance.record,
+      'text': instance.text,
       'type': instance.$type,
     };
 
-_$ConditionContentPhotoImpl _$$ConditionContentPhotoImplFromJson(
+_$ConditionContentImageImpl _$$ConditionContentImageImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$ConditionContentPhotoImpl',
+      r'_$ConditionContentImageImpl',
       json,
       ($checkedConvert) {
-        final val = _$ConditionContentPhotoImpl(
+        final val = _$ConditionContentImageImpl(
           attachments: $checkedConvert(
               'attachments',
               (v) => (v as List<dynamic>)
-                  .map((e) => ConditionContentAttachment.fromJson(
+                  .map((e) => ConditionContentImageAttachment.fromJson(
                       e as Map<String, dynamic>))
                   .toList()),
           $type: $checkedConvert('type', (v) => v as String?),
@@ -50,8 +50,35 @@ _$ConditionContentPhotoImpl _$$ConditionContentPhotoImplFromJson(
       fieldKeyMap: const {r'$type': 'type'},
     );
 
-Map<String, dynamic> _$$ConditionContentPhotoImplToJson(
-        _$ConditionContentPhotoImpl instance) =>
+Map<String, dynamic> _$$ConditionContentImageImplToJson(
+        _$ConditionContentImageImpl instance) =>
+    <String, dynamic>{
+      'attachments': instance.attachments.map((e) => e.toJson()).toList(),
+      'type': instance.$type,
+    };
+
+_$ConditionContentAudioImpl _$$ConditionContentAudioImplFromJson(
+        Map<String, dynamic> json) =>
+    $checkedCreate(
+      r'_$ConditionContentAudioImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$ConditionContentAudioImpl(
+          attachments: $checkedConvert(
+              'attachments',
+              (v) => (v as List<dynamic>)
+                  .map((e) => ConditionContentAudioAttachment.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList()),
+          $type: $checkedConvert('type', (v) => v as String?),
+        );
+        return val;
+      },
+      fieldKeyMap: const {r'$type': 'type'},
+    );
+
+Map<String, dynamic> _$$ConditionContentAudioImplToJson(
+        _$ConditionContentAudioImpl instance) =>
     <String, dynamic>{
       'attachments': instance.attachments.map((e) => e.toJson()).toList(),
       'type': instance.$type,

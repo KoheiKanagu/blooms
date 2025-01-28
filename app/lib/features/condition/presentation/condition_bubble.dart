@@ -13,7 +13,7 @@ class ConditionBubble extends HookConsumerWidget {
   ConditionBubble({
     required this.documentId,
     required this.createdAt,
-    required this.record,
+    required this.text,
     required this.showDateTime,
     super.key,
   }) {
@@ -36,7 +36,7 @@ class ConditionBubble extends HookConsumerWidget {
 
   late final String createdAtString;
 
-  final String record;
+  final String text;
 
   final bool showDateTime;
 
@@ -118,7 +118,7 @@ class ConditionBubble extends HookConsumerWidget {
                   boxShadow: MyDecoration.dropShadow(context).boxShadow,
                 ),
                 child: Text(
-                  record,
+                  text,
                   style: CupertinoTheme.of(context).textTheme.textStyle,
                 ),
               ),

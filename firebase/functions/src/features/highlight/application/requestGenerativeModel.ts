@@ -1,5 +1,5 @@
 import { Timestamp } from '@google-cloud/firestore';
-import { Content } from '@google-cloud/vertexai';
+import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
 import { HighlightContentPrivate, HighlightContentProfessional, HighlightStyle } from '../domain/highlight';
@@ -22,23 +22,47 @@ export async function requestGenerativeModel(conditions: Condition[], highlightS
   let contents: Content[] = conditions.map<Content | null>((condition) => {
     const date = (condition.createdAt as Timestamp).toDate().toLocaleString('ja-JP');
 
-    let text: string;
+    let part: (TextPart | FileDataPart)[];
     switch (condition.content.type) {
-      case 'subjective':
-        text = `${date}に入力したテキスト: ${condition.content.record}`;
+      case 'text':
+        part = [{
+          text: `${date}に入力したテキスト: ${condition.content.text}`,
+        }];
         break;
-      case 'photo':
-        text = condition.content.attachments
-          .map(attachment => `${date}にアップロードした写真の説明: ${attachment.alt}`)
-          .join('\n');
+      case 'image':
+        part = [
+          {
+            text: `${date}にアップロードされた画像`,
+          },
+          ...condition.content.attachments.map<FileDataPart>(attachment => ({
+            fileData: {
+              fileUri: attachment.fileUri,
+              mimeType: attachment.mimeType,
+            },
+          })),
+        ];
         break;
+      case 'audio':
+        part = [
+          {
+            text: `${date}にアップロードされた音声`,
+          },
+          ...condition.content.attachments.map<FileDataPart>(attachment => ({
+            fileData: {
+              fileUri: attachment.fileUri,
+              mimeType: attachment.mimeType,
+            },
+          })),
+        ];
+        break;
+
       case 'empty':
         return null;
     };
 
     return {
       role: 'user',
-      parts: [{ text: text }],
+      parts: part,
     };
   })
     .filter(e => e !== null);

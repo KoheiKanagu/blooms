@@ -16,10 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 ConditionContent _$ConditionContentFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
-    case 'subjective':
-      return ConditionContentSubjective.fromJson(json);
-    case 'photo':
-      return ConditionContentPhoto.fromJson(json);
+    case 'text':
+      return ConditionContentText.fromJson(json);
+    case 'image':
+      return ConditionContentImage.fromJson(json);
+    case 'audio':
+      return ConditionContentAudio.fromJson(json);
 
     default:
       return ConditionContentEmpty.fromJson(json);
@@ -30,45 +32,52 @@ ConditionContent _$ConditionContentFromJson(Map<String, dynamic> json) {
 mixin _$ConditionContent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String record) subjective,
-    required TResult Function(List<ConditionContentAttachment> attachments)
-        photo,
+    required TResult Function(String text) text,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
     required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String record)? subjective,
-    TResult? Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult? Function(String text)? text,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String record)? subjective,
-    TResult Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult Function(String text)? text,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ConditionContentSubjective value) subjective,
-    required TResult Function(ConditionContentPhoto value) photo,
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionContentSubjective value)? subjective,
-    TResult? Function(ConditionContentPhoto value)? photo,
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionContentSubjective value)? subjective,
-    TResult Function(ConditionContentPhoto value)? photo,
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
     required TResult orElse(),
   }) =>
@@ -100,23 +109,20 @@ class _$ConditionContentCopyWithImpl<$Res, $Val extends ConditionContent>
 }
 
 /// @nodoc
-abstract class _$$ConditionContentSubjectiveImplCopyWith<$Res> {
-  factory _$$ConditionContentSubjectiveImplCopyWith(
-          _$ConditionContentSubjectiveImpl value,
-          $Res Function(_$ConditionContentSubjectiveImpl) then) =
-      __$$ConditionContentSubjectiveImplCopyWithImpl<$Res>;
+abstract class _$$ConditionContentTextImplCopyWith<$Res> {
+  factory _$$ConditionContentTextImplCopyWith(_$ConditionContentTextImpl value,
+          $Res Function(_$ConditionContentTextImpl) then) =
+      __$$ConditionContentTextImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String record});
+  $Res call({String text});
 }
 
 /// @nodoc
-class __$$ConditionContentSubjectiveImplCopyWithImpl<$Res>
-    extends _$ConditionContentCopyWithImpl<$Res,
-        _$ConditionContentSubjectiveImpl>
-    implements _$$ConditionContentSubjectiveImplCopyWith<$Res> {
-  __$$ConditionContentSubjectiveImplCopyWithImpl(
-      _$ConditionContentSubjectiveImpl _value,
-      $Res Function(_$ConditionContentSubjectiveImpl) _then)
+class __$$ConditionContentTextImplCopyWithImpl<$Res>
+    extends _$ConditionContentCopyWithImpl<$Res, _$ConditionContentTextImpl>
+    implements _$$ConditionContentTextImplCopyWith<$Res> {
+  __$$ConditionContentTextImplCopyWithImpl(_$ConditionContentTextImpl _value,
+      $Res Function(_$ConditionContentTextImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ConditionContent
@@ -124,12 +130,12 @@ class __$$ConditionContentSubjectiveImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? record = null,
+    Object? text = null,
   }) {
-    return _then(_$ConditionContentSubjectiveImpl(
-      record: null == record
-          ? _value.record
-          : record // ignore: cast_nullable_to_non_nullable
+    return _then(_$ConditionContentTextImpl(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -137,78 +143,81 @@ class __$$ConditionContentSubjectiveImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionContentSubjectiveImpl implements ConditionContentSubjective {
-  const _$ConditionContentSubjectiveImpl(
-      {required this.record, final String? $type})
-      : $type = $type ?? 'subjective';
+class _$ConditionContentTextImpl implements ConditionContentText {
+  const _$ConditionContentTextImpl({required this.text, final String? $type})
+      : $type = $type ?? 'text';
 
-  factory _$ConditionContentSubjectiveImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$ConditionContentSubjectiveImplFromJson(json);
+  factory _$ConditionContentTextImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConditionContentTextImplFromJson(json);
 
   @override
-  final String record;
+  final String text;
 
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'ConditionContent.subjective(record: $record)';
+    return 'ConditionContent.text(text: $text)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionContentSubjectiveImpl &&
-            (identical(other.record, record) || other.record == record));
+            other is _$ConditionContentTextImpl &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, record);
+  int get hashCode => Object.hash(runtimeType, text);
 
   /// Create a copy of ConditionContent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ConditionContentSubjectiveImplCopyWith<_$ConditionContentSubjectiveImpl>
-      get copyWith => __$$ConditionContentSubjectiveImplCopyWithImpl<
-          _$ConditionContentSubjectiveImpl>(this, _$identity);
+  _$$ConditionContentTextImplCopyWith<_$ConditionContentTextImpl>
+      get copyWith =>
+          __$$ConditionContentTextImplCopyWithImpl<_$ConditionContentTextImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String record) subjective,
-    required TResult Function(List<ConditionContentAttachment> attachments)
-        photo,
+    required TResult Function(String text) text,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
     required TResult Function() empty,
   }) {
-    return subjective(record);
+    return text(this.text);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String record)? subjective,
-    TResult? Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult? Function(String text)? text,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
   }) {
-    return subjective?.call(record);
+    return text?.call(this.text);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String record)? subjective,
-    TResult Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult Function(String text)? text,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
-    if (subjective != null) {
-      return subjective(record);
+    if (text != null) {
+      return text(this.text);
     }
     return orElse();
   }
@@ -216,77 +225,80 @@ class _$ConditionContentSubjectiveImpl implements ConditionContentSubjective {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ConditionContentSubjective value) subjective,
-    required TResult Function(ConditionContentPhoto value) photo,
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
   }) {
-    return subjective(this);
+    return text(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionContentSubjective value)? subjective,
-    TResult? Function(ConditionContentPhoto value)? photo,
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
   }) {
-    return subjective?.call(this);
+    return text?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionContentSubjective value)? subjective,
-    TResult Function(ConditionContentPhoto value)? photo,
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
     required TResult orElse(),
   }) {
-    if (subjective != null) {
-      return subjective(this);
+    if (text != null) {
+      return text(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConditionContentSubjectiveImplToJson(
+    return _$$ConditionContentTextImplToJson(
       this,
     );
   }
 }
 
-abstract class ConditionContentSubjective implements ConditionContent {
-  const factory ConditionContentSubjective({required final String record}) =
-      _$ConditionContentSubjectiveImpl;
+abstract class ConditionContentText implements ConditionContent {
+  const factory ConditionContentText({required final String text}) =
+      _$ConditionContentTextImpl;
 
-  factory ConditionContentSubjective.fromJson(Map<String, dynamic> json) =
-      _$ConditionContentSubjectiveImpl.fromJson;
+  factory ConditionContentText.fromJson(Map<String, dynamic> json) =
+      _$ConditionContentTextImpl.fromJson;
 
-  String get record;
+  String get text;
 
   /// Create a copy of ConditionContent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionContentSubjectiveImplCopyWith<_$ConditionContentSubjectiveImpl>
+  _$$ConditionContentTextImplCopyWith<_$ConditionContentTextImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ConditionContentPhotoImplCopyWith<$Res> {
-  factory _$$ConditionContentPhotoImplCopyWith(
-          _$ConditionContentPhotoImpl value,
-          $Res Function(_$ConditionContentPhotoImpl) then) =
-      __$$ConditionContentPhotoImplCopyWithImpl<$Res>;
+abstract class _$$ConditionContentImageImplCopyWith<$Res> {
+  factory _$$ConditionContentImageImplCopyWith(
+          _$ConditionContentImageImpl value,
+          $Res Function(_$ConditionContentImageImpl) then) =
+      __$$ConditionContentImageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ConditionContentAttachment> attachments});
+  $Res call({List<ConditionContentImageAttachment> attachments});
 }
 
 /// @nodoc
-class __$$ConditionContentPhotoImplCopyWithImpl<$Res>
-    extends _$ConditionContentCopyWithImpl<$Res, _$ConditionContentPhotoImpl>
-    implements _$$ConditionContentPhotoImplCopyWith<$Res> {
-  __$$ConditionContentPhotoImplCopyWithImpl(_$ConditionContentPhotoImpl _value,
-      $Res Function(_$ConditionContentPhotoImpl) _then)
+class __$$ConditionContentImageImplCopyWithImpl<$Res>
+    extends _$ConditionContentCopyWithImpl<$Res, _$ConditionContentImageImpl>
+    implements _$$ConditionContentImageImplCopyWith<$Res> {
+  __$$ConditionContentImageImplCopyWithImpl(_$ConditionContentImageImpl _value,
+      $Res Function(_$ConditionContentImageImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ConditionContent
@@ -296,30 +308,30 @@ class __$$ConditionContentPhotoImplCopyWithImpl<$Res>
   $Res call({
     Object? attachments = null,
   }) {
-    return _then(_$ConditionContentPhotoImpl(
+    return _then(_$ConditionContentImageImpl(
       attachments: null == attachments
           ? _value._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
-              as List<ConditionContentAttachment>,
+              as List<ConditionContentImageAttachment>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionContentPhotoImpl implements ConditionContentPhoto {
-  const _$ConditionContentPhotoImpl(
-      {required final List<ConditionContentAttachment> attachments,
+class _$ConditionContentImageImpl implements ConditionContentImage {
+  const _$ConditionContentImageImpl(
+      {required final List<ConditionContentImageAttachment> attachments,
       final String? $type})
       : _attachments = attachments,
-        $type = $type ?? 'photo';
+        $type = $type ?? 'image';
 
-  factory _$ConditionContentPhotoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConditionContentPhotoImplFromJson(json);
+  factory _$ConditionContentImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConditionContentImageImplFromJson(json);
 
-  final List<ConditionContentAttachment> _attachments;
+  final List<ConditionContentImageAttachment> _attachments;
   @override
-  List<ConditionContentAttachment> get attachments {
+  List<ConditionContentImageAttachment> get attachments {
     if (_attachments is EqualUnmodifiableListView) return _attachments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_attachments);
@@ -330,14 +342,14 @@ class _$ConditionContentPhotoImpl implements ConditionContentPhoto {
 
   @override
   String toString() {
-    return 'ConditionContent.photo(attachments: $attachments)';
+    return 'ConditionContent.image(attachments: $attachments)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionContentPhotoImpl &&
+            other is _$ConditionContentImageImpl &&
             const DeepCollectionEquality()
                 .equals(other._attachments, _attachments));
   }
@@ -352,41 +364,45 @@ class _$ConditionContentPhotoImpl implements ConditionContentPhoto {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ConditionContentPhotoImplCopyWith<_$ConditionContentPhotoImpl>
-      get copyWith => __$$ConditionContentPhotoImplCopyWithImpl<
-          _$ConditionContentPhotoImpl>(this, _$identity);
+  _$$ConditionContentImageImplCopyWith<_$ConditionContentImageImpl>
+      get copyWith => __$$ConditionContentImageImplCopyWithImpl<
+          _$ConditionContentImageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String record) subjective,
-    required TResult Function(List<ConditionContentAttachment> attachments)
-        photo,
+    required TResult Function(String text) text,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
     required TResult Function() empty,
   }) {
-    return photo(attachments);
+    return image(attachments);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String record)? subjective,
-    TResult? Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult? Function(String text)? text,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
   }) {
-    return photo?.call(attachments);
+    return image?.call(attachments);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String record)? subjective,
-    TResult Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult Function(String text)? text,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
-    if (photo != null) {
-      return photo(attachments);
+    if (image != null) {
+      return image(attachments);
     }
     return orElse();
   }
@@ -394,59 +410,248 @@ class _$ConditionContentPhotoImpl implements ConditionContentPhoto {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ConditionContentSubjective value) subjective,
-    required TResult Function(ConditionContentPhoto value) photo,
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
   }) {
-    return photo(this);
+    return image(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionContentSubjective value)? subjective,
-    TResult? Function(ConditionContentPhoto value)? photo,
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
   }) {
-    return photo?.call(this);
+    return image?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionContentSubjective value)? subjective,
-    TResult Function(ConditionContentPhoto value)? photo,
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
     required TResult orElse(),
   }) {
-    if (photo != null) {
-      return photo(this);
+    if (image != null) {
+      return image(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConditionContentPhotoImplToJson(
+    return _$$ConditionContentImageImplToJson(
       this,
     );
   }
 }
 
-abstract class ConditionContentPhoto implements ConditionContent {
-  const factory ConditionContentPhoto(
-          {required final List<ConditionContentAttachment> attachments}) =
-      _$ConditionContentPhotoImpl;
+abstract class ConditionContentImage implements ConditionContent {
+  const factory ConditionContentImage(
+          {required final List<ConditionContentImageAttachment> attachments}) =
+      _$ConditionContentImageImpl;
 
-  factory ConditionContentPhoto.fromJson(Map<String, dynamic> json) =
-      _$ConditionContentPhotoImpl.fromJson;
+  factory ConditionContentImage.fromJson(Map<String, dynamic> json) =
+      _$ConditionContentImageImpl.fromJson;
 
-  List<ConditionContentAttachment> get attachments;
+  List<ConditionContentImageAttachment> get attachments;
 
   /// Create a copy of ConditionContent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionContentPhotoImplCopyWith<_$ConditionContentPhotoImpl>
+  _$$ConditionContentImageImplCopyWith<_$ConditionContentImageImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ConditionContentAudioImplCopyWith<$Res> {
+  factory _$$ConditionContentAudioImplCopyWith(
+          _$ConditionContentAudioImpl value,
+          $Res Function(_$ConditionContentAudioImpl) then) =
+      __$$ConditionContentAudioImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<ConditionContentAudioAttachment> attachments});
+}
+
+/// @nodoc
+class __$$ConditionContentAudioImplCopyWithImpl<$Res>
+    extends _$ConditionContentCopyWithImpl<$Res, _$ConditionContentAudioImpl>
+    implements _$$ConditionContentAudioImplCopyWith<$Res> {
+  __$$ConditionContentAudioImplCopyWithImpl(_$ConditionContentAudioImpl _value,
+      $Res Function(_$ConditionContentAudioImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? attachments = null,
+  }) {
+    return _then(_$ConditionContentAudioImpl(
+      attachments: null == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<ConditionContentAudioAttachment>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ConditionContentAudioImpl implements ConditionContentAudio {
+  const _$ConditionContentAudioImpl(
+      {required final List<ConditionContentAudioAttachment> attachments,
+      final String? $type})
+      : _attachments = attachments,
+        $type = $type ?? 'audio';
+
+  factory _$ConditionContentAudioImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConditionContentAudioImplFromJson(json);
+
+  final List<ConditionContentAudioAttachment> _attachments;
+  @override
+  List<ConditionContentAudioAttachment> get attachments {
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachments);
+  }
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ConditionContent.audio(attachments: $attachments)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConditionContentAudioImpl &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_attachments));
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConditionContentAudioImplCopyWith<_$ConditionContentAudioImpl>
+      get copyWith => __$$ConditionContentAudioImplCopyWithImpl<
+          _$ConditionContentAudioImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String text) text,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
+    required TResult Function() empty,
+  }) {
+    return audio(attachments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String text)? text,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
+    TResult? Function()? empty,
+  }) {
+    return audio?.call(attachments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String text)? text,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (audio != null) {
+      return audio(attachments);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
+    required TResult Function(ConditionContentEmpty value) empty,
+  }) {
+    return audio(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
+    TResult? Function(ConditionContentEmpty value)? empty,
+  }) {
+    return audio?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
+    TResult Function(ConditionContentEmpty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (audio != null) {
+      return audio(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ConditionContentAudioImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ConditionContentAudio implements ConditionContent {
+  const factory ConditionContentAudio(
+          {required final List<ConditionContentAudioAttachment> attachments}) =
+      _$ConditionContentAudioImpl;
+
+  factory ConditionContentAudio.fromJson(Map<String, dynamic> json) =
+      _$ConditionContentAudioImpl.fromJson;
+
+  List<ConditionContentAudioAttachment> get attachments;
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConditionContentAudioImplCopyWith<_$ConditionContentAudioImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -501,9 +706,11 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String record) subjective,
-    required TResult Function(List<ConditionContentAttachment> attachments)
-        photo,
+    required TResult Function(String text) text,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
     required TResult Function() empty,
   }) {
     return empty();
@@ -512,8 +719,9 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String record)? subjective,
-    TResult? Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult? Function(String text)? text,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
   }) {
     return empty?.call();
@@ -522,8 +730,9 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String record)? subjective,
-    TResult Function(List<ConditionContentAttachment> attachments)? photo,
+    TResult Function(String text)? text,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -536,8 +745,9 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ConditionContentSubjective value) subjective,
-    required TResult Function(ConditionContentPhoto value) photo,
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
   }) {
     return empty(this);
@@ -546,8 +756,9 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionContentSubjective value)? subjective,
-    TResult? Function(ConditionContentPhoto value)? photo,
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
   }) {
     return empty?.call(this);
@@ -556,8 +767,9 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionContentSubjective value)? subjective,
-    TResult Function(ConditionContentPhoto value)? photo,
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
     required TResult orElse(),
   }) {

@@ -50,14 +50,14 @@ class ConditionForm extends HookConsumerWidget {
                   CupertinoIcons.arrow_up_circle_fill,
                 ),
                 onPressed: () async {
-                  final record = textController.text;
-                  if (record.isEmpty) {
+                  final text = textController.text;
+                  if (text.isEmpty) {
                     return;
                   }
 
                   await ref.read(
-                    conditionCreateSubjectiveProvider(
-                      record: record,
+                    conditionCreateTextProvider(
+                      text: text,
                     ).future,
                   );
 

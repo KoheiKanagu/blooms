@@ -1,4 +1,5 @@
-import 'package:blooms/features/condition/domain/condition_content_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,15 +12,20 @@ part 'condition_content.g.dart';
   fallbackUnion: 'empty',
 )
 class ConditionContent with _$ConditionContent {
-  /// 主観的な記録
-  const factory ConditionContent.subjective({
-    required String record,
-  }) = ConditionContentSubjective;
+  /// テキストの記録
+  const factory ConditionContent.text({
+    required String text,
+  }) = ConditionContentText;
 
-  /// 写真の記録
-  const factory ConditionContent.photo({
-    required List<ConditionContentAttachment> attachments,
-  }) = ConditionContentPhoto;
+  /// 画像の記録
+  const factory ConditionContent.image({
+    required List<ConditionContentImageAttachment> attachments,
+  }) = ConditionContentImage;
+
+  /// 音声の記録
+  const factory ConditionContent.audio({
+    required List<ConditionContentAudioAttachment> attachments,
+  }) = ConditionContentAudio;
 
   const factory ConditionContent.empty() = ConditionContentEmpty;
 

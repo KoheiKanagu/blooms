@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { conditionConverter } from '../models/condition';
+import { ConditionContentText, conditionConverter } from '../models/condition';
 import { CollectionPath } from '../utils/collectionPath';
 import { adminInitializeAppStg } from './adminInitializeApp';
 
@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     .withConverter(conditionConverter)
     .where('deletedAt', '==', null)
     .where('state', '==', 'success')
-    .where('type', '==', 'subjective')
+    .where('type', '==', 'text')
     .where('createdBy', '==', sourceUid)
     .orderBy('createdAt', 'desc')
     .get();
@@ -31,7 +31,7 @@ async function main(): Promise<void> {
     .map(e => e.data())
     .map(e => ({
       日時: (e.createdAt as Timestamp).toDate().toLocaleString('ja-JP'),
-      記録: e.record,
+      記録: (e.content as ConditionContentText).text,
     }));
 
   console.log(JSON.stringify(records, null, 2));

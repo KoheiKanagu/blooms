@@ -31,7 +31,7 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
       .read(conditionCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('createdBy', isEqualTo: uid)
-      .where('type', isEqualTo: ConditionType.subjective.name)
+      .where('type', isEqualTo: ConditionType.text.name)
       .orderBy('createdAt', descending: true);
 }
 
@@ -47,9 +47,9 @@ Future<void> conditionDelete(
 }
 
 @riverpod
-Future<void> conditionCreateSubjective(
+Future<void> conditionCreateText(
   Ref ref, {
-  required String record,
+  required String text,
 }) async {
   final uid = await ref.read(firebaseUserUidProvider.future);
   if (uid == null) {
@@ -57,9 +57,9 @@ Future<void> conditionCreateSubjective(
   }
 
   await ref.read(conditionCollectionReferenceProvider).add(
-        Condition.subjective(
+        Condition.text(
           uid: uid,
-          record: record,
+          text: text,
         ),
       );
 }

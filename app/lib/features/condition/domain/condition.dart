@@ -1,6 +1,6 @@
 import 'package:blooms/features/condition/domain/condition_content.dart';
-import 'package:blooms/features/condition/domain/condition_content_attachment.dart';
-import 'package:blooms/features/condition/domain/condition_state.dart';
+import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,27 +22,31 @@ class Condition with _$Condition {
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Condition;
 
-  factory Condition.subjective({required String uid, required String record}) =>
+  factory Condition.text({required String uid, required String text}) =>
       Condition(
         createdBy: uid,
-        content: ConditionContent.subjective(record: record),
+        content: ConditionContent.text(text: text),
       );
 
-  factory Condition.photo({
+  factory Condition.image({
     required String uid,
-    required List<String> attachments,
+    required List<ConditionContentImageAttachment> attachments,
   }) =>
       Condition(
         createdBy: uid,
-        content: ConditionContent.photo(
-          attachments: attachments
-              .map(
-                (attachment) => ConditionContentAttachment(
-                  gsPath: attachment,
-                  state: ConditionState.pending,
-                ),
-              )
-              .toList(),
+        content: ConditionContent.image(
+          attachments: attachments,
+        ),
+      );
+
+  factory Condition.audio({
+    required String uid,
+    required List<ConditionContentAudioAttachment> attachments,
+  }) =>
+      Condition(
+        createdBy: uid,
+        content: ConditionContent.audio(
+          attachments: attachments,
         ),
       );
 

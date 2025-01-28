@@ -78,8 +78,9 @@ class ConditionPageList extends HookConsumerWidget {
                   final condition = snap.data();
 
                   final createdAt = condition.createdAt?.toDate();
-                  final record = condition.record;
-                  if (createdAt == null || record == null) {
+                  // TODO: 画像、音声の表示
+                  const text = 'condition.content';
+                  if (createdAt == null) {
                     return const SizedBox.shrink();
                   }
 
@@ -95,7 +96,7 @@ class ConditionPageList extends HookConsumerWidget {
                   return ConditionBubble(
                     documentId: snap.id,
                     createdAt: createdAt,
-                    record: record,
+                    text: text,
                     showDateTime: showDateTime,
                   );
                 },
