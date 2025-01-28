@@ -54,7 +54,14 @@ class ConditionForm extends HookConsumerWidget {
                         if (xFile == null) {
                           return;
                         }
-                        print(xFile.mimeType);
+
+                        await ref.read(
+                          conditionCreateImageProvider(
+                            xFiles: [
+                              xFile,
+                            ].toList(),
+                          ).future,
+                        );
                       },
                     ),
                     PullDownMenuItem(
