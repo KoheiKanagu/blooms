@@ -22,24 +22,15 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) {
 mixin _$Condition {
   /// 作成者
   String get createdBy => throw _privateConstructorUsedError;
+
+  /// 内容
+  ConditionContent get content => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get updatedAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get deletedAt => throw _privateConstructorUsedError;
-
-  /// コンディションの種類
-  ConditionType get type => throw _privateConstructorUsedError;
-
-  /// 添付ファイルのgs://パス
-  List<String> get attachments => throw _privateConstructorUsedError;
-
-  /// attachmentsの解析で処理が必要な場合の状態
-  ConditionState get state => throw _privateConstructorUsedError;
-
-  /// 記録
-  String? get record => throw _privateConstructorUsedError;
 
   /// Serializes this Condition to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,13 +49,12 @@ abstract class $ConditionCopyWith<$Res> {
   @useResult
   $Res call(
       {String createdBy,
+      ConditionContent content,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      ConditionType type,
-      List<String> attachments,
-      ConditionState state,
-      String? record});
+      @TimestampConverter() Timestamp? deletedAt});
+
+  $ConditionContentCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -83,19 +73,20 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
   @override
   $Res call({
     Object? createdBy = null,
+    Object? content = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? type = null,
-    Object? attachments = null,
-    Object? state = null,
-    Object? record = freezed,
   }) {
     return _then(_value.copyWith(
       createdBy: null == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as ConditionContent,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -108,23 +99,17 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ConditionType,
-      attachments: null == attachments
-          ? _value.attachments
-          : attachments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as ConditionState,
-      record: freezed == record
-          ? _value.record
-          : record // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
+  }
+
+  /// Create a copy of Condition
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConditionContentCopyWith<$Res> get content {
+    return $ConditionContentCopyWith<$Res>(_value.content, (value) {
+      return _then(_value.copyWith(content: value) as $Val);
+    });
   }
 }
 
@@ -138,13 +123,13 @@ abstract class _$$ConditionImplCopyWith<$Res>
   @useResult
   $Res call(
       {String createdBy,
+      ConditionContent content,
       @TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      ConditionType type,
-      List<String> attachments,
-      ConditionState state,
-      String? record});
+      @TimestampConverter() Timestamp? deletedAt});
+
+  @override
+  $ConditionContentCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -161,19 +146,20 @@ class __$$ConditionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? createdBy = null,
+    Object? content = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? type = null,
-    Object? attachments = null,
-    Object? state = null,
-    Object? record = freezed,
   }) {
     return _then(_$ConditionImpl(
       createdBy: null == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as ConditionContent,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -186,22 +172,6 @@ class __$$ConditionImplCopyWithImpl<$Res>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ConditionType,
-      attachments: null == attachments
-          ? _value._attachments
-          : attachments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as ConditionState,
-      record: freezed == record
-          ? _value.record
-          : record // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -211,14 +181,10 @@ class __$$ConditionImplCopyWithImpl<$Res>
 class _$ConditionImpl implements _Condition {
   const _$ConditionImpl(
       {required this.createdBy,
+      required this.content,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
-      @TimestampConverter() this.deletedAt,
-      this.type = ConditionType.unknown,
-      final List<String> attachments = const [],
-      this.state = ConditionState.pending,
-      this.record})
-      : _attachments = attachments;
+      @TimestampConverter() this.deletedAt});
 
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
@@ -226,6 +192,10 @@ class _$ConditionImpl implements _Condition {
   /// 作成者
   @override
   final String createdBy;
+
+  /// 内容
+  @override
+  final ConditionContent content;
   @override
   @TimestampConverter()
   final Timestamp? createdAt;
@@ -236,35 +206,9 @@ class _$ConditionImpl implements _Condition {
   @TimestampConverter()
   final Timestamp? deletedAt;
 
-  /// コンディションの種類
-  @override
-  @JsonKey()
-  final ConditionType type;
-
-  /// 添付ファイルのgs://パス
-  final List<String> _attachments;
-
-  /// 添付ファイルのgs://パス
-  @override
-  @JsonKey()
-  List<String> get attachments {
-    if (_attachments is EqualUnmodifiableListView) return _attachments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_attachments);
-  }
-
-  /// attachmentsの解析で処理が必要な場合の状態
-  @override
-  @JsonKey()
-  final ConditionState state;
-
-  /// 記録
-  @override
-  final String? record;
-
   @override
   String toString() {
-    return 'Condition(createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, type: $type, attachments: $attachments, state: $state, record: $record)';
+    return 'Condition(createdBy: $createdBy, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -274,31 +218,19 @@ class _$ConditionImpl implements _Condition {
             other is _$ConditionImpl &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.deletedAt, deletedAt) ||
-                other.deletedAt == deletedAt) &&
-            (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality()
-                .equals(other._attachments, _attachments) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.record, record) || other.record == record));
+                other.deletedAt == deletedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      createdBy,
-      createdAt,
-      updatedAt,
-      deletedAt,
-      type,
-      const DeepCollectionEquality().hash(_attachments),
-      state,
-      record);
+      runtimeType, createdBy, content, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -319,13 +251,10 @@ class _$ConditionImpl implements _Condition {
 abstract class _Condition implements Condition {
   const factory _Condition(
       {required final String createdBy,
+      required final ConditionContent content,
       @TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
-      @TimestampConverter() final Timestamp? deletedAt,
-      final ConditionType type,
-      final List<String> attachments,
-      final ConditionState state,
-      final String? record}) = _$ConditionImpl;
+      @TimestampConverter() final Timestamp? deletedAt}) = _$ConditionImpl;
 
   factory _Condition.fromJson(Map<String, dynamic> json) =
       _$ConditionImpl.fromJson;
@@ -333,6 +262,10 @@ abstract class _Condition implements Condition {
   /// 作成者
   @override
   String get createdBy;
+
+  /// 内容
+  @override
+  ConditionContent get content;
   @override
   @TimestampConverter()
   Timestamp? get createdAt;
@@ -342,22 +275,6 @@ abstract class _Condition implements Condition {
   @override
   @TimestampConverter()
   Timestamp? get deletedAt;
-
-  /// コンディションの種類
-  @override
-  ConditionType get type;
-
-  /// 添付ファイルのgs://パス
-  @override
-  List<String> get attachments;
-
-  /// attachmentsの解析で処理が必要な場合の状態
-  @override
-  ConditionState get state;
-
-  /// 記録
-  @override
-  String? get record;
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.

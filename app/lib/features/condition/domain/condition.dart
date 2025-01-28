@@ -1,5 +1,6 @@
+import 'package:blooms/features/condition/domain/condition_content.dart';
+import 'package:blooms/features/condition/domain/condition_content_attachment.dart';
 import 'package:blooms/features/condition/domain/condition_state.dart';
-import 'package:blooms/features/condition/domain/condition_type.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,30 +14,18 @@ class Condition with _$Condition {
   const factory Condition({
     /// 作成者
     required String createdBy,
+
+    /// 内容
+    required ConditionContent content,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
-
-    /// コンディションの種類
-    @Default(ConditionType.unknown) ConditionType type,
-
-    /// 添付ファイルのgs://パス
-    @Default([]) List<String> attachments,
-
-    /// attachmentsの解析で処理が必要な場合の状態
-    @Default(ConditionState.pending) ConditionState state,
-
-    /// 記録
-    String? record,
   }) = _Condition;
 
   factory Condition.subjective({required String uid, required String record}) =>
       Condition(
         createdBy: uid,
-        record: record,
-        type: ConditionType.subjective,
-        attachments: [],
-        state: ConditionState.success,
+        content: ConditionContent.subjective(record: record),
       );
 
   factory Condition.photo({
@@ -45,8 +34,16 @@ class Condition with _$Condition {
   }) =>
       Condition(
         createdBy: uid,
-        type: ConditionType.photo,
-        attachments: attachments,
+        content: ConditionContent.photo(
+          attachments: attachments
+              .map(
+                (attachment) => ConditionContentAttachment(
+                  gsPath: attachment,
+                  state: ConditionState.pending,
+                ),
+              )
+              .toList(),
+        ),
       );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
