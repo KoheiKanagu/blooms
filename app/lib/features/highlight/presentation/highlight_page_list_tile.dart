@@ -60,7 +60,8 @@ class HighlightPageListTile extends HookConsumerWidget {
         contentText: switch (highlight.content) {
           HighlightContentPrivate(:final abstract) => abstract,
           HighlightContentProfessional(:final abstract) => abstract,
-          HighlightContentEmpty() || null => i18n.highlight.unknownStyleContent,
+          HighlightContentEmpty() => i18n.highlight.unknownStyleContent,
+          _ => null,
         },
         onTap: () async {
           switch (highlight.state) {
