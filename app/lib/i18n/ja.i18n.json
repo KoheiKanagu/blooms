@@ -58,5 +58,7 @@
   "onboarding": {
     "letsGetStarted": "さあ、はじめましょう"
   },
-  "grounding": "グラウンディング"
+  "grounding": "グラウンディング",
+  "today": "今日",
+  "yesterday": "昨日"
 }
