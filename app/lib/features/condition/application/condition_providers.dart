@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
+import 'package:blooms/constants/storage_path.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
+import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
+import 'package:blooms/utils/my_logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'condition_providers.g.dart';
@@ -58,6 +66,108 @@ Future<void> conditionCreateText(
         Condition.text(
           uid: uid,
           text: text,
+        ),
+      );
+}
+
+@riverpod
+Future<Reference> conditionImageStorageReference(
+  Ref ref, {
+  required String uid,
+  required String fileName,
+}) async {
+  return ref
+      .read(firebaseStorageProvider)
+      .ref(StoragePath.kImages)
+      .child(uid)
+      .child(fileName);
+}
+
+@riverpod
+Future<void> conditionCreateImage(
+  Ref ref, {
+  required List<XFile> xFiles,
+}) async {
+  final uid = await ref.read(firebaseUserUidProvider.future);
+  if (uid == null) {
+    throw Exception('uid is null');
+  }
+
+  final tasks = xFiles.map((xFile) async {
+    logger.info('Upload image: ${xFile.path}');
+
+    final reference = await ref.read(
+      conditionImageStorageReferenceProvider(
+        uid: uid,
+        fileName: xFile.name,
+      ).future,
+    );
+
+    final task = await reference.putFile(
+      File(xFile.path),
+    );
+    final mimeType = task.metadata?.contentType ?? '';
+
+    return ConditionContentImageAttachment.gs(
+      reference: reference,
+      mimeType: mimeType,
+    );
+  });
+
+  final attachments = await Future.wait(tasks);
+
+  await ref.read(conditionCollectionReferenceProvider).add(
+        Condition.image(
+          uid: uid,
+          attachments: attachments,
+        ),
+      );
+}
+
+@riverpod
+Future<Reference> conditionAudioStorageReference(
+  Ref ref, {
+  required String uid,
+  required String fileName,
+}) async {
+  return ref
+      .read(firebaseStorageProvider)
+      .ref(StoragePath.kAudios)
+      .child(uid)
+      .child(fileName);
+}
+
+@riverpod
+Future<void> conditionCreateAudio(
+  Ref ref, {
+  required XFile xFile,
+}) async {
+  final uid = await ref.read(firebaseUserUidProvider.future);
+  if (uid == null) {
+    throw Exception('uid is null');
+  }
+
+  final reference = await ref.read(
+    conditionAudioStorageReferenceProvider(
+      uid: uid,
+      fileName: xFile.name,
+    ).future,
+  );
+
+  final task = await reference.putFile(
+    File(xFile.path),
+  );
+  final mimeType = task.metadata?.contentType ?? '';
+
+  await ref.read(conditionCollectionReferenceProvider).add(
+        Condition.audio(
+          uid: uid,
+          attachments: [
+            ConditionContentAudioAttachment.gs(
+              reference: reference,
+              mimeType: mimeType,
+            ),
+          ],
         ),
       );
 }
