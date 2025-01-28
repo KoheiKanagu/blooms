@@ -38,7 +38,6 @@ export async function updateHighlightContent(
       .withConverter(conditionConverter)
       .where('deletedAt', '==', null)
       .where('createdBy', '==', highlight.subjectUid)
-      .where('state', '==', 'success')
       .orderBy('createdAt', 'desc')
       // 対象の範囲
       .where('createdAt', '>=', startDate)
