@@ -11,10 +11,12 @@ part 'condition_content.g.dart';
   fallbackUnion: 'empty',
 )
 class ConditionContent with _$ConditionContent {
+  /// 主観的な記録
   const factory ConditionContent.subjective({
     required String record,
   }) = ConditionContentSubjective;
 
+  /// 写真の記録
   const factory ConditionContent.photo({
     required List<ConditionContentAttachment> attachments,
   }) = ConditionContentPhoto;

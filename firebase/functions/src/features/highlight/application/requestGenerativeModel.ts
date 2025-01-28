@@ -19,20 +19,29 @@ export async function requestGenerativeModel(conditions: Condition[], highlightS
 }> {
   const generativeModel = setupGenerativeModel(highlightStyle);
 
-  let contents: Content[] = conditions.map<Content>((condition) => {
+  let contents: Content[] = conditions.map<Content | null>((condition) => {
     const date = (condition.createdAt as Timestamp).toDate().toLocaleString('ja-JP');
+
+    let text: string;
+    switch (condition.content.type) {
+      case 'subjective':
+        text = `${date}に入力したテキスト: ${condition.content.record}`;
+        break;
+      case 'photo':
+        text = condition.content.attachments
+          .map(attachment => `${date}にアップロードした写真の説明: ${attachment.alt}`)
+          .join('\n');
+        break;
+      case 'empty':
+        return null;
+    };
 
     return {
       role: 'user',
-      parts: [
-        {
-          text: `${date}の記録:
-${condition.record ?? ''}
-`,
-        },
-      ],
+      parts: [{ text: text }],
     };
-  });
+  })
+    .filter(e => e !== null);
 
   // 空だとエラーになる
   if (contents.length === 0) {
