@@ -28,7 +28,7 @@ final conditionCollectionReferenceProvider =
 // ignore: unused_element
 typedef ConditionCollectionReferenceRef
     = AutoDisposeProviderRef<CollectionReference<Condition>>;
-String _$conditionQueryHash() => r'5609586f5a79943fae85d4aa0860199bd015a9a1';
+String _$conditionQueryHash() => r'3aaf4e17b3827d34fdade4646ae4309e5c32be73';
 
 /// See also [conditionQuery].
 @ProviderFor(conditionQuery)
