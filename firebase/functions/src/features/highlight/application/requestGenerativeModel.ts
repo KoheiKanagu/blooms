@@ -9,11 +9,12 @@ import { setupGenerativeModel } from './setupGenerativeModel';
 /**
  * 生成モデルにリクエストを送信
  *
+ * @param uid ユーザーID
  * @param conditions 解析対象のConditions
  * @param highlightStyle 文体のスタイル
  * @returns
  */
-export async function requestGenerativeModel(conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
+export async function requestGenerativeModel(uid: string, conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
   content: HighlightContentPrivate | HighlightContentProfessional;
   prompt: string;
 }> {
@@ -96,7 +97,7 @@ export async function requestGenerativeModel(conditions: Condition[], highlightS
   };
   outSensitiveLog(`content:`, content);
 
-  const gsPrompt = await savePrompt(contents);
+  const gsPrompt = await savePrompt(uid, contents);
   return {
     content: content,
     prompt: gsPrompt,
