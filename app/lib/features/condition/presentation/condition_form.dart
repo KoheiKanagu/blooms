@@ -51,6 +51,7 @@ class ConditionForm extends HookConsumerWidget {
                           maxHeight: 1024,
                           maxWidth: 1024,
                           imageQuality: 50,
+                          requestFullMetadata: false,
                         );
                         if (xFile == null) {
                           return;
@@ -74,6 +75,7 @@ class ConditionForm extends HookConsumerWidget {
                           maxWidth: 1024,
                           imageQuality: 50,
                           limit: 4,
+                          requestFullMetadata: false,
                         );
                         if (xFiles.isEmpty) {
                           return;
