@@ -27,7 +27,7 @@ FirebaseStorage firebaseStorage(Ref ref) => FirebaseStorage.instance;
 @riverpod
 Future<List<String>> firebaseStorageGsFileDownloadUrls(
   Ref ref, {
-  required Iterable<String> fileUris,
+  required List<String> fileUris,
 }) async {
   final storage = ref.read(firebaseStorageProvider);
 

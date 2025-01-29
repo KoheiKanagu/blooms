@@ -227,6 +227,9 @@ components:
             required:
               - fileUri
               - mimeType
+              - width
+              - height
+              - additionalInfo
             properties:
               fileUri:
                 type: string
@@ -236,6 +239,22 @@ components:
                 type: string
                 description: MIMEタイプ
                 example: image/webp
+              width:
+                type: integer
+                description: 画像の幅
+                example: 1920
+              height:
+                type: integer
+                description: 画像の高さ
+                example: 1080
+              additionalInfo:
+                type: object
+                description: その他の情報
+                properties:
+                  blurHash:
+                    type: string
+                    description: BlurHash
+                    example: L6PZfSi_.AyE_3t7t7R**0o#DgR4
 
     ConditionContentAudio:
       required:

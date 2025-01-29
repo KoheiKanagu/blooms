@@ -24,6 +24,11 @@ export interface ConditionContentImage {
   attachments: {
     fileUri: string;
     mimeType: string;
+    width: number;
+    height: number;
+    additionalInfo: {
+      blurHash: string | null;
+    };
   }[];
 }
 
@@ -83,6 +88,11 @@ function conditionContentConverter(value: Record<string, unknown>):
         .map(attachment => ({
           fileUri: attachment['fileUri'] as string,
           mimeType: attachment['mimeType'] as string,
+          width: attachment['width'] as number,
+          height: attachment['height'] as number,
+          additionalInfo: {
+            blurHash: (attachment['additionalInfo'] as Record<string, unknown>)['blurHash'] as string | null,
+          },
         }));
 
       const content: ConditionContentImage = {

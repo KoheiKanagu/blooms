@@ -9,9 +9,11 @@ import 'package:blooms/features/condition/domain/condition_content_audio_attachm
 import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:blooms/utils/my_logger.dart';
+import 'package:blurhash_dart/blurhash_dart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -93,26 +95,36 @@ Future<void> conditionCreateImage(
     throw Exception('uid is null');
   }
 
-  final tasks = xFiles.map((xFile) async {
-    logger.info('Upload image: ${xFile.path}');
+  final tasks = xFiles.map(
+    (xFile) async {
+      logger.info('Upload image: ${xFile.path}');
 
-    final reference = await ref.read(
-      conditionImageStorageReferenceProvider(
-        uid: uid,
-        fileName: xFile.name,
-      ).future,
-    );
+      final reference = await ref.read(
+        conditionImageStorageReferenceProvider(
+          uid: uid,
+          fileName: xFile.name,
+        ).future,
+      );
 
-    final task = await reference.putFile(
-      File(xFile.path),
-    );
-    final mimeType = task.metadata?.contentType ?? '';
+      final image = img.decodeImage(await xFile.readAsBytes());
+      final blurHash = image == null ? '' : BlurHash.encode(image).hash;
+      final width = image?.width ?? 0;
+      final height = image?.height ?? 0;
 
-    return ConditionContentImageAttachment.gs(
-      reference: reference,
-      mimeType: mimeType,
-    );
-  });
+      final task = await reference.putFile(
+        File(xFile.path),
+      );
+      final mimeType = task.metadata?.contentType ?? '';
+
+      return ConditionContentImageAttachment.gs(
+        reference: reference,
+        mimeType: mimeType,
+        width: width,
+        height: height,
+        blurHash: blurHash,
+      );
+    },
+  );
 
   final attachments = await Future.wait(tasks);
 

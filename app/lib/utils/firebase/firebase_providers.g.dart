@@ -94,7 +94,7 @@ final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
 // ignore: unused_element
 typedef FirebaseStorageRef = ProviderRef<FirebaseStorage>;
 String _$firebaseStorageGsFileDownloadUrlsHash() =>
-    r'b227657c2dfb27740dff400eed9cdf4e7a366b84';
+    r'a0cec94b1d0986b4a068aa8beadd617065dc53f1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -130,7 +130,7 @@ class FirebaseStorageGsFileDownloadUrlsFamily
 
   /// See also [firebaseStorageGsFileDownloadUrls].
   FirebaseStorageGsFileDownloadUrlsProvider call({
-    required Iterable<String> fileUris,
+    required List<String> fileUris,
   }) {
     return FirebaseStorageGsFileDownloadUrlsProvider(
       fileUris: fileUris,
@@ -166,7 +166,7 @@ class FirebaseStorageGsFileDownloadUrlsProvider
     extends AutoDisposeFutureProvider<List<String>> {
   /// See also [firebaseStorageGsFileDownloadUrls].
   FirebaseStorageGsFileDownloadUrlsProvider({
-    required Iterable<String> fileUris,
+    required List<String> fileUris,
   }) : this._internal(
           (ref) => firebaseStorageGsFileDownloadUrls(
             ref as FirebaseStorageGsFileDownloadUrlsRef,
@@ -194,7 +194,7 @@ class FirebaseStorageGsFileDownloadUrlsProvider
     required this.fileUris,
   }) : super.internal();
 
-  final Iterable<String> fileUris;
+  final List<String> fileUris;
 
   @override
   Override overrideWith(
@@ -241,7 +241,7 @@ class FirebaseStorageGsFileDownloadUrlsProvider
 mixin FirebaseStorageGsFileDownloadUrlsRef
     on AutoDisposeFutureProviderRef<List<String>> {
   /// The parameter `fileUris` of this provider.
-  Iterable<String> get fileUris;
+  List<String> get fileUris;
 }
 
 class _FirebaseStorageGsFileDownloadUrlsProviderElement
@@ -250,7 +250,7 @@ class _FirebaseStorageGsFileDownloadUrlsProviderElement
   _FirebaseStorageGsFileDownloadUrlsProviderElement(super.provider);
 
   @override
-  Iterable<String> get fileUris =>
+  List<String> get fileUris =>
       (origin as FirebaseStorageGsFileDownloadUrlsProvider).fileUris;
 }
 // ignore_for_file: type=lint
