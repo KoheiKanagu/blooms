@@ -291,7 +291,7 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
   @JsonKey()
   final HighlightState state;
 
-  /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
+  /// 生成モデルによるハイライトの生成プロンプトのファイルパス
   @override
   final String? promptFileUri;
 
@@ -508,7 +508,7 @@ abstract class HighlightContentPrivate implements HighlightContent {
   /// 生成モデルでの処理の状態
   HighlightState get state;
 
-  /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
+  /// 生成モデルによるハイライトの生成プロンプトのファイルパス
   String? get promptFileUri;
 
   /// Create a copy of HighlightContent

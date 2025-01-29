@@ -28,7 +28,7 @@ final highlightCollectionReferenceProvider =
 // ignore: unused_element
 typedef HighlightCollectionReferenceRef
     = AutoDisposeProviderRef<CollectionReference<Highlight>>;
-String _$highlightQueryHash() => r'2b000f460e1fdb8856f92af48eebc8535dd699c3';
+String _$highlightQueryHash() => r'dabbf2c37054c7f63279c5df11c4ee8a5281ffcf';
 
 /// See also [highlightQuery].
 @ProviderFor(highlightQuery)
@@ -46,7 +46,7 @@ final highlightQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HighlightQueryRef = AutoDisposeFutureProviderRef<Query<Highlight>>;
-String _$highlightCreateHash() => r'c810582c6f3c1510040fe44d4229453c64760654';
+String _$highlightCreateHash() => r'f033a0d8f87a0603afcd2c76ba99616c70e82270';
 
 /// Copied from Dart SDK
 class _SystemHash {
