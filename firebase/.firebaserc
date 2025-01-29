@@ -14,6 +14,16 @@
           "blooms-widgetbook-stg"
         ]
       }
+    },
+    "blooms-prod-43d74": {
+      "hosting": {
+        "app": [
+          "blooms-prod-43d74"
+        ],
+        "widgetbook": [
+          "blooms-widgetbook-prod"
+        ]
+      }
     }
   },
   "etags": {}
