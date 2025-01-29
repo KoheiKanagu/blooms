@@ -101,6 +101,8 @@ class ConditionPageList extends HookConsumerWidget {
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 16,
                 ),
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
               ),
             );
           },
