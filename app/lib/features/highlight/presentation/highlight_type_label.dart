@@ -5,7 +5,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightTypeLabel extends StatelessWidget {
   const HighlightTypeLabel(
-    this.type, {
+    this.period, {
     super.key,
   });
 
@@ -14,17 +14,17 @@ class HighlightTypeLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      switch (type) {
+      switch (period) {
         HighlightPeriod.past1day => i18n.highlight.onTheDay,
         HighlightPeriod.past7days ||
         HighlightPeriod.past14days ||
         HighlightPeriod.past21days ||
         HighlightPeriod.past28days =>
-          i18n.highlight.pastDays(n: type.days),
+          i18n.highlight.pastDays(n: period.days),
       },
       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontWeight: FontWeight.bold,
-            color: switch (type) {
+            color: switch (period) {
               HighlightPeriod.past1day =>
                 CupertinoColors.systemRed.resolveFrom(context),
               HighlightPeriod.past7days =>

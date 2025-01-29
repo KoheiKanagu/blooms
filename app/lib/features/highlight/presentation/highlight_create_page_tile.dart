@@ -9,7 +9,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightCreatePageTile extends StatelessWidget {
   HighlightCreatePageTile({
-    required this.type,
+    required this.period,
     required this.selected,
     required this.onTap,
     DateTime? today,
@@ -29,19 +29,21 @@ class HighlightCreatePageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HighlightTile(
-      type: type,
+      period: period,
       description: descriptionText(),
       onTap: onTap,
       selected: selected,
-      contentText: i18n.highlight.nDaysConditionSummary(n: type.localizedName),
+      contentText: i18n.highlight.nDaysConditionSummary(
+        n: period.localizedName,
+      ),
     );
   }
 
   String descriptionText() {
     final nowDate = myDateFormat(today);
-    final pastDate = myDateFormat(type.pastDate(today));
+    final pastDate = myDateFormat(period.pastDate(today));
 
-    return switch (type) {
+    return switch (period) {
       HighlightPeriod.past1day => i18n.highlight.onTheDayTarget(date: nowDate),
       HighlightPeriod.past7days ||
       HighlightPeriod.past14days ||
@@ -61,8 +63,8 @@ Widget highlightCreatePageTile(BuildContext context) {
     child: ListView(
       children: HighlightPeriod.values
           .map(
-            (type) => HighlightCreatePageTile(
-              type: type,
+            (period) => HighlightCreatePageTile(
+              period: period,
               selected: context.knobs.boolean(
                 label: 'Selected',
               ),

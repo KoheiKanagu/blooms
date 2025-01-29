@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 
 class HighlightTile extends StatelessWidget {
   const HighlightTile({
-    required this.type,
+    required this.period,
     required this.description,
     required this.onTap,
     this.contentText,
@@ -56,7 +56,7 @@ class HighlightTile extends StatelessWidget {
         ),
         children: [
           _Title(
-            type: type,
+            period: period,
             state: state,
             description: description,
             selected: selected,
@@ -73,7 +73,7 @@ class HighlightTile extends StatelessWidget {
 
 class _Title extends StatelessWidget {
   const _Title({
-    required this.type,
+    required this.period,
     required this.state,
     required this.description,
     required this.selected,
@@ -95,12 +95,12 @@ class _Title extends StatelessWidget {
         children: [
           if (selected == null)
             _Label(
-              type: type,
+              period: period,
               state: state!,
             )
           else
             _LabelCheckMark(
-              type: type,
+              period: period,
               selected: selected!,
             ),
           const Gap(8),
@@ -115,7 +115,7 @@ class _Title extends StatelessWidget {
 
 class _Label extends StatelessWidget {
   const _Label({
-    required this.type,
+    required this.period,
     required this.state,
   });
 
@@ -127,7 +127,7 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        HighlightTypeLabel(type),
+        HighlightTypeLabel(period),
         const Spacer(),
         switch (state) {
           HighlightState.pending => Icon(
@@ -148,7 +148,7 @@ class _Label extends StatelessWidget {
 
 class _LabelCheckMark extends StatelessWidget {
   const _LabelCheckMark({
-    required this.type,
+    required this.period,
     required this.selected,
   });
 
@@ -160,7 +160,7 @@ class _LabelCheckMark extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        HighlightTypeLabel(type),
+        HighlightTypeLabel(period),
         const Spacer(),
         Icon(
           selected

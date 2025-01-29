@@ -49,7 +49,7 @@ class HighlightPageListTile extends HookConsumerWidget {
         ],
       ),
       child: HighlightTile(
-        type: highlight.type,
+        period: highlight.type,
         state: highlight.state,
         description: highlight.type == HighlightPeriod.past1day
             ? highlight.highlightRange.endDate

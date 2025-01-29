@@ -1,5 +1,5 @@
-import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
+import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
@@ -18,14 +18,14 @@ class OnboardingPageBody2 extends StatelessWidget {
     return ListView(
       children: [
         HighlightTile(
-          type: HighlightPeriod.past1day,
+          period: HighlightPeriod.past1day,
           state: HighlightState.success,
           description: myDateFormat(DateTime(2025, 1, 24)),
           onTap: () {},
           contentText: '今日は少し眠気を感じやすい時間帯があったみたいですね。鼻水も出ているようなので、ゆっくり休んでくださいね。',
         ),
         HighlightTile(
-          type: HighlightPeriod.past21days,
+          period: HighlightPeriod.past21days,
           state: HighlightState.success,
           description: i18n.highlight.xToY(
             x: myDateFormat(DateTime(2025, 1, 3)),

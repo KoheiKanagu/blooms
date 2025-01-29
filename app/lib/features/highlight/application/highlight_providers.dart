@@ -4,7 +4,6 @@ import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
-import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
@@ -52,7 +51,7 @@ Future<void> highlightCreate(
   }
 
   final data = Highlight.create(
-    type: type,
+    period: period,
     style: style,
     subjectUid: uid,
     startAt: Timestamp.fromDate(clock.now()),
