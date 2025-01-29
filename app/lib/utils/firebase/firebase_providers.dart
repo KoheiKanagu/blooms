@@ -1,3 +1,4 @@
+import 'package:blooms/extensions/ref_extensions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -29,5 +30,7 @@ Future<String> firebaseStorageGsFileDownloadUrl(
   Ref ref, {
   required String fileUri,
 }) async {
+  ref.cacheFor(const Duration(minutes: 5));
+
   return ref.read(firebaseStorageProvider).refFromURL(fileUri).getDownloadURL();
 }
