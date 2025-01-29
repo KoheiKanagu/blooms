@@ -9,7 +9,7 @@ class HighlightTile extends StatelessWidget {
     required this.period,
     required this.description,
     required this.onTap,
-    this.contentText,
+    required this.contentText,
     this.state,
     this.selected,
     super.key,
@@ -28,7 +28,7 @@ class HighlightTile extends StatelessWidget {
   /// nullの場合はチェックマークを表示しない
   final bool? selected;
 
-  final String? contentText;
+  final String contentText;
 
   final VoidCallback onTap;
 
@@ -61,9 +61,9 @@ class HighlightTile extends StatelessWidget {
             description: description,
             selected: selected,
           ),
-          if (contentText != null)
+          if (contentText.isNotEmpty)
             _Content(
-              text: contentText!,
+              text: contentText,
             ),
         ],
       ),
