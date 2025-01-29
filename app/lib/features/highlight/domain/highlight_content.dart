@@ -39,7 +39,7 @@ sealed class HighlightContent with _$HighlightContent {
     /// 生成モデルでの処理の状態
     @Default(HighlightState.pending) HighlightState state,
 
-    /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
+    /// 生成モデルによるハイライトの生成プロンプトのファイルパス
     String? promptFileUri,
   }) = HighlightContentPrivate;
 
