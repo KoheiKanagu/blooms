@@ -12,8 +12,6 @@ export async function updateHighlightContentState(
   state: HighlightState,
 ): Promise<void> {
   await documentReference.update({
-    content: {
-      state: state,
-    },
+    'content.state': state,
   });
 }

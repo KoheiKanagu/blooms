@@ -19,8 +19,7 @@ async function main(): Promise<void> {
     .collection(CollectionPath.CONDITIONS)
     .withConverter(conditionConverter)
     .where('deletedAt', '==', null)
-    .where('state', '==', 'success')
-    .where('type', '==', 'text')
+    .where('content.type', '==', 'text')
     .where('createdBy', '==', sourceUid)
     .orderBy('createdAt', 'desc')
     .get();

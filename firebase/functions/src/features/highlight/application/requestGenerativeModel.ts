@@ -88,16 +88,16 @@ export async function requestGenerativeModel(
   outSensitiveLog(`generateContent`, generatedResult);
 
   const response = generatedResult.response.candidates![0]!.content.parts[0]!.text ?? '{}';
-  // responseの形式は定義しており、従っていなかった場合は400エラーになるのでnullチェックは不要なはず
+  // responseの形式は定義しており、従っていなかった場合は400エラーになるので型チェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
-  const jsonContent = JSON.parse(response) as HighlightContentPrivate | HighlightContentProfessional;
+  const jsonContent = JSON.parse(response) as Record<string, unknown>;
   const gsFileUri = await savePrompt(uid, requestContents);
 
   const newContent: HighlightContentPrivate | HighlightContentProfessional = {
-    ...jsonContent,
     ...content,
     promptFileUri: gsFileUri,
     state: 'success',
+    ...jsonContent,
   };
   outSensitiveLog(`newContent:`, newContent);
 

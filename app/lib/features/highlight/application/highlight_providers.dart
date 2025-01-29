@@ -35,7 +35,7 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
       .read(highlightCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('subjectUid', isEqualTo: uid)
-      .orderBy('startAt', descending: true);
+      .orderBy('content.startAt', descending: true);
 }
 
 @riverpod

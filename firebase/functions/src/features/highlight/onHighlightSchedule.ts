@@ -26,9 +26,9 @@ export const onHighlightSchedule = onSchedule({
     .collection(CollectionPath.HIGHLIGHTS)
     .withConverter(highlightConverter)
     .where('deletedAt', '==', null)
-    .where('state', '==', 'pending')
-    .where('startAt', '<=', Timestamp.now())
-    .where('type', '==', 'past1day')
+    .where('content.state', '==', 'pending')
+    .where('content.startAt', '<=', Timestamp.now())
+    .where('content.period', '==', 'past1day')
     .orderBy('createdAt')
     .limit(1);
 
