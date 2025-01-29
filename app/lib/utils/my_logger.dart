@@ -49,8 +49,12 @@ final talkerRiverpodObserver = TalkerRiverpodObserver(
   talker: logger,
   settings: TalkerRiverpodLoggerSettings(
     providerFilter: (provider) {
-      if (kAppEnvProd) {
-        final hidden = {'firebaseUserProvider', 'highlightPromptProvider'};
+      if (!kAppEnvProd) {
+        final hidden = {
+          'firebaseUserProvider',
+          'highlightPromptProvider',
+          'firebaseStorageGsFileDownloadUrlProvider',
+        };
 
         //　機密情報が含まれるため、[kAppEnvProd]の場合はログを抑制
         if (hidden.contains(provider.name)) {
