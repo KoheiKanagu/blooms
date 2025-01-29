@@ -47,7 +47,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get skip => 'スキップ';
 	String get kContinue => '続ける';
 	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
-	String get grounding => 'グラウンディング';
 	String get today => '今日';
 	String get yesterday => '昨日';
 	String get camera => 'カメラ';
@@ -153,10 +152,6 @@ class TranslationsHighlightFeaturesPrivateJa {
 	String get care => 'あなたに寄り添って体調を気遣う文体の文章が作成されます';
 	String get trend => 'あなたの体調に関連する何らかの傾向が見つかる可能性があります';
 	String get advice => '明日に向けてのアドバイスが提供されます';
-	TextSpan grounding({required InlineSpan grounding}) => TextSpan(children: [
-		grounding,
-		const TextSpan(text: 'を活用し、正しい内容となるように心がけます'),
-	]);
 	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
 }
 
