@@ -53,6 +53,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get camera => 'カメラ';
 	String get photoLibrary => '写真ライブラリ';
 	String get unknownContent => 'この形式は対応していません。アプリをバージョンアップしてください';
+	String get imageLoadFailed => '画像の読み込みに失敗しました';
 }
 
 // Path: highlight

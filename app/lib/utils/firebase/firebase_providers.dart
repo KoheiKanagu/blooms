@@ -25,15 +25,9 @@ FirebaseMessaging firebaseMessaging(Ref ref) => FirebaseMessaging.instance;
 FirebaseStorage firebaseStorage(Ref ref) => FirebaseStorage.instance;
 
 @riverpod
-Future<List<String>> firebaseStorageGsFileDownloadUrls(
+Future<String> firebaseStorageGsFileDownloadUrl(
   Ref ref, {
-  required List<String> fileUris,
+  required String fileUri,
 }) async {
-  final storage = ref.read(firebaseStorageProvider);
-
-  return Future.wait(
-    fileUris.map(
-      (e) => storage.refFromURL(e).getDownloadURL(),
-    ),
-  );
+  return ref.read(firebaseStorageProvider).refFromURL(fileUri).getDownloadURL();
 }

@@ -93,8 +93,8 @@ final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirebaseStorageRef = ProviderRef<FirebaseStorage>;
-String _$firebaseStorageGsFileDownloadUrlsHash() =>
-    r'a0cec94b1d0986b4a068aa8beadd617065dc53f1';
+String _$firebaseStorageGsFileDownloadUrlHash() =>
+    r'cdee6332cfb476d9b2b4d4e794cd3174cbed3ff8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -117,32 +117,32 @@ class _SystemHash {
   }
 }
 
-/// See also [firebaseStorageGsFileDownloadUrls].
-@ProviderFor(firebaseStorageGsFileDownloadUrls)
-const firebaseStorageGsFileDownloadUrlsProvider =
-    FirebaseStorageGsFileDownloadUrlsFamily();
+/// See also [firebaseStorageGsFileDownloadUrl].
+@ProviderFor(firebaseStorageGsFileDownloadUrl)
+const firebaseStorageGsFileDownloadUrlProvider =
+    FirebaseStorageGsFileDownloadUrlFamily();
 
-/// See also [firebaseStorageGsFileDownloadUrls].
-class FirebaseStorageGsFileDownloadUrlsFamily
-    extends Family<AsyncValue<List<String>>> {
-  /// See also [firebaseStorageGsFileDownloadUrls].
-  const FirebaseStorageGsFileDownloadUrlsFamily();
+/// See also [firebaseStorageGsFileDownloadUrl].
+class FirebaseStorageGsFileDownloadUrlFamily
+    extends Family<AsyncValue<String>> {
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  const FirebaseStorageGsFileDownloadUrlFamily();
 
-  /// See also [firebaseStorageGsFileDownloadUrls].
-  FirebaseStorageGsFileDownloadUrlsProvider call({
-    required List<String> fileUris,
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  FirebaseStorageGsFileDownloadUrlProvider call({
+    required String fileUri,
   }) {
-    return FirebaseStorageGsFileDownloadUrlsProvider(
-      fileUris: fileUris,
+    return FirebaseStorageGsFileDownloadUrlProvider(
+      fileUri: fileUri,
     );
   }
 
   @override
-  FirebaseStorageGsFileDownloadUrlsProvider getProviderOverride(
-    covariant FirebaseStorageGsFileDownloadUrlsProvider provider,
+  FirebaseStorageGsFileDownloadUrlProvider getProviderOverride(
+    covariant FirebaseStorageGsFileDownloadUrlProvider provider,
   ) {
     return call(
-      fileUris: provider.fileUris,
+      fileUri: provider.fileUri,
     );
   }
 
@@ -158,79 +158,78 @@ class FirebaseStorageGsFileDownloadUrlsFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'firebaseStorageGsFileDownloadUrlsProvider';
+  String? get name => r'firebaseStorageGsFileDownloadUrlProvider';
 }
 
-/// See also [firebaseStorageGsFileDownloadUrls].
-class FirebaseStorageGsFileDownloadUrlsProvider
-    extends AutoDisposeFutureProvider<List<String>> {
-  /// See also [firebaseStorageGsFileDownloadUrls].
-  FirebaseStorageGsFileDownloadUrlsProvider({
-    required List<String> fileUris,
+/// See also [firebaseStorageGsFileDownloadUrl].
+class FirebaseStorageGsFileDownloadUrlProvider
+    extends AutoDisposeFutureProvider<String> {
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  FirebaseStorageGsFileDownloadUrlProvider({
+    required String fileUri,
   }) : this._internal(
-          (ref) => firebaseStorageGsFileDownloadUrls(
-            ref as FirebaseStorageGsFileDownloadUrlsRef,
-            fileUris: fileUris,
+          (ref) => firebaseStorageGsFileDownloadUrl(
+            ref as FirebaseStorageGsFileDownloadUrlRef,
+            fileUri: fileUri,
           ),
-          from: firebaseStorageGsFileDownloadUrlsProvider,
-          name: r'firebaseStorageGsFileDownloadUrlsProvider',
+          from: firebaseStorageGsFileDownloadUrlProvider,
+          name: r'firebaseStorageGsFileDownloadUrlProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$firebaseStorageGsFileDownloadUrlsHash,
-          dependencies: FirebaseStorageGsFileDownloadUrlsFamily._dependencies,
-          allTransitiveDependencies: FirebaseStorageGsFileDownloadUrlsFamily
-              ._allTransitiveDependencies,
-          fileUris: fileUris,
+                  : _$firebaseStorageGsFileDownloadUrlHash,
+          dependencies: FirebaseStorageGsFileDownloadUrlFamily._dependencies,
+          allTransitiveDependencies:
+              FirebaseStorageGsFileDownloadUrlFamily._allTransitiveDependencies,
+          fileUri: fileUri,
         );
 
-  FirebaseStorageGsFileDownloadUrlsProvider._internal(
+  FirebaseStorageGsFileDownloadUrlProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.fileUris,
+    required this.fileUri,
   }) : super.internal();
 
-  final List<String> fileUris;
+  final String fileUri;
 
   @override
   Override overrideWith(
-    FutureOr<List<String>> Function(
-            FirebaseStorageGsFileDownloadUrlsRef provider)
+    FutureOr<String> Function(FirebaseStorageGsFileDownloadUrlRef provider)
         create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: FirebaseStorageGsFileDownloadUrlsProvider._internal(
-        (ref) => create(ref as FirebaseStorageGsFileDownloadUrlsRef),
+      override: FirebaseStorageGsFileDownloadUrlProvider._internal(
+        (ref) => create(ref as FirebaseStorageGsFileDownloadUrlRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        fileUris: fileUris,
+        fileUri: fileUri,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<String>> createElement() {
-    return _FirebaseStorageGsFileDownloadUrlsProviderElement(this);
+  AutoDisposeFutureProviderElement<String> createElement() {
+    return _FirebaseStorageGsFileDownloadUrlProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FirebaseStorageGsFileDownloadUrlsProvider &&
-        other.fileUris == fileUris;
+    return other is FirebaseStorageGsFileDownloadUrlProvider &&
+        other.fileUri == fileUri;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, fileUris.hashCode);
+    hash = _SystemHash.combine(hash, fileUri.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -238,20 +237,20 @@ class FirebaseStorageGsFileDownloadUrlsProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FirebaseStorageGsFileDownloadUrlsRef
-    on AutoDisposeFutureProviderRef<List<String>> {
-  /// The parameter `fileUris` of this provider.
-  List<String> get fileUris;
+mixin FirebaseStorageGsFileDownloadUrlRef
+    on AutoDisposeFutureProviderRef<String> {
+  /// The parameter `fileUri` of this provider.
+  String get fileUri;
 }
 
-class _FirebaseStorageGsFileDownloadUrlsProviderElement
-    extends AutoDisposeFutureProviderElement<List<String>>
-    with FirebaseStorageGsFileDownloadUrlsRef {
-  _FirebaseStorageGsFileDownloadUrlsProviderElement(super.provider);
+class _FirebaseStorageGsFileDownloadUrlProviderElement
+    extends AutoDisposeFutureProviderElement<String>
+    with FirebaseStorageGsFileDownloadUrlRef {
+  _FirebaseStorageGsFileDownloadUrlProviderElement(super.provider);
 
   @override
-  List<String> get fileUris =>
-      (origin as FirebaseStorageGsFileDownloadUrlsProvider).fileUris;
+  String get fileUri =>
+      (origin as FirebaseStorageGsFileDownloadUrlProvider).fileUri;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

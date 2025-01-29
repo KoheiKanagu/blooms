@@ -62,5 +62,6 @@
   "yesterday": "昨日",
   "camera": "カメラ",
   "photoLibrary": "写真ライブラリ",
-  "unknownContent": "この形式は対応していません。アプリをバージョンアップしてください"
+  "unknownContent": "この形式は対応していません。アプリをバージョンアップしてください",
+  "imageLoadFailed": "画像の読み込みに失敗しました"
 }
