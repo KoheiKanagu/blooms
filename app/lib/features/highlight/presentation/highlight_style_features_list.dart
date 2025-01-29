@@ -78,11 +78,6 @@ class _PrivateFeatures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final featureTextStyle =
-        CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-              fontSize: 14,
-            );
-
     return Column(
       children: [
         _SimpleText(
