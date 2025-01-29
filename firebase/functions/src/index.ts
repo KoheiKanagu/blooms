@@ -31,5 +31,4 @@ export function functionsV1(): f.FunctionBuilder {
 }
 
 export { onHighlightDocumentCreated } from './features/highlight/onHighlightDocumentCreated';
-export { onHighlightSchedule } from './features/highlight/onHighlightSchedule';
 export { onCreateAuthUser } from './onCreateAuthUser';
