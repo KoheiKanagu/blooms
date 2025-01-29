@@ -1,7 +1,6 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
 export type ConditionType = 'text' | 'image' | 'audio' | 'empty';
-export type ConditionState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export class Condition {
   constructor(
