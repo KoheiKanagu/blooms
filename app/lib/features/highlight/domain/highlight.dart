@@ -1,5 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
+import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
@@ -79,6 +80,22 @@ class Highlight with _$Highlight {
       startDate: startDate,
       endDate: endDate,
     );
+  }
+
+  HighlightPeriod? get period {
+    return switch (content) {
+      HighlightContentPrivate(:final period) => period,
+      HighlightContentProfessional(:final period) => period,
+      HighlightContentEmpty() => null,
+    };
+  }
+
+  HighlightState? get state {
+    return switch (content) {
+      HighlightContentPrivate(:final state) => state,
+      HighlightContentProfessional(:final state) => state,
+      HighlightContentEmpty() => null,
+    };
   }
 }
 

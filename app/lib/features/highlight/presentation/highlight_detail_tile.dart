@@ -1,5 +1,6 @@
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,6 +14,12 @@ class HighlightDetailTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final promptFileUrl = switch (highlight.content) {
+      HighlightContentPrivate(:final promptFileUri) => promptFileUri,
+      HighlightContentProfessional(:final promptFileUri) => promptFileUri,
+      HighlightContentEmpty() => null,
+    };
+
     return CupertinoListSection.insetGrouped(
       children: [
         CupertinoListTile(
@@ -25,7 +32,7 @@ class HighlightDetailTile extends HookConsumerWidget {
         ref
             .watch(
               highlightPromptProvider(
-                gsFilePath: highlight.prompt,
+                gsFilePath: promptFileUrl,
               ),
             )
             .maybeWhen(
