@@ -63,5 +63,18 @@
       ]
     }
   ],
-  "fieldOverrides": []
+  "fieldOverrides": [
+    {
+      "collectionGroup": "conditions_v1",
+      "fieldPath": "deletedAt",
+      "ttl": true,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "highlights_v1",
+      "fieldPath": "deletedAt",
+      "ttl": true,
+      "indexes": []
+    }
+  ]
 }
