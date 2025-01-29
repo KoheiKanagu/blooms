@@ -2,8 +2,9 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
+import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -49,22 +50,21 @@ class HighlightPageListTile extends HookConsumerWidget {
         ],
       ),
       child: HighlightTile(
-        type: highlight.type,
+        period: highlight.period ?? HighlightPeriod.past1day,
         state: highlight.state,
-        description: highlight.type == HighlightType.past1day
-            ? highlight.highlightPeriod.endDate
+        description: highlight.period == HighlightPeriod.past1day
+            ? highlight.highlightRange.endDate
             : i18n.highlight.xToY(
-                x: highlight.highlightPeriod.startDate,
-                y: highlight.highlightPeriod.endDate,
+                x: highlight.highlightRange.startDate,
+                y: highlight.highlightRange.endDate,
               ),
         contentText: switch (highlight.content) {
           HighlightContentPrivate(:final abstract) => abstract,
           HighlightContentProfessional(:final abstract) => abstract,
           HighlightContentEmpty() => i18n.unknownContent,
-          _ => null,
         },
         onTap: () async {
-          switch (highlight.state) {
+          switch (highlight.state ?? HighlightState.failure) {
             case HighlightState.pending:
               await showOkAlertDialog(
                 context: context,
@@ -123,12 +123,13 @@ class HighlightPageListTile extends HookConsumerWidget {
 Widget highlightPageListTile(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightType.values
+      children: HighlightPeriod.values
           .map(
-            (type) => HighlightPageListTile(
+            (period) => HighlightPageListTile(
               documentId: 'documentId',
-              highlight: Highlight(
-                type: type,
+              highlight: Highlight.create(
+                period: period,
+                style: HighlightStyle.private,
                 subjectUid: 'subjectUid',
                 startAt: Timestamp.now(),
               ),
@@ -146,15 +147,17 @@ Widget highlightPageListTile(BuildContext context) {
 Widget highlightPageListTileInProgress(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightType.values
+      children: HighlightPeriod.values
           .map(
-            (type) => HighlightPageListTile(
+            (period) => HighlightPageListTile(
               documentId: 'documentId',
               highlight: Highlight(
-                type: type,
                 subjectUid: 'subjectUid',
-                startAt: Timestamp.now(),
-                state: HighlightState.inProgress,
+                content: HighlightContent.private(
+                  startAt: Timestamp.now(),
+                  period: period,
+                  state: HighlightState.inProgress,
+                ),
               ),
             ),
           )
@@ -170,16 +173,16 @@ Widget highlightPageListTileInProgress(BuildContext context) {
 Widget highlightPageListTileSuccess(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightType.values
+      children: HighlightPeriod.values
           .map(
-            (type) => HighlightPageListTile(
+            (period) => HighlightPageListTile(
               documentId: 'documentId',
               highlight: Highlight(
-                type: type,
                 subjectUid: 'subjectUid',
-                startAt: Timestamp.now(),
-                state: HighlightState.success,
-                content: const HighlightContent.private(
+                content: HighlightContent.private(
+                  period: period,
+                  startAt: Timestamp.now(),
+                  state: HighlightState.success,
                   subjectiveTrend: 'subjectiveTrend',
                   objectiveTrend: 'objectiveTrend',
                   analysisResult: 'analysisResult',
@@ -201,15 +204,17 @@ Widget highlightPageListTileSuccess(BuildContext context) {
 Widget highlightPageListTileFailure(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightType.values
+      children: HighlightPeriod.values
           .map(
             (type) => HighlightPageListTile(
               documentId: 'documentId',
               highlight: Highlight(
-                type: type,
                 subjectUid: 'subjectUid',
-                startAt: Timestamp.now(),
-                state: HighlightState.failure,
+                content: HighlightContent.private(
+                  period: type,
+                  startAt: Timestamp.now(),
+                  state: HighlightState.failure,
+                ),
               ),
             ),
           )

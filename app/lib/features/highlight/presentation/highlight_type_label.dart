@@ -1,39 +1,39 @@
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightTypeLabel extends StatelessWidget {
   const HighlightTypeLabel(
-    this.type, {
+    this.period, {
     super.key,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      switch (type) {
-        HighlightType.past1day => i18n.highlight.onTheDay,
-        HighlightType.past7days ||
-        HighlightType.past14days ||
-        HighlightType.past21days ||
-        HighlightType.past28days =>
-          i18n.highlight.pastDays(n: type.days),
+      switch (period) {
+        HighlightPeriod.past1day => i18n.highlight.onTheDay,
+        HighlightPeriod.past7days ||
+        HighlightPeriod.past14days ||
+        HighlightPeriod.past21days ||
+        HighlightPeriod.past28days =>
+          i18n.highlight.pastDays(n: period.days),
       },
       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontWeight: FontWeight.bold,
-            color: switch (type) {
-              HighlightType.past1day =>
+            color: switch (period) {
+              HighlightPeriod.past1day =>
                 CupertinoColors.systemRed.resolveFrom(context),
-              HighlightType.past7days =>
+              HighlightPeriod.past7days =>
                 CupertinoColors.systemOrange.resolveFrom(context),
-              HighlightType.past14days =>
+              HighlightPeriod.past14days =>
                 CupertinoColors.systemGreen.resolveFrom(context),
-              HighlightType.past21days =>
+              HighlightPeriod.past21days =>
                 CupertinoColors.systemCyan.resolveFrom(context),
-              HighlightType.past28days =>
+              HighlightPeriod.past28days =>
                 CupertinoColors.systemPurple.resolveFrom(context),
             },
           ),
@@ -49,11 +49,11 @@ Widget highlightTypeLabel(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
       children: const [
-        HighlightTypeLabel(HighlightType.past1day),
-        HighlightTypeLabel(HighlightType.past7days),
-        HighlightTypeLabel(HighlightType.past14days),
-        HighlightTypeLabel(HighlightType.past21days),
-        HighlightTypeLabel(HighlightType.past28days),
+        HighlightTypeLabel(HighlightPeriod.past1day),
+        HighlightTypeLabel(HighlightPeriod.past7days),
+        HighlightTypeLabel(HighlightPeriod.past14days),
+        HighlightTypeLabel(HighlightPeriod.past21days),
+        HighlightTypeLabel(HighlightPeriod.past28days),
       ],
     ),
   );

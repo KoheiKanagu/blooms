@@ -1,4 +1,8 @@
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
+import 'package:blooms/features/highlight/domain/highlight_state.dart';
+import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'highlight_content.freezed.dart';
@@ -11,28 +15,52 @@ part 'highlight_content.g.dart';
 )
 sealed class HighlightContent with _$HighlightContent {
   const factory HighlightContent.private({
+    /// ハイライトを作成開始する日時。この日からN日前のハイライト
+    @TimestampConverterNotNull() required Timestamp startAt,
+
+    /// ハイライトの対象期間
+    required HighlightPeriod period,
+
     /// 主観的なデータのトレンド
-    required String subjectiveTrend,
+    @Default('') String subjectiveTrend,
 
     /// 客観的なデータのトレンド
-    required String objectiveTrend,
+    @Default('') String objectiveTrend,
 
     /// 分析結果
-    required String analysisResult,
+    @Default('') String analysisResult,
 
     /// アドバイス
-    required String advice,
+    @Default('') String advice,
 
     /// 分析結果の要旨
-    required String abstract,
+    @Default('') String abstract,
+
+    /// 生成モデルでの処理の状態
+    @Default(HighlightState.pending) HighlightState state,
+
+    /// 生成モデルによるハイライトの生成プロンプトのファイルパス
+    String? promptFileUri,
   }) = HighlightContentPrivate;
 
   const factory HighlightContent.professional({
+    /// ハイライトを作成開始する日時。この日からN日前のハイライト
+    @TimestampConverterNotNull() required Timestamp startAt,
+
+    /// ハイライトの種類
+    required HighlightPeriod period,
+
     /// 分析結果
-    required List<String> analysisResults,
+    @Default([]) List<String> analysisResults,
 
     /// 分析結果の要旨
-    required String abstract,
+    @Default('') String abstract,
+
+    /// 生成モデルでの処理の状態
+    @Default(HighlightState.pending) HighlightState state,
+
+    /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
+    String? promptFileUri,
   }) = HighlightContentProfessional;
 
   const factory HighlightContent.empty() = HighlightContentEmpty;

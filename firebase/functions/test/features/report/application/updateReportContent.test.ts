@@ -42,10 +42,4 @@ describe('getDateRange', () => {
     expect(startDate).toEqual(new Date(2024, 11, 19, 0, 0, 0));
     expect(endDate).toEqual(new Date(2025, 0, 15, 23, 59, 59));
   });
-
-  it('不明なハイライトタイプの場合はエラーを投げること', () => {
-    expect(() => {
-      getDateRange('invalid_type', baseDate);
-    }).toThrow('Unknown highlight type: invalid_type');
-  });
 });

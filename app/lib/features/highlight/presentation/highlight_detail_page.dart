@@ -22,8 +22,8 @@ class HighlightDetailPage extends HookConsumerWidget {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           i18n.highlight.xToY(
-            x: highlight.highlightPeriod.endDate,
-            y: highlight.highlightPeriod.startDate,
+            x: highlight.highlightRange.endDate,
+            y: highlight.highlightRange.startDate,
           ),
         ),
       ),

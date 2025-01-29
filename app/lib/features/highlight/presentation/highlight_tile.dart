@@ -1,15 +1,15 @@
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_type_label.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
 class HighlightTile extends StatelessWidget {
   const HighlightTile({
-    required this.type,
+    required this.period,
     required this.description,
     required this.onTap,
-    this.contentText,
+    required this.contentText,
     this.state,
     this.selected,
     super.key,
@@ -18,7 +18,7 @@ class HighlightTile extends StatelessWidget {
           'selectedかstateのどちらか一方を指定してください',
         );
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState? state;
 
@@ -28,7 +28,7 @@ class HighlightTile extends StatelessWidget {
   /// nullの場合はチェックマークを表示しない
   final bool? selected;
 
-  final String? contentText;
+  final String contentText;
 
   final VoidCallback onTap;
 
@@ -56,14 +56,14 @@ class HighlightTile extends StatelessWidget {
         ),
         children: [
           _Title(
-            type: type,
+            period: period,
             state: state,
             description: description,
             selected: selected,
           ),
-          if (contentText != null)
+          if (contentText.isNotEmpty)
             _Content(
-              text: contentText!,
+              text: contentText,
             ),
         ],
       ),
@@ -73,13 +73,13 @@ class HighlightTile extends StatelessWidget {
 
 class _Title extends StatelessWidget {
   const _Title({
-    required this.type,
+    required this.period,
     required this.state,
     required this.description,
     required this.selected,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState? state;
 
@@ -95,12 +95,12 @@ class _Title extends StatelessWidget {
         children: [
           if (selected == null)
             _Label(
-              type: type,
+              period: period,
               state: state!,
             )
           else
             _LabelCheckMark(
-              type: type,
+              period: period,
               selected: selected!,
             ),
           const Gap(8),
@@ -115,11 +115,11 @@ class _Title extends StatelessWidget {
 
 class _Label extends StatelessWidget {
   const _Label({
-    required this.type,
+    required this.period,
     required this.state,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState state;
 
@@ -127,7 +127,7 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        HighlightTypeLabel(type),
+        HighlightTypeLabel(period),
         const Spacer(),
         switch (state) {
           HighlightState.pending => Icon(
@@ -148,11 +148,11 @@ class _Label extends StatelessWidget {
 
 class _LabelCheckMark extends StatelessWidget {
   const _LabelCheckMark({
-    required this.type,
+    required this.period,
     required this.selected,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final bool selected;
 
@@ -160,7 +160,7 @@ class _LabelCheckMark extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        HighlightTypeLabel(type),
+        HighlightTypeLabel(period),
         const Spacer(),
         Icon(
           selected

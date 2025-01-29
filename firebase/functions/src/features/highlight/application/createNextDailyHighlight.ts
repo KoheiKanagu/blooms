@@ -43,12 +43,18 @@ export async function createNextDailyHighlight(subjectUid: string, lastStartAt: 
     updatedAt: FieldValue.serverTimestamp(),
     deletedAt: null,
     subjectUid: subjectUid,
-    startAt: Timestamp.fromDate(nextStartAt),
-    prompt: null,
-    type: 'past1day',
-    style: 'private',
-    content: null,
-    state: 'pending',
+    content: {
+      style: 'private',
+      startAt: Timestamp.fromDate(nextStartAt),
+      period: 'past1day',
+      subjectiveTrend: '',
+      objectiveTrend: '',
+      analysisResult: '',
+      advice: '',
+      abstract: '',
+      state: 'pending',
+      promptFileUri: null,
+    },
   };
 
   const result = await getFirestore()

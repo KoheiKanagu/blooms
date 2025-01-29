@@ -4,8 +4,8 @@ import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,13 +35,13 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
       .read(highlightCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('subjectUid', isEqualTo: uid)
-      .orderBy('startAt', descending: true);
+      .orderBy('content.startAt', descending: true);
 }
 
 @riverpod
 Future<void> highlightCreate(
   Ref ref, {
-  required HighlightType type,
+  required HighlightPeriod period,
   required HighlightStyle style,
 }) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
@@ -51,7 +51,7 @@ Future<void> highlightCreate(
   }
 
   final data = Highlight.create(
-    type: type,
+    period: period,
     style: style,
     subjectUid: uid,
     startAt: Timestamp.fromDate(clock.now()),

@@ -27,11 +27,11 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "state",
+          "fieldPath": "content.state",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "type",
+          "fieldPath": "content.period",
           "order": "ASCENDING"
         },
         {
@@ -39,7 +39,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "startAt",
+          "fieldPath": "content.startAt",
           "order": "ASCENDING"
         }
       ]
@@ -57,7 +57,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "startAt",
+          "fieldPath": "content.startAt",
           "order": "DESCENDING"
         }
       ]

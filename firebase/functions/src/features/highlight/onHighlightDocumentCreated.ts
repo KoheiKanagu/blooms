@@ -15,7 +15,5 @@ export const onHighlightDocumentCreated = onDocumentCreated(`${CollectionPath.HI
   }
 
   const highlight = highlightConverter.fromFirestore(snapshot);
-
-  // highlight.startAtでハイライト作成開始時刻を検証しているので、highlight.typeは気にしなくても良い
   await updateHighlightContent(snapshot.ref, highlight);
 });

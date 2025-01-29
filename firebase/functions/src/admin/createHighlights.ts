@@ -32,12 +32,18 @@ async function main(): Promise<void> {
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       deletedAt: null,
       subjectUid: subjectUid,
-      startAt: admin.firestore.Timestamp.fromDate(startAt),
-      prompt: null,
-      type: 'past1day',
-      style: 'private',
-      content: null,
-      state: 'pending',
+      content: {
+        style: 'private',
+        startAt: admin.firestore.Timestamp.fromDate(startAt),
+        period: 'past1day',
+        subjectiveTrend: '',
+        objectiveTrend: '',
+        analysisResult: '',
+        advice: '',
+        abstract: '',
+        promptFileUri: null,
+        state: 'pending',
+      },
     };
 
     const result = await collection.add(highlight);

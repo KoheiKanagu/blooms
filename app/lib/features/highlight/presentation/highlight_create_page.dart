@@ -1,6 +1,6 @@
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_header.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_tile.dart';
 import 'package:blooms/features/highlight/presentation/highlight_style_features_list.dart';
@@ -22,8 +22,8 @@ class HighlightCreatePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedType = useState({
-      HighlightStyle.private: HighlightType.past7days,
-      HighlightStyle.professional: HighlightType.past28days,
+      HighlightStyle.private: HighlightPeriod.past7days,
+      HighlightStyle.professional: HighlightPeriod.past28days,
     });
 
     final selectedStyle = useState<HighlightStyle>(
@@ -95,7 +95,7 @@ class HighlightCreatePage extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: _BottomNavigationBar(
-          type: selectedType.value[selectedStyle.value]!,
+          period: selectedType.value[selectedStyle.value]!,
           style: selectedStyle.value,
         ),
       ),
@@ -112,18 +112,18 @@ class _CreateTiles extends StatelessWidget {
 
   final HighlightStyle selectedStyle;
 
-  final HighlightType selectedType;
+  final HighlightPeriod selectedType;
 
-  final ValueChanged<HighlightType> onTap;
+  final ValueChanged<HighlightPeriod> onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: switch (selectedStyle) {
-        HighlightStyle.private => HighlightType.values
+        HighlightStyle.private => HighlightPeriod.values
             .map(
               (e) => HighlightCreatePageTile(
-                type: e,
+                period: e,
                 selected: selectedType == e,
                 onTap: () {
                   onTap(e);
@@ -133,7 +133,7 @@ class _CreateTiles extends StatelessWidget {
             .toList(),
         HighlightStyle.professional => [
             HighlightCreatePageTile(
-              type: HighlightType.past28days,
+              period: HighlightPeriod.past28days,
               selected: true,
               onTap: () {},
             ),
@@ -145,11 +145,11 @@ class _CreateTiles extends StatelessWidget {
 
 class _BottomNavigationBar extends HookConsumerWidget {
   const _BottomNavigationBar({
-    required this.type,
+    required this.period,
     required this.style,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightStyle style;
 
@@ -165,7 +165,7 @@ class _BottomNavigationBar extends HookConsumerWidget {
           onPressed: () async {
             await ref.read(
               highlightCreateProvider(
-                type: type,
+                period: period,
                 style: style,
               ).future,
             );

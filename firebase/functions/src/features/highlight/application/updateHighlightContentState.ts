@@ -7,11 +7,11 @@ import { HighlightState } from '../domain/highlight';
  * @param documentReference
  * @param state
  */
-export async function updateHighlightState(
+export async function updateHighlightContentState(
   documentReference: DocumentReference<DocumentData>,
   state: HighlightState,
 ): Promise<void> {
   await documentReference.update({
-    state,
+    'content.state': state,
   });
 }
