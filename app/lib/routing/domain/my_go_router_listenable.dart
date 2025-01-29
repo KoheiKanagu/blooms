@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/startup/application/app_startup.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
+import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,6 +41,17 @@ Raw<ValueNotifier<MyGoRouterListenable>> refreshListenable(Ref ref) {
       firebaseUserUidProvider.select((e) => e.value),
       (_, uid) async {
         listenable.value = listenable.value.copyWith(signedIn: uid != null);
+      },
+    )
+    ..listen(
+      // Crashlyticsにuidを設定
+      firebaseUserUidProvider.select((e) => e.value),
+      (_, uid) async {
+        if (!kIsWeb) {
+          await ref
+              .read(firebaseCrashlyticsProvider)
+              .setUserIdentifier(uid ?? '');
+        }
       },
     )
     ..listen(
