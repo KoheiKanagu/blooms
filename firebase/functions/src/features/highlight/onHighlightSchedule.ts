@@ -46,11 +46,16 @@ export const onHighlightSchedule = onSchedule({
     const highlight = doc.data();
 
     try {
+      if (highlight.content.style !== 'private' && highlight.content.style !== 'professional') {
+        logger.error(`Invalid style: ${highlight.content.style}. Skip processing.`);
+        continue;
+      }
+
       // contentを更新
       await updateHighlightContent(doc.ref, highlight);
 
       // 次の日のデイリーハイライトを作成
-      await createNextDailyHighlight(highlight.subjectUid, highlight.startAt);
+      await createNextDailyHighlight(highlight.subjectUid, highlight.content.startAt);
     } catch (error) {
       logger.error(`Failed to process highlight: ${doc.id}`, error);
     }

@@ -34,6 +34,9 @@ function buildTools(highlightStyle: HighlightStyle): Tool[] {
       }];
     case 'professional':
       return [];
+
+    case 'empty':
+      throw new Error('Highlight style is empty');
   }
 }
 
@@ -42,6 +45,10 @@ function buildPrompt(highlightStyle: HighlightStyle): {
   systemInstruction: string;
   temperature: number;
 } {
+  if (highlightStyle === 'empty') {
+    throw new Error('Highlight style is empty');
+  }
+
   const today = new Date().toLocaleDateString('ja-JP');
 
   switch (highlightStyle) {

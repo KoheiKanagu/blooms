@@ -3,9 +3,9 @@ import { logger } from 'firebase-functions';
 import { conditionConverter } from '../../../models/condition';
 import { CollectionPath } from '../../../utils/collectionPath';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { Highlight, highlightConverter } from '../domain/highlight';
+import { Highlight, HighlightContentPrivate, HighlightContentProfessional, highlightConverter, HighlightPeriod } from '../domain/highlight';
 import { requestGenerativeModel } from './requestGenerativeModel';
-import { updateHighlightState } from './updateHighlightState';
+import { updateHighlightContentState } from './updateHighlightContentState';
 
 /**
  * ハイライトのcontentを更新する
@@ -23,13 +23,14 @@ export async function updateHighlightContent(
   }
 
   try {
-    // HighlightのstateをinProgressに更新
-    await updateHighlightState(documentReference, 'inProgress');
+    const content = highlight.content as HighlightContentPrivate | HighlightContentProfessional;
+    // HighlightContentのstateをinProgressに更新
+    await updateHighlightContentState(documentReference, 'inProgress');
 
     // 解析の対処となるConditionsの範囲
     const { startDate, endDate } = getDateRange(
-      highlight.type,
-      highlight.startAt.toDate(),
+      content.period,
+      content.startAt.toDate(),
     );
 
     // 解析対象のConditionsを探す
@@ -47,13 +48,15 @@ export async function updateHighlightContent(
     outSensitiveLog(`conditions`, conditions);
 
     // 生成モデルにリクエストを送信
-    const { content, prompt } = await requestGenerativeModel(highlight.subjectUid, conditions, highlight.style);
+    const newContent = await requestGenerativeModel(
+      highlight.subjectUid,
+      conditions,
+      content,
+    );
     const updatedHighlight: Highlight = {
       ...highlight,
-      content: content,
-      state: 'success',
+      content: newContent,
       updatedAt: FieldValue.serverTimestamp(),
-      prompt: prompt,
     };
     outSensitiveLog(`updatedHighlight`, updatedHighlight);
 
@@ -69,7 +72,7 @@ export async function updateHighlightContent(
     });
 
     // Highlightのstateをfailureに変更
-    await updateHighlightState(documentReference, 'failure');
+    await updateHighlightContentState(documentReference, 'failure');
 
     throw error;
   }
@@ -82,14 +85,19 @@ export async function updateHighlightContent(
  * @returns
  */
 function shouldSkipProcessing(highlight: Highlight): boolean {
+  if (highlight.content.style !== 'private' && highlight.content.style !== 'professional') {
+    logger.error(`Highlight style is invalid.`, { highlight });
+    return true;
+  }
+
   // stateがpendingでない場合は処理をスキップ
-  if (highlight.state !== 'pending') {
+  if (highlight.content.state !== 'pending') {
     logger.info(`Highlight state is not 'pending'. Skip processing.`, { highlight });
     return true;
   }
 
   // startAtを過ぎていない場合は処理をスキップ
-  const startAt = highlight.startAt.toDate();
+  const startAt = highlight.content.startAt.toDate();
   const now = new Date();
   if (startAt > now) {
     logger.info(`Highlight startAt is not passed. Skip processing.`, { highlight });
@@ -102,16 +110,16 @@ function shouldSkipProcessing(highlight: Highlight): boolean {
 /**
  * conditionsを探すための日付範囲を取得
  *
- * @param highlightType
+ * @param period
  * @param startAt
  * @returns
  */
-export function getDateRange(highlightType: string, startAt: Date): {
+export function getDateRange(period: HighlightPeriod, startAt: Date): {
   startDate: Date;
   endDate: Date;
 } {
   let startDate: Date;
-  switch (highlightType) {
+  switch (period) {
     case 'past1day':
       startDate = new Date(startAt.getFullYear(), startAt.getMonth(), startAt.getDate(), 0, 0, 0);
       break;
@@ -127,8 +135,6 @@ export function getDateRange(highlightType: string, startAt: Date): {
     case 'past28days':
       startDate = new Date(startAt.getFullYear(), startAt.getMonth(), startAt.getDate() - 27, 0, 0, 0);
       break;
-    default:
-      throw new Error(`Unknown highlight type: ${highlightType}`);
   }
 
   const endDate = new Date(startAt.getFullYear(), startAt.getMonth(), startAt.getDate(), 23, 59, 59);

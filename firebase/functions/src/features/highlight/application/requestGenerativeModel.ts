@@ -1,7 +1,7 @@
 import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
 import { Condition } from '../../../models/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentPrivate, HighlightContentProfessional, HighlightStyle } from '../domain/highlight';
+import { HighlightContentPrivate, HighlightContentProfessional } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -10,16 +10,17 @@ import { setupGenerativeModel } from './setupGenerativeModel';
  *
  * @param uid ユーザーID
  * @param conditions 解析対象のConditions
- * @param highlightStyle 文体のスタイル
+ * @param content ハイライトの内容
  * @returns
  */
-export async function requestGenerativeModel(uid: string, conditions: Condition[], highlightStyle: HighlightStyle): Promise<{
-  content: HighlightContentPrivate | HighlightContentProfessional;
-  prompt: string;
-}> {
-  const generativeModel = setupGenerativeModel(highlightStyle);
+export async function requestGenerativeModel(
+  uid: string,
+  conditions: Condition[],
+  content: HighlightContentPrivate | HighlightContentProfessional,
+): Promise<HighlightContentPrivate | HighlightContentProfessional> {
+  const generativeModel = setupGenerativeModel(content.style);
 
-  let contents: Content[] = conditions.map<Content | null>((condition) => {
+  let requestContents: Content[] = conditions.map<Content | null>((condition) => {
     const date = condition.createdAtIso8601;
 
     let part: (TextPart | FileDataPart)[];
@@ -68,8 +69,8 @@ export async function requestGenerativeModel(uid: string, conditions: Condition[
     .filter(e => e !== null);
 
   // 空だとエラーになる
-  if (contents.length === 0) {
-    contents = [
+  if (requestContents.length === 0) {
+    requestContents = [
       {
         role: 'user',
         parts: [
@@ -81,24 +82,24 @@ export async function requestGenerativeModel(uid: string, conditions: Condition[
     ];
   }
 
-  const result = await generativeModel.generateContent({
-    contents: contents,
+  const generatedResult = await generativeModel.generateContent({
+    contents: requestContents,
   });
-  outSensitiveLog(`generateContent`, result);
+  outSensitiveLog(`generateContent`, generatedResult);
 
-  const response = result.response.candidates![0]!.content.parts[0]!.text ?? '{}';
+  const response = generatedResult.response.candidates![0]!.content.parts[0]!.text ?? '{}';
   // responseの形式は定義しており、従っていなかった場合は400エラーになるのでnullチェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
-  let content = JSON.parse(response) as HighlightContentPrivate | HighlightContentProfessional;
-  content = {
-    ...content,
-    style: highlightStyle,
-  };
-  outSensitiveLog(`content:`, content);
+  const jsonContent = JSON.parse(response) as HighlightContentPrivate | HighlightContentProfessional;
+  const gsFileUri = await savePrompt(uid, requestContents);
 
-  const gsPrompt = await savePrompt(uid, contents);
-  return {
-    content: content,
-    prompt: gsPrompt,
+  const newContent: HighlightContentPrivate | HighlightContentProfessional = {
+    ...jsonContent,
+    ...content,
+    promptFileUri: gsFileUri,
+    state: 'success',
   };
+  outSensitiveLog(`newContent:`, newContent);
+
+  return newContent;
 }
