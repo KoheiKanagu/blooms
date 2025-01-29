@@ -1,6 +1,7 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
+import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -81,9 +82,13 @@ class ConditionForm extends HookConsumerWidget {
                           return;
                         }
 
-                        await ref.read(
-                          conditionCreateImageProvider(xFiles: xFiles).future,
-                        );
+                        if (context.mounted) {
+                          final indicator = showMyProgressIndicator(context);
+                          await ref.read(
+                            conditionCreateImageProvider(xFiles: xFiles).future,
+                          );
+                          indicator.dismiss();
+                        }
                       },
                     ),
                   ];
