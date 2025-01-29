@@ -50,6 +50,10 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get grounding => 'グラウンディング';
 	String get today => '今日';
 	String get yesterday => '昨日';
+	String get camera => 'カメラ';
+	String get photoLibrary => '写真ライブラリ';
+	String get unknownContent => 'この形式は対応していません。アプリをバージョンアップしてください';
+	String get imageLoadFailed => '画像の読み込みに失敗しました';
 }
 
 // Path: highlight
@@ -76,7 +80,6 @@ class TranslationsHighlightJa {
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
 	late final TranslationsHighlightStyleJa style = TranslationsHighlightStyleJa.internal(_root);
-	String get unknownStyleContent => 'この形式は対応していません。アプリをバージョンアップしてください';
 	late final TranslationsHighlightFeaturesJa features = TranslationsHighlightFeaturesJa.internal(_root);
 }
 

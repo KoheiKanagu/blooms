@@ -1,7 +1,9 @@
-import 'package:blooms/features/condition/domain/condition_state.dart';
-import 'package:blooms/features/condition/domain/condition_type.dart';
+import 'package:blooms/features/condition/domain/condition_content.dart';
+import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
+import 'package:clock/clock.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,40 +15,46 @@ class Condition with _$Condition {
   const factory Condition({
     /// 作成者
     required String createdBy,
+
+    /// 内容
+    required ConditionContent content,
+
+    /// ISO8601形式の作成日時
+    required String createdAtIso8601,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
-
-    /// コンディションの種類
-    @Default(ConditionType.unknown) ConditionType type,
-
-    /// 添付ファイルのgs://パス
-    @Default([]) List<String> attachments,
-
-    /// attachmentsの解析で処理が必要な場合の状態
-    @Default(ConditionState.pending) ConditionState state,
-
-    /// 記録
-    String? record,
   }) = _Condition;
 
-  factory Condition.subjective({required String uid, required String record}) =>
+  factory Condition.text({required String uid, required String text}) =>
       Condition(
         createdBy: uid,
-        record: record,
-        type: ConditionType.subjective,
-        attachments: [],
-        state: ConditionState.success,
+        content: ConditionContent.text(text: text),
+        createdAtIso8601: clock.now().toIso8601String(),
       );
 
-  factory Condition.photo({
+  factory Condition.image({
     required String uid,
-    required List<String> attachments,
+    required List<ConditionContentImageAttachment> attachments,
   }) =>
       Condition(
         createdBy: uid,
-        type: ConditionType.photo,
-        attachments: attachments,
+        content: ConditionContent.image(
+          attachments: attachments,
+        ),
+        createdAtIso8601: clock.now().toIso8601String(),
+      );
+
+  factory Condition.audio({
+    required String uid,
+    required List<ConditionContentAudioAttachment> attachments,
+  }) =>
+      Condition(
+        createdBy: uid,
+        content: ConditionContent.audio(
+          attachments: attachments,
+        ),
+        createdAtIso8601: clock.now().toIso8601String(),
       );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);

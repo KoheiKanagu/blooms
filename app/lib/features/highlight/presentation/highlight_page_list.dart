@@ -47,11 +47,11 @@ class HighlightPageList extends HookConsumerWidget {
           FirestoreQueryBuilder(
             query: query,
             builder: (context, snapshot, _) {
-              if (snapshot.isFetching) {
-                if (snapshot.hasError) {
-                  logger.error(snapshot.error);
-                }
+              if (snapshot.hasError) {
+                logger.error(snapshot.error);
+              }
 
+              if (snapshot.isFetching) {
                 return const SliverToBoxAdapter(
                   child: CupertinoActivityIndicator(),
                 );

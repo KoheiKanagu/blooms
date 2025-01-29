@@ -1,4 +1,9 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/features/condition/domain/condition_content.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_audio.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_empty.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_image.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_text.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
@@ -13,7 +18,7 @@ class ConditionBubble extends HookConsumerWidget {
   ConditionBubble({
     required this.documentId,
     required this.createdAt,
-    required this.record,
+    required this.content,
     required this.showDateTime,
     super.key,
   }) {
@@ -36,7 +41,7 @@ class ConditionBubble extends HookConsumerWidget {
 
   late final String createdAtString;
 
-  final String record;
+  final ConditionContent content;
 
   final bool showDateTime;
 
@@ -117,10 +122,16 @@ class ConditionBubble extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: MyDecoration.dropShadow(context).boxShadow,
                 ),
-                child: Text(
-                  record,
-                  style: CupertinoTheme.of(context).textTheme.textStyle,
-                ),
+                child: switch (content) {
+                  ConditionContentText() =>
+                    ConditionBubbleText(content as ConditionContentText),
+                  ConditionContentImage() =>
+                    ConditionBubbleImage(content as ConditionContentImage),
+                  ConditionContentAudio() =>
+                    ConditionBubbleAudio(content as ConditionContentAudio),
+                  ConditionContentEmpty() =>
+                    ConditionBubbleEmpty(content as ConditionContentEmpty),
+                },
               ),
             ),
           ),

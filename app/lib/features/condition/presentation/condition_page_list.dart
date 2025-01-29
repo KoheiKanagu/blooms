@@ -32,21 +32,21 @@ class ConditionPageList extends HookConsumerWidget {
         body: FirestoreQueryBuilder(
           query: query,
           builder: (context, snapshot, _) {
+            if (snapshot.hasError) {
+              logger.error(snapshot.error);
+
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(i18n.anUnexpectedErrorOccurred),
+                    Text(i18n.pleaseRestartTheAppLater),
+                  ],
+                ),
+              );
+            }
+
             if (snapshot.isFetching) {
-              if (snapshot.hasError) {
-                logger.error(snapshot.error);
-
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(i18n.anUnexpectedErrorOccurred),
-                      Text(i18n.pleaseRestartTheAppLater),
-                    ],
-                  ),
-                );
-              }
-
               return const Center(
                 child: CupertinoActivityIndicator(),
               );
@@ -78,8 +78,7 @@ class ConditionPageList extends HookConsumerWidget {
                   final condition = snap.data();
 
                   final createdAt = condition.createdAt?.toDate();
-                  final record = condition.record;
-                  if (createdAt == null || record == null) {
+                  if (createdAt == null) {
                     return const SizedBox.shrink();
                   }
 
@@ -95,7 +94,7 @@ class ConditionPageList extends HookConsumerWidget {
                   return ConditionBubble(
                     documentId: snap.id,
                     createdAt: createdAt,
-                    record: record,
+                    content: condition.content,
                     showDateTime: showDateTime,
                   );
                 },

@@ -8,12 +8,11 @@ part of 'firebase_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseFirestoreHash() => r'eca974fdc891fcd3f9586742678f47582b20adec';
+String _$firebaseFirestoreHash() => r'211c9d7cd91051da8adfacbf85a09b8bad1d41e8';
 
 /// See also [firebaseFirestore].
 @ProviderFor(firebaseFirestore)
-final firebaseFirestoreProvider =
-    AutoDisposeProvider<FirebaseFirestore>.internal(
+final firebaseFirestoreProvider = Provider<FirebaseFirestore>.internal(
   firebaseFirestore,
   name: r'firebaseFirestoreProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,14 +24,13 @@ final firebaseFirestoreProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseFirestoreRef = AutoDisposeProviderRef<FirebaseFirestore>;
+typedef FirebaseFirestoreRef = ProviderRef<FirebaseFirestore>;
 String _$firebaseCrashlyticsHash() =>
-    r'011819a5f3ce1923a2df677a4d83544b648711e6';
+    r'b676b545954cfaab78c5f4cfd7d774d97c96dcad';
 
 /// See also [firebaseCrashlytics].
 @ProviderFor(firebaseCrashlytics)
-final firebaseCrashlyticsProvider =
-    AutoDisposeProvider<FirebaseCrashlytics>.internal(
+final firebaseCrashlyticsProvider = Provider<FirebaseCrashlytics>.internal(
   firebaseCrashlytics,
   name: r'firebaseCrashlyticsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -44,12 +42,12 @@ final firebaseCrashlyticsProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseCrashlyticsRef = AutoDisposeProviderRef<FirebaseCrashlytics>;
-String _$firebaseAuthHash() => r'8f84097cccd00af817397c1715c5f537399ba780';
+typedef FirebaseCrashlyticsRef = ProviderRef<FirebaseCrashlytics>;
+String _$firebaseAuthHash() => r'8c3e9d11b27110ca96130356b5ef4d5d34a5ffc2';
 
 /// See also [firebaseAuth].
 @ProviderFor(firebaseAuth)
-final firebaseAuthProvider = AutoDisposeProvider<FirebaseAuth>.internal(
+final firebaseAuthProvider = Provider<FirebaseAuth>.internal(
   firebaseAuth,
   name: r'firebaseAuthProvider',
   debugGetCreateSourceHash:
@@ -60,13 +58,12 @@ final firebaseAuthProvider = AutoDisposeProvider<FirebaseAuth>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseAuthRef = AutoDisposeProviderRef<FirebaseAuth>;
-String _$firebaseMessagingHash() => r'5e9baf830c916e075321e6c66ba316573c77e98f';
+typedef FirebaseAuthRef = ProviderRef<FirebaseAuth>;
+String _$firebaseMessagingHash() => r'6765ce963b9b8c50186b5132356d60eb68265741';
 
 /// See also [firebaseMessaging].
 @ProviderFor(firebaseMessaging)
-final firebaseMessagingProvider =
-    AutoDisposeProvider<FirebaseMessaging>.internal(
+final firebaseMessagingProvider = Provider<FirebaseMessaging>.internal(
   firebaseMessaging,
   name: r'firebaseMessagingProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -78,6 +75,182 @@ final firebaseMessagingProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FirebaseMessagingRef = AutoDisposeProviderRef<FirebaseMessaging>;
+typedef FirebaseMessagingRef = ProviderRef<FirebaseMessaging>;
+String _$firebaseStorageHash() => r'4d34fbbd82ac849c74805e19a05079afa5e20cad';
+
+/// See also [firebaseStorage].
+@ProviderFor(firebaseStorage)
+final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
+  firebaseStorage,
+  name: r'firebaseStorageProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseStorageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FirebaseStorageRef = ProviderRef<FirebaseStorage>;
+String _$firebaseStorageGsFileDownloadUrlHash() =>
+    r'cdee6332cfb476d9b2b4d4e794cd3174cbed3ff8';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [firebaseStorageGsFileDownloadUrl].
+@ProviderFor(firebaseStorageGsFileDownloadUrl)
+const firebaseStorageGsFileDownloadUrlProvider =
+    FirebaseStorageGsFileDownloadUrlFamily();
+
+/// See also [firebaseStorageGsFileDownloadUrl].
+class FirebaseStorageGsFileDownloadUrlFamily
+    extends Family<AsyncValue<String>> {
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  const FirebaseStorageGsFileDownloadUrlFamily();
+
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  FirebaseStorageGsFileDownloadUrlProvider call({
+    required String fileUri,
+  }) {
+    return FirebaseStorageGsFileDownloadUrlProvider(
+      fileUri: fileUri,
+    );
+  }
+
+  @override
+  FirebaseStorageGsFileDownloadUrlProvider getProviderOverride(
+    covariant FirebaseStorageGsFileDownloadUrlProvider provider,
+  ) {
+    return call(
+      fileUri: provider.fileUri,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'firebaseStorageGsFileDownloadUrlProvider';
+}
+
+/// See also [firebaseStorageGsFileDownloadUrl].
+class FirebaseStorageGsFileDownloadUrlProvider
+    extends AutoDisposeFutureProvider<String> {
+  /// See also [firebaseStorageGsFileDownloadUrl].
+  FirebaseStorageGsFileDownloadUrlProvider({
+    required String fileUri,
+  }) : this._internal(
+          (ref) => firebaseStorageGsFileDownloadUrl(
+            ref as FirebaseStorageGsFileDownloadUrlRef,
+            fileUri: fileUri,
+          ),
+          from: firebaseStorageGsFileDownloadUrlProvider,
+          name: r'firebaseStorageGsFileDownloadUrlProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$firebaseStorageGsFileDownloadUrlHash,
+          dependencies: FirebaseStorageGsFileDownloadUrlFamily._dependencies,
+          allTransitiveDependencies:
+              FirebaseStorageGsFileDownloadUrlFamily._allTransitiveDependencies,
+          fileUri: fileUri,
+        );
+
+  FirebaseStorageGsFileDownloadUrlProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.fileUri,
+  }) : super.internal();
+
+  final String fileUri;
+
+  @override
+  Override overrideWith(
+    FutureOr<String> Function(FirebaseStorageGsFileDownloadUrlRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FirebaseStorageGsFileDownloadUrlProvider._internal(
+        (ref) => create(ref as FirebaseStorageGsFileDownloadUrlRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        fileUri: fileUri,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<String> createElement() {
+    return _FirebaseStorageGsFileDownloadUrlProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FirebaseStorageGsFileDownloadUrlProvider &&
+        other.fileUri == fileUri;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, fileUri.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin FirebaseStorageGsFileDownloadUrlRef
+    on AutoDisposeFutureProviderRef<String> {
+  /// The parameter `fileUri` of this provider.
+  String get fileUri;
+}
+
+class _FirebaseStorageGsFileDownloadUrlProviderElement
+    extends AutoDisposeFutureProviderElement<String>
+    with FirebaseStorageGsFileDownloadUrlRef {
+  _FirebaseStorageGsFileDownloadUrlProviderElement(super.provider);
+
+  @override
+  String get fileUri =>
+      (origin as FirebaseStorageGsFileDownloadUrlProvider).fileUri;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

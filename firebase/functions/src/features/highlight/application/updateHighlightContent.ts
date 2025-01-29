@@ -38,7 +38,6 @@ export async function updateHighlightContent(
       .withConverter(conditionConverter)
       .where('deletedAt', '==', null)
       .where('createdBy', '==', highlight.subjectUid)
-      .where('state', '==', 'success')
       .orderBy('createdAt', 'desc')
       // 対象の範囲
       .where('createdAt', '>=', startDate)
@@ -48,7 +47,7 @@ export async function updateHighlightContent(
     outSensitiveLog(`conditions`, conditions);
 
     // 生成モデルにリクエストを送信
-    const { content, prompt } = await requestGenerativeModel(conditions, highlight.style);
+    const { content, prompt } = await requestGenerativeModel(highlight.subjectUid, conditions, highlight.style);
     const updatedHighlight: Highlight = {
       ...highlight,
       content: content,

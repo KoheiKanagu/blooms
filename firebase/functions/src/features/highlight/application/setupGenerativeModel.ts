@@ -3,7 +3,7 @@ import { projectID } from 'firebase-functions/params';
 import { kVertexAiSearchDatastore } from '../../../constants/appEnv';
 import { HighlightStyle } from '../domain/highlight';
 
-const safetySetting: SafetySetting[] = [
+const safetySettings: SafetySetting[] = [
   {
     category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
     threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
@@ -185,7 +185,7 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
     .preview
     .getGenerativeModel({
       model: 'gemini-2.0-flash-exp',
-      safetySettings: safetySetting,
+      safetySettings: safetySettings,
       generationConfig: {
         temperature: temperature,
         topP: 0.95,

@@ -1,9 +1,13 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
+import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pull_down_button/pull_down_button.dart';
 
 class ConditionForm extends HookConsumerWidget {
   const ConditionForm({
@@ -36,6 +40,66 @@ class ConditionForm extends HookConsumerWidget {
           color: CupertinoColors.tertiarySystemBackground.resolveFrom(context),
           child: Row(
             children: [
+              PullDownButton(
+                itemBuilder: (context) {
+                  return [
+                    PullDownMenuItem(
+                      title: i18n.camera,
+                      icon: CupertinoIcons.camera,
+                      onTap: () async {
+                        final xFile = await ImagePicker().pickImage(
+                          source: ImageSource.camera,
+                          maxHeight: 1024,
+                          maxWidth: 1024,
+                          imageQuality: 50,
+                          requestFullMetadata: false,
+                        );
+                        if (xFile == null) {
+                          return;
+                        }
+
+                        await ref.read(
+                          conditionCreateImageProvider(
+                            xFiles: [
+                              xFile,
+                            ].toList(),
+                          ).future,
+                        );
+                      },
+                    ),
+                    PullDownMenuItem(
+                      title: i18n.photoLibrary,
+                      icon: CupertinoIcons.photo_fill,
+                      onTap: () async {
+                        final xFiles = await ImagePicker().pickMultiImage(
+                          maxHeight: 1024,
+                          maxWidth: 1024,
+                          imageQuality: 50,
+                          limit: 4,
+                          requestFullMetadata: false,
+                        );
+                        if (xFiles.isEmpty) {
+                          return;
+                        }
+
+                        if (context.mounted) {
+                          final indicator = showMyProgressIndicator(context);
+                          await ref.read(
+                            conditionCreateImageProvider(xFiles: xFiles).future,
+                          );
+                          indicator.dismiss();
+                        }
+                      },
+                    ),
+                  ];
+                },
+                buttonBuilder: (context, showMenu) => CupertinoButton(
+                  onPressed: showMenu,
+                  sizeStyle: CupertinoButtonSize.medium,
+                  padding: EdgeInsets.zero,
+                  child: const Icon(CupertinoIcons.add_circled_solid),
+                ),
+              ),
               const Gap(8),
               Expanded(
                 child: CupertinoTextField(
@@ -50,14 +114,14 @@ class ConditionForm extends HookConsumerWidget {
                   CupertinoIcons.arrow_up_circle_fill,
                 ),
                 onPressed: () async {
-                  final record = textController.text;
-                  if (record.isEmpty) {
+                  final text = textController.text;
+                  if (text.isEmpty) {
                     return;
                   }
 
                   await ref.read(
-                    conditionCreateSubjectiveProvider(
-                      record: record,
+                    conditionCreateTextProvider(
+                      text: text,
                     ).future,
                   );
 

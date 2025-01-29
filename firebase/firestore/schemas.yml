@@ -57,6 +57,10 @@ paths:
                     description: 作成日時 Timestamp
                     type: object
                     nullable: true
+                  createdAtIso8601:
+                    description: ISO8601形式の作成日時
+                    type: string
+                    example: 2004-04-01T12:00+09:00
                   updatedAt:
                     description: 更新日時 Timestamp
                     type: object
@@ -68,34 +72,13 @@ paths:
                   createdBy:
                     description: 作成者のUID
                     type: string
-                  type:
-                    description: コンディションの種類
-                    type: string
-                    default: unknown
-                    enum:
-                      - unknown
-                      - subjective
-                      - photo
-                  attachments:
-                    description: 添付ファイルのgs://パス
-                    type: array
-                    default: []
-                    items:
-                      type: string
-                      example: gs://bucket/path/to/file
-                  state:
-                    description: attachmentsの解析で処理が必要な場合の状態
-                    type: string
-                    default: pending
-                    enum:
-                      - pending
-                      - inProgress
-                      - success
-                      - failure
-                  record:
-                    description: 記録
-                    type: string
-                    example: 頭痛がする
+                  content:
+                    description: コンディションの内容
+                    type: object
+                    oneOf:
+                      - $ref: "#/components/schemas/ConditionContentText"
+                      - $ref: "#/components/schemas/ConditionContentImage"
+                      - $ref: "#/components/schemas/ConditionContentAudio"
 
   /highlights_v1/{documentId}:
     get:
@@ -212,3 +195,90 @@ components:
         abstract:
           description: 分析結果の要旨
           type: string
+
+    ConditionContentText:
+      required:
+        - type
+        - text
+      properties:
+        type:
+          description: コンディションの種類
+          type: string
+          default: text
+        text:
+          description: 記録
+          type: string
+          example: 頭痛がする
+
+    ConditionContentImage:
+      required:
+        - type
+        - attachments
+      properties:
+        type:
+          description: コンディションの種類
+          type: string
+          default: image
+        attachments:
+          description: 添付ファイル
+          type: array
+          items:
+            type: object
+            required:
+              - fileUri
+              - mimeType
+              - width
+              - height
+              - additionalInfo
+            properties:
+              fileUri:
+                type: string
+                description: 添付ファイルのgs://パス
+                example: gs://bucket/path/to/file
+              mimeType:
+                type: string
+                description: MIMEタイプ
+                example: image/webp
+              width:
+                type: integer
+                description: 画像の幅
+                example: 1920
+              height:
+                type: integer
+                description: 画像の高さ
+                example: 1080
+              additionalInfo:
+                type: object
+                description: その他の情報
+                properties:
+                  blurHash:
+                    type: string
+                    description: BlurHash
+                    example: L6PZfSi_.AyE_3t7t7R**0o#DgR4
+
+    ConditionContentAudio:
+      required:
+        - type
+        - attachments
+      properties:
+        type:
+          description: コンディションの種類
+          type: string
+          default: audio
+        attachments:
+          description: 添付ファイル
+          type: array
+          items:
+            type: object
+            required:
+              - fileUri
+              - mimeType
+            properties:
+              fileUri:
+                type: string
+                description: 添付ファイルのgs://パス
+                example: gs://bucket/path/to/file
+              mimeType:
+                type: string
+                description: MIMEタイプ
+                example: audio/mpeg

@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // already authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // check if the user is the owner of the document
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    match /prompts_v1/{uid}/{fileId} {
+      allow get:
+        if isOwner(uid);
+    }
+
+    match /images_v1/{uid}/{fileId} {
+      allow get, create:
+        if isOwner(uid);
+    }
+
+    match /audios_v1/{uid}/{fileId} {
+      allow get, create:
+        if isOwner(uid);
+    }
+  }
+}
