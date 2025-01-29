@@ -49,7 +49,7 @@ final talkerRiverpodObserver = TalkerRiverpodObserver(
   talker: logger,
   settings: TalkerRiverpodLoggerSettings(
     providerFilter: (provider) {
-      if (!kAppEnvProd) {
+      if (kAppEnvProd) {
         final hidden = {
           'firebaseUserProvider',
           'highlightPromptProvider',
