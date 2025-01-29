@@ -13,7 +13,7 @@ void main() {
 
         final json = {
           'style': 'private',
-          'startAt': now.millisecondsSinceEpoch,
+          'startAt': now,
           'period': 'past21days',
           'subjectiveTrend': 'subjectiveTrend',
           'objectiveTrend': 'objectiveTrend',
@@ -47,7 +47,7 @@ void main() {
 
         final json = {
           'style': 'professional',
-          'startAt': now.millisecondsSinceEpoch,
+          'startAt': now,
           'period': 'past21days',
           'analysisResults': ['analysisResults'],
           'abstract': 'abstract',
