@@ -41,7 +41,6 @@
         "care": "あなたに寄り添って体調を気遣う文体の文章が作成されます",
         "trend": "あなたの体調に関連する何らかの傾向が見つかる可能性があります",
         "advice": "明日に向けてのアドバイスが提供されます",
-        "grounding(rich)": "${grounding}を活用し、正しい内容となるように心がけます",
         "disclaimer": "内容はあくまで参考であり、診断結果として活用はできません"
       },
       "professional": {
@@ -57,7 +56,6 @@
   "onboarding": {
     "letsGetStarted": "さあ、はじめましょう"
   },
-  "grounding": "グラウンディング",
   "today": "今日",
   "yesterday": "昨日",
   "camera": "カメラ",

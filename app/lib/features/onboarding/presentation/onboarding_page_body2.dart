@@ -3,9 +3,7 @@ import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
-import 'package:blooms/widgets/show_grounding_modal_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:gap/gap.dart';
 
 class OnboardingPageBody2 extends StatelessWidget {
@@ -56,26 +54,9 @@ class OnboardingPageBody2 extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   style: CupertinoTheme.of(context).textTheme.textStyle,
-                  children: [
-                    const TextSpan(
-                      text: '記録されたあなたの体調と客観的なデータ、そして',
-                    ),
+                  children: const [
                     TextSpan(
-                      text: 'グラウンディング',
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .textStyle
-                          .copyWith(
-                            color:
-                                CupertinoColors.activeBlue.resolveFrom(context),
-                          ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          showGroundingModalSheet(context);
-                        },
-                    ),
-                    const TextSpan(
-                      text: 'を組み合わせることで、あなたの体調の変化を理解しましょう。',
+                      text: '記録されたあなたの体調と客観的なデータを組み合わせることで、あなたの体調の変化を理解しましょう。',
                     ),
                   ],
                 ),
