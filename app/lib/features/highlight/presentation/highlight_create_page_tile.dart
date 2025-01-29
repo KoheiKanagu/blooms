@@ -1,4 +1,4 @@
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
@@ -18,7 +18,7 @@ class HighlightCreatePageTile extends StatelessWidget {
     this.today = today ??= clock.now();
   }
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final bool selected;
 
@@ -42,11 +42,11 @@ class HighlightCreatePageTile extends StatelessWidget {
     final pastDate = myDateFormat(type.pastDate(today));
 
     return switch (type) {
-      HighlightType.past1day => i18n.highlight.onTheDayTarget(date: nowDate),
-      HighlightType.past7days ||
-      HighlightType.past14days ||
-      HighlightType.past21days ||
-      HighlightType.past28days =>
+      HighlightPeriod.past1day => i18n.highlight.onTheDayTarget(date: nowDate),
+      HighlightPeriod.past7days ||
+      HighlightPeriod.past14days ||
+      HighlightPeriod.past21days ||
+      HighlightPeriod.past28days =>
         i18n.highlight.xToYTarget(x: pastDate, y: nowDate),
     };
   }
@@ -59,7 +59,7 @@ class HighlightCreatePageTile extends StatelessWidget {
 Widget highlightCreatePageTile(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightType.values
+      children: HighlightPeriod.values
           .map(
             (type) => HighlightCreatePageTile(
               type: type,

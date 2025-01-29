@@ -4,8 +4,9 @@ import 'package:blooms/constants/collection_path.dart';
 import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/highlight/domain/highlight_content.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +42,7 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
 @riverpod
 Future<void> highlightCreate(
   Ref ref, {
-  required HighlightType type,
+  required HighlightPeriod period,
   required HighlightStyle style,
 }) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);

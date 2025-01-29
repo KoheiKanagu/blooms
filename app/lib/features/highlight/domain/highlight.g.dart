@@ -14,27 +14,9 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$HighlightImpl(
-          type: $checkedConvert(
-              'type', (v) => $enumDecode(_$HighlightTypeEnumMap, v)),
           subjectUid: $checkedConvert('subjectUid', (v) => v as String),
-          startAt: $checkedConvert(
-              'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
-          style: $checkedConvert(
-              'style',
-              (v) =>
-                  $enumDecodeNullable(_$HighlightStyleEnumMap, v) ??
-                  HighlightStyle.private),
-          prompt: $checkedConvert('prompt', (v) => v as String?),
-          content: $checkedConvert(
-              'content',
-              (v) => v == null
-                  ? null
-                  : HighlightContent.fromJson(v as Map<String, dynamic>)),
-          state: $checkedConvert(
-              'state',
-              (v) =>
-                  $enumDecodeNullable(_$HighlightStateEnumMap, v) ??
-                  HighlightState.pending),
+          content: $checkedConvert('content',
+              (v) => HighlightContent.fromJson(v as Map<String, dynamic>)),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
@@ -48,34 +30,9 @@ _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$HighlightImplToJson(_$HighlightImpl instance) =>
     <String, dynamic>{
-      'type': _$HighlightTypeEnumMap[instance.type]!,
       'subjectUid': instance.subjectUid,
-      'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
-      'style': _$HighlightStyleEnumMap[instance.style]!,
-      'prompt': instance.prompt,
-      'content': instance.content?.toJson(),
-      'state': _$HighlightStateEnumMap[instance.state]!,
+      'content': instance.content.toJson(),
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
     };
-
-const _$HighlightTypeEnumMap = {
-  HighlightType.past1day: 'past1day',
-  HighlightType.past7days: 'past7days',
-  HighlightType.past14days: 'past14days',
-  HighlightType.past21days: 'past21days',
-  HighlightType.past28days: 'past28days',
-};
-
-const _$HighlightStyleEnumMap = {
-  HighlightStyle.private: 'private',
-  HighlightStyle.professional: 'professional',
-};
-
-const _$HighlightStateEnumMap = {
-  HighlightState.pending: 'pending',
-  HighlightState.inProgress: 'inProgress',
-  HighlightState.success: 'success',
-  HighlightState.failure: 'failure',
-};

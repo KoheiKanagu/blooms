@@ -46,7 +46,7 @@ final highlightQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HighlightQueryRef = AutoDisposeFutureProviderRef<Query<Highlight>>;
-String _$highlightCreateHash() => r'26a6e62abf12bc5b93221be377b4cf154b630bfa';
+String _$highlightCreateHash() => r'c810582c6f3c1510040fe44d4229453c64760654';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -80,11 +80,11 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
 
   /// See also [highlightCreate].
   HighlightCreateProvider call({
-    required HighlightType type,
+    required HighlightPeriod period,
     required HighlightStyle style,
   }) {
     return HighlightCreateProvider(
-      type: type,
+      period: period,
       style: style,
     );
   }
@@ -94,7 +94,7 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
     covariant HighlightCreateProvider provider,
   ) {
     return call(
-      type: provider.type,
+      period: provider.period,
       style: provider.style,
     );
   }
@@ -118,12 +118,12 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
 class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
   /// See also [highlightCreate].
   HighlightCreateProvider({
-    required HighlightType type,
+    required HighlightPeriod period,
     required HighlightStyle style,
   }) : this._internal(
           (ref) => highlightCreate(
             ref as HighlightCreateRef,
-            type: type,
+            period: period,
             style: style,
           ),
           from: highlightCreateProvider,
@@ -135,7 +135,7 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
           dependencies: HighlightCreateFamily._dependencies,
           allTransitiveDependencies:
               HighlightCreateFamily._allTransitiveDependencies,
-          type: type,
+          period: period,
           style: style,
         );
 
@@ -146,11 +146,11 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.type,
+    required this.period,
     required this.style,
   }) : super.internal();
 
-  final HighlightType type;
+  final HighlightPeriod period;
   final HighlightStyle style;
 
   @override
@@ -166,7 +166,7 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        type: type,
+        period: period,
         style: style,
       ),
     );
@@ -180,14 +180,14 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
   @override
   bool operator ==(Object other) {
     return other is HighlightCreateProvider &&
-        other.type == type &&
+        other.period == period &&
         other.style == style;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, type.hashCode);
+    hash = _SystemHash.combine(hash, period.hashCode);
     hash = _SystemHash.combine(hash, style.hashCode);
 
     return _SystemHash.finish(hash);
@@ -197,8 +197,8 @@ class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin HighlightCreateRef on AutoDisposeFutureProviderRef<void> {
-  /// The parameter `type` of this provider.
-  HighlightType get type;
+  /// The parameter `period` of this provider.
+  HighlightPeriod get period;
 
   /// The parameter `style` of this provider.
   HighlightStyle get style;
@@ -209,7 +209,7 @@ class _HighlightCreateProviderElement
   _HighlightCreateProviderElement(super.provider);
 
   @override
-  HighlightType get type => (origin as HighlightCreateProvider).type;
+  HighlightPeriod get period => (origin as HighlightCreateProvider).period;
   @override
   HighlightStyle get style => (origin as HighlightCreateProvider).style;
 }

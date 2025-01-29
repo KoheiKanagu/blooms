@@ -1,5 +1,5 @@
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/features/highlight/presentation/highlight_type_label.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +18,7 @@ class HighlightTile extends StatelessWidget {
           'selectedかstateのどちらか一方を指定してください',
         );
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState? state;
 
@@ -79,7 +79,7 @@ class _Title extends StatelessWidget {
     required this.selected,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState? state;
 
@@ -119,7 +119,7 @@ class _Label extends StatelessWidget {
     required this.state,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final HighlightState state;
 
@@ -152,7 +152,7 @@ class _LabelCheckMark extends StatelessWidget {
     required this.selected,
   });
 
-  final HighlightType type;
+  final HighlightPeriod period;
 
   final bool selected;
 

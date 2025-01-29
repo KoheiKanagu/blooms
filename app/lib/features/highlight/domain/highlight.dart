@@ -1,7 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
-import 'package:blooms/features/highlight/domain/highlight_state.dart';
+import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_style.dart';
-import 'package:blooms/features/highlight/domain/highlight_type.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -14,42 +13,34 @@ part 'highlight.g.dart';
 @freezed
 class Highlight with _$Highlight {
   const factory Highlight({
-    /// ハイライトの種類
-    required HighlightType type,
-
     /// ハイライトの対象者のUID
     required String subjectUid,
 
-    /// ハイライトを作成開始する日時。この日からN日前のハイライト
-    @TimestampConverterNotNull() required Timestamp startAt,
-
-    /// ハイライトのスタイル
-    @Default(HighlightStyle.private) HighlightStyle style,
-
-    /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
-    String? prompt,
-
-    /// ハイライトの内容
-    HighlightContent? content,
-
-    /// 生成モデルでの処理の状態
-    @Default(HighlightState.pending) HighlightState state,
+    /// 内容
+    required HighlightContent content,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Highlight;
 
   factory Highlight.create({
-    required HighlightType type,
+    required HighlightPeriod period,
     required HighlightStyle style,
     required String subjectUid,
     required Timestamp startAt,
   }) =>
       Highlight(
-        type: type,
-        style: style,
         subjectUid: subjectUid,
-        startAt: startAt,
+        content: switch (style) {
+          HighlightStyle.private => HighlightContentPrivate(
+              startAt: startAt,
+              period: period,
+            ),
+          HighlightStyle.professional => HighlightContentProfessional(
+              startAt: startAt,
+              period: period,
+            ),
+        },
       );
 
   const Highlight._();
@@ -62,11 +53,23 @@ class Highlight with _$Highlight {
   static ToFirestore<Highlight> get toFirestore =>
       (data, _) => TimestampConverter.updateServerTimestamp(data.toJson());
 
-  HighlightPeriod get highlightPeriod {
+  HighlightRange get highlightRange {
+    final (startAt, period) = switch (content) {
+      HighlightContentPrivate(:final startAt, :final period) => (
+          startAt,
+          period
+        ),
+      HighlightContentProfessional(:final startAt, :final period) => (
+          startAt,
+          period
+        ),
+      HighlightContentEmpty() => throw UnimplementedError(),
+    };
+
     final startDate = myDateFormat(
       startAt.toDate().subtract(
             Duration(
-              days: type.days,
+              days: period.days,
             ),
           ),
     );
@@ -79,7 +82,7 @@ class Highlight with _$Highlight {
   }
 }
 
-typedef HighlightPeriod = ({
+typedef HighlightRange = ({
   String startDate,
   String endDate,
 });
