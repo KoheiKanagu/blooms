@@ -153,6 +153,8 @@ class AboutPage extends HookConsumerWidget {
         indicator.dismiss();
 
         if (context.mounted) {
+          Navigator.of(context).pop();
+
           await showOkAlertDialog(
             context: rootContext!,
             routeSettings: const RouteSettings(
