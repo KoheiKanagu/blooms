@@ -38,6 +38,9 @@ class HighlightPageList extends HookConsumerWidget {
                         heightFactor: 0.9,
                         child: HighlightCreatePage(),
                       ),
+                      routeSettings: const RouteSettings(
+                        name: 'highlightCreate',
+                      ),
                     );
                   },
                 ),

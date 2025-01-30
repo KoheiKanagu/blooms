@@ -71,6 +71,9 @@ class HighlightPageListTile extends HookConsumerWidget {
                 title: i18n.highlight.state.pending,
                 message: i18n.highlight.state.pendingDescription,
                 style: AdaptiveStyle.iOS,
+                routeSettings: const RouteSettings(
+                  name: 'highlightPending',
+                ),
               );
             case HighlightState.inProgress:
               await showOkAlertDialog(
@@ -78,6 +81,9 @@ class HighlightPageListTile extends HookConsumerWidget {
                 title: i18n.highlight.state.inProgress,
                 message: i18n.highlight.state.inProgressDescription,
                 style: AdaptiveStyle.iOS,
+                routeSettings: const RouteSettings(
+                  name: 'highlightInProgress',
+                ),
               );
             case HighlightState.success:
               await Navigator.of(context).push(
@@ -103,6 +109,9 @@ class HighlightPageListTile extends HookConsumerWidget {
                     isDefaultAction: true,
                   ),
                 ],
+                routeSettings: const RouteSettings(
+                  name: 'highlightFailure',
+                ),
               );
               if (result == 'delete') {
                 await ref.read(

@@ -46,6 +46,9 @@ class ConditionBubbleImage extends HookConsumerWidget {
                               context: context,
                               title: i18n.imageLoadFailed,
                               style: AdaptiveStyle.iOS,
+                              routeSettings: const RouteSettings(
+                                name: 'imageLoadFailed',
+                              ),
                             );
                           },
                           child: Icon(
