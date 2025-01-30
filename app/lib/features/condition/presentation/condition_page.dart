@@ -1,11 +1,8 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:blooms/features/about/presentation/about_page.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/presentation/condition_page_list.dart';
-import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
-import 'package:blooms/routing/application/my_go_router.dart';
 import 'package:blooms/theme/my_date_format.dart';
-import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,43 +26,17 @@ class ConditionPage extends HookConsumerWidget {
           itemBuilder: (context) {
             return [
               PullDownMenuItem(
-                onTap: () async {
-                  final result = await showConfirmationDialog(
+                onTap: () {
+                  showCupertinoModalPopup<void>(
                     context: context,
-                    title: i18n.deleteAll.title,
-                    message: i18n.deleteAll.message,
+                    builder: (context) => const AboutPage(),
                     routeSettings: const RouteSettings(
-                      name: 'deleteAllConfirmationDialog',
+                      name: AboutPage.path,
                     ),
-                    actions: [
-                      AlertDialogAction(
-                        key: 'delete',
-                        label: i18n.deleteAll.delete,
-                        isDestructiveAction: true,
-                      ),
-                    ],
-                    style: AdaptiveStyle.iOS,
                   );
-                  if (result == 'delete') {
-                    if (context.mounted) {
-                      final indicator = showMyProgressIndicator(context);
-                      await ref.read(userDeleteProvider.future);
-                      indicator.dismiss();
-
-                      if (context.mounted) {
-                        await showOkAlertDialog(
-                          context: rootContext!,
-                          routeSettings: const RouteSettings(
-                            name: 'deleteAllThankYouDialog',
-                          ),
-                          title: i18n.thankYouForUsing,
-                          style: AdaptiveStyle.iOS,
-                        );
-                      }
-                    }
-                  }
                 },
-                title: 'Delete',
+                title: i18n.aboutBLOOMS.aboutBLOOMS,
+                icon: CupertinoIcons.info,
               ),
             ];
           },

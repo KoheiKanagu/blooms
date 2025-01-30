@@ -115,7 +115,7 @@ class TranslationsAboutBLOOMSJa {
 
 	// Translations
 	String get aboutBLOOMS => 'BLOOMSについて';
-	String get version => 'バージョン';
+	String version({required Object version}) => 'バージョン: ${version}';
 	String get whatIsBLOOMS => 'BLOOMSとは';
 	String get openSource => 'オープンソース';
 	String get openSourceDescription => 'BLOOMSはオープンソースで開発されています';
