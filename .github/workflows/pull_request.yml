@@ -97,7 +97,7 @@ jobs:
         env:
           USE_FVM: false
 
-  check_firebase:
+  check_cloud_functions:
     needs: changed-files
     timeout-minutes: 30
     runs-on: ubuntu-latest
@@ -150,7 +150,7 @@ jobs:
         run: |
           ./firebase_emulators_test.sh
 
-  check_firestore:
+  check_firebase:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     permissions:
@@ -187,6 +187,11 @@ jobs:
         working-directory: firebase
         run: |
           ./scripts/export_firestore_indexes.sh
+
+      - name: Export Firebase Extensions
+        working-directory: firebase
+        run: |
+          ./scripts/export_extensions.sh
 
       - run: |
           git diff --exit-code
