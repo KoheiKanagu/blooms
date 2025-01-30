@@ -61,5 +61,11 @@
   "camera": "カメラ",
   "photoLibrary": "写真ライブラリ",
   "unknownContent": "この形式は対応していません。アプリをバージョンアップしてください",
-  "imageLoadFailed": "画像の読み込みに失敗しました"
+  "imageLoadFailed": "画像の読み込みに失敗しました",
+  "deleteAll": {
+    "title": "全てのデータを削除しますか？",
+    "message": "これまでの記録やハイライトなどのデータがすべて削除されます。この操作は取り消せません",
+    "delete": "削除"
+  },
+  "thankYouForUsing": "ご利用いただきありがとうございました"
 }

@@ -53,6 +53,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get photoLibrary => '写真ライブラリ';
 	String get unknownContent => 'この形式は対応していません。アプリをバージョンアップしてください';
 	String get imageLoadFailed => '画像の読み込みに失敗しました';
+	late final TranslationsDeleteAllJa deleteAll = TranslationsDeleteAllJa.internal(_root);
+	String get thankYouForUsing => 'ご利用いただきありがとうございました';
 }
 
 // Path: highlight
@@ -90,6 +92,18 @@ class TranslationsOnboardingJa {
 
 	// Translations
 	String get letsGetStarted => 'さあ、はじめましょう';
+}
+
+// Path: deleteAll
+class TranslationsDeleteAllJa {
+	TranslationsDeleteAllJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => '全てのデータを削除しますか？';
+	String get message => 'これまでの記録やハイライトなどのデータがすべて削除されます。この操作は取り消せません';
+	String get delete => '削除';
 }
 
 // Path: highlight.state

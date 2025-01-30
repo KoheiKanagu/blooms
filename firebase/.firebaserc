@@ -26,5 +26,16 @@
       }
     }
   },
-  "etags": {}
+  "etags": {
+    "blooms-stg": {
+      "extensionInstances": {
+        "delete-user-data-firestore-conditions-v1": "8d33859f1c7842f5a7579d422282722843af7bddf9e25ca7665fca7e7a11cf8a",
+        "delete-user-data-firestore-highlights-v1": "d6721656bb8b050718259d732adc701d14677ab6554e05c5457f466c802fa376",
+        "delete-user-data-firestore-users-v1": "db256cbb7d357f48a6f675f60c1ddd1e52244e4a30f834e1ab5470817d9c32c5",
+        "delete-user-data-storage-audios-v1": "11a97feb8cb0ee85013b8523493e058da7ddf57b6cda73c6c2ef1dbe8b3c165d",
+        "delete-user-data-storage-images-v1": "be3179e948160502ca30bc1b6c6b5238ef9b30dff2fdd84982a220169b6c40f2",
+        "delete-user-data-storage-prompts-v1": "cbf6a74510522488796d705937c8a5a3fb87813332319a694eafeab2781d40a7"
+      }
+    }
+  }
 }
