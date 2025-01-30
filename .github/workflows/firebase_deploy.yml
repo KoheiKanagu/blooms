@@ -33,8 +33,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - script: deploy_only_extensions.sh
-            useHotfixFirebaseCLI: true
+          # Firebase CLIがプライベートAPIを呼び出そうとするのでエラーになる
+          # CIでデプロイしたい場合はFIREBASE_TOKENを設定する必要があるが、ひとまず手動でデプロイする
+          # https://github.com/firebase/firebase-tools/issues/6310
+          # - script: deploy_only_extensions.sh
           - script: deploy_only_hosting_app.sh
             flutterBuildScript: flutter_build_web_app.sh --flavor ${{ inputs.environment }}
           - script: deploy_only_hosting_widgetbook.sh
@@ -62,21 +64,8 @@ jobs:
           node-version-file: firebase/functions/package.json
 
       - name: Firebase bootstrap
-        if: ${{ matrix.useHotfixFirebaseCLI != 'true' }}
         run: |
           .github/workflows/firebase_bootstrap.sh
-
-      - name: Firebase bootstrap (hotfix)
-        if: ${{ matrix.useHotfixFirebaseCLI == 'true' }}
-        run: |
-          # バケット名が原因でデプロイできないのでHotfix版を使う
-          # https://github.com/firebase/firebase-tools/issues/8152#issuecomment-2623374393
-          gh repo clone KoheiKanagu/firebase-tools
-          cd firebase-tools
-          git checkout firebasestorage
-          npm ci
-          npm link
-          npm ls -g --depth=0 --link=true
 
       - run: |
           firebase use ${{ inputs.environment }} --debug
