@@ -63,9 +63,20 @@
   "unknownContent": "この形式は対応していません。アプリをバージョンアップしてください",
   "imageLoadFailed": "画像の読み込みに失敗しました",
   "deleteAll": {
-    "title": "全てのデータを削除しますか？",
+    "title": "すべてのデータを削除しますか？",
     "message": "これまでの記録やハイライトなどのデータがすべて削除されます。この操作は取り消せません",
     "delete": "削除"
   },
-  "thankYouForUsing": "ご利用いただきありがとうございました"
+  "thankYouForUsing": "ご利用いただきありがとうございました",
+  "aboutBLOOMS": {
+    "aboutBLOOMS": "BLOOMSについて",
+    "version": "バージョン: ${version}",
+    "whatIsBLOOMS": "BLOOMSとは",
+    "openSource": "オープンソース",
+    "openSourceDescription": "BLOOMSはオープンソースで開発されています",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "licenseInformation": "ライセンス情報",
+    "deleteAllData": "すべてのデータを削除"
+  }
 }

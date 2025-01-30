@@ -55,6 +55,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get imageLoadFailed => '画像の読み込みに失敗しました';
 	late final TranslationsDeleteAllJa deleteAll = TranslationsDeleteAllJa.internal(_root);
 	String get thankYouForUsing => 'ご利用いただきありがとうございました';
+	late final TranslationsAboutBLOOMSJa aboutBLOOMS = TranslationsAboutBLOOMSJa.internal(_root);
 }
 
 // Path: highlight
@@ -101,9 +102,27 @@ class TranslationsDeleteAllJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => '全てのデータを削除しますか？';
+	String get title => 'すべてのデータを削除しますか？';
 	String get message => 'これまでの記録やハイライトなどのデータがすべて削除されます。この操作は取り消せません';
 	String get delete => '削除';
+}
+
+// Path: aboutBLOOMS
+class TranslationsAboutBLOOMSJa {
+	TranslationsAboutBLOOMSJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get aboutBLOOMS => 'BLOOMSについて';
+	String version({required Object version}) => 'バージョン: ${version}';
+	String get whatIsBLOOMS => 'BLOOMSとは';
+	String get openSource => 'オープンソース';
+	String get openSourceDescription => 'BLOOMSはオープンソースで開発されています';
+	String get termsOfService => '利用規約';
+	String get privacyPolicy => 'プライバシーポリシー';
+	String get licenseInformation => 'ライセンス情報';
+	String get deleteAllData => 'すべてのデータを削除';
 }
 
 // Path: highlight.state
