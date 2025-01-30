@@ -73,5 +73,13 @@
   ],
   "storage": {
     "rules": "storage/storage.rules"
+  },
+  "extensions": {
+    "delete-user-data-firestore-users-v1": "firebase/delete-user-data@0.1.23",
+    "delete-user-data-firestore-highlights-v1": "firebase/delete-user-data@0.1.23",
+    "delete-user-data-firestore-conditions-v1": "firebase/delete-user-data@0.1.23",
+    "delete-user-data-storage-prompts-v1": "firebase/delete-user-data@0.1.23",
+    "delete-user-data-storage-images-v1": "firebase/delete-user-data@0.1.23",
+    "delete-user-data-storage-audios-v1": "firebase/delete-user-data@0.1.23"
   }
 }
