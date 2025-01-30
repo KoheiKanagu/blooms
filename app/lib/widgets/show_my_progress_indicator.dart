@@ -12,6 +12,9 @@ MyProgressIndicator showMyProgressIndicator(
                 child: CupertinoActivityIndicator(),
               ),
             ),
+    routeSettings: const RouteSettings(
+      name: 'MyProgressIndicator',
+    ),
   );
 
   return MyProgressIndicator(context);
