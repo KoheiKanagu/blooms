@@ -29,12 +29,6 @@ done
 rm -rf ../firebase/public
 
 flutter build web \
-  --target lib/main.dart \
-  --wasm \
-  --dart-define FLUTTER_APP_FLAVOR="$flavor" \
-  --output ../firebase/hosting/public/
-
-flutter build web \
   --target lib/widgetbook/main.dart \
   --wasm \
   --dart-define FLUTTER_APP_FLAVOR="$flavor" \

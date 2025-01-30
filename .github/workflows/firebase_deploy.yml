@@ -29,6 +29,17 @@ jobs:
       id-token: write
       contents: read
       actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - script: deploy_only_extensions.sh
+            useHotfixFirebaseCLI: true
+          - script: deploy_only_hosting_app.sh
+            flutterBuildScript: flutter_build_web_app.sh --flavor ${{ inputs.environment }}
+          - script: deploy_only_hosting_widgetbook.sh
+            flutterBuildScript: flutter_build_web_widgetbook.sh --flavor ${{ inputs.environment }}
+          - script: deploy.sh
 
     steps:
       - name: Collect Workflow Telemetry
@@ -51,24 +62,40 @@ jobs:
           node-version-file: firebase/functions/package.json
 
       - name: Firebase bootstrap
+        if: ${{ matrix.useHotfixFirebaseCLI != 'true' }}
         run: |
           .github/workflows/firebase_bootstrap.sh
+
+      - name: Firebase bootstrap (hotfix)
+        if: ${{ matrix.useHotfixFirebaseCLI == 'true' }}
+        run: |
+          # バケット名が原因でデプロイできないのでHotfix版を使う
+          # https://github.com/firebase/firebase-tools/issues/8152#issuecomment-2623374393
+          gh repo clone KoheiKanagu/firebase-tools
+          cd firebase-tools
+          git checkout firebasestorage
+          npm ci
+          npm link
+          npm ls -g --depth=0 --link=true
 
       - run: |
           firebase use ${{ inputs.environment }} --debug
         working-directory: firebase
 
       - name: Install dependencies
+        if: ${{ matrix.flutterBuildScript == null }}
         working-directory: firebase/functions
         run: npm ci
 
       ### Setup Flutter ###
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
+        if: ${{ matrix.flutterBuildScript != null }}
         id: fvm-config-action
         with:
           path: app/.fvmrc
 
       - name: Setup Flutter
+        if: ${{ matrix.flutterBuildScript != null }}
         uses: subosito/flutter-action@v2.18.0
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
@@ -78,12 +105,15 @@ jobs:
           pub-cache-key: "flutter-pub-:os:-:channel:-:version:-:arch:"
 
       - name: Flutter bootstrap
+        if: ${{ matrix.flutterBuildScript != null }}
         run: |
           .github/workflows/flutter_bootstrap.sh
 
       ### Flutter Build ###
-      - run: |
-          ./scripts/flutter-build-web.sh --flavor ${{ inputs.environment }}
+      - name: Flutter Build
+        if: ${{ matrix.flutterBuildScript != null }}
+        run: |
+          ./scripts/${{ matrix.flutterBuildScript }}
         working-directory: app
         env:
           USE_FVM: false
@@ -92,4 +122,4 @@ jobs:
       - name: Firebase Deploy
         working-directory: firebase
         run: |
-          firebase deploy --force --except extensions
+          ./scripts/${{ matrix.script }}
