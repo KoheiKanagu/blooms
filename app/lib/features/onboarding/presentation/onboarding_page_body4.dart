@@ -80,7 +80,7 @@ class _Terms extends StatelessWidget {
               ),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              launchUrl(MyUrl.termOfService);
+              launchUrl(MyUrl.termsOfService);
             },
         ),
         privacyPolicy: (text) => TextSpan(
