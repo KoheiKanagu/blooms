@@ -145,6 +145,7 @@ class AboutPage extends HookConsumerWidget {
       ],
       style: AdaptiveStyle.iOS,
     );
+
     if (result == 'delete') {
       if (context.mounted) {
         final indicator = showMyProgressIndicator(context);
