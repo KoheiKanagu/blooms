@@ -30,5 +30,6 @@ export function functionsV1(): f.FunctionBuilder {
     .region('asia-northeast1');
 }
 
+export { onUserDeleteSchedule } from './features/auth/application/onUserDeleteSchedule';
 export { onHighlightDocumentCreated } from './features/highlight/onHighlightDocumentCreated';
 export { onCreateAuthUser } from './onCreateAuthUser';
