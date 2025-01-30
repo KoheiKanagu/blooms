@@ -36,6 +36,16 @@
         "delete-user-data-storage-images-v1": "be3179e948160502ca30bc1b6c6b5238ef9b30dff2fdd84982a220169b6c40f2",
         "delete-user-data-storage-prompts-v1": "cbf6a74510522488796d705937c8a5a3fb87813332319a694eafeab2781d40a7"
       }
+    },
+    "blooms-prod-43d74": {
+      "extensionInstances": {
+        "delete-user-data-firestore-conditions-v1": "8453b04980adf5a019e3838b4e2d2acd71f6e42682b14637db8b0d9c5ab81141",
+        "delete-user-data-firestore-highlights-v1": "438f6e9554a1ab465c06e9db7fbddbb2eff7bd199d05a3e6e08dd15989574be3",
+        "delete-user-data-firestore-users-v1": "b830b7324ec25ca79b3cf35dad47a519c91450115d61bac3749197744a48cbde",
+        "delete-user-data-storage-audios-v1": "f16287758579790a166078c25f5496bd8db0cb86003877ccc138eb7c6bdb24f3",
+        "delete-user-data-storage-images-v1": "fa6e3f887068b4c4963d77dd0b386643bf8622986d5eaf6bb50074a02aba2bf2",
+        "delete-user-data-storage-prompts-v1": "bf68b795052b6ab0f019a7316d33701a055315416759d11dd3bc385dfb78d5af"
+      }
     }
   }
 }
