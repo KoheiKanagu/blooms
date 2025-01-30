@@ -6,4 +6,6 @@ class MyUrl {
   static Uri termOfService = Uri.parse('https://kingu.dev/terms_of_service');
 
   static Uri privacyPolicy = Uri.parse('https://kingu.dev/privacy_policy');
+
+  static Uri github = Uri.parse('https://github.com/KoheiKanagu/blooms');
 }
