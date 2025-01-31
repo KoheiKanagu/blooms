@@ -26,6 +26,16 @@ class AboutPage extends HookConsumerWidget {
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
         middle: Text(i18n.aboutBLOOMS.aboutBLOOMS),
+        automaticallyImplyLeading: false,
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Text(
+            MaterialLocalizations.of(context).closeButtonLabel,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       child: ListView(
         children: [

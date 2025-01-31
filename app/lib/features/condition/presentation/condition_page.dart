@@ -52,7 +52,8 @@ class ConditionPage extends HookConsumerWidget {
                   );
                 },
                 title: i18n.aboutBLOOMS.aboutBLOOMS,
-                icon: CupertinoIcons.info,
+                icon: CupertinoIcons.info_circle_fill,
+                iconColor: CupertinoTheme.of(context).primaryColor,
               ),
             ];
           },
