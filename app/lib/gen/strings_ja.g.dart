@@ -32,6 +32,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	String get blooms => 'BLOOMS';
 	String get anUnexpectedErrorOccurred => '予期しないエラーが発生しました';
 	String get pleaseRestartTheAppLater => 'しばらくしてからアプリを再起動してください';
 	String get retry => '再試行';

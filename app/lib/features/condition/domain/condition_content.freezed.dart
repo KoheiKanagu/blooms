@@ -18,6 +18,8 @@ ConditionContent _$ConditionContentFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
     case 'text':
       return ConditionContentText.fromJson(json);
+    case 'textWithSearchKeywords':
+      return ConditionContentTextWithSearchKeywords.fromJson(json);
     case 'image':
       return ConditionContentImage.fromJson(json);
     case 'audio':
@@ -33,6 +35,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
     required TResult Function(List<ConditionContentImageAttachment> attachments)
         image,
     required TResult Function(List<ConditionContentAudioAttachment> attachments)
@@ -43,6 +47,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
@@ -51,6 +57,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
@@ -60,6 +68,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
     required TResult Function(ConditionContentImage value) image,
     required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
@@ -68,6 +78,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult? Function(ConditionContentImage value)? image,
     TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
@@ -76,6 +88,8 @@ mixin _$ConditionContent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult Function(ConditionContentImage value)? image,
     TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
@@ -187,6 +201,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
     required TResult Function(List<ConditionContentImageAttachment> attachments)
         image,
     required TResult Function(List<ConditionContentAudioAttachment> attachments)
@@ -200,6 +216,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
@@ -211,6 +229,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
@@ -226,6 +246,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
     required TResult Function(ConditionContentImage value) image,
     required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
@@ -237,6 +259,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult? Function(ConditionContentImage value)? image,
     TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
@@ -248,6 +272,8 @@ class _$ConditionContentTextImpl implements ConditionContentText {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult Function(ConditionContentImage value)? image,
     TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
@@ -280,6 +306,224 @@ abstract class ConditionContentText implements ConditionContent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConditionContentTextImplCopyWith<_$ConditionContentTextImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ConditionContentTextWithSearchKeywordsImplCopyWith<$Res> {
+  factory _$$ConditionContentTextWithSearchKeywordsImplCopyWith(
+          _$ConditionContentTextWithSearchKeywordsImpl value,
+          $Res Function(_$ConditionContentTextWithSearchKeywordsImpl) then) =
+      __$$ConditionContentTextWithSearchKeywordsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String text, List<String> searchKeywords});
+}
+
+/// @nodoc
+class __$$ConditionContentTextWithSearchKeywordsImplCopyWithImpl<$Res>
+    extends _$ConditionContentCopyWithImpl<$Res,
+        _$ConditionContentTextWithSearchKeywordsImpl>
+    implements _$$ConditionContentTextWithSearchKeywordsImplCopyWith<$Res> {
+  __$$ConditionContentTextWithSearchKeywordsImplCopyWithImpl(
+      _$ConditionContentTextWithSearchKeywordsImpl _value,
+      $Res Function(_$ConditionContentTextWithSearchKeywordsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+    Object? searchKeywords = null,
+  }) {
+    return _then(_$ConditionContentTextWithSearchKeywordsImpl(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchKeywords: null == searchKeywords
+          ? _value._searchKeywords
+          : searchKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ConditionContentTextWithSearchKeywordsImpl
+    implements ConditionContentTextWithSearchKeywords {
+  const _$ConditionContentTextWithSearchKeywordsImpl(
+      {required this.text,
+      required final List<String> searchKeywords,
+      final String? $type})
+      : _searchKeywords = searchKeywords,
+        $type = $type ?? 'textWithSearchKeywords';
+
+  factory _$ConditionContentTextWithSearchKeywordsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ConditionContentTextWithSearchKeywordsImplFromJson(json);
+
+  @override
+  final String text;
+  final List<String> _searchKeywords;
+  @override
+  List<String> get searchKeywords {
+    if (_searchKeywords is EqualUnmodifiableListView) return _searchKeywords;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchKeywords);
+  }
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ConditionContent.textWithSearchKeywords(text: $text, searchKeywords: $searchKeywords)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConditionContentTextWithSearchKeywordsImpl &&
+            (identical(other.text, text) || other.text == text) &&
+            const DeepCollectionEquality()
+                .equals(other._searchKeywords, _searchKeywords));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, text, const DeepCollectionEquality().hash(_searchKeywords));
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConditionContentTextWithSearchKeywordsImplCopyWith<
+          _$ConditionContentTextWithSearchKeywordsImpl>
+      get copyWith =>
+          __$$ConditionContentTextWithSearchKeywordsImplCopyWithImpl<
+              _$ConditionContentTextWithSearchKeywordsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
+    required TResult Function(List<ConditionContentImageAttachment> attachments)
+        image,
+    required TResult Function(List<ConditionContentAudioAttachment> attachments)
+        audio,
+    required TResult Function() empty,
+  }) {
+    return textWithSearchKeywords(this.text, searchKeywords);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
+    TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
+    TResult? Function()? empty,
+  }) {
+    return textWithSearchKeywords?.call(this.text, searchKeywords);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
+    TResult Function(List<ConditionContentImageAttachment> attachments)? image,
+    TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (textWithSearchKeywords != null) {
+      return textWithSearchKeywords(this.text, searchKeywords);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
+    required TResult Function(ConditionContentImage value) image,
+    required TResult Function(ConditionContentAudio value) audio,
+    required TResult Function(ConditionContentEmpty value) empty,
+  }) {
+    return textWithSearchKeywords(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
+    TResult? Function(ConditionContentImage value)? image,
+    TResult? Function(ConditionContentAudio value)? audio,
+    TResult? Function(ConditionContentEmpty value)? empty,
+  }) {
+    return textWithSearchKeywords?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
+    TResult Function(ConditionContentImage value)? image,
+    TResult Function(ConditionContentAudio value)? audio,
+    TResult Function(ConditionContentEmpty value)? empty,
+    required TResult orElse(),
+  }) {
+    if (textWithSearchKeywords != null) {
+      return textWithSearchKeywords(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ConditionContentTextWithSearchKeywordsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ConditionContentTextWithSearchKeywords
+    implements ConditionContent {
+  const factory ConditionContentTextWithSearchKeywords(
+          {required final String text,
+          required final List<String> searchKeywords}) =
+      _$ConditionContentTextWithSearchKeywordsImpl;
+
+  factory ConditionContentTextWithSearchKeywords.fromJson(
+          Map<String, dynamic> json) =
+      _$ConditionContentTextWithSearchKeywordsImpl.fromJson;
+
+  String get text;
+  List<String> get searchKeywords;
+
+  /// Create a copy of ConditionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConditionContentTextWithSearchKeywordsImplCopyWith<
+          _$ConditionContentTextWithSearchKeywordsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -372,6 +616,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
     required TResult Function(List<ConditionContentImageAttachment> attachments)
         image,
     required TResult Function(List<ConditionContentAudioAttachment> attachments)
@@ -385,6 +631,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
@@ -396,6 +644,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
@@ -411,6 +661,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
     required TResult Function(ConditionContentImage value) image,
     required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
@@ -422,6 +674,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult? Function(ConditionContentImage value)? image,
     TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
@@ -433,6 +687,8 @@ class _$ConditionContentImageImpl implements ConditionContentImage {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult Function(ConditionContentImage value)? image,
     TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
@@ -558,6 +814,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
     required TResult Function(List<ConditionContentImageAttachment> attachments)
         image,
     required TResult Function(List<ConditionContentAudioAttachment> attachments)
@@ -571,6 +829,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
@@ -582,6 +842,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
@@ -597,6 +859,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
     required TResult Function(ConditionContentImage value) image,
     required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
@@ -608,6 +872,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult? Function(ConditionContentImage value)? image,
     TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
@@ -619,6 +885,8 @@ class _$ConditionContentAudioImpl implements ConditionContentAudio {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult Function(ConditionContentImage value)? image,
     TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,
@@ -707,6 +975,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
+    required TResult Function(String text, List<String> searchKeywords)
+        textWithSearchKeywords,
     required TResult Function(List<ConditionContentImageAttachment> attachments)
         image,
     required TResult Function(List<ConditionContentAudioAttachment> attachments)
@@ -720,6 +990,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
+    TResult? Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult? Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult? Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult? Function()? empty,
@@ -731,6 +1003,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
+    TResult Function(String text, List<String> searchKeywords)?
+        textWithSearchKeywords,
     TResult Function(List<ConditionContentImageAttachment> attachments)? image,
     TResult Function(List<ConditionContentAudioAttachment> attachments)? audio,
     TResult Function()? empty,
@@ -746,6 +1020,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ConditionContentText value) text,
+    required TResult Function(ConditionContentTextWithSearchKeywords value)
+        textWithSearchKeywords,
     required TResult Function(ConditionContentImage value) image,
     required TResult Function(ConditionContentAudio value) audio,
     required TResult Function(ConditionContentEmpty value) empty,
@@ -757,6 +1033,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConditionContentText value)? text,
+    TResult? Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult? Function(ConditionContentImage value)? image,
     TResult? Function(ConditionContentAudio value)? audio,
     TResult? Function(ConditionContentEmpty value)? empty,
@@ -768,6 +1046,8 @@ class _$ConditionContentEmptyImpl implements ConditionContentEmpty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConditionContentText value)? text,
+    TResult Function(ConditionContentTextWithSearchKeywords value)?
+        textWithSearchKeywords,
     TResult Function(ConditionContentImage value)? image,
     TResult Function(ConditionContentAudio value)? audio,
     TResult Function(ConditionContentEmpty value)? empty,

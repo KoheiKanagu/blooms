@@ -96,6 +96,7 @@ class ConditionPageList extends HookConsumerWidget {
                     createdAt: createdAt,
                     content: condition.content,
                     showDateTime: showDateTime,
+                    creatorType: condition.creatorType,
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(

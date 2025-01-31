@@ -1,4 +1,5 @@
 {
+  "blooms": "BLOOMS",
   "anUnexpectedErrorOccurred": "予期しないエラーが発生しました",
   "pleaseRestartTheAppLater": "しばらくしてからアプリを再起動してください",
   "retry": "再試行",
