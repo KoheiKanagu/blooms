@@ -7,7 +7,6 @@ import 'package:blooms/utils/my_logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightPageList extends HookConsumerWidget {
@@ -30,16 +29,11 @@ class HighlightPageList extends HookConsumerWidget {
                   title: Text(i18n.highlight.createNewHighlight.title),
                   leading: const HighlightIcon(),
                   onTap: () {
-                    showModalBottomSheet<void>(
+                    showCupertinoModalPopup<void>(
                       context: context,
-                      useRootNavigator: true,
-                      isScrollControlled: true,
-                      builder: (context) => const FractionallySizedBox(
-                        heightFactor: 0.9,
-                        child: HighlightCreatePage(),
-                      ),
+                      builder: (context) => const HighlightCreatePage(),
                       routeSettings: const RouteSettings(
-                        name: 'highlightCreate',
+                        name: 'HighlightCreatePage',
                       ),
                     );
                   },
