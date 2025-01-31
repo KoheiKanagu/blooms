@@ -48,6 +48,7 @@ class HighlightCreatePage extends HookConsumerWidget {
             CupertinoColors.systemGroupedBackground.resolveFrom(context),
         child: ListView(
           children: [
+            const Gap(16),
             HighlightCreatePageHeader(
               style: selectedStyle.value,
             ),
