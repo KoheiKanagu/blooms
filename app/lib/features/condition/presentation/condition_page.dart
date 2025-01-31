@@ -1,6 +1,7 @@
 import 'package:blooms/features/about/presentation/about_page.dart';
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/presentation/condition_page_list.dart';
+import 'package:blooms/features/reminder/presentation/reminder_page.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:clock/clock.dart';
@@ -25,6 +26,20 @@ class ConditionPage extends HookConsumerWidget {
         trailing: PullDownButton(
           itemBuilder: (context) {
             return [
+              PullDownMenuItem(
+                onTap: () {
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (context) => const ReminderPage(),
+                    routeSettings: const RouteSettings(
+                      name: ReminderPage.path,
+                    ),
+                  );
+                },
+                title: i18n.reminder.reminder,
+                icon: CupertinoIcons.bell_fill,
+                iconColor: CupertinoColors.systemOrange.resolveFrom(context),
+              ),
               PullDownMenuItem(
                 onTap: () {
                   showCupertinoModalPopup<void>(
