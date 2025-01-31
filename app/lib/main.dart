@@ -8,15 +8,17 @@ import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
 
-  final (locale, _) = (
+  final (locale, _, locationName) = (
     await LocaleSettings.useDeviceLocale(),
     await Firebase.initializeApp(
       options: switch (appEnv) {
@@ -24,8 +26,10 @@ Future<void> main() async {
         AppEnv.prod => prod_firebase.DefaultFirebaseOptions.currentPlatform,
       },
     ),
+    await FlutterTimezone.getLocalTimezone()
   );
   Intl.defaultLocale = locale.languageCode;
+  tz.setLocalLocation(tz.getLocation(locationName));
 
   runApp(
     ProviderScope(observers: [talkerRiverpodObserver], child: const MyApp()),
