@@ -85,7 +85,7 @@ final reminderStatusProvider = AutoDisposeFutureProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ReminderStatusRef = AutoDisposeFutureProviderRef<bool>;
-String _$reminderEnableHash() => r'2e2dad5eed56ad84b73019d8900f8f95639ce9e8';
+String _$reminderSaveHash() => r'095880b96e722124dccde99d82851f23c3fe6425';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -108,37 +108,40 @@ class _SystemHash {
   }
 }
 
-/// 通知を設定
+/// リマインダーを保存
 ///
-/// Copied from [reminderEnable].
-@ProviderFor(reminderEnable)
-const reminderEnableProvider = ReminderEnableFamily();
+/// Copied from [reminderSave].
+@ProviderFor(reminderSave)
+const reminderSaveProvider = ReminderSaveFamily();
 
-/// 通知を設定
+/// リマインダーを保存
 ///
-/// Copied from [reminderEnable].
-class ReminderEnableFamily extends Family<AsyncValue<void>> {
-  /// 通知を設定
+/// Copied from [reminderSave].
+class ReminderSaveFamily extends Family<AsyncValue<void>> {
+  /// リマインダーを保存
   ///
-  /// Copied from [reminderEnable].
-  const ReminderEnableFamily();
+  /// Copied from [reminderSave].
+  const ReminderSaveFamily();
 
-  /// 通知を設定
+  /// リマインダーを保存
   ///
-  /// Copied from [reminderEnable].
-  ReminderEnableProvider call({
+  /// Copied from [reminderSave].
+  ReminderSaveProvider call({
+    required bool enable,
     required TimeOfDay time,
   }) {
-    return ReminderEnableProvider(
+    return ReminderSaveProvider(
+      enable: enable,
       time: time,
     );
   }
 
   @override
-  ReminderEnableProvider getProviderOverride(
-    covariant ReminderEnableProvider provider,
+  ReminderSaveProvider getProviderOverride(
+    covariant ReminderSaveProvider provider,
   ) {
     return call(
+      enable: provider.enable,
       time: provider.time,
     );
   }
@@ -155,60 +158,66 @@ class ReminderEnableFamily extends Family<AsyncValue<void>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'reminderEnableProvider';
+  String? get name => r'reminderSaveProvider';
 }
 
-/// 通知を設定
+/// リマインダーを保存
 ///
-/// Copied from [reminderEnable].
-class ReminderEnableProvider extends AutoDisposeFutureProvider<void> {
-  /// 通知を設定
+/// Copied from [reminderSave].
+class ReminderSaveProvider extends AutoDisposeFutureProvider<void> {
+  /// リマインダーを保存
   ///
-  /// Copied from [reminderEnable].
-  ReminderEnableProvider({
+  /// Copied from [reminderSave].
+  ReminderSaveProvider({
+    required bool enable,
     required TimeOfDay time,
   }) : this._internal(
-          (ref) => reminderEnable(
-            ref as ReminderEnableRef,
+          (ref) => reminderSave(
+            ref as ReminderSaveRef,
+            enable: enable,
             time: time,
           ),
-          from: reminderEnableProvider,
-          name: r'reminderEnableProvider',
+          from: reminderSaveProvider,
+          name: r'reminderSaveProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$reminderEnableHash,
-          dependencies: ReminderEnableFamily._dependencies,
+                  : _$reminderSaveHash,
+          dependencies: ReminderSaveFamily._dependencies,
           allTransitiveDependencies:
-              ReminderEnableFamily._allTransitiveDependencies,
+              ReminderSaveFamily._allTransitiveDependencies,
+          enable: enable,
           time: time,
         );
 
-  ReminderEnableProvider._internal(
+  ReminderSaveProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
+    required this.enable,
     required this.time,
   }) : super.internal();
 
+  final bool enable;
   final TimeOfDay time;
 
   @override
   Override overrideWith(
-    FutureOr<void> Function(ReminderEnableRef provider) create,
+    FutureOr<void> Function(ReminderSaveRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: ReminderEnableProvider._internal(
-        (ref) => create(ref as ReminderEnableRef),
+      override: ReminderSaveProvider._internal(
+        (ref) => create(ref as ReminderSaveRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
+        enable: enable,
         time: time,
       ),
     );
@@ -216,17 +225,20 @@ class ReminderEnableProvider extends AutoDisposeFutureProvider<void> {
 
   @override
   AutoDisposeFutureProviderElement<void> createElement() {
-    return _ReminderEnableProviderElement(this);
+    return _ReminderSaveProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ReminderEnableProvider && other.time == time;
+    return other is ReminderSaveProvider &&
+        other.enable == enable &&
+        other.time == time;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, enable.hashCode);
     hash = _SystemHash.combine(hash, time.hashCode);
 
     return _SystemHash.finish(hash);
@@ -235,37 +247,22 @@ class ReminderEnableProvider extends AutoDisposeFutureProvider<void> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ReminderEnableRef on AutoDisposeFutureProviderRef<void> {
+mixin ReminderSaveRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `enable` of this provider.
+  bool get enable;
+
   /// The parameter `time` of this provider.
   TimeOfDay get time;
 }
 
-class _ReminderEnableProviderElement
-    extends AutoDisposeFutureProviderElement<void> with ReminderEnableRef {
-  _ReminderEnableProviderElement(super.provider);
+class _ReminderSaveProviderElement
+    extends AutoDisposeFutureProviderElement<void> with ReminderSaveRef {
+  _ReminderSaveProviderElement(super.provider);
 
   @override
-  TimeOfDay get time => (origin as ReminderEnableProvider).time;
+  bool get enable => (origin as ReminderSaveProvider).enable;
+  @override
+  TimeOfDay get time => (origin as ReminderSaveProvider).time;
 }
-
-String _$reminderDisableHash() => r'17179c014b607c63403a1dd2c20f2245bc562f5e';
-
-/// 通知をキャンセル
-///
-/// Copied from [reminderDisable].
-@ProviderFor(reminderDisable)
-final reminderDisableProvider = AutoDisposeFutureProvider<void>.internal(
-  reminderDisable,
-  name: r'reminderDisableProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$reminderDisableHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ReminderDisableRef = AutoDisposeFutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
