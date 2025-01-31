@@ -78,5 +78,11 @@
     "privacyPolicy": "プライバシーポリシー",
     "licenseInformation": "ライセンス情報",
     "deleteAllData": "すべてのデータを削除"
-  }
+  },
+  "reminder": {
+    "reminder": "リマインダー",
+    "setReminder": "記録をし忘れないように通知が設定できます",
+    "notificationTitle": "今日の体調はいかがですか？"
+  },
+  "done": "完了"
 }

@@ -10,9 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
 
   final (locale, _) = (
     await LocaleSettings.useDeviceLocale(),

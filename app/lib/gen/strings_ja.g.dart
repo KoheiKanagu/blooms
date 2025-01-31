@@ -56,6 +56,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsDeleteAllJa deleteAll = TranslationsDeleteAllJa.internal(_root);
 	String get thankYouForUsing => 'ご利用いただきありがとうございました';
 	late final TranslationsAboutBLOOMSJa aboutBLOOMS = TranslationsAboutBLOOMSJa.internal(_root);
+	late final TranslationsReminderJa reminder = TranslationsReminderJa.internal(_root);
+	String get done => '完了';
 }
 
 // Path: highlight
@@ -123,6 +125,18 @@ class TranslationsAboutBLOOMSJa {
 	String get privacyPolicy => 'プライバシーポリシー';
 	String get licenseInformation => 'ライセンス情報';
 	String get deleteAllData => 'すべてのデータを削除';
+}
+
+// Path: reminder
+class TranslationsReminderJa {
+	TranslationsReminderJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get reminder => 'リマインダー';
+	String get setReminder => '記録をし忘れないように通知が設定できます';
+	String get notificationTitle => '今日の体調はいかがですか？';
 }
 
 // Path: highlight.state
