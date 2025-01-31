@@ -1,4 +1,5 @@
 import { getFirestore } from 'firebase-admin/firestore';
+import { logger } from 'firebase-functions';
 import { CollectionPath } from '../../utils/collectionPath';
 import { outSensitiveLog } from '../../utils/sensitive_log';
 import { Condition, conditionConverter } from '../domain/condition';
@@ -22,6 +23,11 @@ export async function createReplyCondition(
     .then(e => e.docs.map(e => e.data()));
 
   outSensitiveLog(`contextConditions`, contextConditions);
+
+  if (contextConditions.length === 0) {
+    logger.warn('contextConditions is empty');
+    return;
+  }
 
   const newCondition = await requestGenerativeModel(
     condition.subjectUid,

@@ -1,9 +1,58 @@
-import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
+import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { outSensitiveLog } from '../../utils/sensitive_log';
 import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
+
+function createParts(condition: Condition): Part[] | null {
+  const date = condition.createdAtIso8601;
+
+  let parts: Part[] = [];
+  switch (condition.content.type) {
+    case 'text':
+      parts = [{
+        text: `${date}に入力したテキスト: ${condition.content.text}`,
+      }];
+      break;
+    case 'textWithSearchKeywords':
+      parts = [{
+        text: condition.content.text,
+      }];
+      break;
+    case 'image':
+      parts = [
+        {
+          text: `${date}にアップロードされた画像`,
+        },
+        ...condition.content.attachments.map<FileDataPart>(attachment => ({
+          fileData: {
+            fileUri: attachment.fileUri,
+            mimeType: attachment.mimeType,
+          },
+        })),
+      ];
+      break;
+    case 'audio':
+      parts = [
+        {
+          text: `${date}にアップロードされた音声`,
+        },
+        ...condition.content.attachments.map<FileDataPart>(attachment => ({
+          fileData: {
+            fileUri: attachment.fileUri,
+            mimeType: attachment.mimeType,
+          },
+        })),
+      ];
+      break;
+
+    case 'empty':
+      return null;
+  };
+
+  return parts;
+}
 
 /**
  * 生成モデルにリクエストを送信
@@ -18,78 +67,38 @@ export async function requestGenerativeModel(
 ): Promise<Condition | null> {
   const generativeModel = setupGenerativeModel();
 
-  let requestContents: Content[] = conditions.map<Content | null>((condition) => {
-    const date = condition.createdAtIso8601;
+  // 履歴を作成
+  const historyContents: Content[] = conditions
+    .slice(1)
+    .map<Content | null>((condition) => {
+      const parts = createParts(condition);
 
-    let part: (TextPart | FileDataPart)[] = [];
-    switch (condition.content.type) {
-      case 'text':
-        part = [{
-          text: `${date}に入力したテキスト: ${condition.content.text}`,
-        }];
-        break;
-      case 'textWithSearchKeywords':
-        console.log(`condition.content.text`, condition.content.text);
-        part = [{
-          text: condition.content.text,
-        }];
-        break;
-      case 'image':
-        part = [
-          {
-            text: `${date}にアップロードされた画像`,
-          },
-          ...condition.content.attachments.map<FileDataPart>(attachment => ({
-            fileData: {
-              fileUri: attachment.fileUri,
-              mimeType: attachment.mimeType,
-            },
-          })),
-        ];
-        break;
-      case 'audio':
-        part = [
-          {
-            text: `${date}にアップロードされた音声`,
-          },
-          ...condition.content.attachments.map<FileDataPart>(attachment => ({
-            fileData: {
-              fileUri: attachment.fileUri,
-              mimeType: attachment.mimeType,
-            },
-          })),
-        ];
-        break;
-
-      case 'empty':
+      if (parts === null) {
         return null;
-    };
+      }
 
-    return {
-      role: condition.creatorType,
-      parts: part,
-    };
-  })
+      return {
+        role: condition.creatorType,
+        parts: parts,
+      };
+    })
     .filter(e => e !== null);
+  outSensitiveLog(`historyContents`, historyContents);
 
-  // 空だとエラーになる
-  if (requestContents.length === 0) {
-    requestContents = [
-      {
-        role: 'user',
-        parts: [
-          {
-            text: 'No data',
-          },
-        ],
-      },
-    ];
-  }
-  outSensitiveLog(`requestContents`, requestContents);
-
-  const generatedResult = await generativeModel.generateContent({
-    contents: requestContents,
+  const chat = generativeModel.startChat({
+    history: historyContents,
   });
+
+  // 最新のメッセージ
+  const latestConditionParts = createParts(conditions[0]!);
+  if (latestConditionParts === null) {
+    logger.warn('No latest condition');
+    return null;
+  }
+
+  // リクエスト
+  const generatedResult = await chat.sendMessage(latestConditionParts);
+
   outSensitiveLog(`generatedResult`, generatedResult);
 
   const response = generatedResult.response.candidates![0]!.content.parts[0]!.text ?? '{}';
@@ -119,6 +128,6 @@ export async function requestGenerativeModel(
 
   };
 
-  outSensitiveLog(`newContent:`, newCondition);
+  outSensitiveLog(`newCondition:`, newCondition);
   return newCondition;
 }
