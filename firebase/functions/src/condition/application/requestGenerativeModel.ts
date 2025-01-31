@@ -28,6 +28,12 @@ export async function requestGenerativeModel(
           text: `${date}に入力したテキスト: ${condition.content.text}`,
         }];
         break;
+      case 'textWithSearchKeywords':
+        console.log(`condition.content.text`, condition.content.text);
+        part = [{
+          text: condition.content.text,
+        }];
+        break;
       case 'image':
         part = [
           {
