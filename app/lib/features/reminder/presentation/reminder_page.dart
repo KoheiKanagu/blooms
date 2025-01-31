@@ -36,7 +36,6 @@ class ReminderPage extends HookConsumerWidget {
           padding: EdgeInsets.zero,
           child: Text(
             MaterialLocalizations.of(context).cancelButtonLabel,
-            style: CupertinoTheme.of(context).textTheme.navActionTextStyle,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -44,10 +43,7 @@ class ReminderPage extends HookConsumerWidget {
         ),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
-          child: Text(
-            i18n.done,
-            style: CupertinoTheme.of(context).textTheme.navActionTextStyle,
-          ),
+          child: Text(i18n.done),
           onPressed: () async {
             ref.read(
               reminderSaveProvider(

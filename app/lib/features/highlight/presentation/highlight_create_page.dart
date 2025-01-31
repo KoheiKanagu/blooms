@@ -30,74 +30,68 @@ class HighlightCreatePage extends HookConsumerWidget {
       HighlightStyle.private,
     );
 
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(12),
-        topRight: Radius.circular(12),
-      ),
-      child: Scaffold(
-        body: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            trailing: CupertinoButton.tinted(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              sizeStyle: CupertinoButtonSize.medium,
-              borderRadius: BorderRadius.circular(24),
-              child: const Icon(CupertinoIcons.xmark),
-            ),
-            automaticallyImplyLeading: false,
+    return Scaffold(
+      body: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          trailing: CupertinoButton.tinted(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            sizeStyle: CupertinoButtonSize.medium,
+            borderRadius: BorderRadius.circular(24),
+            child: const Icon(CupertinoIcons.xmark),
           ),
-          backgroundColor:
-              CupertinoColors.systemGroupedBackground.resolveFrom(context),
-          child: ListView(
-            children: [
-              HighlightCreatePageHeader(
-                style: selectedStyle.value,
+          automaticallyImplyLeading: false,
+        ),
+        backgroundColor:
+            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        child: ListView(
+          children: [
+            HighlightCreatePageHeader(
+              style: selectedStyle.value,
+            ),
+            const Gap(16),
+            HighlightStyleFeaturesList(
+              style: selectedStyle.value,
+            ),
+            const Gap(24),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
               ),
-              const Gap(16),
-              HighlightStyleFeaturesList(
-                style: selectedStyle.value,
-              ),
-              const Gap(24),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: CupertinoSlidingSegmentedControl(
-                  children: {
-                    HighlightStyle.private: Text(
-                      HighlightStyle.private.localizedName,
-                    ),
-                    HighlightStyle.professional: Text(
-                      HighlightStyle.professional.localizedName,
-                    ),
-                  },
-                  groupValue: selectedStyle.value,
-                  onValueChanged: (value) {
-                    selectedStyle.value = value ?? HighlightStyle.private;
-                  },
-                ),
-              ),
-              const Gap(8),
-              _CreateTiles(
-                selectedType: selectedType.value[selectedStyle.value]!,
-                selectedStyle: selectedStyle.value,
-                onTap: (value) {
-                  selectedType.value = {
-                    ...selectedType.value,
-                    selectedStyle.value: value,
-                  };
+              child: CupertinoSlidingSegmentedControl(
+                children: {
+                  HighlightStyle.private: Text(
+                    HighlightStyle.private.localizedName,
+                  ),
+                  HighlightStyle.professional: Text(
+                    HighlightStyle.professional.localizedName,
+                  ),
+                },
+                groupValue: selectedStyle.value,
+                onValueChanged: (value) {
+                  selectedStyle.value = value ?? HighlightStyle.private;
                 },
               ),
-            ],
-          ),
+            ),
+            const Gap(8),
+            _CreateTiles(
+              selectedType: selectedType.value[selectedStyle.value]!,
+              selectedStyle: selectedStyle.value,
+              onTap: (value) {
+                selectedType.value = {
+                  ...selectedType.value,
+                  selectedStyle.value: value,
+                };
+              },
+            ),
+          ],
         ),
-        bottomNavigationBar: _BottomNavigationBar(
-          period: selectedType.value[selectedStyle.value]!,
-          style: selectedStyle.value,
-        ),
+      ),
+      bottomNavigationBar: _BottomNavigationBar(
+        period: selectedType.value[selectedStyle.value]!,
+        style: selectedStyle.value,
       ),
     );
   }
