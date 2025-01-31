@@ -13,18 +13,12 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
       json,
       ($checkedConvert) {
         final val = _$UserImpl(
-          dailyHighlightTime: $checkedConvert(
-              'dailyHighlightTime',
-              (v) =>
-                  UserDailyHighlightTime.fromJson(v as Map<String, dynamic>)),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(
               'updatedAt', (v) => const TimestampConverter().fromJson(v)),
           deletedAt: $checkedConvert(
               'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-          weatherLocation:
-              $checkedConvert('weatherLocation', (v) => v as String?),
         );
         return val;
       },
@@ -32,9 +26,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'dailyHighlightTime': instance.dailyHighlightTime.toJson(),
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
-      'weatherLocation': instance.weatherLocation,
     };
