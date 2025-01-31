@@ -2,7 +2,7 @@ import { firestore } from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions/v1';
 import { functionsV1 } from '.';
-import { User, userConverter, UserDailyHighlightTime } from './models/user';
+import { User, userConverter } from './models/user';
 import { CollectionPath } from './utils/collectionPath';
 
 export const onCreateAuthUser = functionsV1()
@@ -21,8 +21,6 @@ export const onCreateAuthUser = functionsV1()
     const data = new User(
       FieldValue.serverTimestamp(),
       FieldValue.serverTimestamp(),
-      null,
-      new UserDailyHighlightTime(11, 0), // 20:00 JST
       null,
     );
 

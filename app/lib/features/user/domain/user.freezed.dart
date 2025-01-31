@@ -20,17 +20,12 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  UserDailyHighlightTime get dailyHighlightTime =>
-      throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get updatedAt => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get deletedAt => throw _privateConstructorUsedError;
-
-  /// 気象情報を取得する地域
-  String? get weatherLocation => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,13 +42,9 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {UserDailyHighlightTime dailyHighlightTime,
-      @TimestampConverter() Timestamp? createdAt,
+      {@TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      String? weatherLocation});
-
-  $UserDailyHighlightTimeCopyWith<$Res> get dailyHighlightTime;
+      @TimestampConverter() Timestamp? deletedAt});
 }
 
 /// @nodoc
@@ -71,17 +62,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dailyHighlightTime = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? weatherLocation = freezed,
   }) {
     return _then(_value.copyWith(
-      dailyHighlightTime: null == dailyHighlightTime
-          ? _value.dailyHighlightTime
-          : dailyHighlightTime // ignore: cast_nullable_to_non_nullable
-              as UserDailyHighlightTime,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -94,22 +79,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      weatherLocation: freezed == weatherLocation
-          ? _value.weatherLocation
-          : weatherLocation // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
-  }
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserDailyHighlightTimeCopyWith<$Res> get dailyHighlightTime {
-    return $UserDailyHighlightTimeCopyWith<$Res>(_value.dailyHighlightTime,
-        (value) {
-      return _then(_value.copyWith(dailyHighlightTime: value) as $Val);
-    });
   }
 }
 
@@ -121,14 +91,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {UserDailyHighlightTime dailyHighlightTime,
-      @TimestampConverter() Timestamp? createdAt,
+      {@TimestampConverter() Timestamp? createdAt,
       @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt,
-      String? weatherLocation});
-
-  @override
-  $UserDailyHighlightTimeCopyWith<$Res> get dailyHighlightTime;
+      @TimestampConverter() Timestamp? deletedAt});
 }
 
 /// @nodoc
@@ -143,17 +108,11 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dailyHighlightTime = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
-    Object? weatherLocation = freezed,
   }) {
     return _then(_$UserImpl(
-      dailyHighlightTime: null == dailyHighlightTime
-          ? _value.dailyHighlightTime
-          : dailyHighlightTime // ignore: cast_nullable_to_non_nullable
-              as UserDailyHighlightTime,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -166,10 +125,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp?,
-      weatherLocation: freezed == weatherLocation
-          ? _value.weatherLocation
-          : weatherLocation // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -178,17 +133,13 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.dailyHighlightTime,
-      @TimestampConverter() this.createdAt,
+      {@TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt,
-      @TimestampConverter() this.deletedAt,
-      this.weatherLocation});
+      @TimestampConverter() this.deletedAt});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
-  @override
-  final UserDailyHighlightTime dailyHighlightTime;
   @override
   @TimestampConverter()
   final Timestamp? createdAt;
@@ -199,13 +150,9 @@ class _$UserImpl implements _User {
   @TimestampConverter()
   final Timestamp? deletedAt;
 
-  /// 気象情報を取得する地域
-  @override
-  final String? weatherLocation;
-
   @override
   String toString() {
-    return 'User(dailyHighlightTime: $dailyHighlightTime, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, weatherLocation: $weatherLocation)';
+    return 'User(createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -213,22 +160,17 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.dailyHighlightTime, dailyHighlightTime) ||
-                other.dailyHighlightTime == dailyHighlightTime) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.deletedAt, deletedAt) ||
-                other.deletedAt == deletedAt) &&
-            (identical(other.weatherLocation, weatherLocation) ||
-                other.weatherLocation == weatherLocation));
+                other.deletedAt == deletedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, dailyHighlightTime, createdAt,
-      updatedAt, deletedAt, weatherLocation);
+  int get hashCode => Object.hash(runtimeType, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -248,16 +190,12 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final UserDailyHighlightTime dailyHighlightTime,
-      @TimestampConverter() final Timestamp? createdAt,
+      {@TimestampConverter() final Timestamp? createdAt,
       @TimestampConverter() final Timestamp? updatedAt,
-      @TimestampConverter() final Timestamp? deletedAt,
-      final String? weatherLocation}) = _$UserImpl;
+      @TimestampConverter() final Timestamp? deletedAt}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
-  @override
-  UserDailyHighlightTime get dailyHighlightTime;
   @override
   @TimestampConverter()
   Timestamp? get createdAt;
@@ -267,10 +205,6 @@ abstract class _User implements User {
   @override
   @TimestampConverter()
   Timestamp? get deletedAt;
-
-  /// 気象情報を取得する地域
-  @override
-  String? get weatherLocation;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
