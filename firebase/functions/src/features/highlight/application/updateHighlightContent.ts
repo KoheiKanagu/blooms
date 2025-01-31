@@ -1,6 +1,6 @@
 import { DocumentData, DocumentReference, FieldValue, getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { conditionConverter } from '../../../models/condition';
+import { conditionConverter } from '../../../condition/domain/condition';
 import { CollectionPath } from '../../../utils/collectionPath';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
 import { Highlight, HighlightContentPrivate, HighlightContentProfessional, highlightConverter, HighlightPeriod } from '../domain/highlight';

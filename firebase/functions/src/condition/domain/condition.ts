@@ -11,13 +11,19 @@ export class Condition {
     readonly subjectUid: string,
     readonly creatorType: CreatorType,
     readonly createdAtIso8601: string,
-    readonly content: ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
+    readonly content: ConditionContentText | ConditionContentTextWithSearchKeywords | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
   ) { }
 }
 
 export interface ConditionContentText {
   type: 'text';
   text: string;
+}
+
+export interface ConditionContentTextWithSearchKeywords {
+  type: 'textWithSearchKeywords';
+  text: string;
+  searchKeywords: string[];
 }
 
 export interface ConditionContentImage {

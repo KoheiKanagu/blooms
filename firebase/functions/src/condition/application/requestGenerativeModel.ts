@@ -1,8 +1,8 @@
 import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
-import { Condition } from '../../../condition/domain/condition';
-import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentPrivate, HighlightContentProfessional } from '../domain/highlight';
-import { savePrompt } from './savePrompt';
+import { FieldValue } from 'firebase-admin/firestore';
+import { logger } from 'firebase-functions';
+import { outSensitiveLog } from '../../utils/sensitive_log';
+import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
 /**
@@ -10,15 +10,13 @@ import { setupGenerativeModel } from './setupGenerativeModel';
  *
  * @param uid ユーザーID
  * @param conditions 解析対象のConditions
- * @param content ハイライトの内容
  * @returns
  */
 export async function requestGenerativeModel(
   uid: string,
   conditions: Condition[],
-  content: HighlightContentPrivate | HighlightContentProfessional,
-): Promise<HighlightContentPrivate | HighlightContentProfessional> {
-  const generativeModel = setupGenerativeModel(content.style);
+): Promise<Condition | null> {
+  const generativeModel = setupGenerativeModel();
 
   let requestContents: Content[] = conditions.map<Content | null>((condition) => {
     const date = condition.createdAtIso8601;
@@ -91,15 +89,29 @@ export async function requestGenerativeModel(
   // responseの形式は定義しており、従っていなかった場合は400エラーになるので型チェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
-  const gsFileUri = await savePrompt(uid, requestContents);
 
-  const newContent: HighlightContentPrivate | HighlightContentProfessional = {
-    ...content,
-    promptFileUri: gsFileUri,
-    state: 'success',
-    ...jsonContent,
+  const reply = jsonContent['reply'] as string | null;
+  if (reply === null) {
+    logger.info('No reply');
+    return null;
+  }
+  const searchKeywords = jsonContent['searchKeywords'] as string[] | null;
+
+  const newCondition: Condition = {
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    deletedAt: null,
+    subjectUid: uid,
+    creatorType: 'system',
+    createdAtIso8601: '',
+    content: {
+      type: 'textWithSearchKeywords',
+      text: reply,
+      searchKeywords: searchKeywords ?? [],
+    },
+
   };
-  outSensitiveLog(`newContent:`, newContent);
 
-  return newContent;
+  outSensitiveLog(`newContent:`, newCondition);
+  return newCondition;
 }
