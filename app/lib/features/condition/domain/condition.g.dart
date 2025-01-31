@@ -45,5 +45,5 @@ Map<String, dynamic> _$$ConditionImplToJson(_$ConditionImpl instance) =>
 
 const _$ConditionCreatorTypeEnumMap = {
   ConditionCreatorType.user: 'user',
-  ConditionCreatorType.system: 'system',
+  ConditionCreatorType.model: 'model',
 };

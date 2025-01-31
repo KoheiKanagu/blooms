@@ -1,5 +1,5 @@
 enum ConditionCreatorType {
   user,
-  system,
+  model,
   ;
 }

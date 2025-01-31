@@ -1,7 +1,9 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
-export type ConditionType = 'text' | 'image' | 'audio' | 'empty';
-export type CreatorType = 'user' | 'system';
+export type ConditionType = 'text' | 'textWithSearchKeywords' | 'image' | 'audio' | 'empty';
+export type CreatorType = 'user' | 'model';
+
+export type ConditionContentInterfaces = ConditionContentText | ConditionContentTextWithSearchKeywords | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty;
 
 export class Condition {
   constructor(
@@ -11,7 +13,7 @@ export class Condition {
     readonly subjectUid: string,
     readonly creatorType: CreatorType,
     readonly createdAtIso8601: string,
-    readonly content: ConditionContentText | ConditionContentTextWithSearchKeywords | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
+    readonly content: ConditionContentInterfaces,
   ) { }
 }
 
@@ -72,8 +74,7 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
   ),
 };
 
-function conditionContentConverter(value: Record<string, unknown>):
-  ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty {
+function conditionContentConverter(value: Record<string, unknown>): ConditionContentInterfaces {
   if (value == null) {
     const empty: ConditionContentEmpty = {
       type: 'empty',
@@ -121,6 +122,15 @@ function conditionContentConverter(value: Record<string, unknown>):
       const content: ConditionContentAudio = {
         type: 'audio',
         attachments: attachments,
+      };
+      return content;
+    }
+
+    case 'textWithSearchKeywords': {
+      const content: ConditionContentTextWithSearchKeywords = {
+        type: 'textWithSearchKeywords',
+        text: value['text'] as string,
+        searchKeywords: value['searchKeywords'] as string[],
       };
       return content;
     }

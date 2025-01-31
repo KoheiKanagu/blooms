@@ -79,6 +79,7 @@ export async function requestGenerativeModel(
       },
     ];
   }
+  outSensitiveLog(`requestContents`, requestContents);
 
   const generatedResult = await generativeModel.generateContent({
     contents: requestContents,
@@ -102,7 +103,7 @@ export async function requestGenerativeModel(
     updatedAt: FieldValue.serverTimestamp(),
     deletedAt: null,
     subjectUid: uid,
-    creatorType: 'system',
+    creatorType: 'model',
     createdAtIso8601: '',
     content: {
       type: 'textWithSearchKeywords',

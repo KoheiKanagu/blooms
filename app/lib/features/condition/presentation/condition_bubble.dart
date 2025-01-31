@@ -75,7 +75,7 @@ class ConditionBubble extends HookConsumerWidget {
                   left: 64,
                   right: 16,
                 ),
-              ConditionCreatorType.system => const EdgeInsets.only(
+              ConditionCreatorType.model => const EdgeInsets.only(
                   left: 16,
                   right: 64,
                 ),
@@ -133,14 +133,14 @@ class ConditionBubble extends HookConsumerWidget {
                     ConditionCreatorType.user => CupertinoColors
                         .secondarySystemGroupedBackground
                         .resolveFrom(context),
-                    ConditionCreatorType.system =>
+                    ConditionCreatorType.model =>
                       myColorGreen2.withOpacity(0.1),
                   },
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: switch (creatorType) {
                     ConditionCreatorType.user =>
                       MyDecoration.dropShadow(context).boxShadow,
-                    ConditionCreatorType.system => [],
+                    ConditionCreatorType.model => [],
                   },
                 ),
                 child: switch (content) {
