@@ -39,7 +39,7 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
   return ref
       .read(conditionCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
-      .where('createdBy', isEqualTo: uid)
+      .where('subjectUid', isEqualTo: uid)
       .orderBy('createdAt', descending: true);
 }
 

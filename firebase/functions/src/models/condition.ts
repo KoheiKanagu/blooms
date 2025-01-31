@@ -1,13 +1,15 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
 export type ConditionType = 'text' | 'image' | 'audio' | 'empty';
+export type CreatorType = 'user' | 'system';
 
 export class Condition {
   constructor(
     readonly createdAt: Timestamp | FieldValue,
     readonly updatedAt: Timestamp | FieldValue,
     readonly deletedAt: Timestamp | null,
-    readonly createdBy: string,
+    readonly subjectUid: string,
+    readonly creatorType: CreatorType,
     readonly createdAtIso8601: string,
     readonly content: ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
   ) { }
@@ -48,7 +50,8 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     createdAt: condition.createdAt,
     updatedAt: condition.updatedAt,
     deletedAt: condition.deletedAt,
-    createdBy: condition.createdBy,
+    subjectUid: condition.subjectUid,
+    creatorType: condition.creatorType,
     timeZone: condition.createdAtIso8601,
     content: condition.content,
   }),
@@ -56,7 +59,8 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('createdAt') as Timestamp,
     snapshot.get('updatedAt') as Timestamp,
     snapshot.get('deletedAt') as Timestamp | null,
-    snapshot.get('createdBy') as string,
+    snapshot.get('subjectUid') as string,
+    snapshot.get('creatorType') as CreatorType,
     snapshot.get('createdAtIso8601') as string,
     conditionContentConverter(snapshot.get('content') as Record<string, unknown>),
   ),

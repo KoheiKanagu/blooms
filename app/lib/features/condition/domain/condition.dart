@@ -1,6 +1,7 @@
 import 'package:blooms/features/condition/domain/condition_content.dart';
 import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
 import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
+import 'package:blooms/features/condition/domain/condition_creator_type.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
 import 'package:clock/clock.dart';
@@ -13,8 +14,11 @@ part 'condition.g.dart';
 @freezed
 class Condition with _$Condition {
   const factory Condition({
-    /// 作成者
-    required String createdBy,
+    /// 対象者のUID
+    required String subjectUid,
+
+    /// contentの作成者の種類
+    required ConditionCreatorType creatorType,
 
     /// 内容
     required ConditionContent content,
@@ -28,7 +32,8 @@ class Condition with _$Condition {
 
   factory Condition.text({required String uid, required String text}) =>
       Condition(
-        createdBy: uid,
+        subjectUid: uid,
+        creatorType: ConditionCreatorType.user,
         content: ConditionContent.text(text: text),
         createdAtIso8601: clock.now().toIso8601String(),
       );
@@ -38,7 +43,8 @@ class Condition with _$Condition {
     required List<ConditionContentImageAttachment> attachments,
   }) =>
       Condition(
-        createdBy: uid,
+        subjectUid: uid,
+        creatorType: ConditionCreatorType.user,
         content: ConditionContent.image(
           attachments: attachments,
         ),
@@ -50,7 +56,8 @@ class Condition with _$Condition {
     required List<ConditionContentAudioAttachment> attachments,
   }) =>
       Condition(
-        createdBy: uid,
+        subjectUid: uid,
+        creatorType: ConditionCreatorType.user,
         content: ConditionContent.audio(
           attachments: attachments,
         ),

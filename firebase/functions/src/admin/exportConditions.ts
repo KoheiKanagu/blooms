@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     .withConverter(conditionConverter)
     .where('deletedAt', '==', null)
     .where('content.type', '==', 'text')
-    .where('createdBy', '==', sourceUid)
+    .where('subjectUid', '==', sourceUid)
     .orderBy('createdAt', 'desc')
     .get();
 

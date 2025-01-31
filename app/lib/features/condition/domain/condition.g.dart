@@ -14,7 +14,9 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$ConditionImpl(
-          createdBy: $checkedConvert('createdBy', (v) => v as String),
+          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+          creatorType: $checkedConvert('creatorType',
+              (v) => $enumDecode(_$ConditionCreatorTypeEnumMap, v)),
           content: $checkedConvert('content',
               (v) => ConditionContent.fromJson(v as Map<String, dynamic>)),
           createdAtIso8601:
@@ -32,10 +34,16 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ConditionImplToJson(_$ConditionImpl instance) =>
     <String, dynamic>{
-      'createdBy': instance.createdBy,
+      'subjectUid': instance.subjectUid,
+      'creatorType': _$ConditionCreatorTypeEnumMap[instance.creatorType]!,
       'content': instance.content.toJson(),
       'createdAtIso8601': instance.createdAtIso8601,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
     };
+
+const _$ConditionCreatorTypeEnumMap = {
+  ConditionCreatorType.user: 'user',
+  ConditionCreatorType.system: 'system',
+};

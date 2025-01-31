@@ -62,7 +62,7 @@ export async function requestGenerativeModel(
     };
 
     return {
-      role: 'user',
+      role: condition.creatorType,
       parts: part,
     };
   })

@@ -26,11 +26,11 @@ service cloud.firestore {
     match /conditions_v1/{document=**} {
       // only the user can read and write their own data
       allow get, list, update:
-        if isAuthenticated() && resource.data.createdBy == request.auth.uid;
+        if isAuthenticated() && resource.data.subjectUid == request.auth.uid;
 
       // only the user can create their own data
       allow create:
-        if isAuthenticated() && request.resource.data.createdBy == request.auth.uid;
+        if isAuthenticated() && request.resource.data.subjectUid == request.auth.uid;
     }
 
     match /highlights_v1/{document=**} {

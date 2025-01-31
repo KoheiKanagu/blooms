@@ -20,8 +20,11 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Condition {
-  /// 作成者
-  String get createdBy => throw _privateConstructorUsedError;
+  /// 対象者のUID
+  String get subjectUid => throw _privateConstructorUsedError;
+
+  /// contentの作成者の種類
+  ConditionCreatorType get creatorType => throw _privateConstructorUsedError;
 
   /// 内容
   ConditionContent get content => throw _privateConstructorUsedError;
@@ -51,7 +54,8 @@ abstract class $ConditionCopyWith<$Res> {
       _$ConditionCopyWithImpl<$Res, Condition>;
   @useResult
   $Res call(
-      {String createdBy,
+      {String subjectUid,
+      ConditionCreatorType creatorType,
       ConditionContent content,
       String createdAtIso8601,
       @TimestampConverter() Timestamp? createdAt,
@@ -76,7 +80,8 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdBy = null,
+    Object? subjectUid = null,
+    Object? creatorType = null,
     Object? content = null,
     Object? createdAtIso8601 = null,
     Object? createdAt = freezed,
@@ -84,10 +89,14 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
     Object? deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      subjectUid: null == subjectUid
+          ? _value.subjectUid
+          : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
+      creatorType: null == creatorType
+          ? _value.creatorType
+          : creatorType // ignore: cast_nullable_to_non_nullable
+              as ConditionCreatorType,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -131,7 +140,8 @@ abstract class _$$ConditionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String createdBy,
+      {String subjectUid,
+      ConditionCreatorType creatorType,
       ConditionContent content,
       String createdAtIso8601,
       @TimestampConverter() Timestamp? createdAt,
@@ -155,7 +165,8 @@ class __$$ConditionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdBy = null,
+    Object? subjectUid = null,
+    Object? creatorType = null,
     Object? content = null,
     Object? createdAtIso8601 = null,
     Object? createdAt = freezed,
@@ -163,10 +174,14 @@ class __$$ConditionImplCopyWithImpl<$Res>
     Object? deletedAt = freezed,
   }) {
     return _then(_$ConditionImpl(
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      subjectUid: null == subjectUid
+          ? _value.subjectUid
+          : subjectUid // ignore: cast_nullable_to_non_nullable
               as String,
+      creatorType: null == creatorType
+          ? _value.creatorType
+          : creatorType // ignore: cast_nullable_to_non_nullable
+              as ConditionCreatorType,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -195,7 +210,8 @@ class __$$ConditionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConditionImpl implements _Condition {
   const _$ConditionImpl(
-      {required this.createdBy,
+      {required this.subjectUid,
+      required this.creatorType,
       required this.content,
       required this.createdAtIso8601,
       @TimestampConverter() this.createdAt,
@@ -205,9 +221,13 @@ class _$ConditionImpl implements _Condition {
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
 
-  /// 作成者
+  /// 対象者のUID
   @override
-  final String createdBy;
+  final String subjectUid;
+
+  /// contentの作成者の種類
+  @override
+  final ConditionCreatorType creatorType;
 
   /// 内容
   @override
@@ -228,7 +248,7 @@ class _$ConditionImpl implements _Condition {
 
   @override
   String toString() {
-    return 'Condition(createdBy: $createdBy, content: $content, createdAtIso8601: $createdAtIso8601, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Condition(subjectUid: $subjectUid, creatorType: $creatorType, content: $content, createdAtIso8601: $createdAtIso8601, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -236,8 +256,10 @@ class _$ConditionImpl implements _Condition {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConditionImpl &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
+            (identical(other.subjectUid, subjectUid) ||
+                other.subjectUid == subjectUid) &&
+            (identical(other.creatorType, creatorType) ||
+                other.creatorType == creatorType) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.createdAtIso8601, createdAtIso8601) ||
                 other.createdAtIso8601 == createdAtIso8601) &&
@@ -251,7 +273,7 @@ class _$ConditionImpl implements _Condition {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, createdBy, content,
+  int get hashCode => Object.hash(runtimeType, subjectUid, creatorType, content,
       createdAtIso8601, createdAt, updatedAt, deletedAt);
 
   /// Create a copy of Condition
@@ -272,7 +294,8 @@ class _$ConditionImpl implements _Condition {
 
 abstract class _Condition implements Condition {
   const factory _Condition(
-      {required final String createdBy,
+      {required final String subjectUid,
+      required final ConditionCreatorType creatorType,
       required final ConditionContent content,
       required final String createdAtIso8601,
       @TimestampConverter() final Timestamp? createdAt,
@@ -282,9 +305,13 @@ abstract class _Condition implements Condition {
   factory _Condition.fromJson(Map<String, dynamic> json) =
       _$ConditionImpl.fromJson;
 
-  /// 作成者
+  /// 対象者のUID
   @override
-  String get createdBy;
+  String get subjectUid;
+
+  /// contentの作成者の種類
+  @override
+  ConditionCreatorType get creatorType;
 
   /// 内容
   @override

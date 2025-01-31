@@ -38,7 +38,7 @@ export async function updateHighlightContent(
       .collection(CollectionPath.CONDITIONS)
       .withConverter(conditionConverter)
       .where('deletedAt', '==', null)
-      .where('createdBy', '==', highlight.subjectUid)
+      .where('subjectUid', '==', highlight.subjectUid)
       .orderBy('createdAt', 'desc')
       // 対象の範囲
       .where('createdAt', '>=', startDate)

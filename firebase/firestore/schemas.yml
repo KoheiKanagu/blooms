@@ -53,9 +53,15 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
-                  createdBy:
-                    description: 作成者のUID
+                  subjectUid:
+                    description: 対象者のUID
                     type: string
+                  creatorType:
+                    description: contentの作成者の種類
+                    type: string
+                    enum:
+                      - user
+                      - system
                   content:
                     description: コンディションの内容
                     type: object
