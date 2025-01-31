@@ -33,16 +33,16 @@ class HighlightCreatePage extends HookConsumerWidget {
     return Scaffold(
       body: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          trailing: CupertinoButton.tinted(
+          leading: CupertinoButton(
             padding: EdgeInsets.zero,
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
             onPressed: () {
               Navigator.of(context).pop();
             },
-            sizeStyle: CupertinoButtonSize.medium,
-            borderRadius: BorderRadius.circular(24),
-            child: const Icon(CupertinoIcons.xmark),
           ),
-          automaticallyImplyLeading: false,
+          middle: Text(
+            i18n.highlight.createNewHighlight.title,
+          ),
         ),
         backgroundColor:
             CupertinoColors.systemGroupedBackground.resolveFrom(context),
