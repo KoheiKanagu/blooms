@@ -28,12 +28,13 @@ class ConditionPage extends HookConsumerWidget {
             return [
               PullDownMenuItem(
                 onTap: () {
-                  showCupertinoModalPopup<void>(
+                  showModalBottomSheet<void>(
                     context: context,
                     builder: (context) => const ReminderPage(),
                     routeSettings: const RouteSettings(
                       name: ReminderPage.path,
                     ),
+                    useRootNavigator: true,
                   );
                 },
                 title: i18n.reminder.reminder,

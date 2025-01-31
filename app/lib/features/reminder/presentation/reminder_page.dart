@@ -1,5 +1,6 @@
 import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/widgets/my_cupertino_page_scaffold_with_large_navigation_bar.dart';
 import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class ReminderPage extends HookConsumerWidget {
         selectedTime.value = next.value ?? kReminderDefaultTime;
       });
 
-    return CupertinoPageScaffold(
+    return MyCupertinoPageScaffoldWithLargeNavigationBar(
       backgroundColor:
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       navigationBar: CupertinoNavigationBar(
