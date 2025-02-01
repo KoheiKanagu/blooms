@@ -148,12 +148,12 @@ class TranslationsHighlightStateJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get pending => 'トレンド分析を待っています';
+	String get pending => 'ハイライトの作成を待っています';
 	String get pendingDescription => 'もうすぐ開始されます。しばらくお待ちください';
-	String get inProgress => 'トレンド分析中です';
+	String get inProgress => 'ハイライを作成中です';
 	String get inProgressDescription => 'しばらくお待ちください';
-	String get failure => 'トレンド分析に失敗しました';
-	String get failureDescription => '何らかのエラーが発生したため、トレンド分析できませんでした';
+	String get failure => 'ハイライトの作成に失敗しました';
+	String get failureDescription => '何らかのエラーが発生したため、ハイライトを作成できませんでした';
 }
 
 // Path: highlight.createNewHighlight
