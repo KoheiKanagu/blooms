@@ -90,25 +90,29 @@ class ConditionBubble extends HookConsumerWidget {
                   ),
                 ],
               ),
-              previewBuilder: (context, child) => Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  spacing: 8,
-                  children: [
-                    Text(
-                      createdAtString,
-                      textAlign: TextAlign.center,
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .textStyle
-                          .copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    child,
-                  ],
+              previewBuilder: (context, child) => ColoredBox(
+                color: CupertinoColors.systemGroupedBackground
+                    .resolveFrom(context),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: 8,
+                    children: [
+                      Text(
+                        createdAtString,
+                        textAlign: TextAlign.center,
+                        style: CupertinoTheme.of(context)
+                            .textTheme
+                            .textStyle
+                            .copyWith(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      child,
+                    ],
+                  ),
                 ),
               ),
               child: Container(
