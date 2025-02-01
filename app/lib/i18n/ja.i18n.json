@@ -77,7 +77,8 @@
     "setConditionReminder": "今日の体調を記録し忘れないように、通知が設定できます",
     "conditionReminderNotificationTitle": "今日の体調はいかがですか？",
     "setHighlightReminder": "今週のハイライトを作成し忘れないように、通知が設定できます",
-    "highlightReminderNotificationTitle": "今週のハイライトを確認してみましょう"
+    "highlightReminderNotificationTitle": "今週のハイライトを確認してみましょう",
+    "saturday": "土曜日"
   },
   "done": "完了"
 }

@@ -1,3 +1,4 @@
+import 'package:blooms/features/reminder/presentation/reminder_page.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/configure/shared_preferences_providers.dart';
 import 'package:clock/clock.dart';
@@ -9,10 +10,15 @@ import 'package:timezone/timezone.dart' as tz;
 
 part 'reminder_providers.g.dart';
 
-const _reminderHourKey = 'reminder_hour';
-const _reminderMinuteKey = 'reminder_minute';
-const _reminderNotificationId = 0;
-const _reminderEnableKey = 'reminder_enable';
+const _reminderConditionHourKey = 'reminder_hour';
+const _reminderConditionMinuteKey = 'reminder_minute';
+const _reminderConditionNotificationId = 0;
+const _reminderConditionEnableKey = 'reminder_enable';
+
+const _reminderHighlightHourKey = 'reminder_highlight_hour';
+const _reminderHighlightMinuteKey = 'reminder_highlight_minute';
+const _reminderHighlightNotificationId = 1;
+const _reminderHighlightEnableKey = 'reminder_highlight_enable';
 
 const kReminderDefaultTime = TimeOfDay(hour: 20, minute: 0);
 
@@ -32,11 +38,20 @@ Future<void> flutterLocalNotificationPluginInitialize(Ref ref) =>
 
 /// 通知の時間を取得
 @riverpod
-Future<TimeOfDay> reminderTime(Ref ref) async {
-  final results = await Future.wait([
-    ref.read(sharedPreferencesProvider).getInt(_reminderHourKey),
-    ref.read(sharedPreferencesProvider).getInt(_reminderMinuteKey),
-  ]);
+Future<TimeOfDay> reminderTime(
+  Ref ref,
+  ReminderType type,
+) async {
+  final results = switch (type) {
+    ReminderType.condition => await Future.wait([
+        ref.read(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
+        ref.read(sharedPreferencesProvider).getInt(_reminderConditionMinuteKey),
+      ]),
+    ReminderType.highlight => await Future.wait([
+        ref.read(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
+        ref.read(sharedPreferencesProvider).getInt(_reminderHighlightMinuteKey),
+      ]),
+  };
 
   final hour = results[0];
   final minute = results[1];
@@ -49,17 +64,27 @@ Future<TimeOfDay> reminderTime(Ref ref) async {
 
 /// 通知の有効状態を取得
 @riverpod
-Future<bool> reminderStatus(Ref ref) {
-  return ref
-      .read(sharedPreferencesProvider)
-      .getBool(_reminderEnableKey)
-      .then((e) => e ?? false);
+Future<bool> reminderStatus(
+  Ref ref,
+  ReminderType type,
+) {
+  return switch (type) {
+    ReminderType.condition => ref
+        .read(sharedPreferencesProvider)
+        .getBool(_reminderConditionEnableKey)
+        .then((e) => e ?? false),
+    ReminderType.highlight => ref
+        .read(sharedPreferencesProvider)
+        .getBool(_reminderHighlightEnableKey)
+        .then((e) => e ?? false),
+  };
 }
 
 /// リマインダーを保存
 @riverpod
 Future<void> reminderSave(
   Ref ref, {
+  required ReminderType type,
   required bool enable,
   required TimeOfDay time,
 }) async {
@@ -69,33 +94,78 @@ Future<void> reminderSave(
     await ref.read(flutterLocalNotificationPluginInitializeProvider.future);
 
     // スケジュール
-    await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
-          _reminderNotificationId,
-          i18n.reminder.conditionReminderNotificationTitle,
-          null,
-          nextInstance(time),
-          const NotificationDetails(
-            iOS: DarwinNotificationDetails(),
-          ),
-          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime,
-          matchDateTimeComponents: DateTimeComponents.time,
-        );
+    switch (type) {
+      case ReminderType.condition:
+        await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
+              _reminderConditionNotificationId,
+              i18n.reminder.conditionReminderNotificationTitle,
+              null,
+              nextInstance(time),
+              const NotificationDetails(
+                iOS: DarwinNotificationDetails(),
+              ),
+              androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+              uiLocalNotificationDateInterpretation:
+                  UILocalNotificationDateInterpretation.absoluteTime,
+              matchDateTimeComponents: DateTimeComponents.time,
+            );
+
+      case ReminderType.highlight:
+        await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
+              _reminderHighlightNotificationId,
+              i18n.reminder.highlightReminderNotificationTitle,
+              null,
+              nextSaturdayInstance(time),
+              const NotificationDetails(
+                iOS: DarwinNotificationDetails(),
+              ),
+              androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+              uiLocalNotificationDateInterpretation:
+                  UILocalNotificationDateInterpretation.absoluteTime,
+              matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+            );
+    }
   } else {
     // オフ
     // 通知をキャンセル
-    await ref
-        .read(flutterLocalNotificationsPluginProvider)
-        .cancel(_reminderNotificationId);
+    switch (type) {
+      case ReminderType.condition:
+        await ref
+            .read(flutterLocalNotificationsPluginProvider)
+            .cancel(_reminderConditionNotificationId);
+      case ReminderType.highlight:
+        await ref
+            .read(flutterLocalNotificationsPluginProvider)
+            .cancel(_reminderHighlightNotificationId);
+    }
   }
 
-  // 時間と有効状態を保存
-  await Future.wait([
-    ref.read(sharedPreferencesProvider).setInt(_reminderHourKey, time.hour),
-    ref.read(sharedPreferencesProvider).setInt(_reminderMinuteKey, time.minute),
-    ref.read(sharedPreferencesProvider).setBool(_reminderEnableKey, enable),
-  ]);
+  switch (type) {
+    case ReminderType.condition:
+      await Future.wait([
+        ref
+            .read(sharedPreferencesProvider)
+            .setInt(_reminderConditionHourKey, time.hour),
+        ref
+            .read(sharedPreferencesProvider)
+            .setInt(_reminderConditionMinuteKey, time.minute),
+        ref
+            .read(sharedPreferencesProvider)
+            .setBool(_reminderConditionEnableKey, enable),
+      ]);
+    case ReminderType.highlight:
+      await Future.wait([
+        ref
+            .read(sharedPreferencesProvider)
+            .setInt(_reminderHighlightHourKey, time.hour),
+        ref
+            .read(sharedPreferencesProvider)
+            .setInt(_reminderHighlightMinuteKey, time.minute),
+        ref
+            .read(sharedPreferencesProvider)
+            .setBool(_reminderHighlightEnableKey, enable),
+      ]);
+  }
 }
 
 @visibleForTesting
@@ -115,5 +185,31 @@ tz.TZDateTime nextInstance(TimeOfDay time) {
       const Duration(days: 1),
     );
   }
+  return scheduledDate;
+}
+
+@visibleForTesting
+tz.TZDateTime nextSaturdayInstance(TimeOfDay time) {
+  final now = clock.now();
+
+  var scheduledDate = tz.TZDateTime(
+    tz.local,
+    now.year,
+    now.month,
+    now.day,
+    time.hour,
+    time.minute,
+  );
+
+  if (scheduledDate.weekday != DateTime.saturday ||
+      scheduledDate.isBefore(now)) {
+    scheduledDate = scheduledDate.add(
+      Duration(days: (DateTime.saturday - scheduledDate.weekday + 7) % 7),
+    );
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 7));
+    }
+  }
+
   return scheduledDate;
 }

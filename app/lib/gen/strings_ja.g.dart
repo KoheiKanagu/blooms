@@ -139,6 +139,7 @@ class TranslationsReminderJa {
 	String get conditionReminderNotificationTitle => '今日の体調はいかがですか？';
 	String get setHighlightReminder => '今週のハイライトを作成し忘れないように、通知が設定できます';
 	String get highlightReminderNotificationTitle => '今週のハイライトを確認してみましょう';
+	String get saturday => '土曜日';
 }
 
 // Path: highlight.state
