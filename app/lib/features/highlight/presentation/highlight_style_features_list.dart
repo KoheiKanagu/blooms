@@ -33,41 +33,7 @@ class HighlightStyleFeaturesList extends StatelessWidget {
         ),
         switch (style) {
           HighlightStyle.private => const _PrivateFeatures(),
-          HighlightStyle.professional => const _ProfessionalFeatures(),
         },
-      ],
-    );
-  }
-}
-
-class _ProfessionalFeatures extends StatelessWidget {
-  const _ProfessionalFeatures();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _SimpleText(
-          text: i18n.highlight.features.professional.medical,
-          icon: const Icon(
-            CupertinoIcons.person_circle_fill,
-            color: CupertinoColors.systemPink,
-          ),
-        ),
-        _SimpleText(
-          text: i18n.highlight.features.professional.summary,
-          icon: const Icon(
-            CupertinoIcons.equal_circle_fill,
-            color: CupertinoColors.systemCyan,
-          ),
-        ),
-        _SimpleText(
-          text: i18n.highlight.features.professional.disclaimer,
-          icon: const Icon(
-            CupertinoIcons.xmark_circle_fill,
-            color: CupertinoColors.systemRed,
-          ),
-        ),
       ],
     );
   }

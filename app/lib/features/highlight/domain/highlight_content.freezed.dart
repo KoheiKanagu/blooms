@@ -18,8 +18,6 @@ HighlightContent _$HighlightContentFromJson(Map<String, dynamic> json) {
   switch (json['style']) {
     case 'private':
       return HighlightContentPrivate.fromJson(json);
-    case 'professional':
-      return HighlightContentProfessional.fromJson(json);
 
     default:
       return HighlightContentEmpty.fromJson(json);
@@ -41,14 +39,6 @@ mixin _$HighlightContent {
             HighlightState state,
             String? promptFileUri)
         private,
-    required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        professional,
     required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,14 +55,6 @@ mixin _$HighlightContent {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,14 +71,6 @@ mixin _$HighlightContent {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) =>
@@ -104,21 +78,18 @@ mixin _$HighlightContent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HighlightContentPrivate value) private,
-    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HighlightContentPrivate value)? private,
-    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HighlightContentPrivate value)? private,
-    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) =>
@@ -352,14 +323,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
             HighlightState state,
             String? promptFileUri)
         private,
-    required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        professional,
     required TResult Function() empty,
   }) {
     return private(startAt, period, subjectiveTrend, objectiveTrend,
@@ -380,14 +343,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult? Function()? empty,
   }) {
     return private?.call(startAt, period, subjectiveTrend, objectiveTrend,
@@ -408,14 +363,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -430,7 +377,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HighlightContentPrivate value) private,
-    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) {
     return private(this);
@@ -440,7 +386,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HighlightContentPrivate value)? private,
-    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) {
     return private?.call(this);
@@ -450,7 +395,6 @@ class _$HighlightContentPrivateImpl implements HighlightContentPrivate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HighlightContentPrivate value)? private,
-    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) {
@@ -519,341 +463,6 @@ abstract class HighlightContentPrivate implements HighlightContent {
 }
 
 /// @nodoc
-abstract class _$$HighlightContentProfessionalImplCopyWith<$Res> {
-  factory _$$HighlightContentProfessionalImplCopyWith(
-          _$HighlightContentProfessionalImpl value,
-          $Res Function(_$HighlightContentProfessionalImpl) then) =
-      __$$HighlightContentProfessionalImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {@TimestampConverterNotNull() Timestamp startAt,
-      HighlightPeriod period,
-      List<String> analysisResults,
-      String abstract,
-      HighlightState state,
-      String? promptFileUri});
-}
-
-/// @nodoc
-class __$$HighlightContentProfessionalImplCopyWithImpl<$Res>
-    extends _$HighlightContentCopyWithImpl<$Res,
-        _$HighlightContentProfessionalImpl>
-    implements _$$HighlightContentProfessionalImplCopyWith<$Res> {
-  __$$HighlightContentProfessionalImplCopyWithImpl(
-      _$HighlightContentProfessionalImpl _value,
-      $Res Function(_$HighlightContentProfessionalImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of HighlightContent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? startAt = null,
-    Object? period = null,
-    Object? analysisResults = null,
-    Object? abstract = null,
-    Object? state = null,
-    Object? promptFileUri = freezed,
-  }) {
-    return _then(_$HighlightContentProfessionalImpl(
-      startAt: null == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as HighlightPeriod,
-      analysisResults: null == analysisResults
-          ? _value._analysisResults
-          : analysisResults // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      abstract: null == abstract
-          ? _value.abstract
-          : abstract // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as HighlightState,
-      promptFileUri: freezed == promptFileUri
-          ? _value.promptFileUri
-          : promptFileUri // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$HighlightContentProfessionalImpl
-    implements HighlightContentProfessional {
-  const _$HighlightContentProfessionalImpl(
-      {@TimestampConverterNotNull() required this.startAt,
-      required this.period,
-      final List<String> analysisResults = const [],
-      this.abstract = '',
-      this.state = HighlightState.pending,
-      this.promptFileUri,
-      final String? $type})
-      : _analysisResults = analysisResults,
-        $type = $type ?? 'professional';
-
-  factory _$HighlightContentProfessionalImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$HighlightContentProfessionalImplFromJson(json);
-
-  /// ハイライトを作成開始する日時。この日からN日前のハイライト
-  @override
-  @TimestampConverterNotNull()
-  final Timestamp startAt;
-
-  /// ハイライトの種類
-  @override
-  final HighlightPeriod period;
-
-  /// 分析結果
-  final List<String> _analysisResults;
-
-  /// 分析結果
-  @override
-  @JsonKey()
-  List<String> get analysisResults {
-    if (_analysisResults is EqualUnmodifiableListView) return _analysisResults;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_analysisResults);
-  }
-
-  /// 分析結果の要旨
-  @override
-  @JsonKey()
-  final String abstract;
-
-  /// 生成モデルでの処理の状態
-  @override
-  @JsonKey()
-  final HighlightState state;
-
-  /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
-  @override
-  final String? promptFileUri;
-
-  @JsonKey(name: 'style')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'HighlightContent.professional(startAt: $startAt, period: $period, analysisResults: $analysisResults, abstract: $abstract, state: $state, promptFileUri: $promptFileUri)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$HighlightContentProfessionalImpl &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.period, period) || other.period == period) &&
-            const DeepCollectionEquality()
-                .equals(other._analysisResults, _analysisResults) &&
-            (identical(other.abstract, abstract) ||
-                other.abstract == abstract) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.promptFileUri, promptFileUri) ||
-                other.promptFileUri == promptFileUri));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      startAt,
-      period,
-      const DeepCollectionEquality().hash(_analysisResults),
-      abstract,
-      state,
-      promptFileUri);
-
-  /// Create a copy of HighlightContent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$HighlightContentProfessionalImplCopyWith<
-          _$HighlightContentProfessionalImpl>
-      get copyWith => __$$HighlightContentProfessionalImplCopyWithImpl<
-          _$HighlightContentProfessionalImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String subjectiveTrend,
-            String objectiveTrend,
-            String analysisResult,
-            String advice,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        private,
-    required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        professional,
-    required TResult Function() empty,
-  }) {
-    return professional(
-        startAt, period, analysisResults, abstract, state, promptFileUri);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String subjectiveTrend,
-            String objectiveTrend,
-            String analysisResult,
-            String advice,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        private,
-    TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
-    TResult? Function()? empty,
-  }) {
-    return professional?.call(
-        startAt, period, analysisResults, abstract, state, promptFileUri);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String subjectiveTrend,
-            String objectiveTrend,
-            String analysisResult,
-            String advice,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        private,
-    TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
-    TResult Function()? empty,
-    required TResult orElse(),
-  }) {
-    if (professional != null) {
-      return professional(
-          startAt, period, analysisResults, abstract, state, promptFileUri);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(HighlightContentPrivate value) private,
-    required TResult Function(HighlightContentProfessional value) professional,
-    required TResult Function(HighlightContentEmpty value) empty,
-  }) {
-    return professional(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HighlightContentPrivate value)? private,
-    TResult? Function(HighlightContentProfessional value)? professional,
-    TResult? Function(HighlightContentEmpty value)? empty,
-  }) {
-    return professional?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(HighlightContentPrivate value)? private,
-    TResult Function(HighlightContentProfessional value)? professional,
-    TResult Function(HighlightContentEmpty value)? empty,
-    required TResult orElse(),
-  }) {
-    if (professional != null) {
-      return professional(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$HighlightContentProfessionalImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class HighlightContentProfessional implements HighlightContent {
-  const factory HighlightContentProfessional(
-      {@TimestampConverterNotNull() required final Timestamp startAt,
-      required final HighlightPeriod period,
-      final List<String> analysisResults,
-      final String abstract,
-      final HighlightState state,
-      final String? promptFileUri}) = _$HighlightContentProfessionalImpl;
-
-  factory HighlightContentProfessional.fromJson(Map<String, dynamic> json) =
-      _$HighlightContentProfessionalImpl.fromJson;
-
-  /// ハイライトを作成開始する日時。この日からN日前のハイライト
-  @TimestampConverterNotNull()
-  Timestamp get startAt;
-
-  /// ハイライトの種類
-  HighlightPeriod get period;
-
-  /// 分析結果
-  List<String> get analysisResults;
-
-  /// 分析結果の要旨
-  String get abstract;
-
-  /// 生成モデルでの処理の状態
-  HighlightState get state;
-
-  /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
-  String? get promptFileUri;
-
-  /// Create a copy of HighlightContent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HighlightContentProfessionalImplCopyWith<
-          _$HighlightContentProfessionalImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$HighlightContentEmptyImplCopyWith<$Res> {
   factory _$$HighlightContentEmptyImplCopyWith(
           _$HighlightContentEmptyImpl value,
@@ -915,14 +524,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
             HighlightState state,
             String? promptFileUri)
         private,
-    required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        professional,
     required TResult Function() empty,
   }) {
     return empty();
@@ -942,14 +543,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult? Function()? empty,
   }) {
     return empty?.call();
@@ -969,14 +562,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
             HighlightState state,
             String? promptFileUri)?
         private,
-    TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            List<String> analysisResults,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        professional,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -990,7 +575,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HighlightContentPrivate value) private,
-    required TResult Function(HighlightContentProfessional value) professional,
     required TResult Function(HighlightContentEmpty value) empty,
   }) {
     return empty(this);
@@ -1000,7 +584,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HighlightContentPrivate value)? private,
-    TResult? Function(HighlightContentProfessional value)? professional,
     TResult? Function(HighlightContentEmpty value)? empty,
   }) {
     return empty?.call(this);
@@ -1010,7 +593,6 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HighlightContentPrivate value)? private,
-    TResult Function(HighlightContentProfessional value)? professional,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
   }) {

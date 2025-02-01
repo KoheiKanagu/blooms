@@ -23,7 +23,6 @@ class HighlightCreatePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedType = useState({
       HighlightStyle.private: HighlightPeriod.past7days,
-      HighlightStyle.professional: HighlightPeriod.past28days,
     });
 
     final selectedStyle = useState<HighlightStyle>(
@@ -57,26 +56,6 @@ class HighlightCreatePage extends HookConsumerWidget {
               style: selectedStyle.value,
             ),
             const Gap(24),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: CupertinoSlidingSegmentedControl(
-                children: {
-                  HighlightStyle.private: Text(
-                    HighlightStyle.private.localizedName,
-                  ),
-                  HighlightStyle.professional: Text(
-                    HighlightStyle.professional.localizedName,
-                  ),
-                },
-                groupValue: selectedStyle.value,
-                onValueChanged: (value) {
-                  selectedStyle.value = value ?? HighlightStyle.private;
-                },
-              ),
-            ),
-            const Gap(8),
             _CreateTiles(
               selectedType: selectedType.value[selectedStyle.value]!,
               selectedStyle: selectedStyle.value,
@@ -126,13 +105,6 @@ class _CreateTiles extends StatelessWidget {
               ),
             )
             .toList(),
-        HighlightStyle.professional => [
-            HighlightCreatePageTile(
-              period: HighlightPeriod.past28days,
-              selected: true,
-              onTap: () {},
-            ),
-          ]
       },
     );
   }

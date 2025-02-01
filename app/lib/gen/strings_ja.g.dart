@@ -163,7 +163,6 @@ class TranslationsHighlightCreateNewHighlightJa {
 	// Translations
 	String get title => '新しいハイライトを作成';
 	String get privateDescription1 => 'あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。';
-	String get professionalDescription1 => 'プロフェッショナルがあなたの体調を理解することを助ける、ハイライトを作成します。';
 }
 
 // Path: highlight.style
@@ -174,7 +173,6 @@ class TranslationsHighlightStyleJa {
 
 	// Translations
 	String get private => '自分用';
-	String get professional => 'プロ用';
 }
 
 // Path: highlight.features
@@ -186,7 +184,6 @@ class TranslationsHighlightFeaturesJa {
 	// Translations
 	String get description => '作成される文章には次の特徴があります:';
 	late final TranslationsHighlightFeaturesPrivateJa private = TranslationsHighlightFeaturesPrivateJa.internal(_root);
-	late final TranslationsHighlightFeaturesProfessionalJa professional = TranslationsHighlightFeaturesProfessionalJa.internal(_root);
 }
 
 // Path: highlight.features.private
@@ -199,17 +196,5 @@ class TranslationsHighlightFeaturesPrivateJa {
 	String get care => 'あなたに寄り添って体調を気遣う文体の文章が作成されます';
 	String get trend => 'あなたの体調に関連する何らかの傾向が見つかる可能性があります';
 	String get advice => '明日に向けてのアドバイスが提供されます';
-	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
-}
-
-// Path: highlight.features.professional
-class TranslationsHighlightFeaturesProfessionalJa {
-	TranslationsHighlightFeaturesProfessionalJa.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get medical => '医師や助産師などに体調を相談したい際に活用できる文章が作成されます';
-	String get summary => '箇条書きで日々の体調に関する情報が簡潔にまとめられます';
 	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
 }

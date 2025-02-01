@@ -2,7 +2,7 @@ import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { logger } from 'firebase-functions';
 import { Condition } from '../../../condition/domain/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentPrivate, HighlightContentProfessional } from '../domain/highlight';
+import { HighlightContentPrivate } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -65,8 +65,8 @@ function createParts(condition: Condition): Part[] {
 export async function requestGenerativeModel(
   uid: string,
   conditions: Condition[],
-  content: HighlightContentPrivate | HighlightContentProfessional,
-): Promise<HighlightContentPrivate | HighlightContentProfessional> {
+  content: HighlightContentPrivate,
+): Promise<HighlightContentPrivate> {
   const generativeModel = setupGenerativeModel(content.style);
 
   let requestContents: Content[] = conditions
@@ -102,7 +102,7 @@ export async function requestGenerativeModel(
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
   const gsFileUri = await savePrompt(uid, requestContents);
 
-  const newContent: HighlightContentPrivate | HighlightContentProfessional = {
+  const newContent: HighlightContentPrivate = {
     ...content,
     promptFileUri: gsFileUri,
     state: 'success',

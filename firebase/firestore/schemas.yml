@@ -104,7 +104,6 @@ paths:
                     oneOf:
                       - $ref: "#/components/schemas/HighlightContentEmpty"
                       - $ref: "#/components/schemas/HighlightContentPrivate"
-                      - $ref: "#/components/schemas/HighlightContentProfessional"
 
 components:
   schemas:
@@ -158,55 +157,6 @@ components:
         advice:
           description: アドバイス
           type: string
-        abstract:
-          description: 分析結果の要旨
-          type: string
-        state:
-          description: 生成モデルでの処理の状態
-          type: string
-          default: pending
-          enum:
-            - pending
-            - inProgress
-            - success
-            - failure
-        promptFileUri:
-          description: 生成モデルによるハイライトの生成プロンプトのファイルパス
-          type: string
-          example: gs://bucket/path/to/file
-          nullable: true
-
-    HighlightContentProfessional:
-      required:
-        - style
-        - startAt
-        - period
-        - analysisResults
-        - abstract
-        - state
-      properties:
-        style:
-          description: ハイライトのスタイル
-          type: string
-          default: professional
-        startAt:
-          description: ハイライトを作成開始する日時。この日からN日前のハイライト Timestamp
-          type: object
-        period:
-          description: ハイライトの対象期間
-          type: string
-          default: past1day
-          enum:
-            - past1day
-            - past7days
-            - past14days
-            - past21days
-            - past28days
-        analysisResults:
-          description: 分析結果
-          type: array
-          items:
-            type: string
         abstract:
           description: 分析結果の要旨
           type: string

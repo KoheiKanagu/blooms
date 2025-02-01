@@ -19,9 +19,6 @@ class HighlightCreatePageHeader extends StatelessWidget {
       child: switch (style) {
         HighlightStyle.private =>
           Text(i18n.highlight.createNewHighlight.privateDescription1),
-        HighlightStyle.professional => Text(
-            i18n.highlight.createNewHighlight.professionalDescription1,
-          ),
       },
     );
   }
