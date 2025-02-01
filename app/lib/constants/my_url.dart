@@ -8,4 +8,8 @@ class MyUrl {
   static Uri privacyPolicy = Uri.parse('https://kingu.dev/privacy_policy');
 
   static Uri github = Uri.parse('https://github.com/KoheiKanagu/blooms');
+
+  static Uri buildSearchURL(String query) => Uri.parse(
+        'https://www.google.com/search?q=$query',
+      );
 }

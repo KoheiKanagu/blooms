@@ -17,6 +17,12 @@ sealed class ConditionContent with _$ConditionContent {
     required String text,
   }) = ConditionContentText;
 
+  /// テキストの記録（検索キーワード付き）
+  const factory ConditionContent.textWithSearchKeywords({
+    required String text,
+    required List<String> searchKeywords,
+  }) = ConditionContentTextWithSearchKeywords;
+
   /// 画像の記録
   const factory ConditionContent.image({
     required List<ConditionContentImageAttachment> attachments,

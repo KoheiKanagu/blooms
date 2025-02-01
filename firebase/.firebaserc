@@ -29,7 +29,7 @@
   "etags": {
     "blooms-stg": {
       "extensionInstances": {
-        "delete-user-data-firestore-conditions-v1": "8d33859f1c7842f5a7579d422282722843af7bddf9e25ca7665fca7e7a11cf8a",
+        "delete-user-data-firestore-conditions-v1": "44fc8e4253e1698127dbcb4657c5287653bd61e2fa46e3b4a98d4cb59c5052b0",
         "delete-user-data-firestore-highlights-v1": "d6721656bb8b050718259d732adc701d14677ab6554e05c5457f466c802fa376",
         "delete-user-data-firestore-users-v1": "db256cbb7d357f48a6f675f60c1ddd1e52244e4a30f834e1ab5470817d9c32c5",
         "delete-user-data-storage-audios-v1": "11a97feb8cb0ee85013b8523493e058da7ddf57b6cda73c6c2ef1dbe8b3c165d",
@@ -39,7 +39,7 @@
     },
     "blooms-prod-43d74": {
       "extensionInstances": {
-        "delete-user-data-firestore-conditions-v1": "8453b04980adf5a019e3838b4e2d2acd71f6e42682b14637db8b0d9c5ab81141",
+        "delete-user-data-firestore-conditions-v1": "db749131bb45a6fe817c653819ab7bc2a359628baee97c88f5bbe762eef9d610",
         "delete-user-data-firestore-highlights-v1": "438f6e9554a1ab465c06e9db7fbddbb2eff7bd199d05a3e6e08dd15989574be3",
         "delete-user-data-firestore-users-v1": "b830b7324ec25ca79b3cf35dad47a519c91450115d61bac3749197744a48cbde",
         "delete-user-data-storage-audios-v1": "f16287758579790a166078c25f5496bd8db0cb86003877ccc138eb7c6bdb24f3",

@@ -16,7 +16,7 @@ async function main(): Promise<void> {
   const conditionQuery = admin
     .firestore()
     .collection(CollectionPath.CONDITIONS)
-    .where('createdBy', '==', sourceUid);
+    .where('subjectUid', '==', sourceUid);
 
   await admin.firestore().runTransaction(async (transaction) => {
     const conditions = await transaction.get(conditionQuery);
@@ -24,7 +24,7 @@ async function main(): Promise<void> {
 
     for (const condition of conditions.docs) {
       transaction.update(condition.ref, {
-        createdBy: toUid,
+        subjectUid: toUid,
       });
     }
   });

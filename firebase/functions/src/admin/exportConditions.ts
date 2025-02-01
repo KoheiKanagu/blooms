@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { ConditionContentText, conditionConverter } from '../models/condition';
+import { ConditionContentText, conditionConverter } from '../condition/domain/condition';
 import { CollectionPath } from '../utils/collectionPath';
 import { adminInitializeAppStg } from './adminInitializeApp';
 
@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     .withConverter(conditionConverter)
     .where('deletedAt', '==', null)
     .where('content.type', '==', 'text')
-    .where('createdBy', '==', sourceUid)
+    .where('subjectUid', '==', sourceUid)
     .orderBy('createdAt', 'desc')
     .get();
 

@@ -1,12 +1,15 @@
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/domain/condition_content.dart';
+import 'package:blooms/features/condition/domain/condition_creator_type.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_audio.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_empty.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_image.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_text.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_text_with_search_keywords.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
+import 'package:blooms/theme/my_theme.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +23,7 @@ class ConditionBubble extends HookConsumerWidget {
     required this.createdAt,
     required this.content,
     required this.showDateTime,
+    required this.creatorType,
     super.key,
   }) {
     final isToday = DateUtils.isSameDay(clock.now(), createdAt);
@@ -45,6 +49,8 @@ class ConditionBubble extends HookConsumerWidget {
 
   final bool showDateTime;
 
+  final ConditionCreatorType creatorType;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
@@ -64,10 +70,16 @@ class ConditionBubble extends HookConsumerWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: 64,
-              right: 16,
-            ),
+            padding: switch (creatorType) {
+              ConditionCreatorType.user => const EdgeInsets.only(
+                  left: 64,
+                  right: 16,
+                ),
+              ConditionCreatorType.model => const EdgeInsets.only(
+                  left: 16,
+                  right: 64,
+                ),
+            },
             child: ContextMenuWidget(
               menuProvider: (_) => Menu(
                 children: [
@@ -117,18 +129,38 @@ class ConditionBubble extends HookConsumerWidget {
                   vertical: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: CupertinoColors.secondarySystemGroupedBackground
-                      .resolveFrom(context),
+                  color: switch (creatorType) {
+                    ConditionCreatorType.user => CupertinoColors
+                        .secondarySystemGroupedBackground
+                        .resolveFrom(context),
+                    ConditionCreatorType.model =>
+                      myColorGreen2.withOpacity(0.1),
+                  },
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: MyDecoration.dropShadow(context).boxShadow,
+                  boxShadow: switch (creatorType) {
+                    ConditionCreatorType.user =>
+                      MyDecoration.dropShadow(context).boxShadow,
+                    ConditionCreatorType.model => [],
+                  },
                 ),
                 child: switch (content) {
-                  ConditionContentText() =>
-                    ConditionBubbleText(content as ConditionContentText),
-                  ConditionContentImage() =>
-                    ConditionBubbleImage(content as ConditionContentImage),
-                  ConditionContentAudio() =>
-                    ConditionBubbleAudio(content as ConditionContentAudio),
+                  ConditionContentText() => ConditionBubbleText(
+                      content as ConditionContentText,
+                      creatorType: creatorType,
+                    ),
+                  ConditionContentTextWithSearchKeywords() =>
+                    ConditionBubbleTextWithSearchKeywords(
+                      content as ConditionContentTextWithSearchKeywords,
+                      creatorType: creatorType,
+                    ),
+                  ConditionContentImage() => ConditionBubbleImage(
+                      content as ConditionContentImage,
+                      creatorType: creatorType,
+                    ),
+                  ConditionContentAudio() => ConditionBubbleAudio(
+                      content as ConditionContentAudio,
+                      creatorType: creatorType,
+                    ),
                   ConditionContentEmpty() =>
                     ConditionBubbleEmpty(content as ConditionContentEmpty),
                 },

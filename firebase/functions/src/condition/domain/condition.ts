@@ -1,21 +1,31 @@
 import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/firestore';
 
-export type ConditionType = 'text' | 'image' | 'audio' | 'empty';
+export type ConditionType = 'text' | 'textWithSearchKeywords' | 'image' | 'audio' | 'empty';
+export type CreatorType = 'user' | 'model';
+
+export type ConditionContentInterfaces = ConditionContentText | ConditionContentTextWithSearchKeywords | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty;
 
 export class Condition {
   constructor(
     readonly createdAt: Timestamp | FieldValue,
     readonly updatedAt: Timestamp | FieldValue,
     readonly deletedAt: Timestamp | null,
-    readonly createdBy: string,
-    readonly createdAtIso8601: string,
-    readonly content: ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty,
+    readonly subjectUid: string,
+    readonly creatorType: CreatorType,
+    readonly createdAtIso8601: string | null,
+    readonly content: ConditionContentInterfaces,
   ) { }
 }
 
 export interface ConditionContentText {
   type: 'text';
   text: string;
+}
+
+export interface ConditionContentTextWithSearchKeywords {
+  type: 'textWithSearchKeywords';
+  text: string;
+  searchKeywords: string[];
 }
 
 export interface ConditionContentImage {
@@ -48,7 +58,8 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     createdAt: condition.createdAt,
     updatedAt: condition.updatedAt,
     deletedAt: condition.deletedAt,
-    createdBy: condition.createdBy,
+    subjectUid: condition.subjectUid,
+    creatorType: condition.creatorType,
     timeZone: condition.createdAtIso8601,
     content: condition.content,
   }),
@@ -56,14 +67,14 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('createdAt') as Timestamp,
     snapshot.get('updatedAt') as Timestamp,
     snapshot.get('deletedAt') as Timestamp | null,
-    snapshot.get('createdBy') as string,
-    snapshot.get('createdAtIso8601') as string,
+    snapshot.get('subjectUid') as string,
+    snapshot.get('creatorType') as CreatorType,
+    snapshot.get('createdAtIso8601') as string | null,
     conditionContentConverter(snapshot.get('content') as Record<string, unknown>),
   ),
 };
 
-function conditionContentConverter(value: Record<string, unknown>):
-  ConditionContentText | ConditionContentImage | ConditionContentAudio | ConditionContentEmpty {
+function conditionContentConverter(value: Record<string, unknown>): ConditionContentInterfaces {
   if (value == null) {
     const empty: ConditionContentEmpty = {
       type: 'empty',
@@ -111,6 +122,15 @@ function conditionContentConverter(value: Record<string, unknown>):
       const content: ConditionContentAudio = {
         type: 'audio',
         attachments: attachments,
+      };
+      return content;
+    }
+
+    case 'textWithSearchKeywords': {
+      const content: ConditionContentTextWithSearchKeywords = {
+        type: 'textWithSearchKeywords',
+        text: value['text'] as string,
+        searchKeywords: value['searchKeywords'] as string[],
       };
       return content;
     }

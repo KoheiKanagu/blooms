@@ -1,9 +1,8 @@
 import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
+import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { Condition } from '../../../condition/domain/condition';
-import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentPrivate, HighlightContentProfessional } from '../domain/highlight';
-import { savePrompt } from './savePrompt';
+import { outSensitiveLog } from '../../utils/sensitive_log';
+import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
 function createParts(condition: Condition): Part[] {
@@ -59,17 +58,16 @@ function createParts(condition: Condition): Part[] {
  *
  * @param uid ユーザーID
  * @param conditions 解析対象のConditions
- * @param content ハイライトの内容
  * @returns
  */
 export async function requestGenerativeModel(
   uid: string,
   conditions: Condition[],
-  content: HighlightContentPrivate | HighlightContentProfessional,
-): Promise<HighlightContentPrivate | HighlightContentProfessional> {
-  const generativeModel = setupGenerativeModel(content.style);
+): Promise<Condition | null> {
+  const generativeModel = setupGenerativeModel();
 
-  let requestContents: Content[] = conditions
+  // 生成モデルに投げるContentを生成
+  const requestContents: Content[] = conditions
     .map<Content>(condition => ({
       role: condition.creatorType,
       parts: createParts(condition),
@@ -77,20 +75,14 @@ export async function requestGenerativeModel(
     // 空だとエラーになるので除外
     .filter(content => content.parts.length > 0);
 
-  // 空だとエラーになる
   if (requestContents.length === 0) {
-    requestContents = [
-      {
-        role: 'user',
-        parts: [
-          {
-            text: 'No data',
-          },
-        ],
-      },
-    ];
+    logger.warn('requestContents is empty');
+    // 内容が無い場合はスキップ
+    return null;
   }
+  outSensitiveLog(`requestContents`, requestContents);
 
+  // 生成
   const generatedResult = await generativeModel.generateContent({
     contents: requestContents,
   });
@@ -100,15 +92,25 @@ export async function requestGenerativeModel(
   // responseの形式は定義しており、従っていなかった場合は400エラーになるので型チェックは不要なはず
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
-  const gsFileUri = await savePrompt(uid, requestContents);
 
-  const newContent: HighlightContentPrivate | HighlightContentProfessional = {
-    ...content,
-    promptFileUri: gsFileUri,
-    state: 'success',
-    ...jsonContent,
+  const reply = jsonContent['reply'] as string;
+  const searchKeywords = jsonContent['searchKeywords'] as string[];
+
+  const newCondition: Condition = {
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    deletedAt: null,
+    subjectUid: uid,
+    creatorType: 'model',
+    createdAtIso8601: null,
+    content: {
+      type: 'textWithSearchKeywords',
+      text: reply,
+      searchKeywords: searchKeywords,
+    },
+
   };
-  outSensitiveLog(`newContent:`, newContent);
 
-  return newContent;
+  outSensitiveLog(`newCondition:`, newCondition);
+  return newCondition;
 }

@@ -30,6 +30,32 @@ Map<String, dynamic> _$$ConditionContentTextImplToJson(
       'type': instance.$type,
     };
 
+_$ConditionContentTextWithSearchKeywordsImpl
+    _$$ConditionContentTextWithSearchKeywordsImplFromJson(
+            Map<String, dynamic> json) =>
+        $checkedCreate(
+          r'_$ConditionContentTextWithSearchKeywordsImpl',
+          json,
+          ($checkedConvert) {
+            final val = _$ConditionContentTextWithSearchKeywordsImpl(
+              text: $checkedConvert('text', (v) => v as String),
+              searchKeywords: $checkedConvert('searchKeywords',
+                  (v) => (v as List<dynamic>).map((e) => e as String).toList()),
+              $type: $checkedConvert('type', (v) => v as String?),
+            );
+            return val;
+          },
+          fieldKeyMap: const {r'$type': 'type'},
+        );
+
+Map<String, dynamic> _$$ConditionContentTextWithSearchKeywordsImplToJson(
+        _$ConditionContentTextWithSearchKeywordsImpl instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'searchKeywords': instance.searchKeywords,
+      'type': instance.$type,
+    };
+
 _$ConditionContentImageImpl _$$ConditionContentImageImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(

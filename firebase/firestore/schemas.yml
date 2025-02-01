@@ -45,6 +45,7 @@ paths:
                     description: ISO8601形式の作成日時
                     type: string
                     example: 2004-04-01T12:00+09:00
+                    nullable: true
                   updatedAt:
                     description: 更新日時 Timestamp
                     type: object
@@ -53,15 +54,22 @@ paths:
                     description: 削除日時 Timestamp
                     type: object
                     nullable: true
-                  createdBy:
-                    description: 作成者のUID
+                  subjectUid:
+                    description: 対象者のUID
                     type: string
+                  creatorType:
+                    description: contentの作成者の種類
+                    type: string
+                    enum:
+                      - user
+                      - model
                   content:
                     description: コンディションの内容
                     type: object
                     oneOf:
                       - $ref: "#/components/schemas/ConditionContentEmpty"
                       - $ref: "#/components/schemas/ConditionContentText"
+                      - $ref: "#/components/schemas/ConditionContentTextWithSearchKeywords"
                       - $ref: "#/components/schemas/ConditionContentImage"
                       - $ref: "#/components/schemas/ConditionContentAudio"
 
@@ -239,6 +247,27 @@ components:
           description: 記録
           type: string
           example: 頭痛がする
+
+    ConditionContentTextWithSearchKeywords:
+      required:
+        - type
+        - text
+        - searchKeywords
+      properties:
+        type:
+          description: コンディションの種類
+          type: string
+          default: textWithSearchKeywords
+        text:
+          description: 記録
+          type: string
+          example: 頭痛がする
+        searchKeywords:
+          description: 検索キーワード
+          type: array
+          items:
+            type: string
+          example: [妊婦 頭痛, 妊婦 頭痛がする]
 
     ConditionContentImage:
       required:
