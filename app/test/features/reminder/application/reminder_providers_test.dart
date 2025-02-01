@@ -2,12 +2,17 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-void main() {
+Future<void> main() async {
   tz.initializeTimeZones();
-  tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
+  tz.setLocalLocation(
+    tz.getLocation(
+      await FlutterTimezone.getLocalTimezone(),
+    ),
+  );
 
   group('nextInstance', () {
     test(
@@ -24,7 +29,6 @@ void main() {
 
         withClock(now, () {
           final actual = nextInstance(time);
-          print('actual: $actual');
 
           expect(actual.year, 2025);
           expect(actual.month, 12);
