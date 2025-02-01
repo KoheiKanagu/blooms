@@ -1,7 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -24,22 +23,19 @@ class Highlight with _$Highlight {
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Highlight;
 
-  factory Highlight.create({
+  factory Highlight.summary({
     required HighlightPeriod period,
-    required HighlightStyle style,
     required String subjectUid,
     required Timestamp startAt,
   }) =>
       Highlight(
         subjectUid: subjectUid,
-        content: switch (style) {
-          HighlightStyle.private => HighlightContentSummary(
-              startAt: startAt,
-              period: period,
-              summary: '',
-              abstract: '',
-            ),
-        },
+        content: HighlightContentSummary(
+          startAt: startAt,
+          period: period,
+          summary: '',
+          abstract: '',
+        ),
       );
 
   const Highlight._();

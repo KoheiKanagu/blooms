@@ -5,7 +5,6 @@ import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +41,6 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
 Future<void> highlightCreate(
   Ref ref, {
   required HighlightPeriod period,
-  required HighlightStyle style,
 }) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
 
@@ -50,9 +48,8 @@ Future<void> highlightCreate(
     throw Exception('uid is null');
   }
 
-  final data = Highlight.create(
+  final data = Highlight.summary(
     period: period,
-    style: style,
     subjectUid: uid,
     startAt: Timestamp.fromDate(clock.now()),
   );

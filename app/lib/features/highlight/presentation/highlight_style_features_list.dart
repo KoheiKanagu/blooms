@@ -1,14 +1,11 @@
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gap/gap.dart';
 
 class HighlightStyleFeaturesList extends StatelessWidget {
   const HighlightStyleFeaturesList({
-    required this.style,
     super.key,
   });
-
-  final HighlightStyle style;
 
   @override
   Widget build(BuildContext context) {
@@ -31,44 +28,36 @@ class HighlightStyleFeaturesList extends StatelessWidget {
             ),
           ),
         ),
-        switch (style) {
-          HighlightStyle.private => const _PrivateFeatures(),
-        },
+        const Gap(8),
+        const _Features(),
       ],
     );
   }
 }
 
-class _PrivateFeatures extends StatelessWidget {
-  const _PrivateFeatures();
+class _Features extends StatelessWidget {
+  const _Features();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _SimpleText(
-          text: i18n.highlight.features.private.care,
+          text: i18n.highlight.features.summary.care,
           icon: const Icon(
             CupertinoIcons.heart_circle_fill,
             color: CupertinoColors.systemPink,
           ),
         ),
         _SimpleText(
-          text: i18n.highlight.features.private.trend,
+          text: i18n.highlight.features.summary.summary,
           icon: const Icon(
             CupertinoIcons.search_circle_fill,
             color: CupertinoColors.systemBlue,
           ),
         ),
         _SimpleText(
-          text: i18n.highlight.features.private.advice,
-          icon: const Icon(
-            CupertinoIcons.star_circle_fill,
-            color: CupertinoColors.systemOrange,
-          ),
-        ),
-        _SimpleText(
-          text: i18n.highlight.features.private.disclaimer,
+          text: i18n.highlight.features.summary.disclaimer,
           icon: const Icon(
             CupertinoIcons.xmark_circle_fill,
             color: CupertinoColors.systemRed,

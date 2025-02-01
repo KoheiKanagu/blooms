@@ -4,7 +4,6 @@ import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -135,9 +134,8 @@ Widget highlightPageListTile(BuildContext context) {
           .map(
             (period) => HighlightPageListTile(
               documentId: 'documentId',
-              highlight: Highlight.create(
+              highlight: Highlight.summary(
                 period: period,
-                style: HighlightStyle.private,
                 subjectUid: 'subjectUid',
                 startAt: Timestamp.now(),
               ),

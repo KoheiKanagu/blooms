@@ -83,7 +83,6 @@ class TranslationsHighlightJa {
 	String nDaysConditionSummary({required Object n}) => '${n}の記録を基にしてハイライトを作成します';
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
-	late final TranslationsHighlightStyleJa style = TranslationsHighlightStyleJa.internal(_root);
 	late final TranslationsHighlightFeaturesJa features = TranslationsHighlightFeaturesJa.internal(_root);
 }
 
@@ -165,17 +164,6 @@ class TranslationsHighlightCreateNewHighlightJa {
 
 	// Translations
 	String get title => '新しいハイライトを作成';
-	String get privateDescription1 => 'あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。';
-}
-
-// Path: highlight.style
-class TranslationsHighlightStyleJa {
-	TranslationsHighlightStyleJa.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get private => '自分用';
 }
 
 // Path: highlight.features
@@ -185,19 +173,18 @@ class TranslationsHighlightFeaturesJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get description => '作成される文章には次の特徴があります:';
-	late final TranslationsHighlightFeaturesPrivateJa private = TranslationsHighlightFeaturesPrivateJa.internal(_root);
+	String get description => '作成されるハイライトには次の特徴があります:';
+	late final TranslationsHighlightFeaturesSummaryJa summary = TranslationsHighlightFeaturesSummaryJa.internal(_root);
 }
 
-// Path: highlight.features.private
-class TranslationsHighlightFeaturesPrivateJa {
-	TranslationsHighlightFeaturesPrivateJa.internal(this._root);
+// Path: highlight.features.summary
+class TranslationsHighlightFeaturesSummaryJa {
+	TranslationsHighlightFeaturesSummaryJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 	String get care => 'あなたに寄り添って体調を気遣う文体の文章が作成されます';
-	String get trend => 'あなたの体調に関連する何らかの傾向が見つかる可能性があります';
-	String get advice => '明日に向けてのアドバイスが提供されます';
+	String get summary => '対象の期間における、あなたの体調についてまとめます';
 	String get disclaimer => '内容はあくまで参考であり、診断結果として活用はできません';
 }
