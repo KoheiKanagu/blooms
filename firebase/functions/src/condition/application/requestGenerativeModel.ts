@@ -16,9 +16,9 @@ function createParts(condition: Condition): Part[] {
 
     case 'textWithSearchKeywords':
       return [{
-        text: `前回の回答: ${condition.content.text}`,
+        text: `回答: ${condition.content.text}`,
       }, {
-        text: `前回の検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
+        text: `検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
       }];
 
     case 'image':

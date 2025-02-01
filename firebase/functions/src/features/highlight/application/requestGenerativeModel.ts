@@ -1,9 +1,58 @@
-import { Content, FileDataPart, TextPart } from '@google-cloud/vertexai';
+import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
+import { logger } from 'firebase-functions';
 import { Condition } from '../../../condition/domain/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
 import { HighlightContentPrivate, HighlightContentProfessional } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
+
+function createParts(condition: Condition): Part[] {
+  const date = condition.createdAtIso8601;
+
+  switch (condition.content.type) {
+    case 'text':
+      return [{
+        text: `${date}に入力したテキスト: ${condition.content.text}`,
+      }];
+
+    case 'textWithSearchKeywords':
+      return [{
+        text: `回答: ${condition.content.text}`,
+      }, {
+        text: `検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
+      }];
+
+    case 'image':
+      return [
+        {
+          text: `${date}にアップロードされた画像`,
+        },
+        ...condition.content.attachments.map<FileDataPart>(attachment => ({
+          fileData: {
+            fileUri: attachment.fileUri,
+            mimeType: attachment.mimeType,
+          },
+        })),
+      ];
+
+    case 'audio':
+      return [
+        {
+          text: `${date}にアップロードされた音声`,
+        },
+        ...condition.content.attachments.map<FileDataPart>(attachment => ({
+          fileData: {
+            fileUri: attachment.fileUri,
+            mimeType: attachment.mimeType,
+          },
+        })),
+      ];
+
+    case 'empty':
+      logger.warn('Empty content');
+      return [];
+  };
+}
 
 /**
  * 生成モデルにリクエストを送信
@@ -20,53 +69,13 @@ export async function requestGenerativeModel(
 ): Promise<HighlightContentPrivate | HighlightContentProfessional> {
   const generativeModel = setupGenerativeModel(content.style);
 
-  let requestContents: Content[] = conditions.map<Content | null>((condition) => {
-    const date = condition.createdAtIso8601;
-
-    let part: (TextPart | FileDataPart)[] = [];
-    switch (condition.content.type) {
-      case 'text':
-        part = [{
-          text: `${date}に入力したテキスト: ${condition.content.text}`,
-        }];
-        break;
-      case 'image':
-        part = [
-          {
-            text: `${date}にアップロードされた画像`,
-          },
-          ...condition.content.attachments.map<FileDataPart>(attachment => ({
-            fileData: {
-              fileUri: attachment.fileUri,
-              mimeType: attachment.mimeType,
-            },
-          })),
-        ];
-        break;
-      case 'audio':
-        part = [
-          {
-            text: `${date}にアップロードされた音声`,
-          },
-          ...condition.content.attachments.map<FileDataPart>(attachment => ({
-            fileData: {
-              fileUri: attachment.fileUri,
-              mimeType: attachment.mimeType,
-            },
-          })),
-        ];
-        break;
-
-      case 'empty':
-        return null;
-    };
-
-    return {
+  let requestContents: Content[] = conditions
+    .map<Content>(condition => ({
       role: condition.creatorType,
-      parts: part,
-    };
-  })
-    .filter(e => e !== null);
+      parts: createParts(condition),
+    }))
+    // 空だとエラーになるので除外
+    .filter(content => content.parts.length > 0);
 
   // 空だとエラーになる
   if (requestContents.length === 0) {
