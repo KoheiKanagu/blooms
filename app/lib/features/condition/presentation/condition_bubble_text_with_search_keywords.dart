@@ -1,7 +1,7 @@
 import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/condition/domain/condition_content.dart';
-import 'package:blooms/gen/assets.gen.dart';
-import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/features/condition/domain/condition_creator_type.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_blooms_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,33 +9,21 @@ import 'package:url_launcher/url_launcher.dart';
 class ConditionBubbleTextWithSearchKeywords extends StatelessWidget {
   const ConditionBubbleTextWithSearchKeywords(
     this.content, {
+    required this.creatorType,
     super.key,
   });
 
   final ConditionContentTextWithSearchKeywords content;
+
+  final ConditionCreatorType creatorType;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Assets.blooms.image(
-              width: 20,
-              height: 20,
-            ),
-            const Gap(4),
-            Text(
-              i18n.blooms,
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 12,
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                  ),
-            ),
-          ],
-        ),
-        const Gap(4),
+        if (creatorType == ConditionCreatorType.model)
+          const ConditionBubbleBloomsIcon(),
         Text(
           content.text,
           style: CupertinoTheme.of(context).textTheme.textStyle,

@@ -144,16 +144,23 @@ class ConditionBubble extends HookConsumerWidget {
                   },
                 ),
                 child: switch (content) {
-                  ConditionContentText() =>
-                    ConditionBubbleText(content as ConditionContentText),
+                  ConditionContentText() => ConditionBubbleText(
+                      content as ConditionContentText,
+                      creatorType: creatorType,
+                    ),
                   ConditionContentTextWithSearchKeywords() =>
                     ConditionBubbleTextWithSearchKeywords(
                       content as ConditionContentTextWithSearchKeywords,
+                      creatorType: creatorType,
                     ),
-                  ConditionContentImage() =>
-                    ConditionBubbleImage(content as ConditionContentImage),
-                  ConditionContentAudio() =>
-                    ConditionBubbleAudio(content as ConditionContentAudio),
+                  ConditionContentImage() => ConditionBubbleImage(
+                      content as ConditionContentImage,
+                      creatorType: creatorType,
+                    ),
+                  ConditionContentAudio() => ConditionBubbleAudio(
+                      content as ConditionContentAudio,
+                      creatorType: creatorType,
+                    ),
                   ConditionContentEmpty() =>
                     ConditionBubbleEmpty(content as ConditionContentEmpty),
                 },
