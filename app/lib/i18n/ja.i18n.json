@@ -10,16 +10,15 @@
     "pastDays": "過去${n}日間",
     "xToY": "${x} から ${y}",
     "state": {
-      "pending": "トレンド分析を待っています",
+      "pending": "ハイライトの作成を待っています",
       "pendingDescription": "もうすぐ開始されます。しばらくお待ちください",
-      "inProgress": "トレンド分析中です",
+      "inProgress": "ハイライトを作成中です",
       "inProgressDescription": "しばらくお待ちください",
-      "failure": "トレンド分析に失敗しました",
-      "failureDescription": "何らかのエラーが発生したため、トレンド分析できませんでした"
+      "failure": "ハイライトの作成に失敗しました",
+      "failureDescription": "何らかのエラーが発生したため、ハイライトを作成できませんでした"
     },
     "createNewHighlight": {
-      "title": "新しいハイライトを作成",
-      "privateDescription1": "あなた自身が体調を理解するために、対象の期間の記録を基にしてハイライトを作成します。"
+      "title": "新しいハイライトを作成"
     },
     "past1day": "当日",
     "past7days": "過去7日間",
@@ -31,15 +30,11 @@
     "nDaysConditionSummary": "${n}の記録を基にしてハイライトを作成します",
     "createHighlight": "ハイライトを作成する",
     "deleteHighlight": "ハイライトを削除する",
-    "style": {
-      "private": "自分用"
-    },
     "features": {
-      "description": "作成される文章には次の特徴があります:",
-      "private": {
+      "description": "作成されるハイライトには次の特徴があります:",
+      "summary": {
         "care": "あなたに寄り添って体調を気遣う文体の文章が作成されます",
-        "trend": "あなたの体調に関連する何らかの傾向が見つかる可能性があります",
-        "advice": "明日に向けてのアドバイスが提供されます",
+        "summary": "対象の期間における、あなたの体調についてまとめます",
         "disclaimer": "内容はあくまで参考であり、診断結果として活用はできません"
       }
     }

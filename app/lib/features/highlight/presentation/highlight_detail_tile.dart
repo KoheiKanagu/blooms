@@ -15,7 +15,7 @@ class HighlightDetailTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final promptFileUrl = switch (highlight.content) {
-      HighlightContentPrivate(:final promptFileUri) => promptFileUri,
+      HighlightContentSummary(:final promptFileUri) => promptFileUri,
       HighlightContentEmpty() => null,
     };
 

@@ -11,7 +11,7 @@ function createParts(condition: Condition): Part[] {
   switch (condition.content.type) {
     case 'text':
       return [{
-        text: `${date}に入力したテキスト: ${condition.content.text}`,
+        text: `${date} の記録: ${condition.content.text}`,
       }];
 
     case 'textWithSearchKeywords':
@@ -24,7 +24,7 @@ function createParts(condition: Condition): Part[] {
     case 'image':
       return [
         {
-          text: `${date}にアップロードされた画像`,
+          text: `${date} の記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -37,7 +37,7 @@ function createParts(condition: Condition): Part[] {
     case 'audio':
       return [
         {
-          text: `${date}にアップロードされた音声`,
+          text: `${date} の記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {

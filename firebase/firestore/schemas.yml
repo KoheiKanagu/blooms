@@ -103,35 +103,32 @@ paths:
                     nullable: true
                     oneOf:
                       - $ref: "#/components/schemas/HighlightContentEmpty"
-                      - $ref: "#/components/schemas/HighlightContentPrivate"
+                      - $ref: "#/components/schemas/HighlightContentSummary"
 
 components:
   schemas:
     HighlightContentEmpty:
       required:
-        - style
+        - type
       properties:
-        style:
-          description: ハイライトのスタイル
+        type:
+          description: ハイライトの種類
           type: string
           default: empty
 
-    HighlightContentPrivate:
+    HighlightContentSummary:
       required:
-        - style
+        - type
         - startAt
         - period
-        - subjectiveTrend
-        - objectiveTrend
-        - analysisResult
-        - advice
+        - summary
         - abstract
         - state
       properties:
-        style:
-          description: ハイライトのスタイル
+        type:
+          description: ハイライトの種類
           type: string
-          default: private
+          default: summary
         startAt:
           description: ハイライトを作成開始する日時。この日からN日前のハイライト Timestamp
           type: object
@@ -145,17 +142,8 @@ components:
             - past14days
             - past21days
             - past28days
-        subjectiveTrend:
-          description: 主観的なデータのトレンド
-          type: string
-        objectiveTrend:
-          description: 客観的なデータのトレンド
-          type: string
-        analysisResult:
-          description: 分析結果
-          type: string
-        advice:
-          description: アドバイス
+        summary:
+          description: コンディションの要約
           type: string
         abstract:
           description: 分析結果の要旨

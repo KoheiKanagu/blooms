@@ -2,24 +2,21 @@ import { FieldValue, FirestoreDataConverter, Timestamp } from 'firebase-admin/fi
 import { logger } from 'firebase-functions';
 
 export type HighlightPeriod = 'past1day' | 'past7days' | 'past14days' | 'past21days' | 'past28days';
-export type HighlightStyle = 'private' | 'empty';
+export type HighlightType = 'summary' | 'empty';
 export type HighlightState = 'pending' | 'inProgress' | 'success' | 'failure';
 
-export interface HighlightContentPrivate {
-  style: 'private';
+export interface HighlightContentSummary {
+  type: 'summary';
   startAt: Timestamp;
   period: HighlightPeriod;
-  subjectiveTrend: string;
-  objectiveTrend: string;
-  analysisResult: string;
-  advice: string;
+  summary: string;
   abstract: string;
   state: HighlightState;
   promptFileUri: string | null;
 }
 
 export interface HighlightContentEmpty {
-  style: 'empty';
+  type: 'empty';
 }
 
 export class Highlight {
@@ -28,7 +25,7 @@ export class Highlight {
     readonly updatedAt: Timestamp | FieldValue,
     readonly deletedAt: Timestamp | null,
     readonly subjectUid: string,
-    readonly content: HighlightContentPrivate | HighlightContentEmpty,
+    readonly content: HighlightContentSummary | HighlightContentEmpty,
   ) { }
 }
 
@@ -49,33 +46,30 @@ export const highlightConverter: FirestoreDataConverter<Highlight> = {
   ),
 };
 
-function highlightContentConverter(value: Record<string, unknown>): HighlightContentPrivate | HighlightContentEmpty {
+function highlightContentConverter(value: Record<string, unknown>): HighlightContentSummary | HighlightContentEmpty {
   if (value == null) {
     return {
-      style: 'empty',
+      type: 'empty',
     };
   }
 
-  const style = value['style'] as HighlightStyle | null;
+  const type = value['type'] as HighlightType | null;
 
-  switch (style) {
-    case 'private':
+  switch (type) {
+    case 'summary':
       return {
-        style: style,
+        type: type,
         startAt: value['startAt'] as Timestamp,
         period: value['period'] as HighlightPeriod,
-        subjectiveTrend: value['subjectiveTrend'] as string,
-        objectiveTrend: value['objectiveTrend'] as string,
-        analysisResult: value['analysisResult'] as string,
-        advice: value['advice'] as string,
+        summary: value['summary'] as string,
         abstract: value['abstract'] as string,
         state: value['state'] as HighlightState,
         promptFileUri: value['promptFileUri'] as string | null,
       };
     default:
-      logger.error(`Invalid style: ${style}`);
+      logger.error(`Invalid type: ${type}`);
       return {
-        style: 'empty',
+        type: 'empty',
       };
   }
 }

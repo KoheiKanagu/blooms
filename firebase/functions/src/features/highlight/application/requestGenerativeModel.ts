@@ -2,7 +2,7 @@ import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { logger } from 'firebase-functions';
 import { Condition } from '../../../condition/domain/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { HighlightContentPrivate } from '../domain/highlight';
+import { HighlightContentSummary } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -12,7 +12,7 @@ function createParts(condition: Condition): Part[] {
   switch (condition.content.type) {
     case 'text':
       return [{
-        text: `${date}に入力したテキスト: ${condition.content.text}`,
+        text: `${date} の記録: ${condition.content.text}`,
       }];
 
     case 'textWithSearchKeywords':
@@ -25,7 +25,7 @@ function createParts(condition: Condition): Part[] {
     case 'image':
       return [
         {
-          text: `${date}にアップロードされた画像`,
+          text: `${date} の記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -38,7 +38,7 @@ function createParts(condition: Condition): Part[] {
     case 'audio':
       return [
         {
-          text: `${date}にアップロードされた音声`,
+          text: `${date} の記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -65,9 +65,9 @@ function createParts(condition: Condition): Part[] {
 export async function requestGenerativeModel(
   uid: string,
   conditions: Condition[],
-  content: HighlightContentPrivate,
-): Promise<HighlightContentPrivate> {
-  const generativeModel = setupGenerativeModel(content.style);
+  content: HighlightContentSummary,
+): Promise<HighlightContentSummary> {
+  const generativeModel = setupGenerativeModel(content.type);
 
   let requestContents: Content[] = conditions
     .map<Content>(condition => ({
@@ -102,7 +102,7 @@ export async function requestGenerativeModel(
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
   const gsFileUri = await savePrompt(uid, requestContents);
 
-  const newContent: HighlightContentPrivate = {
+  const newContent: HighlightContentSummary = {
     ...content,
     promptFileUri: gsFileUri,
     state: 'success',

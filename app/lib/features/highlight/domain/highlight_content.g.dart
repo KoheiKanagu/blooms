@@ -8,51 +8,42 @@ part of 'highlight_content.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HighlightContentPrivateImpl _$$HighlightContentPrivateImplFromJson(
+_$HighlightContentSummaryImpl _$$HighlightContentSummaryImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$HighlightContentPrivateImpl',
+      r'_$HighlightContentSummaryImpl',
       json,
       ($checkedConvert) {
-        final val = _$HighlightContentPrivateImpl(
+        final val = _$HighlightContentSummaryImpl(
           startAt: $checkedConvert(
               'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
           period: $checkedConvert(
               'period', (v) => $enumDecode(_$HighlightPeriodEnumMap, v)),
-          subjectiveTrend:
-              $checkedConvert('subjectiveTrend', (v) => v as String? ?? ''),
-          objectiveTrend:
-              $checkedConvert('objectiveTrend', (v) => v as String? ?? ''),
-          analysisResult:
-              $checkedConvert('analysisResult', (v) => v as String? ?? ''),
-          advice: $checkedConvert('advice', (v) => v as String? ?? ''),
-          abstract: $checkedConvert('abstract', (v) => v as String? ?? ''),
+          summary: $checkedConvert('summary', (v) => v as String),
+          abstract: $checkedConvert('abstract', (v) => v as String),
           state: $checkedConvert(
               'state',
               (v) =>
                   $enumDecodeNullable(_$HighlightStateEnumMap, v) ??
                   HighlightState.pending),
           promptFileUri: $checkedConvert('promptFileUri', (v) => v as String?),
-          $type: $checkedConvert('style', (v) => v as String?),
+          $type: $checkedConvert('type', (v) => v as String?),
         );
         return val;
       },
-      fieldKeyMap: const {r'$type': 'style'},
+      fieldKeyMap: const {r'$type': 'type'},
     );
 
-Map<String, dynamic> _$$HighlightContentPrivateImplToJson(
-        _$HighlightContentPrivateImpl instance) =>
+Map<String, dynamic> _$$HighlightContentSummaryImplToJson(
+        _$HighlightContentSummaryImpl instance) =>
     <String, dynamic>{
       'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
       'period': _$HighlightPeriodEnumMap[instance.period]!,
-      'subjectiveTrend': instance.subjectiveTrend,
-      'objectiveTrend': instance.objectiveTrend,
-      'analysisResult': instance.analysisResult,
-      'advice': instance.advice,
+      'summary': instance.summary,
       'abstract': instance.abstract,
       'state': _$HighlightStateEnumMap[instance.state]!,
       'promptFileUri': instance.promptFileUri,
-      'style': instance.$type,
+      'type': instance.$type,
     };
 
 const _$HighlightPeriodEnumMap = {
@@ -77,15 +68,15 @@ _$HighlightContentEmptyImpl _$$HighlightContentEmptyImplFromJson(
       json,
       ($checkedConvert) {
         final val = _$HighlightContentEmptyImpl(
-          $type: $checkedConvert('style', (v) => v as String?),
+          $type: $checkedConvert('type', (v) => v as String?),
         );
         return val;
       },
-      fieldKeyMap: const {r'$type': 'style'},
+      fieldKeyMap: const {r'$type': 'type'},
     );
 
 Map<String, dynamic> _$$HighlightContentEmptyImplToJson(
         _$HighlightContentEmptyImpl instance) =>
     <String, dynamic>{
-      'style': instance.$type,
+      'type': instance.$type,
     };

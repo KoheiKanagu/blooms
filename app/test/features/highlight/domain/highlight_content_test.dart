@@ -8,17 +8,14 @@ void main() {
   group(
     'fromJson',
     () {
-      test('private', () {
+      test('summary', () {
         final now = Timestamp.now();
 
         final json = {
-          'style': 'private',
+          'type': 'summary',
           'startAt': now,
           'period': 'past21days',
-          'subjectiveTrend': 'subjectiveTrend',
-          'objectiveTrend': 'objectiveTrend',
-          'analysisResult': 'analysisResult',
-          'advice': 'advice',
+          'summary': 'summary',
           'abstract': 'abstract',
           'state': 'inProgress',
           'promptFileUri': 'promptFileUri',
@@ -28,13 +25,10 @@ void main() {
 
         expect(
           expected,
-          HighlightContent.private(
+          HighlightContent.summary(
             startAt: now,
             period: HighlightPeriod.past21days,
-            subjectiveTrend: 'subjectiveTrend',
-            objectiveTrend: 'objectiveTrend',
-            analysisResult: 'analysisResult',
-            advice: 'advice',
+            summary: 'summary',
             abstract: 'abstract',
             state: HighlightState.inProgress,
             promptFileUri: 'promptFileUri',

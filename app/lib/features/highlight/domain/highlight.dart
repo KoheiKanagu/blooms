@@ -1,7 +1,6 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -24,20 +23,19 @@ class Highlight with _$Highlight {
     @TimestampConverter() Timestamp? deletedAt,
   }) = _Highlight;
 
-  factory Highlight.create({
+  factory Highlight.summary({
     required HighlightPeriod period,
-    required HighlightStyle style,
     required String subjectUid,
     required Timestamp startAt,
   }) =>
       Highlight(
         subjectUid: subjectUid,
-        content: switch (style) {
-          HighlightStyle.private => HighlightContentPrivate(
-              startAt: startAt,
-              period: period,
-            ),
-        },
+        content: HighlightContentSummary(
+          startAt: startAt,
+          period: period,
+          summary: '',
+          abstract: '',
+        ),
       );
 
   const Highlight._();
@@ -52,7 +50,7 @@ class Highlight with _$Highlight {
 
   HighlightRange get highlightRange {
     final (startAt, period) = switch (content) {
-      HighlightContentPrivate(:final startAt, :final period) => (
+      HighlightContentSummary(:final startAt, :final period) => (
           startAt,
           period
         ),
@@ -76,14 +74,14 @@ class Highlight with _$Highlight {
 
   HighlightPeriod? get period {
     return switch (content) {
-      HighlightContentPrivate(:final period) => period,
+      HighlightContentSummary(:final period) => period,
       HighlightContentEmpty() => null,
     };
   }
 
   HighlightState? get state {
     return switch (content) {
-      HighlightContentPrivate(:final state) => state,
+      HighlightContentSummary(:final state) => state,
       HighlightContentEmpty() => null,
     };
   }

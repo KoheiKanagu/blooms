@@ -4,7 +4,6 @@ import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
 import 'package:blooms/features/highlight/presentation/highlight_detail_page.dart';
 import 'package:blooms/features/highlight/presentation/highlight_tile.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -59,7 +58,7 @@ class HighlightPageListTile extends HookConsumerWidget {
                 y: highlight.highlightRange.endDate,
               ),
         contentText: switch (highlight.content) {
-          HighlightContentPrivate(:final abstract) => abstract,
+          HighlightContentSummary(:final abstract) => abstract,
           HighlightContentEmpty() => i18n.unknownContent,
         },
         onTap: () async {
@@ -135,9 +134,8 @@ Widget highlightPageListTile(BuildContext context) {
           .map(
             (period) => HighlightPageListTile(
               documentId: 'documentId',
-              highlight: Highlight.create(
+              highlight: Highlight.summary(
                 period: period,
-                style: HighlightStyle.private,
                 subjectUid: 'subjectUid',
                 startAt: Timestamp.now(),
               ),
@@ -161,10 +159,12 @@ Widget highlightPageListTileInProgress(BuildContext context) {
               documentId: 'documentId',
               highlight: Highlight(
                 subjectUid: 'subjectUid',
-                content: HighlightContent.private(
+                content: HighlightContent.summary(
                   startAt: Timestamp.now(),
                   period: period,
                   state: HighlightState.inProgress,
+                  summary: 'summary',
+                  abstract: 'abstract',
                 ),
               ),
             ),
@@ -187,14 +187,11 @@ Widget highlightPageListTileSuccess(BuildContext context) {
               documentId: 'documentId',
               highlight: Highlight(
                 subjectUid: 'subjectUid',
-                content: HighlightContent.private(
+                content: HighlightContent.summary(
                   period: period,
                   startAt: Timestamp.now(),
                   state: HighlightState.success,
-                  subjectiveTrend: 'subjectiveTrend',
-                  objectiveTrend: 'objectiveTrend',
-                  analysisResult: 'analysisResult',
-                  advice: 'advice',
+                  summary: 'summary',
                   abstract: 'abstract',
                 ),
               ),
@@ -218,10 +215,12 @@ Widget highlightPageListTileFailure(BuildContext context) {
               documentId: 'documentId',
               highlight: Highlight(
                 subjectUid: 'subjectUid',
-                content: HighlightContent.private(
+                content: HighlightContent.summary(
                   period: type,
                   startAt: Timestamp.now(),
                   state: HighlightState.failure,
+                  summary: 'summary',
+                  abstract: 'abstract',
                 ),
               ),
             ),

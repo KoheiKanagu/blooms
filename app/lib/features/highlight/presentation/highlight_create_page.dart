@@ -1,7 +1,5 @@
 import 'package:blooms/features/highlight/application/highlight_providers.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
-import 'package:blooms/features/highlight/domain/highlight_style.dart';
-import 'package:blooms/features/highlight/presentation/highlight_create_page_header.dart';
 import 'package:blooms/features/highlight/presentation/highlight_create_page_tile.dart';
 import 'package:blooms/features/highlight/presentation/highlight_style_features_list.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -21,13 +19,7 @@ class HighlightCreatePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedType = useState({
-      HighlightStyle.private: HighlightPeriod.past7days,
-    });
-
-    final selectedStyle = useState<HighlightStyle>(
-      HighlightStyle.private,
-    );
+    final selectedPeriod = useState(HighlightPeriod.past7days);
 
     return Scaffold(
       body: CupertinoPageScaffold(
@@ -48,30 +40,19 @@ class HighlightCreatePage extends HookConsumerWidget {
         child: ListView(
           children: [
             const Gap(16),
-            HighlightCreatePageHeader(
-              style: selectedStyle.value,
-            ),
-            const Gap(16),
-            HighlightStyleFeaturesList(
-              style: selectedStyle.value,
-            ),
+            const HighlightStyleFeaturesList(),
             const Gap(24),
             _CreateTiles(
-              selectedType: selectedType.value[selectedStyle.value]!,
-              selectedStyle: selectedStyle.value,
+              selectedPeriod: selectedPeriod.value,
               onTap: (value) {
-                selectedType.value = {
-                  ...selectedType.value,
-                  selectedStyle.value: value,
-                };
+                selectedPeriod.value = value;
               },
             ),
           ],
         ),
       ),
       bottomNavigationBar: _BottomNavigationBar(
-        period: selectedType.value[selectedStyle.value]!,
-        style: selectedStyle.value,
+        period: selectedPeriod.value,
       ),
     );
   }
@@ -79,33 +60,28 @@ class HighlightCreatePage extends HookConsumerWidget {
 
 class _CreateTiles extends StatelessWidget {
   const _CreateTiles({
-    required this.selectedType,
-    required this.selectedStyle,
+    required this.selectedPeriod,
     required this.onTap,
   });
 
-  final HighlightStyle selectedStyle;
-
-  final HighlightPeriod selectedType;
+  final HighlightPeriod selectedPeriod;
 
   final ValueChanged<HighlightPeriod> onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: switch (selectedStyle) {
-        HighlightStyle.private => HighlightPeriod.values
-            .map(
-              (e) => HighlightCreatePageTile(
-                period: e,
-                selected: selectedType == e,
-                onTap: () {
-                  onTap(e);
-                },
-              ),
-            )
-            .toList(),
-      },
+      children: HighlightPeriod.values
+          .map(
+            (e) => HighlightCreatePageTile(
+              period: e,
+              selected: selectedPeriod == e,
+              onTap: () {
+                onTap(e);
+              },
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -113,12 +89,9 @@ class _CreateTiles extends StatelessWidget {
 class _BottomNavigationBar extends HookConsumerWidget {
   const _BottomNavigationBar({
     required this.period,
-    required this.style,
   });
 
   final HighlightPeriod period;
-
-  final HighlightStyle style;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -133,7 +106,6 @@ class _BottomNavigationBar extends HookConsumerWidget {
             await ref.read(
               highlightCreateProvider(
                 period: period,
-                style: style,
               ).future,
             );
 
