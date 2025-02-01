@@ -180,6 +180,7 @@ tz.TZDateTime nextInstance(TimeOfDay time) {
     time.hour,
     time.minute,
   );
+  print("scheduledDate: $scheduledDate");
 
   if (scheduledDate.isBefore(now)) {
     scheduledDate = scheduledDate.add(

@@ -2,6 +2,7 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   group('nextInstance', () {
@@ -14,11 +15,16 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 9), // 9:00
+          tz.TZDateTime.from(
+            DateTime(2025, 12, 31, 9), // 9:00
+            tz.getLocation('Asia/Tokyo'),
+          ),
         );
+        print('now: $now');
 
         withClock(now, () {
           final actual = nextInstance(time);
+          print('actual: $actual');
 
           expect(actual.year, 2025);
           expect(actual.month, 12);
