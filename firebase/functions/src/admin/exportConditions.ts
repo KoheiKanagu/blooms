@@ -27,7 +27,7 @@ async function main(): Promise<void> {
     .map(e => e.data())
     .map((e) => {
       if (e.content.type === 'text') {
-        return `${e.createdAtIso8601!}に入力したテキスト: ${e.content.text}`;
+        return `${e.createdAtIso8601!} の記録: ${e.content.text}`;
       }
       return null;
     })
