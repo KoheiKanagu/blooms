@@ -22,7 +22,6 @@ class HighlightDetailTile extends HookConsumerWidget {
     return CupertinoListSection.insetGrouped(
       children: [
         CupertinoListTile(
-          // TODO: content
           title: Text(
             highlight.content.toString(),
             maxLines: 100,
