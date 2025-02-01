@@ -19,7 +19,9 @@ import 'package:blooms/features/highlight/presentation/highlight_type_label.dart
     as _i5;
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart'
     as _i6;
-import 'package:blooms/features/startup/presentation/startup_page.dart' as _i7;
+import 'package:blooms/features/reminder/presentation/reminder_page.dart'
+    as _i7;
+import 'package:blooms/features/startup/presentation/startup_page.dart' as _i8;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -96,6 +98,29 @@ final directories = <_i1.WidgetbookNode>[
         ],
       ),
       _i1.WidgetbookFolder(
+        name: 'reminder',
+        children: [
+          _i1.WidgetbookFolder(
+            name: 'presentation',
+            children: [
+              _i1.WidgetbookComponent(
+                name: 'ReminderPage',
+                useCases: [
+                  _i1.WidgetbookUseCase(
+                    name: 'condition',
+                    builder: _i7.reminderPageCondition,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'highlight',
+                    builder: _i7.reminderPageHighlight,
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
+      ),
+      _i1.WidgetbookFolder(
         name: 'startup',
         children: [
           _i1.WidgetbookFolder(
@@ -105,14 +130,14 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'AppStartupErrorWidget',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'AppStartupErrorWidget',
-                  builder: _i7.startupPageError,
+                  builder: _i8.startupPageError,
                 ),
               ),
               _i1.WidgetbookLeafComponent(
                 name: 'AppStartupLoadingWidget',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'AppStartupLoadingWidget',
-                  builder: _i7.startupPage,
+                  builder: _i8.startupPage,
                 ),
               ),
             ],

@@ -30,7 +30,9 @@ class ConditionPage extends HookConsumerWidget {
                 onTap: () {
                   showModalBottomSheet<void>(
                     context: context,
-                    builder: (context) => const ReminderPage(),
+                    builder: (context) => const ReminderPage(
+                      type: ReminderType.condition,
+                    ),
                     routeSettings: const RouteSettings(
                       name: ReminderPage.path,
                     ),

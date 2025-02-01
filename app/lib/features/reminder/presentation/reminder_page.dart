@@ -5,14 +5,25 @@ import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+
+enum ReminderType {
+  condition,
+  highlight,
+  ;
+}
 
 class ReminderPage extends HookConsumerWidget {
   const ReminderPage({
+    required this.type,
     super.key,
   });
 
   static const path = '/reminder';
+
+  final ReminderType type;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,10 +31,10 @@ class ReminderPage extends HookConsumerWidget {
     final selectedTime = useState<TimeOfDay>(kReminderDefaultTime);
 
     ref
-      ..listen(reminderStatusProvider, (_, next) {
+      ..listen(reminderStatusProvider(type), (_, next) {
         reminderSwitch.value = next.value ?? false;
       })
-      ..listen(reminderTimeProvider, (_, next) {
+      ..listen(reminderTimeProvider(type), (_, next) {
         selectedTime.value = next.value ?? kReminderDefaultTime;
       });
 
@@ -47,6 +58,7 @@ class ReminderPage extends HookConsumerWidget {
           onPressed: () async {
             ref.read(
               reminderSaveProvider(
+                type: type,
                 time: selectedTime.value,
                 enable: reminderSwitch.value,
               ),
@@ -66,7 +78,10 @@ class ReminderPage extends HookConsumerWidget {
                 horizontal: 28,
               ),
               child: Text(
-                i18n.reminder.setReminder,
+                switch (type) {
+                  ReminderType.condition => i18n.reminder.setConditionReminder,
+                  ReminderType.highlight => i18n.reminder.setHighlightReminder,
+                },
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                       color:
                           CupertinoColors.secondaryLabel.resolveFrom(context),
@@ -77,13 +92,26 @@ class ReminderPage extends HookConsumerWidget {
             children: [
               CupertinoListTile.notched(
                 title: FittedBox(
-                  child: ref.watch(reminderTimeProvider).maybeWhen(
+                  child: ref.watch(reminderTimeProvider(type)).maybeWhen(
                         orElse: CupertinoActivityIndicator.new,
-                        data: (time) => CupertinoTimePickerButton(
-                          initialTime: time,
-                          onTimeChanged: (value) {
-                            selectedTime.value = value;
-                          },
+                        data: (time) => Row(
+                          children: [
+                            Visibility(
+                              visible: type == ReminderType.highlight,
+                              child: Row(
+                                children: [
+                                  Text(i18n.reminder.saturday),
+                                  const Gap(8),
+                                ],
+                              ),
+                            ),
+                            CupertinoTimePickerButton(
+                              initialTime: time,
+                              onTimeChanged: (value) {
+                                selectedTime.value = value;
+                              },
+                            ),
+                          ],
                         ),
                       ),
                 ),
@@ -100,4 +128,28 @@ class ReminderPage extends HookConsumerWidget {
       ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'condition',
+  type: ReminderPage,
+)
+Widget reminderPageCondition(BuildContext context) {
+  return const CupertinoPageScaffold(
+    child: ReminderPage(
+      type: ReminderType.condition,
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'highlight',
+  type: ReminderPage,
+)
+Widget reminderPageHighlight(BuildContext context) {
+  return const CupertinoPageScaffold(
+    child: ReminderPage(
+      type: ReminderType.highlight,
+    ),
+  );
 }
