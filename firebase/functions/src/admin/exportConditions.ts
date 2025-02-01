@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 import { logger } from 'firebase-functions';
-import { conditionConverter } from '../condition/domain/condition';
+import { conditionConverter } from '../features/condition/domain/condition';
 import { CollectionPath } from '../utils/collectionPath';
 import { adminInitializeAppStg } from './adminInitializeApp';
 

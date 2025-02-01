@@ -1,7 +1,7 @@
 import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { logger } from 'firebase-functions';
-import { Condition } from '../../../condition/domain/condition';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
+import { Condition } from '../../condition/domain/condition';
 import { HighlightContentSummary } from '../domain/highlight';
 import { savePrompt } from './savePrompt';
 import { setupGenerativeModel } from './setupGenerativeModel';

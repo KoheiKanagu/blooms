@@ -1,9 +1,9 @@
 import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { outSensitiveLog } from '../../utils/sensitive_log';
 import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
+import { outSensitiveLog } from '../../../utils/sensitive_log';
 
 function createParts(condition: Condition): Part[] {
   const date = condition.createdAtIso8601;

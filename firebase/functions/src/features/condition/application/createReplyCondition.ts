@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { CollectionPath } from '../../utils/collectionPath';
-import { outSensitiveLog } from '../../utils/sensitive_log';
+import { CollectionPath } from '../../../utils/collectionPath';
+import { outSensitiveLog } from '../../../utils/sensitive_log';
 import { Condition, conditionConverter, CreatorType } from '../domain/condition';
 import { requestGenerativeModel } from './requestGenerativeModel';
 
