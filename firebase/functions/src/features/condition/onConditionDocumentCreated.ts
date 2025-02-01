@@ -1,8 +1,8 @@
 import { logger } from 'firebase-functions';
 import { onDocumentCreated } from 'firebase-functions/firestore';
-import { CollectionPath } from '../utils/collectionPath';
 import { createReplyCondition } from './application/createReplyCondition';
 import { conditionConverter } from './domain/condition';
+import { CollectionPath } from '../../utils/collectionPath';
 
 /**
  * Conditionドキュメントが作成されたとき、リプライする
