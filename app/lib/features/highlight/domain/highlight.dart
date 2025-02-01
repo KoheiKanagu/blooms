@@ -33,9 +33,11 @@ class Highlight with _$Highlight {
       Highlight(
         subjectUid: subjectUid,
         content: switch (style) {
-          HighlightStyle.private => HighlightContentPrivate(
+          HighlightStyle.private => HighlightContentSummary(
               startAt: startAt,
               period: period,
+              summary: '',
+              abstract: '',
             ),
         },
       );
@@ -52,7 +54,7 @@ class Highlight with _$Highlight {
 
   HighlightRange get highlightRange {
     final (startAt, period) = switch (content) {
-      HighlightContentPrivate(:final startAt, :final period) => (
+      HighlightContentSummary(:final startAt, :final period) => (
           startAt,
           period
         ),
@@ -76,14 +78,14 @@ class Highlight with _$Highlight {
 
   HighlightPeriod? get period {
     return switch (content) {
-      HighlightContentPrivate(:final period) => period,
+      HighlightContentSummary(:final period) => period,
       HighlightContentEmpty() => null,
     };
   }
 
   HighlightState? get state {
     return switch (content) {
-      HighlightContentPrivate(:final state) => state,
+      HighlightContentSummary(:final state) => state,
       HighlightContentEmpty() => null,
     };
   }

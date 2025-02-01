@@ -9,39 +9,30 @@ part 'highlight_content.freezed.dart';
 part 'highlight_content.g.dart';
 
 @Freezed(
-  unionKey: 'style',
+  unionKey: 'type',
   unionValueCase: FreezedUnionCase.none,
   fallbackUnion: 'empty',
 )
 sealed class HighlightContent with _$HighlightContent {
-  const factory HighlightContent.private({
+  const factory HighlightContent.summary({
     /// ハイライトを作成開始する日時。この日からN日前のハイライト
     @TimestampConverterNotNull() required Timestamp startAt,
 
     /// ハイライトの対象期間
     required HighlightPeriod period,
 
-    /// 主観的なデータのトレンド
-    @Default('') String subjectiveTrend,
-
-    /// 客観的なデータのトレンド
-    @Default('') String objectiveTrend,
-
-    /// 分析結果
-    @Default('') String analysisResult,
-
-    /// アドバイス
-    @Default('') String advice,
+    /// コンディションの要約
+    required String summary,
 
     /// 分析結果の要旨
-    @Default('') String abstract,
+    required String abstract,
 
     /// 生成モデルでの処理の状態
     @Default(HighlightState.pending) HighlightState state,
 
     /// 生成モデルによるハイライトの生成プロンプトのファイルパス
     String? promptFileUri,
-  }) = HighlightContentPrivate;
+  }) = HighlightContentSummary;
 
   const factory HighlightContent.empty() = HighlightContentEmpty;
 
