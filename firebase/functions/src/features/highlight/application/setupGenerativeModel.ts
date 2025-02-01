@@ -21,16 +21,16 @@ const safetySettings: SafetySetting[] = [
   },
 ];
 
-function buildPrompt(highlightStyle: HighlightType): {
+function buildPrompt(highlightType: HighlightType): {
   responseSchema: ResponseSchema;
   systemInstruction: string;
   temperature: number;
 } {
-  if (highlightStyle === 'empty') {
-    throw new Error('Highlight style is empty');
+  if (highlightType === 'empty') {
+    throw new Error('Highlight type is empty');
   }
 
-  switch (highlightStyle) {
+  switch (highlightType) {
     case 'summary':
       return {
         responseSchema: {
@@ -81,13 +81,13 @@ function buildPrompt(highlightStyle: HighlightType): {
   }
 }
 
-export function setupGenerativeModel(highlightStyle: HighlightType): GenerativeModelPreview {
+export function setupGenerativeModel(highlightType: HighlightType): GenerativeModelPreview {
   const vertexAI = new VertexAI({
     project: projectID.value(),
     location: 'us-central1',
   });
 
-  const { responseSchema, systemInstruction, temperature } = buildPrompt(highlightStyle);
+  const { responseSchema, systemInstruction, temperature } = buildPrompt(highlightType);
 
   return vertexAI
     .preview

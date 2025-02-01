@@ -109,16 +109,16 @@ components:
   schemas:
     HighlightContentEmpty:
       required:
-        - style
+        - type
       properties:
-        style:
-          description: ハイライトのスタイル
+        type:
+          description: ハイライトの種類
           type: string
           default: empty
 
     HighlightContentSummary:
       required:
-        - style
+        - type
         - startAt
         - period
         - summary

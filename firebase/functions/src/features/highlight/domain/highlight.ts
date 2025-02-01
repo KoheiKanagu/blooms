@@ -6,7 +6,7 @@ export type HighlightType = 'summary' | 'empty';
 export type HighlightState = 'pending' | 'inProgress' | 'success' | 'failure';
 
 export interface HighlightContentSummary {
-  style: 'summary';
+  type: 'summary';
   startAt: Timestamp;
   period: HighlightPeriod;
   summary: string;
@@ -16,7 +16,7 @@ export interface HighlightContentSummary {
 }
 
 export interface HighlightContentEmpty {
-  style: 'empty';
+  type: 'empty';
 }
 
 export class Highlight {
@@ -49,16 +49,16 @@ export const highlightConverter: FirestoreDataConverter<Highlight> = {
 function highlightContentConverter(value: Record<string, unknown>): HighlightContentSummary | HighlightContentEmpty {
   if (value == null) {
     return {
-      style: 'empty',
+      type: 'empty',
     };
   }
 
-  const style = value['style'] as HighlightType | null;
+  const type = value['type'] as HighlightType | null;
 
-  switch (style) {
+  switch (type) {
     case 'summary':
       return {
-        style: style,
+        type: type,
         startAt: value['startAt'] as Timestamp,
         period: value['period'] as HighlightPeriod,
         summary: value['summary'] as string,
@@ -67,9 +67,9 @@ function highlightContentConverter(value: Record<string, unknown>): HighlightCon
         promptFileUri: value['promptFileUri'] as string | null,
       };
     default:
-      logger.error(`Invalid style: ${style}`);
+      logger.error(`Invalid type: ${type}`);
       return {
-        style: 'empty',
+        type: 'empty',
       };
   }
 }

@@ -67,7 +67,7 @@ export async function requestGenerativeModel(
   conditions: Condition[],
   content: HighlightContentSummary,
 ): Promise<HighlightContentSummary> {
-  const generativeModel = setupGenerativeModel(content.style);
+  const generativeModel = setupGenerativeModel(content.type);
 
   let requestContents: Content[] = conditions
     .map<Content>(condition => ({

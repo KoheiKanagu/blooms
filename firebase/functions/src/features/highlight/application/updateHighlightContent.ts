@@ -85,8 +85,8 @@ export async function updateHighlightContent(
  * @returns
  */
 function shouldSkipProcessing(highlight: Highlight): boolean {
-  if (highlight.content.style !== 'summary') {
-    logger.error(`Highlight style is invalid.`, { highlight });
+  if (highlight.content.type !== 'summary') {
+    logger.error(`Highlight type is invalid.`, { highlight });
     return true;
   }
 
