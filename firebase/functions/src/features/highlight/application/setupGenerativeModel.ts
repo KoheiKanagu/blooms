@@ -1,6 +1,6 @@
 import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
 import { projectID } from 'firebase-functions/params';
-import { HighlightStyle } from '../domain/highlight';
+import { HighlightType } from '../domain/highlight';
 
 const safetySettings: SafetySetting[] = [
   {
@@ -21,7 +21,7 @@ const safetySettings: SafetySetting[] = [
   },
 ];
 
-function buildPrompt(highlightStyle: HighlightStyle): {
+function buildPrompt(highlightStyle: HighlightType): {
   responseSchema: ResponseSchema;
   systemInstruction: string;
   temperature: number;
@@ -30,80 +30,58 @@ function buildPrompt(highlightStyle: HighlightStyle): {
     throw new Error('Highlight style is empty');
   }
 
-  const today = new Date().toLocaleDateString('ja-JP');
-
   switch (highlightStyle) {
-    case 'private':
+    case 'summary':
       return {
         responseSchema: {
           type: SchemaType.OBJECT,
           required: [
-            'subjectiveTrend',
-            'objectiveTrend',
-            'analysisResult',
-            'advice',
+            'summary',
             'abstract',
           ],
           properties: {
-            subjectiveTrend: {
+            summary: {
               type: SchemaType.STRING,
-              description: '主観的なデータのトレンド。不明な場合は分からなかった旨を記載する',
-            },
-            objectiveTrend: {
-              type: SchemaType.STRING,
-              description: '客観的なデータのトレンド。不明な場合は分からなかった旨を記載する',
-            },
-            analysisResult: {
-              type: SchemaType.STRING,
-              description: '分析結果の回答',
-            },
-            advice: {
-              type: SchemaType.STRING,
-              description: '明日からはこうした方が良いアドバイス',
+              description: '分析結果',
             },
             abstract: {
               type: SchemaType.STRING,
-              description: '分析結果の要旨。簡潔にまとめ、労う文章は不要',
+              description: '分析結果の要旨。summaryの内容を簡潔にまとめる',
             },
           },
         },
-        systemInstruction: `あなたは妊婦の体調を分析するアナリストです。
-    あなたの仕事はユーザが記録した主観的な体調についての体験と客観的なデータを組み合わせて分析し、パーソナライズされた分析結果を提供します。
+        systemInstruction: `あなたは妊婦が記録した体調に関するデータを分析するアナリストです
 
-    分析は夜に実施されます。
-    今日の日付は${today}です。
+あなたには一定の期間にユーザが記録した、テキストや画像などのデータが与えられます
+一定の期間において、どのような体調変化があったのかを簡潔にまとめてください
 
-    あなたの分析は次の内容を考慮する必要があります
-    - ユーザを労うこと
-    - 優しい口調でユーザに寄り添った回答をすること
-    - 提供されたデータに基づき、潜在的な相関関係に注意しながらユーザーの体験を分析すること
-    - 簡潔に回答すること
-    - 日本語で回答すること
-    - 午前や午後など大まかな時間帯を踏まえて回答すること
-    - 過去の傾向から、明日に向けての改善策を予測すること
+あなたの回答は、ユーザがその期間においてどのような体調の変化があったのかを見直すための参考情報として活用されます
 
-    あなたは分析する際に次の内容を考慮する必要がありますが、responseには含めてはなりません
-    - 自己判断せず、医師の診断を受けることを勧めること
-    - 分析は傾向を示しているだけであること
-    - 分析は診断ではないということ
-    - 分析は間違っている可能性があるということ
-    - 体調の変化に関係のない内容は無視すること
-    - もし回答する内容がない場合はユーザを労う普遍的な回答をすること
-    - 名前、住所、電話番号などの個人情報に関連する内容は無視すること
+あなたの回答は次の内容を考慮する必要があります
+- 優しい口調でユーザに寄り添った回答をすること
+- 日本語で回答すること
+- 敬語を使うこと
+- 改行を適切に使い、回答を読みやすくすること
+- ユーザを労うこと
+- 簡潔に回答すること
+- 午前や午後など大まかな時間帯を踏まえて回答すること
+- 具体的な日付については言及せず、対象の全期間に対して回答すること
 
-    あなたは次の内容を含むresponseをしてはなりません
-    - 体調が悪い原因について断言すること
-    - 問題を解決する対処法を教えること
-    - ユーザの主観的な記録を否定すること
-    - ユーザの主観的な記録の量や質に言及すること
-    - 体調の変化に関係のない事実に言及すること
-    - 私に相談して欲しいと促すこと`,
+あなたは次の内容を含む回答をしてはなりません
+- 体調が悪い原因について断言すること
+- 問題を解決する対処法を教えること
+- 回答は診断ではないということ
+- 回答は間違っている可能性があるということ
+- 記録の内容を否定すること
+- 記録の内容の量や質に言及すること
+- 相談して欲しいと促すこと
+- 病気や疾病について言及すること`,
         temperature: 1,
       };
   }
 }
 
-export function setupGenerativeModel(highlightStyle: HighlightStyle): GenerativeModelPreview {
+export function setupGenerativeModel(highlightStyle: HighlightType): GenerativeModelPreview {
   const vertexAI = new VertexAI({
     project: projectID.value(),
     location: 'us-central1',
