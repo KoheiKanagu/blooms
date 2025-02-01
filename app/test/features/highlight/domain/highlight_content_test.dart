@@ -12,7 +12,7 @@ void main() {
         final now = Timestamp.now();
 
         final json = {
-          'style': 'summary',
+          'type': 'summary',
           'startAt': now,
           'period': 'past21days',
           'summary': 'summary',
