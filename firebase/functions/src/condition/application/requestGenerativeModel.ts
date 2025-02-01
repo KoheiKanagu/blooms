@@ -5,23 +5,24 @@ import { outSensitiveLog } from '../../utils/sensitive_log';
 import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
-function createParts(condition: Condition): Part[] | null {
+function createParts(condition: Condition): Part[] {
   const date = condition.createdAtIso8601;
 
-  let parts: Part[] = [];
   switch (condition.content.type) {
     case 'text':
-      parts = [{
+      return [{
         text: `${date}に入力したテキスト: ${condition.content.text}`,
       }];
-      break;
+
     case 'textWithSearchKeywords':
-      parts = [{
-        text: condition.content.text,
+      return [{
+        text: `前回の回答: ${condition.content.text}`,
+      }, {
+        text: `前回の検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
       }];
-      break;
+
     case 'image':
-      parts = [
+      return [
         {
           text: `${date}にアップロードされた画像`,
         },
@@ -32,9 +33,9 @@ function createParts(condition: Condition): Part[] | null {
           },
         })),
       ];
-      break;
+
     case 'audio':
-      parts = [
+      return [
         {
           text: `${date}にアップロードされた音声`,
         },
@@ -45,13 +46,11 @@ function createParts(condition: Condition): Part[] | null {
           },
         })),
       ];
-      break;
 
     case 'empty':
-      return null;
+      logger.warn('Empty content');
+      return [];
   };
-
-  return parts;
 }
 
 /**
@@ -67,38 +66,26 @@ export async function requestGenerativeModel(
 ): Promise<Condition | null> {
   const generativeModel = setupGenerativeModel();
 
-  // 履歴を作成
-  const historyContents: Content[] = conditions
-    .slice(1)
-    .map<Content | null>((condition) => {
-      const parts = createParts(condition);
+  // 生成モデルに投げるContentを生成
+  const requestContents: Content[] = conditions
+    .map<Content>(condition => ({
+      role: condition.creatorType,
+      parts: createParts(condition),
+    }))
+    // 空だとエラーになるので除外
+    .filter(content => content.parts.length > 0);
 
-      if (parts === null) {
-        return null;
-      }
-
-      return {
-        role: condition.creatorType,
-        parts: parts,
-      };
-    })
-    .filter(e => e !== null);
-  outSensitiveLog(`historyContents`, historyContents);
-
-  const chat = generativeModel.startChat({
-    history: historyContents,
-  });
-
-  // 最新のメッセージ
-  const latestConditionParts = createParts(conditions[0]!);
-  if (latestConditionParts === null) {
-    logger.warn('No latest condition');
+  if (requestContents.length === 0) {
+    logger.warn('requestContents is empty');
+    // 内容が無い場合はスキップ
     return null;
   }
+  outSensitiveLog(`requestContents`, requestContents);
 
-  // リクエスト
-  const generatedResult = await chat.sendMessage(latestConditionParts);
-
+  // 生成
+  const generatedResult = await generativeModel.generateContent({
+    contents: requestContents,
+  });
   outSensitiveLog(`generatedResult`, generatedResult);
 
   const response = generatedResult.response.candidates![0]!.content.parts[0]!.text ?? '{}';
@@ -106,12 +93,8 @@ export async function requestGenerativeModel(
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
 
-  const reply = jsonContent['reply'] as string | null;
-  if (reply === null) {
-    logger.info('No reply');
-    return null;
-  }
-  const searchKeywords = jsonContent['searchKeywords'] as string[] | null;
+  const reply = jsonContent['reply'] as string;
+  const searchKeywords = jsonContent['searchKeywords'] as string[];
 
   const newCondition: Condition = {
     createdAt: FieldValue.serverTimestamp(),
@@ -123,7 +106,7 @@ export async function requestGenerativeModel(
     content: {
       type: 'textWithSearchKeywords',
       text: reply,
-      searchKeywords: searchKeywords ?? [],
+      searchKeywords: searchKeywords,
     },
 
   };
