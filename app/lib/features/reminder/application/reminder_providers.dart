@@ -171,6 +171,7 @@ Future<void> reminderSave(
 @visibleForTesting
 tz.TZDateTime nextInstance(TimeOfDay time) {
   final now = clock.now();
+  print('now: $now');
 
   var scheduledDate = tz.TZDateTime(
     tz.local,
@@ -180,6 +181,7 @@ tz.TZDateTime nextInstance(TimeOfDay time) {
     time.hour,
     time.minute,
   );
+  print('scheduledDate: $scheduledDate');
   if (scheduledDate.isBefore(now)) {
     scheduledDate = scheduledDate.add(
       const Duration(days: 1),

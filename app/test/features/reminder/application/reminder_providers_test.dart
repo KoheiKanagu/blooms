@@ -24,6 +24,7 @@ void main() {
 
         withClock(now, () {
           final actual = nextInstance(time);
+          print('actual: $actual');
 
           expect(actual.year, 2025);
           expect(actual.month, 12);
