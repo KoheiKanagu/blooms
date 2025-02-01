@@ -67,23 +67,30 @@ class HighlightDetailTile extends HookConsumerWidget {
           ),
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            child: Row(
-              children: [
-                Text(
-                  i18n.highlight.createdFromThisRecords,
-                ),
-                Icon(
-                  CupertinoIcons.right_chevron,
-                  size: CupertinoTheme.of(context)
-                      .textTheme
-                      .actionSmallTextStyle
-                      .fontSize,
-                  color: CupertinoTheme.of(context)
-                      .textTheme
-                      .actionSmallTextStyle
-                      .color,
-                ),
-              ],
+            child: Builder(
+              builder: (context) {
+                final textStyle = CupertinoTheme.of(context)
+                    .textTheme
+                    .actionSmallTextStyle
+                    .copyWith(
+                      fontSize: 14,
+                    );
+
+                return Row(
+                  children: [
+                    Text(
+                      i18n.highlight.createdFromThisRecords,
+                      style: textStyle,
+                    ),
+                    const Gap(4),
+                    Icon(
+                      CupertinoIcons.right_chevron,
+                      size: textStyle.fontSize,
+                      color: textStyle.color,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           onPressed: () {
