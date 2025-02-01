@@ -26,7 +26,7 @@ class HighlightDetailPage extends HookConsumerWidget {
       child: ListView(
         children: [
           HighlightDetailTile(
-            highlight: highlight,
+            content: highlight.content,
           ),
         ],
       ),

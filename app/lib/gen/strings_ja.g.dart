@@ -84,6 +84,7 @@ class TranslationsHighlightJa {
 	String get createHighlight => 'ハイライトを作成する';
 	String get deleteHighlight => 'ハイライトを削除する';
 	late final TranslationsHighlightFeaturesJa features = TranslationsHighlightFeaturesJa.internal(_root);
+	String get createdFromThisRecords => 'このハイライトはこれらの記録から作成されました';
 }
 
 // Path: onboarding

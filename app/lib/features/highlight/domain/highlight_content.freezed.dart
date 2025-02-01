@@ -179,7 +179,7 @@ class __$$HighlightContentSummaryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HighlightContentSummaryImpl implements HighlightContentSummary {
+class _$HighlightContentSummaryImpl extends HighlightContentSummary {
   const _$HighlightContentSummaryImpl(
       {@TimestampConverterNotNull() required this.startAt,
       required this.period,
@@ -188,7 +188,8 @@ class _$HighlightContentSummaryImpl implements HighlightContentSummary {
       this.state = HighlightState.pending,
       this.promptFileUri,
       final String? $type})
-      : $type = $type ?? 'summary';
+      : $type = $type ?? 'summary',
+        super._();
 
   factory _$HighlightContentSummaryImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightContentSummaryImplFromJson(json);
@@ -350,7 +351,7 @@ class _$HighlightContentSummaryImpl implements HighlightContentSummary {
   }
 }
 
-abstract class HighlightContentSummary implements HighlightContent {
+abstract class HighlightContentSummary extends HighlightContent {
   const factory HighlightContentSummary(
       {@TimestampConverterNotNull() required final Timestamp startAt,
       required final HighlightPeriod period,
@@ -358,6 +359,7 @@ abstract class HighlightContentSummary implements HighlightContent {
       required final String abstract,
       final HighlightState state,
       final String? promptFileUri}) = _$HighlightContentSummaryImpl;
+  const HighlightContentSummary._() : super._();
 
   factory HighlightContentSummary.fromJson(Map<String, dynamic> json) =
       _$HighlightContentSummaryImpl.fromJson;
@@ -410,9 +412,10 @@ class __$$HighlightContentEmptyImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
+class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
   const _$HighlightContentEmptyImpl({final String? $type})
-      : $type = $type ?? 'empty';
+      : $type = $type ?? 'empty',
+        super._();
 
   factory _$HighlightContentEmptyImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightContentEmptyImplFromJson(json);
@@ -527,8 +530,9 @@ class _$HighlightContentEmptyImpl implements HighlightContentEmpty {
   }
 }
 
-abstract class HighlightContentEmpty implements HighlightContent {
+abstract class HighlightContentEmpty extends HighlightContent {
   const factory HighlightContentEmpty() = _$HighlightContentEmptyImpl;
+  const HighlightContentEmpty._() : super._();
 
   factory HighlightContentEmpty.fromJson(Map<String, dynamic> json) =
       _$HighlightContentEmptyImpl.fromJson;

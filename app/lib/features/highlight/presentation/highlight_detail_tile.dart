@@ -1,47 +1,104 @@
-import 'package:blooms/features/highlight/application/highlight_providers.dart';
-import 'package:blooms/features/highlight/domain/highlight.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_blooms_icon.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
+import 'package:blooms/features/highlight/presentation/highlight_prompt_page.dart';
+import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightDetailTile extends HookConsumerWidget {
   const HighlightDetailTile({
-    required this.highlight,
+    required this.content,
     super.key,
   });
 
-  final Highlight highlight;
+  final HighlightContent content;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final promptFileUrl = switch (highlight.content) {
-      HighlightContentSummary(:final promptFileUri) => promptFileUri,
-      HighlightContentEmpty() => null,
-    };
-
-    return CupertinoListSection.insetGrouped(
-      children: [
-        CupertinoListTile(
-          title: Text(
-            highlight.content.toString(),
-            maxLines: 100,
-          ),
+    if (content is HighlightContentEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Text(i18n.unknownContent),
         ),
-        ref
-            .watch(
-              highlightPromptProvider(
-                gsFilePath: promptFileUrl,
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        switch (content) {
+          HighlightContentSummary(:final summary) => Padding(
+              padding: const EdgeInsets.only(
+                top: 16,
+                left: 16,
+                right: 16,
               ),
-            )
-            .maybeWhen(
-              orElse: () => const Text('error'),
-              data: (data) => CupertinoListTile(
-                title: Text(
-                  data ?? 'null',
-                  maxLines: 100,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                decoration: BoxDecoration(
+                  color: myColorGreen2.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const ConditionBubbleBloomsIcon(),
+                    Text(
+                      summary,
+                      maxLines: 100,
+                    ),
+                  ],
                 ),
               ),
             ),
+          HighlightContentEmpty() => throw UnimplementedError(),
+        },
+        const Gap(8),
+        CupertinoButton(
+          sizeStyle: CupertinoButtonSize.small,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32,
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              children: [
+                Text(
+                  i18n.highlight.createdFromThisRecords,
+                ),
+                Icon(
+                  CupertinoIcons.right_chevron,
+                  size: CupertinoTheme.of(context)
+                      .textTheme
+                      .actionSmallTextStyle
+                      .fontSize,
+                  color: CupertinoTheme.of(context)
+                      .textTheme
+                      .actionSmallTextStyle
+                      .color,
+                ),
+              ],
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute<void>(
+                builder: (_) => HighlightPromptPage(
+                  promptFileUri: content.promptFileUri,
+                ),
+                settings: const RouteSettings(
+                  name: HighlightPromptPage.path,
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
   }
