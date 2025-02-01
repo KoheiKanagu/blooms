@@ -3,7 +3,7 @@ import { logger } from 'firebase-functions';
 import { conditionConverter } from '../../../condition/domain/condition';
 import { CollectionPath } from '../../../utils/collectionPath';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { Highlight, HighlightContentPrivate, HighlightContentProfessional, highlightConverter, HighlightPeriod } from '../domain/highlight';
+import { Highlight, HighlightContentPrivate, highlightConverter, HighlightPeriod } from '../domain/highlight';
 import { requestGenerativeModel } from './requestGenerativeModel';
 import { updateHighlightContentState } from './updateHighlightContentState';
 
@@ -23,7 +23,7 @@ export async function updateHighlightContent(
   }
 
   try {
-    const content = highlight.content as HighlightContentPrivate | HighlightContentProfessional;
+    const content = highlight.content as HighlightContentPrivate;
     // HighlightContentのstateをinProgressに更新
     await updateHighlightContentState(documentReference, 'inProgress');
 
@@ -85,7 +85,7 @@ export async function updateHighlightContent(
  * @returns
  */
 function shouldSkipProcessing(highlight: Highlight): boolean {
-  if (highlight.content.style !== 'private' && highlight.content.style !== 'professional') {
+  if (highlight.content.style !== 'private') {
     logger.error(`Highlight style is invalid.`, { highlight });
     return true;
   }

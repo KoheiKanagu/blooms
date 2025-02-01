@@ -70,48 +70,6 @@ const _$HighlightStateEnumMap = {
   HighlightState.failure: 'failure',
 };
 
-_$HighlightContentProfessionalImpl _$$HighlightContentProfessionalImplFromJson(
-        Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$HighlightContentProfessionalImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$HighlightContentProfessionalImpl(
-          startAt: $checkedConvert(
-              'startAt', (v) => const TimestampConverterNotNull().fromJson(v)),
-          period: $checkedConvert(
-              'period', (v) => $enumDecode(_$HighlightPeriodEnumMap, v)),
-          analysisResults: $checkedConvert(
-              'analysisResults',
-              (v) =>
-                  (v as List<dynamic>?)?.map((e) => e as String).toList() ??
-                  const []),
-          abstract: $checkedConvert('abstract', (v) => v as String? ?? ''),
-          state: $checkedConvert(
-              'state',
-              (v) =>
-                  $enumDecodeNullable(_$HighlightStateEnumMap, v) ??
-                  HighlightState.pending),
-          promptFileUri: $checkedConvert('promptFileUri', (v) => v as String?),
-          $type: $checkedConvert('style', (v) => v as String?),
-        );
-        return val;
-      },
-      fieldKeyMap: const {r'$type': 'style'},
-    );
-
-Map<String, dynamic> _$$HighlightContentProfessionalImplToJson(
-        _$HighlightContentProfessionalImpl instance) =>
-    <String, dynamic>{
-      'startAt': const TimestampConverterNotNull().toJson(instance.startAt),
-      'period': _$HighlightPeriodEnumMap[instance.period]!,
-      'analysisResults': instance.analysisResults,
-      'abstract': instance.abstract,
-      'state': _$HighlightStateEnumMap[instance.state]!,
-      'promptFileUri': instance.promptFileUri,
-      'style': instance.$type,
-    };
-
 _$HighlightContentEmptyImpl _$$HighlightContentEmptyImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(

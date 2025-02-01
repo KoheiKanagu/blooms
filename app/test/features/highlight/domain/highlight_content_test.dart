@@ -42,34 +42,6 @@ void main() {
         );
       });
 
-      test('professional', () {
-        final now = Timestamp.now();
-
-        final json = {
-          'style': 'professional',
-          'startAt': now,
-          'period': 'past21days',
-          'analysisResults': ['analysisResults'],
-          'abstract': 'abstract',
-          'state': 'inProgress',
-          'promptFileUri': 'promptFileUri',
-        };
-
-        final expected = HighlightContent.fromJson(json);
-
-        expect(
-          expected,
-          HighlightContent.professional(
-            startAt: now,
-            period: HighlightPeriod.past21days,
-            analysisResults: ['analysisResults'],
-            abstract: 'abstract',
-            state: HighlightState.inProgress,
-            promptFileUri: 'promptFileUri',
-          ),
-        );
-      });
-
       test('不明なStyleはHighlightContentEmptyになること', () {
         final json = {
           'style': 'unknown',

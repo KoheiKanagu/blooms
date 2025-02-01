@@ -43,26 +43,6 @@ sealed class HighlightContent with _$HighlightContent {
     String? promptFileUri,
   }) = HighlightContentPrivate;
 
-  const factory HighlightContent.professional({
-    /// ハイライトを作成開始する日時。この日からN日前のハイライト
-    @TimestampConverterNotNull() required Timestamp startAt,
-
-    /// ハイライトの種類
-    required HighlightPeriod period,
-
-    /// 分析結果
-    @Default([]) List<String> analysisResults,
-
-    /// 分析結果の要旨
-    @Default('') String abstract,
-
-    /// 生成モデルでの処理の状態
-    @Default(HighlightState.pending) HighlightState state,
-
-    /// 生成モデルによるハイライトの生成のプロンプトのファイルパス
-    String? promptFileUri,
-  }) = HighlightContentProfessional;
-
   const factory HighlightContent.empty() = HighlightContentEmpty;
 
   factory HighlightContent.fromJson(Json json) =>
