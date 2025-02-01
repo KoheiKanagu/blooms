@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import { getFirestore } from 'firebase-admin/firestore';
+import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { CollectionPath } from '../../utils/collectionPath';
 import { outSensitiveLog } from '../../utils/sensitive_log';
@@ -14,11 +14,14 @@ export async function createReplyCondition(
   }
 
   // コンテキストとなるConditionを取得
+  // 過去48時間が対象
+  const targetDate = new Date(Date.now() - 48 * 60 * 60 * 1000);
   const contextConditions = await getFirestore()
     .collection(CollectionPath.CONDITIONS)
     .withConverter(conditionConverter)
     .where('subjectUid', '==', condition.subjectUid)
     .where('deletedAt', '==', null)
+    .where('createdAt', '>=', Timestamp.fromDate(targetDate))
     .orderBy('createdAt', 'asc')
     .limit(20)
     .get()
