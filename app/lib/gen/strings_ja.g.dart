@@ -49,7 +49,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get kContinue => '続ける';
 	late final TranslationsOnboardingJa onboarding = TranslationsOnboardingJa.internal(_root);
 	String get today => '今日';
-	String get yesterday => '昨日';
 	String get camera => 'カメラ';
 	String get photoLibrary => '写真ライブラリ';
 	String get unknownContent => 'この形式は対応していません。アプリをバージョンアップしてください';
