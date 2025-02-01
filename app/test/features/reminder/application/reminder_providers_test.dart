@@ -19,7 +19,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 9).toUtc(),
+          DateTime(2025, 12, 31, 9).toLocal(), // 9:00
         );
 
         withClock(now, () {
@@ -43,7 +43,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 10, 1).toUtc(),
+          DateTime(2025, 12, 31, 10, 1).toLocal(), // 10:01
         );
 
         withClock(now, () {
@@ -69,7 +69,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 2).toUtc(), // 火曜日
+          DateTime(2024, 1, 2).toLocal(), // 火曜日
         );
 
         withClock(now, () {
@@ -93,7 +93,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 6, 10, 1).toUtc(), // 土曜日 10:01
+          DateTime(2024, 1, 6, 10, 1).toLocal(), // 土曜日 10:01
         );
 
         withClock(now, () {
@@ -117,7 +117,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 2, 10, 1).toUtc(), // 火曜日 10:01
+          DateTime(2024, 1, 2, 10, 1).toLocal(), // 火曜日 10:01
         );
 
         withClock(now, () {
