@@ -67,7 +67,7 @@ class ConditionPage extends HookConsumerWidget {
         ),
       ),
       child: ref.watch(conditionQueryProvider).maybeWhen(
-            orElse: () => const CircularProgressIndicator.adaptive(),
+            orElse: () => const CupertinoActivityIndicator(),
             data: (query) => ConditionPageList(
               query,
               onItemDisplayed: (value) {
