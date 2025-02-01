@@ -17,6 +17,7 @@ export async function createReplyCondition(
     .withConverter(conditionConverter)
     .where('subjectUid', '==', condition.subjectUid)
     .where('deletedAt', '==', null)
+    .where('creatorType', '==', 'user')
     .orderBy('createdAt', 'desc')
     .limit(42)
     .get()
