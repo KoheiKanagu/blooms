@@ -2,7 +2,6 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   group('nextInstance', () {
@@ -15,16 +14,11 @@ void main() {
         );
 
         final now = Clock.fixed(
-          tz.TZDateTime.from(
-            DateTime(2025, 12, 31, 9), // 9:00
-            tz.getLocation('Asia/Tokyo'),
-          ),
+          DateTime.utc(2025, 12, 31, 9), // 9:00
         );
-        print('now: $now');
 
         withClock(now, () {
           final actual = nextInstance(time);
-          print('actual: $actual');
 
           expect(actual.year, 2025);
           expect(actual.month, 12);
@@ -44,7 +38,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 10, 1), // 10:01
+          DateTime.utc(2025, 12, 31, 10, 1), // 10:01
         );
 
         withClock(now, () {
@@ -94,7 +88,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 6, 10, 1), // 土曜日 10:01
+          DateTime.utc(2024, 1, 6, 10, 1), // 土曜日 10:01
         );
 
         withClock(now, () {
@@ -118,7 +112,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 2, 10, 1), // 火曜日 10:01
+          DateTime.utc(2024, 1, 2, 10, 1), // 火曜日 10:01
         );
 
         withClock(now, () {
