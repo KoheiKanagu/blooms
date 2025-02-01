@@ -29,22 +29,12 @@
   "etags": {
     "blooms-stg": {
       "extensionInstances": {
-        "delete-user-data-firestore-conditions-v1": "44fc8e4253e1698127dbcb4657c5287653bd61e2fa46e3b4a98d4cb59c5052b0",
-        "delete-user-data-firestore-highlights-v1": "d6721656bb8b050718259d732adc701d14677ab6554e05c5457f466c802fa376",
-        "delete-user-data-firestore-users-v1": "db256cbb7d357f48a6f675f60c1ddd1e52244e4a30f834e1ab5470817d9c32c5",
-        "delete-user-data-storage-audios-v1": "11a97feb8cb0ee85013b8523493e058da7ddf57b6cda73c6c2ef1dbe8b3c165d",
-        "delete-user-data-storage-images-v1": "be3179e948160502ca30bc1b6c6b5238ef9b30dff2fdd84982a220169b6c40f2",
-        "delete-user-data-storage-prompts-v1": "cbf6a74510522488796d705937c8a5a3fb87813332319a694eafeab2781d40a7"
+        "delete-user-data": "7236dc98b65994677227467037175daef2f4a25339e30aababbe53e67c599849"
       }
     },
     "blooms-prod-43d74": {
       "extensionInstances": {
-        "delete-user-data-firestore-conditions-v1": "db749131bb45a6fe817c653819ab7bc2a359628baee97c88f5bbe762eef9d610",
-        "delete-user-data-firestore-highlights-v1": "438f6e9554a1ab465c06e9db7fbddbb2eff7bd199d05a3e6e08dd15989574be3",
-        "delete-user-data-firestore-users-v1": "b830b7324ec25ca79b3cf35dad47a519c91450115d61bac3749197744a48cbde",
-        "delete-user-data-storage-audios-v1": "f16287758579790a166078c25f5496bd8db0cb86003877ccc138eb7c6bdb24f3",
-        "delete-user-data-storage-images-v1": "fa6e3f887068b4c4963d77dd0b386643bf8622986d5eaf6bb50074a02aba2bf2",
-        "delete-user-data-storage-prompts-v1": "bf68b795052b6ab0f019a7316d33701a055315416759d11dd3bc385dfb78d5af"
+        "delete-user-data": "f54b93d88a33b0bfa94f4dc75c396068de05ec3f68cd45b6aad64dc904a7bf2a"
       }
     }
   }
