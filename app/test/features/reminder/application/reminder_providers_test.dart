@@ -2,12 +2,15 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
+  Intl.defaultLocale = 'ja_JP';
+  Intl.systemLocale = 'ja_JP';
 
   group('nextInstance', () {
     test(
