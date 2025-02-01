@@ -41,7 +41,7 @@ export const onCreateAuthUser = functionsV1()
       deletedAt: null,
       subjectUid: user.uid,
       creatorType: 'model',
-      createdAtIso8601: '',
+      createdAtIso8601: null,
       content: {
         type: 'text',
         text: `はじめまして、BLOOMSです。

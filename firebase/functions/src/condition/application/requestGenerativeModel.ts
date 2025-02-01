@@ -102,7 +102,7 @@ export async function requestGenerativeModel(
     deletedAt: null,
     subjectUid: uid,
     creatorType: 'model',
-    createdAtIso8601: '',
+    createdAtIso8601: null,
     content: {
       type: 'textWithSearchKeywords',
       text: reply,

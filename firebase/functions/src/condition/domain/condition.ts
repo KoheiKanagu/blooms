@@ -12,7 +12,7 @@ export class Condition {
     readonly deletedAt: Timestamp | null,
     readonly subjectUid: string,
     readonly creatorType: CreatorType,
-    readonly createdAtIso8601: string,
+    readonly createdAtIso8601: string | null,
     readonly content: ConditionContentInterfaces,
   ) { }
 }
@@ -69,7 +69,7 @@ export const conditionConverter: FirestoreDataConverter<Condition> = {
     snapshot.get('deletedAt') as Timestamp | null,
     snapshot.get('subjectUid') as string,
     snapshot.get('creatorType') as CreatorType,
-    snapshot.get('createdAtIso8601') as string,
+    snapshot.get('createdAtIso8601') as string | null,
     conditionContentConverter(snapshot.get('content') as Record<string, unknown>),
   ),
 };

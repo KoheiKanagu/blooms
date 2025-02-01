@@ -45,6 +45,7 @@ paths:
                     description: ISO8601形式の作成日時
                     type: string
                     example: 2004-04-01T12:00+09:00
+                    nullable: true
                   updatedAt:
                     description: 更新日時 Timestamp
                     type: object

@@ -20,7 +20,7 @@ _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
           content: $checkedConvert('content',
               (v) => ConditionContent.fromJson(v as Map<String, dynamic>)),
           createdAtIso8601:
-              $checkedConvert('createdAtIso8601', (v) => v as String),
+              $checkedConvert('createdAtIso8601', (v) => v as String?),
           createdAt: $checkedConvert(
               'createdAt', (v) => const TimestampConverter().fromJson(v)),
           updatedAt: $checkedConvert(

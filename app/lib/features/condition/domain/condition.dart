@@ -24,7 +24,7 @@ class Condition with _$Condition {
     required ConditionContent content,
 
     /// ISO8601形式の作成日時
-    required String createdAtIso8601,
+    String? createdAtIso8601,
     @TimestampConverter() Timestamp? createdAt,
     @TimestampConverter() Timestamp? updatedAt,
     @TimestampConverter() Timestamp? deletedAt,
