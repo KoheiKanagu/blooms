@@ -83,5 +83,10 @@ Future<String?> highlightPrompt(
     return null;
   }
 
-  return utf8.decode(data);
+  final string = utf8.decode(data);
+
+  final json = jsonDecode(string) as List<dynamic>;
+
+  const encoder = JsonEncoder.withIndent('  ');
+  return encoder.convert(json);
 }

@@ -51,12 +51,7 @@ class HighlightPageListTile extends HookConsumerWidget {
       child: HighlightTile(
         period: highlight.period ?? HighlightPeriod.past1day,
         state: highlight.state,
-        description: highlight.period == HighlightPeriod.past1day
-            ? highlight.highlightRange.endDate
-            : i18n.highlight.xToY(
-                x: highlight.highlightRange.startDate,
-                y: highlight.highlightRange.endDate,
-              ),
+        description: highlight.highlightRangeString,
         contentText: switch (highlight.content) {
           HighlightContentSummary(:final abstract) => abstract,
           HighlightContentEmpty() => i18n.unknownContent,

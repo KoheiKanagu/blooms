@@ -1,6 +1,7 @@
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/utils/timestamp_converter.dart';
 import 'package:blooms/utils/typedefs.dart';
@@ -69,6 +70,24 @@ class Highlight with _$Highlight {
     return (
       startDate: startDate,
       endDate: endDate,
+    );
+  }
+
+  /// ハイライトの対象期間を表す文字列
+  ///
+  /// e.g.
+  /// 2月1日(土)
+  /// 1月25日(土) から 2月1日(土)
+  String get highlightRangeString {
+    final (:startDate, :endDate) = highlightRange;
+
+    if (period == HighlightPeriod.past1day) {
+      return endDate;
+    }
+
+    return i18n.highlight.xToY(
+      x: startDate,
+      y: endDate,
     );
   }
 

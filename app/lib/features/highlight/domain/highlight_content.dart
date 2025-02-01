@@ -34,8 +34,15 @@ sealed class HighlightContent with _$HighlightContent {
     String? promptFileUri,
   }) = HighlightContentSummary;
 
+  const HighlightContent._();
+
   const factory HighlightContent.empty() = HighlightContentEmpty;
 
   factory HighlightContent.fromJson(Json json) =>
       _$HighlightContentFromJson(json);
+
+  String? get promptFileUri => switch (this) {
+        HighlightContentSummary(:final promptFileUri) => promptFileUri,
+        HighlightContentEmpty() => null,
+      };
 }
