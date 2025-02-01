@@ -2,15 +2,12 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
-  Intl.defaultLocale = 'ja_JP';
-  Intl.systemLocale = 'ja_JP';
 
   group('nextInstance', () {
     test(
@@ -22,7 +19,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 9),
+          DateTime(2025, 12, 31, 9).toUtc(),
         );
 
         withClock(now, () {
@@ -46,7 +43,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2025, 12, 31, 10, 1),
+          DateTime(2025, 12, 31, 10, 1).toUtc(),
         );
 
         withClock(now, () {
@@ -72,7 +69,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 2), // 火曜日
+          DateTime(2024, 1, 2).toUtc(), // 火曜日
         );
 
         withClock(now, () {
@@ -96,7 +93,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 6, 10, 1), // 土曜日 10:01
+          DateTime(2024, 1, 6, 10, 1).toUtc(), // 土曜日 10:01
         );
 
         withClock(now, () {
@@ -120,7 +117,7 @@ void main() {
         );
 
         final now = Clock.fixed(
-          DateTime(2024, 1, 2, 10, 1), // 火曜日 10:01
+          DateTime(2024, 1, 2, 10, 1).toUtc(), // 火曜日 10:01
         );
 
         withClock(now, () {
