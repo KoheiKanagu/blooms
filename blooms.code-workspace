@@ -7,7 +7,10 @@
       "path": "app"
     },
     {
-      "path": "firebase"
+      "path": "firebase",
+    },
+    {
+      "path": "firebase/functions"
     }
   ],
   "settings": {
