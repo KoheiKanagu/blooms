@@ -8,11 +8,11 @@ void main() {
   group(
     'fromJson',
     () {
-      test('private', () {
+      test('summary', () {
         final now = Timestamp.now();
 
         final json = {
-          'style': 'private',
+          'style': 'summary',
           'startAt': now,
           'period': 'past21days',
           'summary': 'summary',

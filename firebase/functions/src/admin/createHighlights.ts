@@ -33,7 +33,7 @@ async function main(): Promise<void> {
       deletedAt: null,
       subjectUid: subjectUid,
       content: {
-        style: 'private',
+        style: 'summary',
         startAt: admin.firestore.Timestamp.fromDate(startAt),
         period: 'past1day',
         summary: '',
