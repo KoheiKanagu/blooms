@@ -1,6 +1,5 @@
-import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, Tool, VertexAI } from '@google-cloud/vertexai';
+import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
 import { projectID } from 'firebase-functions/params';
-import { kVertexAiSearchDatastore } from '../../../constants/appEnv';
 import { HighlightStyle } from '../domain/highlight';
 
 const safetySettings: SafetySetting[] = [
@@ -21,24 +20,6 @@ const safetySettings: SafetySetting[] = [
     threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
   },
 ];
-
-function buildTools(highlightStyle: HighlightStyle): Tool[] {
-  switch (highlightStyle) {
-    case 'private':
-      return [{
-        retrieval: {
-          vertexAiSearch: {
-            datastore: kVertexAiSearchDatastore,
-          },
-        },
-      }];
-    case 'professional':
-      return [];
-
-    case 'empty':
-      throw new Error('Highlight style is empty');
-  }
-}
 
 function buildPrompt(highlightStyle: HighlightStyle): {
   responseSchema: ResponseSchema;
@@ -198,7 +179,6 @@ export function setupGenerativeModel(highlightStyle: HighlightStyle): Generative
         responseMimeType: 'application/json',
         responseSchema: responseSchema,
       },
-      tools: buildTools(highlightStyle),
       systemInstruction: systemInstruction,
     });
 }
