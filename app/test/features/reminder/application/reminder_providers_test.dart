@@ -2,18 +2,8 @@ import 'package:blooms/features/reminder/application/reminder_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
-Future<void> main() async {
-  tz.initializeTimeZones();
-  tz.setLocalLocation(
-    tz.getLocation(
-      await FlutterTimezone.getLocalTimezone(),
-    ),
-  );
-
+void main() {
   group('nextInstance', () {
     test(
       '同日の時間が求められること',
