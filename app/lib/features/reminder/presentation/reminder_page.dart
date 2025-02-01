@@ -7,12 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+enum ReminderType {
+  condition,
+  highlight,
+  ;
+}
+
 class ReminderPage extends HookConsumerWidget {
   const ReminderPage({
+    required this.type,
     super.key,
   });
 
   static const path = '/reminder';
+
+  final ReminderType type;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,7 +75,7 @@ class ReminderPage extends HookConsumerWidget {
                 horizontal: 28,
               ),
               child: Text(
-                i18n.reminder.setReminder,
+                i18n.reminder.setConditionReminder,
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                       color:
                           CupertinoColors.secondaryLabel.resolveFrom(context),

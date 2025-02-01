@@ -71,7 +71,7 @@ Future<void> reminderSave(
     // スケジュール
     await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
           _reminderNotificationId,
-          i18n.reminder.notificationTitle,
+          i18n.reminder.conditionReminderNotificationTitle,
           null,
           nextInstance(time),
           const NotificationDetails(

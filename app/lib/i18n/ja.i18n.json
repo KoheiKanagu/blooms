@@ -74,8 +74,10 @@
   },
   "reminder": {
     "reminder": "リマインダー",
-    "setReminder": "記録をし忘れないように通知が設定できます",
-    "notificationTitle": "今日の体調はいかがですか？"
+    "setConditionReminder": "今日の体調を記録し忘れないように、通知が設定できます",
+    "conditionReminderNotificationTitle": "今日の体調はいかがですか？",
+    "setHighlightReminder": "今週のハイライトを作成し忘れないように、通知が設定できます",
+    "highlightReminderNotificationTitle": "今週のハイライトを確認してみましょう"
   },
   "done": "完了"
 }

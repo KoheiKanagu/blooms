@@ -85,7 +85,7 @@ final reminderStatusProvider = AutoDisposeFutureProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ReminderStatusRef = AutoDisposeFutureProviderRef<bool>;
-String _$reminderSaveHash() => r'095880b96e722124dccde99d82851f23c3fe6425';
+String _$reminderSaveHash() => r'c771bfd9b7b0ae82156d5184ddc69e63e16279a1';
 
 /// Copied from Dart SDK
 class _SystemHash {
