@@ -95,32 +95,48 @@ Widget onboardingPage(BuildContext context) {
 
 @widgetbook.UseCase(
   name: 'name',
-  type: OnboardingPageBodyName,
+  type: OnboardingPage,
 )
 Widget onboardingPageBody1(BuildContext context) {
-  return const OnboardingPageBodyName();
+  return const CupertinoPageScaffold(
+    child: SafeArea(
+      child: OnboardingPageBodyName(),
+    ),
+  );
 }
 
 @widgetbook.UseCase(
   name: 'highlight',
-  type: OnboardingPageBodyHighlight,
+  type: OnboardingPage,
 )
 Widget onboardingPageBody2(BuildContext context) {
-  return const OnboardingPageBodyHighlight();
+  return const CupertinoPageScaffold(
+    child: SafeArea(
+      child: OnboardingPageBodyHighlight(),
+    ),
+  );
 }
 
 @widgetbook.UseCase(
   name: 'privacy',
-  type: OnboardingPageBodyPrivacy,
+  type: OnboardingPage,
 )
 Widget onboardingPageBody3(BuildContext context) {
-  return const OnboardingPageBodyPrivacy();
+  return const CupertinoPageScaffold(
+    child: SafeArea(
+      child: OnboardingPageBodyPrivacy(),
+    ),
+  );
 }
 
 @widgetbook.UseCase(
   name: 'lets start',
-  type: OnboardingPageBodyLetsStart,
+  type: OnboardingPage,
 )
 Widget onboardingPageBody4(BuildContext context) {
-  return const OnboardingPageBodyLetsStart();
+  return const CupertinoPageScaffold(
+    child: SafeArea(
+      child: OnboardingPageBodyLetsStart(),
+    ),
+  );
 }

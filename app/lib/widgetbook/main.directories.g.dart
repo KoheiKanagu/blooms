@@ -105,12 +105,30 @@ final directories = <_i1.WidgetbookNode>[
           _i1.WidgetbookFolder(
             name: 'presentation',
             children: [
-              _i1.WidgetbookLeafComponent(
+              _i1.WidgetbookComponent(
                 name: 'OnboardingPage',
-                useCase: _i1.WidgetbookUseCase(
-                  name: 'OnboardingPage',
-                  builder: _i7.onboardingPage,
-                ),
+                useCases: [
+                  _i1.WidgetbookUseCase(
+                    name: 'OnboardingPage',
+                    builder: _i7.onboardingPage,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'highlight',
+                    builder: _i7.onboardingPageBody2,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'lets start',
+                    builder: _i7.onboardingPageBody4,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'name',
+                    builder: _i7.onboardingPageBody1,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'privacy',
+                    builder: _i7.onboardingPageBody3,
+                  ),
+                ],
               )
             ],
           )
