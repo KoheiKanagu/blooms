@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/widgets/show_my_progress_indicator.dart';
@@ -7,6 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pull_down_button/pull_down_button.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class ConditionForm extends HookConsumerWidget {
   const ConditionForm({
@@ -30,49 +33,99 @@ class ConditionForm extends HookConsumerWidget {
       ],
     );
 
-    return Row(
-      children: [
-        const _PlusButton(),
-        const Gap(8),
-        Expanded(
-          child: CupertinoTextField(
-            controller: textController,
-            maxLength: 256,
-            decoration: BoxDecoration(
-              color: CupertinoColors.systemBackground.resolveFrom(context),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: CupertinoColors.systemGrey4.resolveFrom(context),
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 16,
+          sigmaY: 16,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 4,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Gap(16),
+              const _PlusButton(),
+              const Gap(16),
+              Expanded(
+                child: CupertinoTextField(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  controller: textController,
+                  maxLength: 256,
+                  decoration: BoxDecoration(
+                    color:
+                        CupertinoColors.systemBackground.resolveFrom(context),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: CupertinoColors.systemGrey4.resolveFrom(context),
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  suffix: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: _SendButton(
+                      textController: textController,
+                    ),
+                  ),
+                  maxLines: 8,
+                  minLines: 1,
+                  keyboardType: TextInputType.multiline,
+                ),
               ),
-            ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
+              const Gap(16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SendButton extends HookConsumerWidget {
+  const _SendButton({
+    required this.textController,
+  });
+
+  final TextEditingController textController;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24),
+      child: CupertinoButton.filled(
+        sizeStyle: CupertinoButtonSize.small,
+        padding: const EdgeInsets.all(4),
+        onPressed: () async {
+          final text = textController.text;
+          if (text.isEmpty) {
+            return;
+          }
+
+          await ref.read(
+            conditionCreateTextProvider(
+              text: text,
+            ).future,
+          );
+
+          textController.clear();
+        },
+        child: Icon(
+          CupertinoIcons.arrow_up,
+          // 太さが変えられないようなのでshadowで太く見せる
+          shadows: List.generate(
+            10,
+            (_) => const BoxShadow(
+              color: CupertinoColors.white,
+              blurRadius: 1.5,
             ),
           ),
         ),
-        const Gap(8),
-        CupertinoButton.tinted(
-          sizeStyle: CupertinoButtonSize.medium,
-          child: const Icon(
-            CupertinoIcons.arrow_up_circle_fill,
-          ),
-          onPressed: () async {
-            final text = textController.text;
-            if (text.isEmpty) {
-              return;
-            }
-
-            await ref.read(
-              conditionCreateTextProvider(
-                text: text,
-              ).future,
-            );
-
-            textController.clear();
-          },
-        ),
-      ],
+      ),
     );
   }
 }
@@ -133,11 +186,48 @@ class _PlusButton extends HookConsumerWidget {
           },
         ),
       ],
-      buttonBuilder: (context, showMenu) => CupertinoButton(
-        onPressed: showMenu,
-        padding: EdgeInsets.zero,
-        child: const Icon(CupertinoIcons.add_circled),
+      buttonBuilder: (context, showMenu) => ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: CupertinoButton.tinted(
+          sizeStyle: CupertinoButtonSize.medium,
+          onPressed: showMenu,
+          padding: EdgeInsets.zero,
+          child: const Padding(
+            padding: EdgeInsets.all(8),
+            child: Icon(CupertinoIcons.add),
+          ),
+        ),
       ),
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'ConditionForm',
+  type: ConditionForm,
+)
+Widget conditionForm(BuildContext context) {
+  return const CupertinoPageScaffold(
+    child: Column(
+      spacing: 16,
+      children: [
+        ConditionForm(),
+        ConditionForm(
+          initialValue: 'あいうえおかきくけこ',
+        ),
+        ConditionForm(
+          initialValue: 'あ\nい\nう\nえ\nお\nか\nき\nく\nけ\nこ\n',
+        ),
+        ConditionForm(
+          initialValue: 'abcdefghijklmnopqrstuvwxyz',
+        ),
+        ConditionForm(
+          initialValue: '''
+    This is a long text example to test how the ConditionForm handles long strings of text.
+    The text should wrap properly and be displayed correctly within the text field.
+    This is important for ensuring that the user experience is smooth and that the text input behaves as expected, even with longer inputs.''',
+        ),
+      ],
+    ),
+  );
 }

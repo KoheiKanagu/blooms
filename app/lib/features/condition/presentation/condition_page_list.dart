@@ -1,11 +1,12 @@
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble.dart';
+import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
@@ -22,12 +23,41 @@ class ConditionPageList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    final viewInsets = MediaQuery.of(context).viewInsets;
+    print(viewInsets);
+
+    final onFocus = useState(false);
+
+    return CupertinoPageScaffold(
       backgroundColor:
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
-      body: _ListView(
-        query: query,
-        onItemDisplayed: onItemDisplayed,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          SafeArea(
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                viewInsets: const EdgeInsets.only(
+                  bottom: 64,
+                ),
+              ),
+              child: _ListView(
+                query: query,
+                onItemDisplayed: onItemDisplayed,
+              ),
+            ),
+          ),
+          SafeArea(
+            top: false,
+            bottom: !onFocus.value,
+            child: FocusScope(
+              onFocusChange: (value) {
+                onFocus.value = value;
+              },
+              child: const ConditionForm(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -60,7 +90,6 @@ class _ListView extends HookConsumerWidget {
         }
 
         final itemCount = snapshot.docs.length;
-
         return ListViewObserver(
           onObserve: (result) {
             final index = result.firstChild?.index;
@@ -69,10 +98,6 @@ class _ListView extends HookConsumerWidget {
             }
           },
           child: ListView.separated(
-            padding: const EdgeInsets.only(
-              // FloatingActionButton分のpadding
-              bottom: 96,
-            ),
             reverse: true,
             itemCount: itemCount,
             itemBuilder: (context, index) {
@@ -109,7 +134,8 @@ class _ListView extends HookConsumerWidget {
             separatorBuilder: (context, index) => const SizedBox(
               height: 16,
             ),
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            //TODO
+            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           ),
         );
       },
@@ -118,9 +144,7 @@ class _ListView extends HookConsumerWidget {
 }
 
 class _ErrorWidget extends StatelessWidget {
-  const _ErrorWidget({
-    super.key,
-  });
+  const _ErrorWidget();
 
   @override
   Widget build(BuildContext context) {

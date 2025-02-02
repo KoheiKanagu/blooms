@@ -21,6 +21,7 @@ class ConditionPage extends HookConsumerWidget {
     final title = useState(i18n.today);
 
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
         middle: Text(title.value),
         trailing: PullDownButton(
