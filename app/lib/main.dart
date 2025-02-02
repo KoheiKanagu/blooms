@@ -4,6 +4,7 @@ import 'package:blooms/constants/firebase_options_stg.dart' as stg_firebase;
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/routing/application/my_go_router.dart';
 import 'package:blooms/theme/my_theme.dart';
+import 'package:blooms/utils/budoux.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
 
-  final (locale, _, locationName) = (
+  final (locale, _, locationName, _) = (
     await LocaleSettings.useDeviceLocale(),
     await Firebase.initializeApp(
       options: switch (appEnv) {
@@ -26,7 +27,8 @@ Future<void> main() async {
         AppEnv.prod => prod_firebase.DefaultFirebaseOptions.currentPlatform,
       },
     ),
-    await FlutterTimezone.getLocalTimezone()
+    await FlutterTimezone.getLocalTimezone(),
+    initBudouX(),
   );
   Intl.defaultLocale = locale.languageCode;
   tz.setLocalLocation(tz.getLocation(locationName));
