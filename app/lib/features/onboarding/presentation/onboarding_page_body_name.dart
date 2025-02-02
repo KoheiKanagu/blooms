@@ -1,4 +1,5 @@
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
@@ -17,7 +18,7 @@ class OnboardingPageBodyName extends StatelessWidget {
         const OnboardingAppIcon(),
         const Gap(32),
         Text(
-          'BLOOMS',
+          i18n.blooms,
           style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
           textAlign: TextAlign.center,
         ),
