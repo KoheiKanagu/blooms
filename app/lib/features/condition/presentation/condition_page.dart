@@ -21,6 +21,7 @@ class ConditionPage extends HookConsumerWidget {
     final title = useState(i18n.today);
 
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
         middle: Text(title.value),
         trailing: PullDownButton(
@@ -67,7 +68,7 @@ class ConditionPage extends HookConsumerWidget {
         ),
       ),
       child: ref.watch(conditionQueryProvider).maybeWhen(
-            orElse: () => const CircularProgressIndicator.adaptive(),
+            orElse: () => const CupertinoActivityIndicator(),
             data: (query) => ConditionPageList(
               query,
               onItemDisplayed: (value) {

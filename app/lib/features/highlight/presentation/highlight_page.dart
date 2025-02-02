@@ -51,7 +51,7 @@ class HighlightPage extends HookConsumerWidget {
         ),
       ),
       child: ref.watch(highlightQueryProvider).maybeWhen(
-            orElse: () => const CircularProgressIndicator.adaptive(),
+            orElse: () => const CupertinoActivityIndicator(),
             data: (query) => HighlightPageList(query: query),
           ),
     );

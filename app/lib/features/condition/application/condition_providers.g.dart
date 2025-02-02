@@ -901,5 +901,25 @@ class _ConditionCreateAudioProviderElement
   @override
   XFile get xFile => (origin as ConditionCreateAudioProvider).xFile;
 }
+
+String _$conditionFormHeightControllerHash() =>
+    r'60f5581ed7dda85770da30c71307d4a99ff5b4d3';
+
+/// [ConditionForm]の高さを計算する
+///
+/// Copied from [ConditionFormHeightController].
+@ProviderFor(ConditionFormHeightController)
+final conditionFormHeightControllerProvider =
+    AutoDisposeNotifierProvider<ConditionFormHeightController, double>.internal(
+  ConditionFormHeightController.new,
+  name: r'conditionFormHeightControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$conditionFormHeightControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ConditionFormHeightController = AutoDisposeNotifier<double>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

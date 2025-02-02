@@ -16,7 +16,6 @@ class HomeTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoTabScaffold(
-      resizeToAvoidBottomInset: false,
       tabBar: CupertinoTabBar(
         iconSize: 28,
         items: [
