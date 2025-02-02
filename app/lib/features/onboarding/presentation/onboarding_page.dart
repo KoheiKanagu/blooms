@@ -1,7 +1,7 @@
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body1.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body2.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body3.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body4.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_highlight.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_lets_start.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_name.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,10 +20,10 @@ class OnboardingPage extends HookConsumerWidget {
     final visibleSkipButton = useState(false);
 
     final bodyItems = [
-      const OnboardingPageBody1(),
-      const OnboardingPageBody2(),
-      const OnboardingPageBody3(),
-      const OnboardingPageBody4(),
+      const OnboardingPageBodyName(),
+      const OnboardingPageBodyHighlight(),
+      const OnboardingPageBodyPrivacy(),
+      const OnboardingPageBodyLetsStart(),
     ];
 
     useEffect(
@@ -91,4 +91,36 @@ class OnboardingPage extends HookConsumerWidget {
 )
 Widget onboardingPage(BuildContext context) {
   return const OnboardingPage();
+}
+
+@widgetbook.UseCase(
+  name: 'name',
+  type: OnboardingPageBodyName,
+)
+Widget onboardingPageBody1(BuildContext context) {
+  return const OnboardingPageBodyName();
+}
+
+@widgetbook.UseCase(
+  name: 'highlight',
+  type: OnboardingPageBodyHighlight,
+)
+Widget onboardingPageBody2(BuildContext context) {
+  return const OnboardingPageBodyHighlight();
+}
+
+@widgetbook.UseCase(
+  name: 'privacy',
+  type: OnboardingPageBodyPrivacy,
+)
+Widget onboardingPageBody3(BuildContext context) {
+  return const OnboardingPageBodyPrivacy();
+}
+
+@widgetbook.UseCase(
+  name: 'lets start',
+  type: OnboardingPageBodyLetsStart,
+)
+Widget onboardingPageBody4(BuildContext context) {
+  return const OnboardingPageBodyLetsStart();
 }

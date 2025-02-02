@@ -2,8 +2,8 @@ import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
-class OnboardingPageBody1 extends StatelessWidget {
-  const OnboardingPageBody1({
+class OnboardingPageBodyName extends StatelessWidget {
+  const OnboardingPageBodyName({
     super.key,
   });
 

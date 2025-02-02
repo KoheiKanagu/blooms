@@ -6,8 +6,8 @@ import 'package:flutter/gestures.dart';
 import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OnboardingPageBody3 extends StatelessWidget {
-  const OnboardingPageBody3({
+class OnboardingPageBodyPrivacy extends StatelessWidget {
+  const OnboardingPageBodyPrivacy({
     super.key,
   });
 

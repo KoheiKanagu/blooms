@@ -10,8 +10,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OnboardingPageBody4 extends HookConsumerWidget {
-  const OnboardingPageBody4({
+class OnboardingPageBodyLetsStart extends HookConsumerWidget {
+  const OnboardingPageBodyLetsStart({
     super.key,
   });
 

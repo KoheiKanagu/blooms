@@ -6,8 +6,8 @@ import 'package:blooms/theme/my_date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
-class OnboardingPageBody2 extends StatelessWidget {
-  const OnboardingPageBody2({
+class OnboardingPageBodyHighlight extends StatelessWidget {
+  const OnboardingPageBodyHighlight({
     super.key,
   });
 
