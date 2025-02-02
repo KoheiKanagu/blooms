@@ -44,7 +44,10 @@
   "skip": "スキップ",
   "continue": "続ける",
   "onboarding": {
-    "letsGetStarted": "さあ、はじめましょう"
+    "subtitle": "妊娠中のあなたの体調を理解しやすくします",
+    "letsGetStarted": "さあ、はじめましょう",
+    "privacy": "プライバシー",
+    "privacySubtitle": "あなたの記録は、あなた個人と紐付けれらません"
   },
   "today": "今日",
   "camera": "カメラ",

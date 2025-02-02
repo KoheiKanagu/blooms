@@ -62,9 +62,7 @@ class OnboardingPage extends HookConsumerWidget {
               child: PageView.builder(
                 controller: pageController,
                 itemCount: bodyItems.length,
-                itemBuilder: (context, index) {
-                  return bodyItems[index];
-                },
+                itemBuilder: (context, index) => bodyItems[index],
               ),
             ),
             SmoothPageIndicator(

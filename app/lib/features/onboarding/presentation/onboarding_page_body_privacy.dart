@@ -1,4 +1,7 @@
 import 'package:blooms/constants/my_url.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_body.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_header.dart';
+import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -18,42 +21,23 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
         horizontal: 20,
       ),
       children: [
-        const _Icon(),
-        const Gap(32),
-        DefaultTextStyle(
-          style: CupertinoTheme.of(context)
-              .textTheme
-              .navLargeTitleTextStyle
-              .copyWith(
-                fontSize: 24,
-              ),
-          child: const Wrap(
-            alignment: WrapAlignment.center,
-            children: [
-              Text('あなたの記録は、'),
-              Text('あなた個人と紐付けれらません'),
-            ],
-          ),
+        OnboardingHeader(
+          title: i18n.onboarding.privacy,
+          subtitle: i18n.onboarding.privacySubtitle,
+          child: const _Icon(),
         ),
-        const Gap(16),
-        Text(
-          'ソーシャルアカウントやメールアドレスなど、個人を特定できる情報は不要です。',
-          style: CupertinoTheme.of(context).textTheme.textStyle,
+        const OnboardingBody(
+          descriptions: [
+            'ソーシャルアカウントやメールアドレスなど、個人を特定できる情報は必要ありません。',
+            'BLOOMS独自のIDを発行して、あなたの記録を安全に保管します。',
+          ],
         ),
-        const Gap(16),
-        Text(
-          'BLOOMS独自のIDを発行して、あなたの記録を安全に保管します。',
-          style: CupertinoTheme.of(context).textTheme.textStyle,
-        ),
-        if (!kIsWeb) ...[
+        if (kIsWeb) ...[
           const Gap(16),
           Text.rich(
             TextSpan(
               style: CupertinoTheme.of(context).textTheme.textStyle,
               children: [
-                const TextSpan(
-                  text: 'お使いのiPhone上で何かを人に見せたいが、BLOOMSをその人に見られないようにして安心したい場合は、',
-                ),
                 TextSpan(
                   text: 'アプリをロック',
                   style: CupertinoTheme.of(context)
@@ -68,7 +52,7 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
                     },
                 ),
                 const TextSpan(
-                  text: 'することができます。',
+                  text: 'すれば、アプリを開けるのはあなただけ。',
                 ),
               ],
             ),

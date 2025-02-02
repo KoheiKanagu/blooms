@@ -94,7 +94,10 @@ class TranslationsOnboardingJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get subtitle => '妊娠中のあなたの体調を理解しやすくします';
 	String get letsGetStarted => 'さあ、はじめましょう';
+	String get privacy => 'プライバシー';
+	String get privacySubtitle => 'あなたの記録は、あなた個人と紐付けれらません';
 }
 
 // Path: deleteAll
