@@ -153,8 +153,7 @@ class _ListView extends HookConsumerWidget {
             separatorBuilder: (context, index) => const SizedBox(
               height: 16,
             ),
-            //TODO
-            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           ),
         );
       },
