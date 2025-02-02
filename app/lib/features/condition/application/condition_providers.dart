@@ -7,11 +7,13 @@ import 'package:blooms/features/authentication/application/firebase_user_provide
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
 import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
+import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:blurhash_dart/blurhash_dart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -182,4 +184,19 @@ Future<void> conditionCreateAudio(
           ],
         ),
       );
+}
+
+/// [ConditionForm]の高さを計算する
+@riverpod
+class ConditionFormHeightController extends _$ConditionFormHeightController {
+  @override
+  double build() {
+    return 0;
+  }
+
+  void calculateHeight(GlobalKey conditionFormKey) {
+    final renderBox =
+        conditionFormKey.currentContext?.findRenderObject() as RenderBox?;
+    state = renderBox?.size.height ?? 0;
+  }
 }

@@ -6,7 +6,6 @@ import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:blooms/utils/my_navigator_observer.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeTab extends HookConsumerWidget {
@@ -17,7 +16,6 @@ class HomeTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoTabScaffold(
-      resizeToAvoidBottomInset: false,
       tabBar: CupertinoTabBar(
         iconSize: 28,
         items: [

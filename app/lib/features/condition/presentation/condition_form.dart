@@ -14,23 +14,29 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 class ConditionForm extends HookConsumerWidget {
   const ConditionForm({
     super.key,
+    this.initialValue,
   });
+
+  final String? initialValue;
+
+  static const maxLines = 8;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textController = useTextEditingController();
+    final textController = useTextEditingController(
+      text: initialValue,
+    );
 
-    final hideSendButton = useState(false);
+    final hideSendButton = useState(true);
     useEffect(
       () {
         textController.addListener(() {
-          hideSendButton.value = textController.text.isEmpty;
+          final text = textController.text;
+          hideSendButton.value = text.isEmpty;
         });
         return null;
       },
-      [
-        textController,
-      ],
+      [textController],
     );
 
     return ClipRRect(
@@ -41,7 +47,7 @@ class ConditionForm extends HookConsumerWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 4,
+            vertical: 8,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -66,13 +72,17 @@ class ConditionForm extends HookConsumerWidget {
                     horizontal: 16,
                     vertical: 8,
                   ),
-                  suffix: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: _SendButton(
-                      textController: textController,
+                  suffix: Visibility(
+                    // 文字がない場合は非表示
+                    visible: !hideSendButton.value,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: _SendButton(
+                        textController: textController,
+                      ),
                     ),
                   ),
-                  maxLines: 8,
+                  maxLines: maxLines,
                   minLines: 1,
                   keyboardType: TextInputType.multiline,
                 ),

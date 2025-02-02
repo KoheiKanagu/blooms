@@ -1,3 +1,4 @@
+import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
@@ -23,41 +24,55 @@ class ConditionPageList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewInsets = MediaQuery.of(context).viewInsets;
-    print(viewInsets);
+    const conditionFormKey = GlobalObjectKey('conditionFormKey');
+    final conditionFormHeight =
+        ref.watch(conditionFormHeightControllerProvider);
 
-    final onFocus = useState(false);
+    useEffect(
+      () {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref
+              .read(conditionFormHeightControllerProvider.notifier)
+              .calculateHeight(conditionFormKey);
+        });
+        return null;
+      },
+      [context],
+    );
 
-    return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          SafeArea(
-            child: MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                viewInsets: const EdgeInsets.only(
-                  bottom: 64,
-                ),
-              ),
-              child: _ListView(
+    return SafeArea(
+      child: CupertinoPageScaffold(
+        backgroundColor:
+            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        child: NotificationListener<SizeChangedLayoutNotification>(
+          onNotification: (notification) {
+            // ConditionFormで改行されて高さが変わったときに起きる
+            Future(() {
+              ref
+                  .read(conditionFormHeightControllerProvider.notifier)
+                  .calculateHeight(conditionFormKey);
+            });
+            return true;
+          },
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              _ListView(
                 query: query,
                 onItemDisplayed: onItemDisplayed,
+                padding: EdgeInsets.only(
+                  top: 24,
+                  bottom: conditionFormHeight,
+                ),
               ),
-            ),
+              const SizeChangedLayoutNotifier(
+                child: ConditionForm(
+                  key: conditionFormKey,
+                ),
+              ),
+            ],
           ),
-          SafeArea(
-            top: false,
-            bottom: !onFocus.value,
-            child: FocusScope(
-              onFocusChange: (value) {
-                onFocus.value = value;
-              },
-              child: const ConditionForm(),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -67,11 +82,14 @@ class _ListView extends HookConsumerWidget {
   const _ListView({
     required this.query,
     required this.onItemDisplayed,
+    required this.padding,
   });
 
   final Query<Condition> query;
 
   final ValueChanged<Condition> onItemDisplayed;
+
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -98,6 +116,7 @@ class _ListView extends HookConsumerWidget {
             }
           },
           child: ListView.separated(
+            padding: padding,
             reverse: true,
             itemCount: itemCount,
             itemBuilder: (context, index) {
