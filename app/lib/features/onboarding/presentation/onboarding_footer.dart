@@ -30,10 +30,20 @@ class OnboardingFooter extends HookConsumerWidget {
             widthFactor: 1,
             child: CupertinoButton.filled(
               child: progress.value
-                  ? const CupertinoActivityIndicator(
-                      color: CupertinoColors.white,
+                  ? CupertinoActivityIndicator(
+                      color:
+                          CupertinoColors.systemBackground.resolveFrom(context),
                     )
-                  : Text(i18n.kContinue),
+                  : Text(
+                      i18n.kContinue,
+                      style: CupertinoTheme.of(context)
+                          .textTheme
+                          .textStyle
+                          .copyWith(
+                            color: CupertinoColors.systemBackground
+                                .resolveFrom(context),
+                          ),
+                    ),
               onPressed: () async {
                 if (progress.value) {
                   return;
