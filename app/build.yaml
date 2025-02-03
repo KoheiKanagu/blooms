@@ -37,6 +37,7 @@ targets:
           timestamp: false
           statistics: false
           output_directory: lib/gen
+          input_directory: lib/i18n
 
 global_options:
   freezed:
