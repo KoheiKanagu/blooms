@@ -8,7 +8,7 @@ part of 'about_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$inquiryUriHash() => r'c52da67cf9c313d3bb5e2091795b889ec17ba608';
+String _$inquiryUriHash() => r'21d8df005adee290ed2469bcc8b441efa959a9a1';
 
 /// See also [inquiryUri].
 @ProviderFor(inquiryUri)

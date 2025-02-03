@@ -18,8 +18,8 @@ Future<Uri> inquiryUri(Ref ref) async {
 uid: $uid
 app name: BLOOMS
 app version: $version
-system name: $systemName,
-system version: $systemVersion,
+system name: $systemName
+system version: $systemVersion
 ''';
 
   return Uri(
