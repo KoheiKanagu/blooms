@@ -79,6 +79,7 @@ class OnboardingPage extends HookConsumerWidget {
                     itemBuilder: (context, index) => bodyItems[index],
                   ),
                 ),
+                const Gap(4),
                 SmoothPageIndicator(
                   controller: pageController,
                   count: bodyItems.length,

@@ -203,7 +203,7 @@ class TranslationsOnboardingPrivacyJa {
 
 	// Translations
 	String get title => 'プライバシー';
-	String get subtitle => 'あなたの記録は、あなた個人と紐付けれらません';
+	String get subtitle => 'あなたの記録は、あなた個人とは紐付けれらません';
 	String get description1 => 'ソーシャルアカウントやメールアドレスなど、個人を特定できる情報は必要ありません。';
 	String get description2 => 'BLOOMS独自のIDを発行して、あなたの記録を安全に保管します。';
 	TextSpan description3({required InlineSpanBuilder appLock}) => TextSpan(children: [
