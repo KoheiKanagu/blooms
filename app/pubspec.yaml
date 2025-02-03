@@ -82,9 +82,12 @@ flutter:
 
   assets:
     - assets/BLOOMS.webp
+    - assets/BLOOMS_dark.webp
 
     - packages/budoux_dart/models/ja.json
 
 flutter_native_splash:
   color: "#3C8789"
-  image: "../assets//icon/BLOOMS.png"
+  color_dark: "#9ED094"
+  image: "assets/BLOOMS.png"
+  image_dark: "assets/BLOOMS_dark.png"

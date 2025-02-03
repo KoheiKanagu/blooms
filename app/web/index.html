@@ -39,6 +39,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       name="viewport"
     />
+
     <style id="splash-screen-style">
       html {
         height: 100%;
@@ -99,6 +100,12 @@
         bottom: 0;
         right: 0;
       }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #9ed094;
+        }
+      }
     </style>
     <script id="splash-screen-script">
       function removeSplashFromWeb() {
@@ -135,6 +142,7 @@
         alt=""
       />
     </picture>
+
     <script src="flutter_bootstrap.js" async=""></script>
   </body>
 </html>
