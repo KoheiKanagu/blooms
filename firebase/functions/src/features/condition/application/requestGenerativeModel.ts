@@ -1,18 +1,25 @@
 import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
+import { outSensitiveLog } from '../../../utils/sensitive_log';
 import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
-import { outSensitiveLog } from '../../../utils/sensitive_log';
 
 function createParts(condition: Condition): Part[] {
   const date = condition.createdAtIso8601;
 
   switch (condition.content.type) {
     case 'text':
-      return [{
-        text: `${date} の記録: ${condition.content.text}`,
-      }];
+      switch (condition.creatorType) {
+        case 'user':
+          return [{
+            text: `${date} の記録: ${condition.content.text}`,
+          }];
+        case 'model':
+          return [{
+            text: `BLOOMSの回答: ${condition.content.text}`,
+          }];
+      }
 
     case 'textWithSearchKeywords':
       return [{
