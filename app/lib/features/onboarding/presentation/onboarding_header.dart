@@ -20,7 +20,9 @@ class OnboardingHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        child,
+        IgnorePointer(
+          child: child,
+        ),
         const Gap(12),
         FittedBox(
           fit: BoxFit.scaleDown,
@@ -34,7 +36,7 @@ class OnboardingHeader extends StatelessWidget {
           style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
           alignment: WrapAlignment.center,
         ),
-        const Gap(64),
+        const Gap(32),
       ],
     );
   }

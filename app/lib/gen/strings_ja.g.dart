@@ -94,10 +94,11 @@ class TranslationsOnboardingJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get subtitle => '妊娠中のあなたの体調を理解しやすくします';
 	String get letsGetStarted => 'さあ、はじめましょう';
-	String get privacy => 'プライバシー';
-	String get privacySubtitle => 'あなたの記録は、あなた個人と紐付けれらません';
+	late final TranslationsOnboardingNameJa name = TranslationsOnboardingNameJa.internal(_root);
+	late final TranslationsOnboardingPrivacyJa privacy = TranslationsOnboardingPrivacyJa.internal(_root);
+	late final TranslationsOnboardingAssistantJa assistant = TranslationsOnboardingAssistantJa.internal(_root);
+	late final TranslationsOnboardingHighlightJa highlight = TranslationsOnboardingHighlightJa.internal(_root);
 }
 
 // Path: deleteAll
@@ -179,6 +180,62 @@ class TranslationsHighlightFeaturesJa {
 	// Translations
 	String get description => '作成されるハイライトには次の特徴があります:';
 	late final TranslationsHighlightFeaturesSummaryJa summary = TranslationsHighlightFeaturesSummaryJa.internal(_root);
+}
+
+// Path: onboarding.name
+class TranslationsOnboardingNameJa {
+	TranslationsOnboardingNameJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'BLOOMS';
+	String get subtitle => '見つめてみよう。妊婦のあなたの日々の体調';
+	String get description1 => '変化しやすい体調も、知れば知るほど対策は取りやすくなります。';
+	String get description2 => 'BLOOMSは、あなたの体調を記録し、理解を深めるお手伝いをします。';
+}
+
+// Path: onboarding.privacy
+class TranslationsOnboardingPrivacyJa {
+	TranslationsOnboardingPrivacyJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'プライバシー';
+	String get subtitle => 'あなたの記録は、あなた個人と紐付けれらません';
+	String get description1 => 'ソーシャルアカウントやメールアドレスなど、個人を特定できる情報は必要ありません。';
+	String get description2 => 'BLOOMS独自のIDを発行して、あなたの記録を安全に保管します。';
+	TextSpan description3({required InlineSpanBuilder appLock}) => TextSpan(children: [
+		appLock('アプリをロック'),
+		const TextSpan(text: 'すれば、アプリはあなたにしか開けません。'),
+	]);
+}
+
+// Path: onboarding.assistant
+class TranslationsOnboardingAssistantJa {
+	TranslationsOnboardingAssistantJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'アシスタント';
+	String get subtitle => 'あなたの記録、アシストします';
+	String get description1 => 'あなたの記録を助けるパーソナルアシスタントが登場します。';
+	String get description2 => '提案された検索キーワードを使って、体調について理解を深めましょう。';
+}
+
+// Path: onboarding.highlight
+class TranslationsOnboardingHighlightJa {
+	TranslationsOnboardingHighlightJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'ハイライト';
+	String get subtitle => '記録をまとめて振り返りましょう';
+	String get description1 => 'たくさんの記録があっても、全てを見返す必要はありません。';
+	String get description2 => 'ハイライトを作成すれば、過去の記録を分かりやすく要約し、ひと目で把握できます。';
 }
 
 // Path: highlight.features.summary

@@ -6,19 +6,22 @@ class OnboardingBody extends StatelessWidget {
     super.key,
   });
 
-  final List<String> descriptions;
+  final List<Text> descriptions;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: descriptions
-          .map(
-            (e) => Text(
-              e,
-              style: CupertinoTheme.of(context).textTheme.textStyle,
-            ),
-          )
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: DefaultTextStyle(
+        style: CupertinoTheme.of(context).textTheme.textStyle,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 4,
+          children: descriptions,
+        ),
+      ),
     );
   }
 }

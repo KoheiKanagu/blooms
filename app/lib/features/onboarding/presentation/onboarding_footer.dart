@@ -18,32 +18,37 @@ class OnboardingFooter extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final progress = useState(false);
 
-    return Column(
-      children: [
-        const _Terms(),
-        const Gap(12),
-        FractionallySizedBox(
-          widthFactor: 1,
-          child: CupertinoButton.filled(
-            child: progress.value
-                ? const CupertinoActivityIndicator(
-                    color: CupertinoColors.white,
-                  )
-                : Text(i18n.kContinue),
-            onPressed: () async {
-              if (progress.value) {
-                return;
-              }
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: Column(
+        children: [
+          const _Terms(),
+          const Gap(12),
+          FractionallySizedBox(
+            widthFactor: 1,
+            child: CupertinoButton.filled(
+              child: progress.value
+                  ? const CupertinoActivityIndicator(
+                      color: CupertinoColors.white,
+                    )
+                  : Text(i18n.kContinue),
+              onPressed: () async {
+                if (progress.value) {
+                  return;
+                }
 
-              progress.value = true;
+                progress.value = true;
 
-              ref.read(onboardingCompleteProvider);
-              await ref.read(authSignInProvider.future);
-            },
+                ref.read(onboardingCompleteProvider);
+                await ref.read(authSignInProvider.future);
+              },
+            ),
           ),
-        ),
-        const Gap(32),
-      ],
+          const Gap(32),
+        ],
+      ),
     );
   }
 }
