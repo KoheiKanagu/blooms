@@ -118,6 +118,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  budoux_dart:
+    dependency: "direct main"
+    description:
+      name: budoux_dart
+      sha256: "7211cfa7bc38beb00d1dfe9d1b9016a6089b0b84b45d6b0b20f66bf8dbd6ef3b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   build:
     dependency: transitive
     description:

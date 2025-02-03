@@ -1,7 +1,6 @@
 import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/onboarding/application/onboarding_providers.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -10,8 +9,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OnboardingPageBody4 extends HookConsumerWidget {
-  const OnboardingPageBody4({
+class OnboardingFooter extends HookConsumerWidget {
+  const OnboardingFooter({
     super.key,
   });
 
@@ -25,14 +24,6 @@ class OnboardingPageBody4 extends HookConsumerWidget {
       ),
       child: Column(
         children: [
-          const OnboardingAppIcon(),
-          const Gap(32),
-          Text(
-            i18n.onboarding.letsGetStarted,
-            style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
-            textAlign: TextAlign.center,
-          ),
-          const Spacer(),
           const _Terms(),
           const Gap(12),
           FractionallySizedBox(

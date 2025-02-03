@@ -1,7 +1,8 @@
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body1.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body2.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body3.dart';
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body4.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_assistant.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_highlight.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_lets_start.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_name.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,11 +20,15 @@ class OnboardingPage extends HookConsumerWidget {
     final pageController = usePageController();
     final visibleSkipButton = useState(false);
 
+    final enableMoveToPreviousButton = useState(false);
+    final enableMoveToNextButton = useState(true);
+
     final bodyItems = [
-      const OnboardingPageBody1(),
-      const OnboardingPageBody2(),
-      const OnboardingPageBody3(),
-      const OnboardingPageBody4(),
+      const OnboardingPageBodyName(),
+      const OnboardingPageBodyAssistant(),
+      const OnboardingPageBodyHighlight(),
+      const OnboardingPageBodyPrivacy(),
+      const OnboardingPageBodyLetsStart(),
     ];
 
     useEffect(
@@ -31,6 +36,13 @@ class OnboardingPage extends HookConsumerWidget {
         pageController.addListener(() {
           // 最後のページではスキップボタンを表示しない
           visibleSkipButton.value = pageController.page == bodyItems.length - 1;
+
+          // 最初のページでは前に戻るボタンは無効
+          enableMoveToPreviousButton.value = pageController.page != 0;
+
+          // 最後のページでは次に進むボタンは無効
+          enableMoveToNextButton.value =
+              pageController.page != bodyItems.length - 1;
         });
         return null;
       },
@@ -56,28 +68,66 @@ class OnboardingPage extends HookConsumerWidget {
         ),
       ),
       child: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: bodyItems.length,
-                itemBuilder: (context, index) {
-                  return bodyItems[index];
-                },
+            Column(
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: bodyItems.length,
+                    itemBuilder: (context, index) => bodyItems[index],
+                  ),
+                ),
+                const Gap(4),
+                SmoothPageIndicator(
+                  controller: pageController,
+                  count: bodyItems.length,
+                  effect: ColorTransitionEffect(
+                    dotColor: CupertinoColors.systemGrey5.resolveFrom(context),
+                    activeDotColor: myColorGreen1.resolveFrom(context),
+                    dotWidth: 10,
+                    dotHeight: 10,
+                  ),
+                ),
+                const Gap(8),
+              ],
+            ),
+            Positioned.fill(
+              child: Row(
+                children: [
+                  const Gap(8),
+                  CupertinoButton.tinted(
+                    sizeStyle: CupertinoButtonSize.small,
+                    padding: EdgeInsets.zero,
+                    onPressed: enableMoveToPreviousButton.value
+                        ? () {
+                            pageController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        : null,
+                    child: const Icon(CupertinoIcons.back),
+                  ),
+                  const Spacer(),
+                  CupertinoButton.tinted(
+                    sizeStyle: CupertinoButtonSize.small,
+                    padding: EdgeInsets.zero,
+                    onPressed: enableMoveToNextButton.value
+                        ? () {
+                            pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        : null,
+                    child: const Icon(CupertinoIcons.forward),
+                  ),
+                  const Gap(8),
+                ],
               ),
             ),
-            SmoothPageIndicator(
-              controller: pageController,
-              count: bodyItems.length,
-              effect: ColorTransitionEffect(
-                dotColor: CupertinoColors.systemGrey5.resolveFrom(context),
-                activeDotColor: myColorPink1.resolveFrom(context),
-                dotWidth: 10,
-                dotHeight: 10,
-              ),
-            ),
-            const Gap(8),
           ],
         ),
       ),

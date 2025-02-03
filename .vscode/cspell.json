@@ -14,9 +14,10 @@
     "app/lib/constants/firebase_options_stg.dart",
     "app/lib/constants/firebase_options_prod.dart",
     "firebase/functions/node_modules/**",
-    "app/pubspec.yaml",
+    "app/pubspec.yaml"
   ],
   "words": [
+    "budoux",
     "firestore",
     "flutterfire",
     "fvmrc",
