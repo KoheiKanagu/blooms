@@ -28,5 +28,12 @@ Future<String> firebaseStorageGsFileDownloadUrl(
 }) async {
   ref.cacheFor(const Duration(minutes: 5));
 
-  return ref.read(firebaseStorageProvider).refFromURL(fileUri).getDownloadURL();
+  if (fileUri.startsWith('gs://')) {
+    return ref
+        .read(firebaseStorageProvider)
+        .refFromURL(fileUri)
+        .getDownloadURL();
+  } else {
+    return fileUri;
+  }
 }

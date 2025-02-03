@@ -77,7 +77,7 @@ final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
 // ignore: unused_element
 typedef FirebaseStorageRef = ProviderRef<FirebaseStorage>;
 String _$firebaseStorageGsFileDownloadUrlHash() =>
-    r'4a4995977a9e0b686f573783f22548f2c43da9d5';
+    r'557f1caafe5513dfeb6f20e38ed5302f8be65247';
 
 /// Copied from Dart SDK
 class _SystemHash {

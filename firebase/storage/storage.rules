@@ -27,10 +27,5 @@ service firebase.storage {
       allow get, create:
         if isOwner(uid);
     }
-
-    match /public/{fileId} {
-      allow get:
-        if isAuthenticated();
-    }
   }
 }
