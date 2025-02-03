@@ -61,7 +61,7 @@ class HighlightTile extends StatelessWidget {
             description: description,
             selected: selected,
           ),
-          if (state == HighlightState.success)
+          if (state == HighlightState.success || selected != null)
             _Content(
               text: contentText,
             ),
