@@ -81,11 +81,13 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icon.webp
-    - assets/BLOOMS.webp
+    - assets/blooms.webp
+    - assets/blooms_dark.webp
 
     - packages/budoux_dart/models/ja.json
 
 flutter_native_splash:
   color: "#3C8789"
-  image: "../assets//icon/BLOOMS.png"
+  color_dark: "#9ED094"
+  image: "assets/blooms.png"
+  image_dark: "assets/blooms_dark.png"

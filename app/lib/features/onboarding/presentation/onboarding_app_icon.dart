@@ -17,10 +17,16 @@ class OnboardingAppIcon extends StatelessWidget {
           color: myColorGreen2,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Assets.blooms.image(
-          width: 96,
-          height: 96,
-        ),
+        child: switch (MediaQuery.platformBrightnessOf(context)) {
+          Brightness.dark => Assets.bloomsDark.image(
+              width: 96,
+              height: 96,
+            ),
+          Brightness.light => Assets.blooms.image(
+              width: 96,
+              height: 96,
+            )
+        },
       ),
     );
   }

@@ -115,6 +115,13 @@ class _BottomNavigationBar extends HookConsumerWidget {
           },
           child: Text(
             i18n.highlight.createHighlight,
+            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  color: MediaQuery.platformBrightnessOf(context) ==
+                          Brightness.light
+                      ? CupertinoColors.white
+                      : CupertinoColors.black,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
       ),

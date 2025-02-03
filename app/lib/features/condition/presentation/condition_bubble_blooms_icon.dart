@@ -14,10 +14,16 @@ class ConditionBubbleBloomsIcon extends StatelessWidget {
       children: [
         Row(
           children: [
-            Assets.blooms.image(
-              width: 20,
-              height: 20,
-            ),
+            switch (MediaQuery.platformBrightnessOf(context)) {
+              Brightness.dark => Assets.bloomsDark.image(
+                  width: 20,
+                  height: 20,
+                ),
+              Brightness.light => Assets.blooms.image(
+                  width: 20,
+                  height: 20,
+                )
+            },
             const Gap(4),
             Text(
               i18n.blooms,
