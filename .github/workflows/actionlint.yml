@@ -1,7 +1,6 @@
 # reference: https://github.com/rhysd/actionlint/blob/main/docs/usage.md#use-actionlint-on-github-actions
 name: Lint GitHub Actions workflows
 on:
-  - push
   - pull_request
 
 jobs:
