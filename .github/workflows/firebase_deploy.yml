@@ -37,6 +37,7 @@ jobs:
           # CIでデプロイしたい場合はFIREBASE_TOKENを設定する必要があるが、ひとまず手動でデプロイする
           # https://github.com/firebase/firebase-tools/issues/6310
           # - script: deploy_only_extensions.sh
+          - script: deploy_only_hosting_public.sh
           - script: deploy_only_hosting_app.sh
             flutterBuildScript: flutter_build_web_app.sh --flavor ${{ inputs.environment }}
           - script: deploy_only_hosting_widgetbook.sh

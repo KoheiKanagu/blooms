@@ -7,8 +7,11 @@
   "targets": {
     "blooms-stg": {
       "hosting": {
-        "app": [
+        "public": [
           "blooms-stg"
+        ],
+        "app": [
+          "blooms-app-stg"
         ],
         "widgetbook": [
           "blooms-widgetbook-stg"
@@ -17,8 +20,11 @@
     },
     "blooms-prod-43d74": {
       "hosting": {
-        "app": [
+        "public": [
           "blooms-prod-43d74"
+        ],
+        "app": [
+          "blooms-app-prod"
         ],
         "widgetbook": [
           "blooms-widgetbook-prod"

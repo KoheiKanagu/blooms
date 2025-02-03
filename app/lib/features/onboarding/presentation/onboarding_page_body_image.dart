@@ -7,7 +7,6 @@ import 'package:blooms/features/onboarding/presentation/onboarding_header.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_decoration.dart';
-import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
@@ -39,16 +38,16 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
                 ConditionBubble(
                   documentId: '',
                   createdAt: DateTime(2025, 2, 10, 9, 41),
-                  content: ConditionContentImage(
+                  content: const ConditionContentImage(
                     attachments: [
                       ConditionContentImageAttachment(
                         fileUri:
-                            'gs://${ref.read(firebaseStorageProvider).bucket}/public/IMG_5176.jpg',
+                            'https://blooms.kingu.dev/assets/images/IMG_5176.jpg',
                         mimeType: 'image/jpeg',
                         width: 640,
                         height: 480,
                         additionalInfo:
-                            const ConditionContentImageAttachmentAdditionalInfo(
+                            ConditionContentImageAttachmentAdditionalInfo(
                           blurHash: r'LDJ7s_$#~U.7RjWW$%xZ?Gxu8^M{',
                         ),
                       ),

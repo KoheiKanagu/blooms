@@ -26,10 +26,10 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
-rm -rf ../firebase/public
+rm -rf ../firebase/app
 
 flutter build web \
   --target lib/main.dart \
   --wasm \
   --dart-define FLUTTER_APP_FLAVOR="$flavor" \
-  --output ../firebase/hosting/public/
+  --output ../firebase/hosting/app/
