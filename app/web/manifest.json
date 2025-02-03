@@ -3,10 +3,15 @@
     "short_name": "BLOOMS",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#FFFFFF",
-    "theme_color": "#FFFFFF",
-    "orientation": "portrait-primary",
-    "prefer_related_applications": false,
+    "background_color": "#FF3C8789",
+    "theme_color": "#FF3C8789",
+    "prefer_related_applications": true,
+    "related_applications": [
+        {
+            "platform": "itunes",
+            "url": "https://apps.apple.com/app/blooms/id6740260241"
+        }
+    ],
     "icons": [
         {
             "src": "icons/Icon-192.png",
