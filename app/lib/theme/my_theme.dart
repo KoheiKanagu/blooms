@@ -5,9 +5,9 @@ const myLightThemeData = CupertinoThemeData(
   primaryColor: myColorGreen2,
 );
 
-const myDarkThemeData = CupertinoThemeData(
+final myDarkThemeData = CupertinoThemeData(
   brightness: Brightness.dark,
-  primaryColor: myColorGreen2,
+  primaryColor: myColorGreen2.darkColor,
 );
 
 const myColorPink1 = CupertinoDynamicColor.withBrightness(
