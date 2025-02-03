@@ -99,6 +99,7 @@ class TranslationsOnboardingJa {
 	late final TranslationsOnboardingNameJa name = TranslationsOnboardingNameJa.internal(_root);
 	late final TranslationsOnboardingPrivacyJa privacy = TranslationsOnboardingPrivacyJa.internal(_root);
 	late final TranslationsOnboardingAssistantJa assistant = TranslationsOnboardingAssistantJa.internal(_root);
+	late final TranslationsOnboardingImageJa image = TranslationsOnboardingImageJa.internal(_root);
 	late final TranslationsOnboardingHighlightJa highlight = TranslationsOnboardingHighlightJa.internal(_root);
 }
 
@@ -224,6 +225,19 @@ class TranslationsOnboardingAssistantJa {
 	String get subtitle => 'あなたの記録、アシストします';
 	String get description1 => 'あなたの記録を助けるパーソナルアシスタントが登場します。';
 	String get description2 => '提案された検索キーワードを使って、体調について理解を深めましょう。';
+}
+
+// Path: onboarding.image
+class TranslationsOnboardingImageJa {
+	TranslationsOnboardingImageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'フォト';
+	String get subtitle => '文字だけ、ではありません';
+	String get description1 => '食事の内容やその日の体験を写真でも記録できます。';
+	String get description2 => 'BLOOMSは何が写っているかを認識し、記録をより鮮明にします。';
 }
 
 // Path: onboarding.highlight
