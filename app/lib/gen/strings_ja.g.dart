@@ -131,6 +131,8 @@ class TranslationsAboutBLOOMSJa {
 	String get privacyPolicy => 'プライバシーポリシー';
 	String get licenseInformation => 'ライセンス情報';
 	String get deleteAllData => 'すべてのデータを削除';
+	String get yourId => 'あなたのID';
+	String get yourIdDescription => 'BLOOMSがあなたの識別するためのIDです。お問い合わせの際などに必要となる場合があります';
 }
 
 // Path: reminder
