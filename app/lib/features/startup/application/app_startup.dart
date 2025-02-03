@@ -17,16 +17,17 @@ Future<void> appStartup(Ref ref) async {
     ref.invalidate(packageInfoProvider);
   });
 
-  /// error handling
-  FlutterError.onError =
-      ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
-
-  PlatformDispatcher.instance.onError = (error, stack) {
-    ref
-        .read(firebaseCrashlyticsProvider)
-        .recordError(error, stack, fatal: true);
-    return true;
-  };
+  if (!kIsWeb) {
+    /// error handling
+    FlutterError.onError =
+        ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      ref
+          .read(firebaseCrashlyticsProvider)
+          .recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   /// initialize AppCheck
   await Future.wait([
