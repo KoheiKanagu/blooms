@@ -39,7 +39,7 @@ class WidgetbookApp extends StatelessWidget {
               name: 'Light',
               data: myLightThemeData,
             ),
-            const WidgetbookTheme(
+            WidgetbookTheme(
               name: 'Dark',
               data: myDarkThemeData,
             ),
