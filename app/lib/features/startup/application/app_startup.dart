@@ -1,5 +1,6 @@
 import 'package:blooms/constants/app_env.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
+import 'package:blooms/utils/configure/device_info_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
@@ -15,6 +16,7 @@ part 'app_startup.g.dart';
 Future<void> appStartup(Ref ref) async {
   ref.onDispose(() {
     ref.invalidate(packageInfoProvider);
+    ref.invalidate(deviceInfoProvider);
   });
 
   if (!kIsWeb) {
@@ -55,6 +57,7 @@ Future<void> appStartup(Ref ref) async {
         .read(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
     ref.read(packageInfoProvider.future),
+    ref.read(deviceInfoProvider.future),
     ref.read(firebaseAuthProvider).setSettings(
           userAccessGroup: kKeychainGroup,
         ),

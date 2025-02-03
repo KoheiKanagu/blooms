@@ -133,6 +133,7 @@ class TranslationsAboutBLOOMSJa {
 	String get deleteAllData => 'すべてのデータを削除';
 	String get yourId => 'あなたのID';
 	String get yourIdDescription => 'BLOOMSがあなたの識別するためのIDです。お問い合わせの際などに必要となる場合があります';
+	String get inquiry => 'お問い合わせ';
 }
 
 // Path: reminder

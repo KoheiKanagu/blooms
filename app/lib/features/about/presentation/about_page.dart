@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/constants/my_url.dart';
+import 'package:blooms/features/about/application/about_provider.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
@@ -129,6 +130,18 @@ class AboutPage extends HookConsumerWidget {
                 trailing: const CupertinoListTileChevron(),
                 onTap: () {
                   launchUrl(MyUrl.github);
+                },
+              ),
+              CupertinoListTile.notched(
+                title: Text(i18n.aboutBLOOMS.inquiry),
+                leading: Icon(
+                  CupertinoIcons.mail_solid,
+                  color: CupertinoColors.systemBlue.resolveFrom(context),
+                ),
+                trailing: const CupertinoListTileChevron(),
+                onTap: () async {
+                  final url = await ref.read(inquiryUriProvider.future);
+                  await launchUrl(url);
                 },
               ),
             ],
