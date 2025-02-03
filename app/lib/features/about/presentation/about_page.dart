@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/constants/my_url.dart';
+import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
@@ -11,6 +12,7 @@ import 'package:blooms/widgets/blooms_logo.dart';
 import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,6 +73,43 @@ class AboutPage extends HookConsumerWidget {
                       ),
                     ),
                   );
+                },
+              ),
+              CupertinoListTile.notched(
+                title: Text(i18n.aboutBLOOMS.yourId),
+                leading: Icon(
+                  CupertinoIcons.person_fill,
+                  color: CupertinoColors.systemCyan.resolveFrom(context),
+                ),
+                subtitle: Text(
+                  ref.watch(firebaseUserUidProvider).valueOrNull ?? '',
+                ),
+                onTap: () async {
+                  final uid =
+                      ref.read(firebaseUserUidProvider).valueOrNull ?? '';
+
+                  final result = await showModalActionSheet<String>(
+                    context: context,
+                    title: '${i18n.aboutBLOOMS.yourId}\n$uid',
+                    message: i18n.aboutBLOOMS.yourIdDescription,
+                    style: AdaptiveStyle.iOS,
+                    actions: [
+                      SheetAction(
+                        key: 'copy',
+                        label:
+                            CupertinoLocalizations.of(context).copyButtonLabel,
+                      ),
+                    ],
+                  );
+
+                  if (result == 'copy') {
+                    await Clipboard.setData(
+                      ClipboardData(
+                        text: uid,
+                      ),
+                    );
+                    await HapticFeedback.heavyImpact();
+                  }
                 },
               ),
             ],
