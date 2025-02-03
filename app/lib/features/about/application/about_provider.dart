@@ -32,6 +32,4 @@ system version: $systemVersion,
       'entry.637067867': systemInfo,
     },
   );
-
-  'https://docs.google.com/forms/d/e/1FAIpQLSesrBpQGaPl1siIwauy9fwlVUlFvDdpGrf9yVjqcGFYMcvdHQ/viewform';
 }

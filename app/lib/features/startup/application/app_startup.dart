@@ -15,8 +15,9 @@ part 'app_startup.g.dart';
 @riverpod
 Future<void> appStartup(Ref ref) async {
   ref.onDispose(() {
-    ref.invalidate(packageInfoProvider);
-    ref.invalidate(deviceInfoProvider);
+    ref
+      ..invalidate(packageInfoProvider)
+      ..invalidate(deviceInfoProvider);
   });
 
   if (!kIsWeb) {
