@@ -49,6 +49,11 @@ updates:
         patterns:
           - "*_info_plus"
 
+      go_router:
+        patterns:
+          - "go_router"
+          - "go_router_builder"
+
   - package-ecosystem: "npm"
     directory: "/firebase/functions"
     open-pull-requests-limit: 100
