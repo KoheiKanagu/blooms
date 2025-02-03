@@ -18,26 +18,32 @@ class OnboardingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        IgnorePointer(
-          child: child,
-        ),
-        const Gap(12),
-        FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            title,
-            style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: Column(
+        children: [
+          IgnorePointer(
+            child: child,
           ),
-        ),
-        const Gap(8),
-        subtitle.wrapBudouXText(
-          style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
-          alignment: WrapAlignment.center,
-        ),
-        const Gap(32),
-      ],
+          const Gap(12),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              title,
+              style:
+                  CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+            ),
+          ),
+          const Gap(8),
+          subtitle.wrapBudouXText(
+            style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
+            alignment: WrapAlignment.center,
+          ),
+          const Gap(32),
+        ],
+      ),
     );
   }
 }

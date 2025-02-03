@@ -26,46 +26,41 @@ class OnboardingPageBodyHighlight extends StatelessWidget {
         OnboardingHeader(
           title: i18n.onboarding.highlight.title,
           subtitle: i18n.onboarding.highlight.subtitle,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-            ),
-            child: Container(
-              decoration: MyDecoration.dropShadow(context),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Column(
-                  children: [
-                    HighlightPageListTile(
-                      documentId: '',
-                      highlight: Highlight(
-                        subjectUid: '',
-                        content: HighlightContent.summary(
-                          startAt: Timestamp.fromDate(DateTime(2025, 2, 9)),
-                          period: HighlightPeriod.past1day,
-                          summary: '',
-                          abstract:
-                              '今日は少し眠気を感じやすい時間帯があったみたいですね。鼻水も出ているようなので、ゆっくり休んでくださいね。',
-                          state: HighlightState.success,
-                        ),
+          child: Container(
+            decoration: MyDecoration.dropShadow(context),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Column(
+                children: [
+                  HighlightPageListTile(
+                    documentId: '',
+                    highlight: Highlight(
+                      subjectUid: '',
+                      content: HighlightContent.summary(
+                        startAt: Timestamp.fromDate(DateTime(2025, 2, 9)),
+                        period: HighlightPeriod.past1day,
+                        summary: '',
+                        abstract:
+                            '今日は少し眠気を感じやすい時間帯があったみたいですね。鼻水も出ているようなので、ゆっくり休んでくださいね。',
+                        state: HighlightState.success,
                       ),
                     ),
-                    HighlightPageListTile(
-                      documentId: '',
-                      highlight: Highlight(
-                        subjectUid: '',
-                        content: HighlightContent.summary(
-                          startAt: Timestamp.fromDate(DateTime(2025, 2, 9)),
-                          period: HighlightPeriod.past14days,
-                          summary: '',
-                          abstract:
-                              '最近、眠気を感じることが多いようですね。また、お腹の調子が優れない日もあったとのこと、体調管理にはお気を付けてくださいね。',
-                          state: HighlightState.success,
-                        ),
+                  ),
+                  HighlightPageListTile(
+                    documentId: '',
+                    highlight: Highlight(
+                      subjectUid: '',
+                      content: HighlightContent.summary(
+                        startAt: Timestamp.fromDate(DateTime(2025, 2, 9)),
+                        period: HighlightPeriod.past14days,
+                        summary: '',
+                        abstract:
+                            '最近、眠気を感じることが多いようですね。また、お腹の調子が優れない日もあったとのこと、体調管理にはお気を付けてくださいね。',
+                        state: HighlightState.success,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

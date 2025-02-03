@@ -39,6 +39,7 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
                         .copyWith(
                           color:
                               CupertinoColors.activeBlue.resolveFrom(context),
+                          fontSize: 14,
                         ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
