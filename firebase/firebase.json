@@ -45,8 +45,15 @@
   },
   "hosting": [
     {
-      "target": "app",
+      "target": "public",
       "public": "hosting/public",
+      "ignore": [
+        "**/.*"
+      ]
+    },
+    {
+      "target": "app",
+      "public": "hosting/app",
       "ignore": [
         "**/.*"
       ],
