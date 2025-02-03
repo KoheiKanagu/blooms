@@ -17,7 +17,7 @@ function createParts(condition: Condition): Part[] {
 
     case 'textWithSearchKeywords':
       return [{
-        text: `回答: ${condition.content.text}`,
+        text: `BLOOMSの回答: ${condition.content.text}`,
       }, {
         text: `検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
       }];
