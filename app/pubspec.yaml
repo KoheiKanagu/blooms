@@ -81,7 +81,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icon.webp
     - assets/BLOOMS.webp
 
     - packages/budoux_dart/models/ja.json
