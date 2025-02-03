@@ -8,6 +8,7 @@ import 'package:blooms/utils/budoux.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,17 +47,36 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(myGoRouterProvider);
 
-    return CupertinoApp.router(
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      routerConfig: router,
-      theme: MediaQuery.of(context).platformBrightness == Brightness.light
-          ? myLightThemeData
-          : myDarkThemeData,
+    return wrapFixedWidth(
+      context: context,
+      child: CupertinoApp.router(
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: const [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        routerConfig: router,
+        theme: MediaQuery.of(context).platformBrightness == Brightness.light
+            ? myLightThemeData
+            : myDarkThemeData,
+      ),
+    );
+  }
+
+  /// Webだけ固定幅にする
+  Widget wrapFixedWidth({
+    required Widget child,
+    required BuildContext context,
+  }) {
+    if (!kIsWeb) {
+      return child;
+    }
+
+    final width = MediaQuery.of(context).size.width;
+    return FractionallySizedBox(
+      widthFactor: width < 500 ? 1.0 : 500 / width,
+      child: child,
     );
   }
 }
