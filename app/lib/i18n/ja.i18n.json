@@ -99,7 +99,8 @@
     "licenseInformation": "ライセンス情報",
     "deleteAllData": "すべてのデータを削除",
     "yourId": "あなたのID",
-    "yourIdDescription": "BLOOMSがあなたの識別するためのIDです。お問い合わせの際などに必要となる場合があります"
+    "yourIdDescription": "BLOOMSがあなたの識別するためのIDです。お問い合わせの際などに必要となる場合があります",
+    "inquiry": "お問い合わせ"
   },
   "reminder": {
     "reminder": "リマインダー",
