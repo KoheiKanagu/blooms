@@ -1,6 +1,6 @@
-import 'package:blooms/gen/assets.gen.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:blooms/theme/my_theme.dart';
+import 'package:blooms/widgets/blooms_logo.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingAppIcon extends StatelessWidget {
@@ -17,16 +17,7 @@ class OnboardingAppIcon extends StatelessWidget {
           color: myColorGreen2,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: switch (MediaQuery.platformBrightnessOf(context)) {
-          Brightness.dark => Assets.bloomsDark.image(
-              width: 96,
-              height: 96,
-            ),
-          Brightness.light => Assets.blooms.image(
-              width: 96,
-              height: 96,
-            )
-        },
+        child: const BloomsLogo(dimension: 96),
       ),
     );
   }
