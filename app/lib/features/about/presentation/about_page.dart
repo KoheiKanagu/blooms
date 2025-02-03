@@ -1,10 +1,13 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/constants/my_url.dart';
+import 'package:blooms/features/onboarding/application/onboarding_page_route.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
 import 'package:blooms/features/user/application/user_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/routing/application/my_go_router.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
+import 'package:blooms/widgets/blooms_logo.dart';
 import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +53,27 @@ class AboutPage extends HookConsumerWidget {
                   fontSize: 14,
                 ),
             textAlign: TextAlign.center,
+          ),
+          CupertinoListSection.insetGrouped(
+            children: [
+              CupertinoListTile.notched(
+                title: Text(i18n.aboutBLOOMS.whatIsBLOOMS),
+                leading: const BloomsLogo(dimension: 48),
+                trailing: const CupertinoListTileChevron(),
+                onTap: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute<void>(
+                      builder: (_) => const OnboardingPage(
+                        enableLetsStartPage: false,
+                      ),
+                      settings: const RouteSettings(
+                        name: OnboardingPageRoute.path,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
           CupertinoListSection.insetGrouped(
             children: [
