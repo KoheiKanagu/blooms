@@ -14,7 +14,7 @@ class OnboardingAppIcon extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: MyDecoration.dropShadow(context).copyWith(
-          color: myColorGreen2,
+          color: myColorGreen2.resolveFrom(context),
           borderRadius: BorderRadius.circular(16),
         ),
         child: const BloomsLogo(dimension: 96),

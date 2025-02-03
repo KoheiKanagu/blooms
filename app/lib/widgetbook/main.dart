@@ -35,11 +35,11 @@ class WidgetbookApp extends StatelessWidget {
       addons: [
         CupertinoThemeAddon(
           themes: [
-            const WidgetbookTheme(
+            WidgetbookTheme(
               name: 'Light',
               data: myLightThemeData,
             ),
-            const WidgetbookTheme(
+            WidgetbookTheme(
               name: 'Dark',
               data: myDarkThemeData,
             ),

@@ -126,7 +126,7 @@ class ConditionBubble extends HookConsumerWidget {
                         .secondarySystemGroupedBackground
                         .resolveFrom(context),
                     ConditionCreatorType.model =>
-                      myColorGreen2.withOpacity(0.1),
+                      myColorGreen2.resolveFrom(context).withOpacity(0.1),
                   },
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: switch (creatorType) {

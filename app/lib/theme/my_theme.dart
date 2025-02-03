@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-const myLightThemeData = CupertinoThemeData(
+final myLightThemeData = CupertinoThemeData(
   brightness: Brightness.light,
-  primaryColor: myColorGreen2,
+  primaryColor: myColorGreen2.color,
 );
 
-const myDarkThemeData = CupertinoThemeData(
+final myDarkThemeData = CupertinoThemeData(
   brightness: Brightness.dark,
-  primaryColor: myColorGreen1,
+  primaryColor: myColorGreen2.darkColor,
 );
 
 const myColorPink1 = CupertinoDynamicColor.withBrightness(
