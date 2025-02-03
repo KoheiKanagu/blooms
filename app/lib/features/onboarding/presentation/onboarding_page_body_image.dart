@@ -42,7 +42,8 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
                     attachments: [
                       ConditionContentImageAttachment(
                         fileUri:
-                            'https://blooms.kingu.dev/assets/images/IMG_5176.jpg',
+                            // blooms.kingu.dev ドメインだとCORSエラーになる
+                            'https://blooms-prod-43d74.web.app/assets/images/IMG_5176.jpg',
                         mimeType: 'image/jpeg',
                         width: 640,
                         height: 480,
