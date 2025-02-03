@@ -19,7 +19,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
 
-  final (locale, _, locationName, _) = (
+  await initBudouX();
+
+  final (locale, _, locationName) = (
     await LocaleSettings.useDeviceLocale(),
     await Firebase.initializeApp(
       options: switch (appEnv) {
@@ -28,7 +30,6 @@ Future<void> main() async {
       },
     ),
     await FlutterTimezone.getLocalTimezone(),
-    initBudouX(),
   );
   Intl.defaultLocale = locale.languageCode;
   tz.setLocalLocation(tz.getLocation(locationName));
