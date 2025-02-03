@@ -49,6 +49,17 @@
       "public": "hosting/public",
       "ignore": [
         "**/.*"
+      ],
+      "headers": [
+        {
+          "source": "assets/images/IMG_5176.jpg",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "https://app.blooms.kingu.dev"
+            }
+          ]
+        }
       ]
     },
     {
