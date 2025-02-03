@@ -1,5 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:blooms/features/highlight/domain/highlight.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
@@ -41,6 +39,8 @@ class OnboardingPageBodyHighlight extends StatelessWidget {
                         period: HighlightPeriod.past1day,
                         summary: '',
                         abstract:
+                            // too long
+                            // ignore: lines_longer_than_80_chars
                             '今日は少し眠気を感じやすい時間帯があったみたいですね。鼻水も出ているようなので、ゆっくり休んでくださいね。',
                         state: HighlightState.success,
                       ),
@@ -55,6 +55,8 @@ class OnboardingPageBodyHighlight extends StatelessWidget {
                         period: HighlightPeriod.past14days,
                         summary: '',
                         abstract:
+                            // too long
+                            // ignore: lines_longer_than_80_chars
                             '最近、眠気を感じることが多いようですね。また、お腹の調子が優れない日もあったとのこと、体調管理にはお気を付けてくださいね。',
                         state: HighlightState.success,
                       ),
