@@ -85,6 +85,7 @@ class ConditionForm extends HookConsumerWidget {
                   maxLines: maxLines,
                   minLines: 1,
                   keyboardType: TextInputType.multiline,
+                  placeholder: i18n.howIsYourConditionNow,
                 ),
               ),
               const Gap(16),
