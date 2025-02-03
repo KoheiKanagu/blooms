@@ -42,7 +42,7 @@ class HighlightDetailTile extends HookConsumerWidget {
                   vertical: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: myColorGreen2.withOpacity(0.1),
+                  color: myColorGreen2.resolveFrom(context).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
