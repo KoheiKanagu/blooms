@@ -25,15 +25,17 @@ import 'package:blooms/features/onboarding/presentation/onboarding_page_body_ass
     as _i8;
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_highlight.dart'
     as _i9;
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body_lets_start.dart'
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_image.dart'
     as _i10;
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body_name.dart'
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_lets_start.dart'
     as _i11;
-import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart'
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_name.dart'
     as _i12;
-import 'package:blooms/features/reminder/presentation/reminder_page.dart'
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart'
     as _i13;
-import 'package:blooms/features/startup/presentation/startup_page.dart' as _i14;
+import 'package:blooms/features/reminder/presentation/reminder_page.dart'
+    as _i14;
+import 'package:blooms/features/startup/presentation/startup_page.dart' as _i15;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -131,16 +133,20 @@ final directories = <_i1.WidgetbookNode>[
                     builder: _i9.onboardingPageBodyHighlight,
                   ),
                   _i1.WidgetbookUseCase(
+                    name: 'image',
+                    builder: _i10.onboardingPageBodyAssistant,
+                  ),
+                  _i1.WidgetbookUseCase(
                     name: 'lets start',
-                    builder: _i10.onboardingPageBodyLetsStart,
+                    builder: _i11.onboardingPageBodyLetsStart,
                   ),
                   _i1.WidgetbookUseCase(
                     name: 'name',
-                    builder: _i11.onboardingPageBodyName,
+                    builder: _i12.onboardingPageBodyName,
                   ),
                   _i1.WidgetbookUseCase(
                     name: 'privacy',
-                    builder: _i12.onboardingPageBodyPrivacy,
+                    builder: _i13.onboardingPageBodyPrivacy,
                   ),
                 ],
               )
@@ -159,11 +165,11 @@ final directories = <_i1.WidgetbookNode>[
                 useCases: [
                   _i1.WidgetbookUseCase(
                     name: 'condition',
-                    builder: _i13.reminderPageCondition,
+                    builder: _i14.reminderPageCondition,
                   ),
                   _i1.WidgetbookUseCase(
                     name: 'highlight',
-                    builder: _i13.reminderPageHighlight,
+                    builder: _i14.reminderPageHighlight,
                   ),
                 ],
               )
@@ -181,14 +187,14 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'AppStartupErrorWidget',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'AppStartupErrorWidget',
-                  builder: _i14.startupPageError,
+                  builder: _i15.startupPageError,
                 ),
               ),
               _i1.WidgetbookLeafComponent(
                 name: 'AppStartupLoadingWidget',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'AppStartupLoadingWidget',
-                  builder: _i14.startupPage,
+                  builder: _i15.startupPage,
                 ),
               ),
             ],

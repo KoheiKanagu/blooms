@@ -1,5 +1,6 @@
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_assistant.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_highlight.dart';
+import 'package:blooms/features/onboarding/presentation/onboarding_page_body_image.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_lets_start.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_name.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart';
@@ -31,6 +32,7 @@ class OnboardingPage extends HookConsumerWidget {
     final bodyItems = [
       const OnboardingPageBodyName(),
       const OnboardingPageBodyAssistant(),
+      const OnboardingPageBodyImage(),
       const OnboardingPageBodyHighlight(),
       const OnboardingPageBodyPrivacy(),
       if (enableLetsStartPage) const OnboardingPageBodyLetsStart(),
