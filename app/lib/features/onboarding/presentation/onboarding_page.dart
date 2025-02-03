@@ -13,7 +13,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPage extends HookConsumerWidget {
-  const OnboardingPage({super.key});
+  const OnboardingPage({
+    super.key,
+    this.enableLetsStartPage = true,
+  });
+
+  final bool enableLetsStartPage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +33,7 @@ class OnboardingPage extends HookConsumerWidget {
       const OnboardingPageBodyAssistant(),
       const OnboardingPageBodyHighlight(),
       const OnboardingPageBodyPrivacy(),
-      const OnboardingPageBodyLetsStart(),
+      if (enableLetsStartPage) const OnboardingPageBodyLetsStart(),
     ];
 
     useEffect(
