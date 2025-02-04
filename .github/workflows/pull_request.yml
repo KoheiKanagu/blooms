@@ -11,7 +11,7 @@ concurrency:
 jobs:
   changed-files:
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       app_any_changed: ${{ steps.changed-files.outputs.app_any_changed == 'true' }}
       firebase_any_changed: ${{ steps.changed-files.outputs.firebase_any_changed == 'true' }}
@@ -33,7 +33,7 @@ jobs:
   check_app:
     needs: changed-files
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       actions: read
@@ -100,7 +100,7 @@ jobs:
   check_cloud_functions:
     needs: changed-files
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       id-token: write
       contents: read
@@ -152,7 +152,7 @@ jobs:
 
   check_firebase:
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       id-token: write
       contents: read
