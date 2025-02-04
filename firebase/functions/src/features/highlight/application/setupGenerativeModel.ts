@@ -1,4 +1,4 @@
-import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
+import { GenerativeModel, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
 import { projectID } from 'firebase-functions/params';
 import { HighlightType } from '../domain/highlight';
 
@@ -81,7 +81,7 @@ function buildPrompt(highlightType: HighlightType): {
   }
 }
 
-export function setupGenerativeModel(highlightType: HighlightType): GenerativeModelPreview {
+export function setupGenerativeModel(highlightType: HighlightType): GenerativeModel {
   const vertexAI = new VertexAI({
     project: projectID.value(),
     location: 'us-central1',
@@ -90,7 +90,6 @@ export function setupGenerativeModel(highlightType: HighlightType): GenerativeMo
   const { responseSchema, systemInstruction, temperature } = buildPrompt(highlightType);
 
   return vertexAI
-    .preview
     .getGenerativeModel({
       model: 'gemini-2.0-flash-exp',
       safetySettings: safetySettings,
