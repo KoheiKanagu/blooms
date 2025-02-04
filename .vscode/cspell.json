@@ -17,6 +17,7 @@
     "app/pubspec.yaml"
   ],
   "words": [
+    "blurhash",
     "budoux",
     "firestore",
     "flutterfire",

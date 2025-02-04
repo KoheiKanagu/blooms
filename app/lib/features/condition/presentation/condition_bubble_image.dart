@@ -93,10 +93,19 @@ class _BlurHashImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final blurHash = attachment.additionalInfo.blurHash ?? '';
+    final blurHash = attachment.additionalInfo.blurHash;
+    final width = attachment.width;
+    final height = attachment.height;
+
+    if (blurHash == null || width == 0 || height == 0) {
+      return const SizedBox(
+        width: 128,
+        height: 128,
+      );
+    }
 
     return AspectRatio(
-      aspectRatio: attachment.width / attachment.height,
+      aspectRatio: width / height,
       child: BlurHash(
         hash: blurHash,
       ),

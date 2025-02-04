@@ -19,12 +19,12 @@ service firebase.storage {
     }
 
     match /images_v1/{uid}/{fileId} {
-      allow get, create:
+      allow get:
         if isOwner(uid);
     }
 
     match /audios_v1/{uid}/{fileId} {
-      allow get, create:
+      allow get:
         if isOwner(uid);
     }
   }

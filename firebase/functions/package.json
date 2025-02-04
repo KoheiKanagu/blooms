@@ -21,9 +21,11 @@
   "types": "lib/src/index.d.ts",
   "dependencies": {
     "@google-cloud/vertexai": "^1.9.3",
+    "blurhash": "^2.0.5",
     "firebase-admin": "^13.0.2",
     "firebase-functions": "^6.3.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^3.0.1",
