@@ -1,3 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_assistant.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_highlight.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_image.dart';
@@ -6,6 +8,8 @@ import 'package:blooms/features/onboarding/presentation/onboarding_page_body_nam
 import 'package:blooms/features/onboarding/presentation/onboarding_page_body_privacy.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/theme/my_theme.dart';
+import 'package:blooms/utils/firebase/firebase_providers.dart';
+import 'package:blooms/utils/my_logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -58,6 +62,41 @@ class OnboardingPage extends HookConsumerWidget {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        // TODO デバッグボタンを削除
+        leading: CupertinoButton(
+          sizeStyle: CupertinoButtonSize.small,
+          padding: EdgeInsets.zero,
+          onPressed: () async {
+            final user = await ref.read(firebaseUserProvider.future);
+            final token = await user?.getIdTokenResult();
+
+            logger
+              ..info(user.toString())
+              ..info('uid: ${user?.uid}')
+              ..info('token: $token')
+              ..info('token.expirationTime: ${token?.expirationTime}')
+              ..info('token.issuedAtTime: ${token?.issuedAtTime}')
+              ..info('token.authTime: ${token?.authTime}')
+              ..info('token.signInProvider: ${token?.signInProvider}');
+
+            if (context.mounted) {
+              final result = await showModalActionSheet<String>(
+                context: context,
+                message: user.toString(),
+                actions: [
+                  const SheetAction(
+                    label: 'Crash',
+                    isDestructiveAction: true,
+                  ),
+                ],
+              );
+              if (result == 'Crash') {
+                ref.read(firebaseCrashlyticsProvider).crash();
+              }
+            }
+          },
+          child: const Icon(CupertinoIcons.info),
+        ),
         trailing: Visibility(
           visible: !visibleSkipButton.value,
           child: CupertinoButton(

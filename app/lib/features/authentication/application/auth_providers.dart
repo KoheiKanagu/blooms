@@ -74,6 +74,7 @@ Future<void> authSignOutWhenFirstRun(Ref ref) async {
   final firstRun = await preferences.getBool(key).then((e) => e ?? true);
 
   if (firstRun) {
+    logger.error('first run. signOut');
     await ref.read(firebaseAuthProvider).signOut();
     await preferences.setBool(key, false);
   }

@@ -43,7 +43,7 @@ final authSignOutProvider = AutoDisposeFutureProvider<void>.internal(
 // ignore: unused_element
 typedef AuthSignOutRef = AutoDisposeFutureProviderRef<void>;
 String _$authSignOutWhenFirstRunHash() =>
-    r'225923ad04a42f8200800511d4ae8db3e3336451';
+    r'e5e8b0618f088217922125fbaf9978910bb31e68';
 
 /// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する
 ///
