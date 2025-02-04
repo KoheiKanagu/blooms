@@ -111,5 +111,6 @@
     "saturday": "土曜日"
   },
   "done": "完了",
-  "howIsYourConditionNow": "今の体調は？"
+  "howIsYourConditionNow": "今の体調は？",
+  "appOnlyFeature": "この機能はアプリ版でのみ利用できます"
 }

@@ -59,6 +59,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsReminderJa reminder = TranslationsReminderJa.internal(_root);
 	String get done => '完了';
 	String get howIsYourConditionNow => '今の体調は？';
+	String get appOnlyFeature => 'この機能はアプリ版でのみ利用できます';
 }
 
 // Path: highlight
