@@ -1,11 +1,11 @@
 import 'package:blooms/features/reminder/application/reminder_providers.dart';
+import 'package:blooms/features/reminder/presentation/reminder_page_body.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/widgets/my_cupertino_page_scaffold_with_large_navigation_bar.dart';
-import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -70,59 +70,30 @@ class ReminderPage extends HookConsumerWidget {
           },
         ),
       ),
-      child: ListView(
+      child: Stack(
         children: [
-          CupertinoListSection.insetGrouped(
-            footer: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 28,
-              ),
-              child: Text(
-                switch (type) {
-                  ReminderType.condition => i18n.reminder.setConditionReminder,
-                  ReminderType.highlight => i18n.reminder.setHighlightReminder,
-                },
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      color:
-                          CupertinoColors.secondaryLabel.resolveFrom(context),
-                      fontSize: 12,
-                    ),
+          ReminderPageBody(
+            type: type,
+            onTimeChanged: (value) {
+              selectedTime.value = value;
+            },
+            switchValue: reminderSwitch.value,
+            onSwitchChanged: (value) {
+              reminderSwitch.value = value;
+            },
+          ),
+          // Webはローカル通知に未対応なのでカバーする
+          Visibility(
+            visible: kIsWeb,
+            child: Positioned.fill(
+              child: Container(
+                alignment: Alignment.center,
+                color: CupertinoColors.systemGrey
+                    .resolveFrom(context)
+                    .withOpacity(0.5),
+                child: Text(i18n.appOnlyFeature),
               ),
             ),
-            children: [
-              CupertinoListTile.notched(
-                title: FittedBox(
-                  child: ref.watch(reminderTimeProvider(type)).maybeWhen(
-                        orElse: CupertinoActivityIndicator.new,
-                        data: (time) => Row(
-                          children: [
-                            Visibility(
-                              visible: type == ReminderType.highlight,
-                              child: Row(
-                                children: [
-                                  Text(i18n.reminder.saturday),
-                                  const Gap(8),
-                                ],
-                              ),
-                            ),
-                            CupertinoTimePickerButton(
-                              initialTime: time,
-                              onTimeChanged: (value) {
-                                selectedTime.value = value;
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                ),
-                trailing: CupertinoSwitch(
-                  value: reminderSwitch.value,
-                  onChanged: (value) {
-                    reminderSwitch.value = value;
-                  },
-                ),
-              ),
-            ],
           ),
         ],
       ),
