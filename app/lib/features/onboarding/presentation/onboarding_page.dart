@@ -71,13 +71,15 @@ class OnboardingPage extends HookConsumerWidget {
             final token = await user?.getIdTokenResult();
 
             logger
-              ..info(user.toString())
-              ..info('uid: ${user?.uid}')
-              ..info('token: $token')
-              ..info('token.expirationTime: ${token?.expirationTime}')
-              ..info('token.issuedAtTime: ${token?.issuedAtTime}')
-              ..info('token.authTime: ${token?.authTime}')
-              ..info('token.signInProvider: ${token?.signInProvider}');
+              .error({
+                'user': user.toString(),
+                'uid': user?.uid,
+                'token': token,
+                'token.expirationTime': token?.expirationTime,
+                'token.issuedAtTime': token?.issuedAtTime,
+                'token.authTime': token?.authTime,
+                'token.signInProvider': token?.signInProvider,
+              })
 
             if (context.mounted) {
               final result = await showModalActionSheet<String>(
@@ -85,6 +87,7 @@ class OnboardingPage extends HookConsumerWidget {
                 message: user.toString(),
                 actions: [
                   const SheetAction(
+                    key: 'Crash',
                     label: 'Crash',
                     isDestructiveAction: true,
                   ),
