@@ -70,16 +70,15 @@ class OnboardingPage extends HookConsumerWidget {
             final user = await ref.read(firebaseUserProvider.future);
             final token = await user?.getIdTokenResult();
 
-            logger
-              .error({
-                'user': user.toString(),
-                'uid': user?.uid,
-                'token': token,
-                'token.expirationTime': token?.expirationTime,
-                'token.issuedAtTime': token?.issuedAtTime,
-                'token.authTime': token?.authTime,
-                'token.signInProvider': token?.signInProvider,
-              })
+            logger.error({
+              'user': user.toString(),
+              'uid': user?.uid,
+              'token': token,
+              'token.expirationTime': token?.expirationTime,
+              'token.issuedAtTime': token?.issuedAtTime,
+              'token.authTime': token?.authTime,
+              'token.signInProvider': token?.signInProvider,
+            });
 
             if (context.mounted) {
               final result = await showModalActionSheet<String>(
