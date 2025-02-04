@@ -1,4 +1,4 @@
-import { GenerativeModelPreview, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
+import { GenerativeModel, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
 import { projectID } from 'firebase-functions/params';
 
 const safetySettings: SafetySetting[] = [
@@ -78,7 +78,7 @@ function buildPrompt(): {
   };
 }
 
-export function setupGenerativeModel(): GenerativeModelPreview {
+export function setupGenerativeModel(): GenerativeModel {
   const vertexAI = new VertexAI({
     project: projectID.value(),
     location: 'us-central1',
@@ -87,7 +87,6 @@ export function setupGenerativeModel(): GenerativeModelPreview {
   const { responseSchema, systemInstruction, temperature } = buildPrompt();
 
   return vertexAI
-    .preview
     .getGenerativeModel({
       model: 'gemini-2.0-flash-exp',
       safetySettings: safetySettings,
