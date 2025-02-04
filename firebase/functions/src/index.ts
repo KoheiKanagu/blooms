@@ -34,3 +34,4 @@ export { onUserDeleteSchedule } from './features/auth/application/onUserDeleteSc
 export { onCreateAuthUser } from './features/auth/onCreateAuthUser';
 export { onConditionDocumentCreated } from './features/condition/onConditionDocumentCreated';
 export { onHighlightDocumentCreated } from './features/highlight/onHighlightDocumentCreated';
+export { processImage } from './features/image/processImage';
