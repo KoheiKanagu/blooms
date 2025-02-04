@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:blooms/features/condition/application/condition_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
+import 'package:blooms/utils/my_logger.dart';
 import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -189,10 +190,17 @@ class _PlusButton extends HookConsumerWidget {
 
             if (context.mounted) {
               final indicator = showMyProgressIndicator(context);
-              await ref.read(
-                conditionCreateImageProvider(xFiles: xFiles).future,
-              );
-              indicator.dismiss();
+
+              try {
+                await ref.read(
+                  conditionCreateImageProvider(xFiles: xFiles).future,
+                );
+              } on Exception catch (error, stack) {
+                // TODO: エラーダイアログ
+                logger.error(error, stack);
+              } finally {
+                indicator.dismiss();
+              }
             }
           },
         ),

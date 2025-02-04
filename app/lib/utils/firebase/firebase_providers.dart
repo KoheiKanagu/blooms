@@ -40,4 +40,6 @@ Future<String> firebaseStorageGsFileDownloadUrl(
 }
 
 @Riverpod(keepAlive: true)
-FirebaseFunctions firebaseFunctions(Ref ref) => FirebaseFunctions.instance;
+FirebaseFunctions firebaseFunctions(Ref ref) => FirebaseFunctions.instanceFor(
+      region: 'asia-northeast1',
+    );

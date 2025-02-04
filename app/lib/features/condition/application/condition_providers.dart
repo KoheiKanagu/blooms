@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:blooms/constants/collection_path.dart';
@@ -7,15 +8,15 @@ import 'package:blooms/features/authentication/application/firebase_user_provide
 import 'package:blooms/features/condition/domain/condition.dart';
 import 'package:blooms/features/condition/domain/condition_content_audio_attachment.dart';
 import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
+import 'package:blooms/features/condition/domain/process_condition_content_image_request.dart';
+import 'package:blooms/features/condition/domain/process_condition_content_image_response.dart';
 import 'package:blooms/features/condition/presentation/condition_form.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
 import 'package:blooms/utils/my_logger.dart';
-import 'package:blurhash_dart/blurhash_dart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -75,19 +76,6 @@ Future<void> conditionCreateText(
 }
 
 @riverpod
-Future<Reference> conditionImageStorageReference(
-  Ref ref, {
-  required String uid,
-  required String fileName,
-}) async {
-  return ref
-      .read(firebaseStorageProvider)
-      .ref(StoragePath.kImages)
-      .child(uid)
-      .child(fileName);
-}
-
-@riverpod
 Future<void> conditionCreateImage(
   Ref ref, {
   required List<XFile> xFiles,
@@ -101,35 +89,33 @@ Future<void> conditionCreateImage(
     (xFile) async {
       logger.info('Upload image: ${xFile.path}');
 
-      final reference = await ref.read(
-        conditionImageStorageReferenceProvider(
-          uid: uid,
-          fileName: xFile.name,
-        ).future,
+      final request = ProcessConditionContentImageRequest(
+        base64: base64.encode(await xFile.readAsBytes()),
       );
 
-      final image = img.decodeImage(await xFile.readAsBytes());
-      final blurHash = image == null ? '' : BlurHash.encode(image).hash;
-      final width = image?.width ?? 0;
-      final height = image?.height ?? 0;
-
-      final task = await reference.putFile(
-        File(xFile.path),
-      );
-      final mimeType = task.metadata?.contentType ?? '';
+      final response = await ref
+          .read(firebaseFunctionsProvider)
+          .httpsCallable(
+            'processConditionContentImage',
+          )
+          .call<Map<String, dynamic>>(
+            request.toJson(),
+          )
+          .then(
+            (e) => ProcessConditionContentImageResponse.fromJson(e.data),
+          );
 
       return ConditionContentImageAttachment.gs(
-        reference: reference,
-        mimeType: mimeType,
-        width: width,
-        height: height,
-        blurHash: blurHash,
+        gsFilePath: response.gsFilePath,
+        mimeType: response.mimeType,
+        width: response.width,
+        height: response.height,
+        blurHash: response.blurHash,
       );
     },
   );
 
   final attachments = await Future.wait(tasks);
-
   await ref.read(conditionCollectionReferenceProvider).add(
         Condition.image(
           uid: uid,

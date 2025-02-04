@@ -1,5 +1,4 @@
 import 'package:blooms/utils/typedefs.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'condition_content_image_attachment.freezed.dart';
@@ -17,14 +16,14 @@ class ConditionContentImageAttachment with _$ConditionContentImageAttachment {
   }) = _ConditionContentImageAttachment;
 
   factory ConditionContentImageAttachment.gs({
-    required Reference reference,
+    required String gsFilePath,
     required String mimeType,
     required int width,
     required int height,
     required String blurHash,
   }) =>
       ConditionContentImageAttachment(
-        fileUri: 'gs://${reference.bucket}/${reference.fullPath}',
+        fileUri: gsFilePath,
         mimeType: mimeType,
         width: width,
         height: height,
