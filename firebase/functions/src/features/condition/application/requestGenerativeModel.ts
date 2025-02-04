@@ -13,7 +13,7 @@ function createParts(condition: Condition): Part[] {
       switch (condition.creatorType) {
         case 'user':
           return [{
-            text: `${date} の記録: ${condition.content.text}`,
+            text: `${date} のユーザの記録: ${condition.content.text}`,
           }];
         case 'model':
           return [{
@@ -31,7 +31,7 @@ function createParts(condition: Condition): Part[] {
     case 'image':
       return [
         {
-          text: `${date} の記録`,
+          text: `${date} のユーザの記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -44,7 +44,7 @@ function createParts(condition: Condition): Part[] {
     case 'audio':
       return [
         {
-          text: `${date} の記録`,
+          text: `${date} のユーザの記録`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
