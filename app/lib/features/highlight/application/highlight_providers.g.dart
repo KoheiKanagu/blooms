@@ -9,12 +9,12 @@ part of 'highlight_providers.dart';
 // **************************************************************************
 
 String _$highlightCollectionReferenceHash() =>
-    r'b4a41eac906094b65ecd0b2a1b72e3f18678d746';
+    r'6073d585e8edffcd6ef2f5135ed288c760c3943c';
 
 /// See also [highlightCollectionReference].
 @ProviderFor(highlightCollectionReference)
 final highlightCollectionReferenceProvider =
-    AutoDisposeProvider<CollectionReference<Highlight>>.internal(
+    Provider<CollectionReference<Highlight>>.internal(
   highlightCollectionReference,
   name: r'highlightCollectionReferenceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -27,7 +27,7 @@ final highlightCollectionReferenceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HighlightCollectionReferenceRef
-    = AutoDisposeProviderRef<CollectionReference<Highlight>>;
+    = ProviderRef<CollectionReference<Highlight>>;
 String _$highlightQueryHash() => r'dabbf2c37054c7f63279c5df11c4ee8a5281ffcf';
 
 /// See also [highlightQuery].

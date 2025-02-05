@@ -22,7 +22,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'condition_providers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 CollectionReference<Condition> conditionCollectionReference(Ref ref) => ref
     .read(firebaseFirestoreProvider)
     .collection(CollectionPath.kConditions)
