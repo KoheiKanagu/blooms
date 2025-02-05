@@ -9,7 +9,7 @@ part of 'condition_providers.dart';
 // **************************************************************************
 
 String _$conditionCollectionReferenceHash() =>
-    r'fdb36e4ca436832eb211b896d866fd915771df69';
+    r'2d68de0e2dfc48f7460c928f7194d0d27c2dec61';
 
 /// See also [conditionCollectionReference].
 @ProviderFor(conditionCollectionReference)
@@ -28,7 +28,7 @@ final conditionCollectionReferenceProvider =
 // ignore: unused_element
 typedef ConditionCollectionReferenceRef
     = ProviderRef<CollectionReference<Condition>>;
-String _$conditionQueryHash() => r'dfb11c887004d561cf26df727d9454b1e7be534a';
+String _$conditionQueryHash() => r'04fd14e241ad1a678be5bf33dc2483c8b2f8bf26';
 
 /// See also [conditionQuery].
 @ProviderFor(conditionQuery)
@@ -46,7 +46,7 @@ final conditionQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ConditionQueryRef = AutoDisposeFutureProviderRef<Query<Condition>>;
-String _$conditionDeleteHash() => r'b2ce26c517f0740d9e55d4847e3a52b6c84cd7a1';
+String _$conditionDeleteHash() => r'e0cac1cd1b378612fc36f6d6aa5a42a536c242a0';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -198,7 +198,7 @@ class _ConditionDeleteProviderElement
 }
 
 String _$conditionCreateTextHash() =>
-    r'b55a9be5821d87cac1f32d5db9c00b4b3431050b';
+    r'592ef4a2a250d67bd9dbec7f13825b837d1bcb2f';
 
 /// See also [conditionCreateText].
 @ProviderFor(conditionCreateText)
@@ -329,7 +329,7 @@ class _ConditionCreateTextProviderElement
 }
 
 String _$conditionCreateImageHash() =>
-    r'02ef16e15cd0e1e0c934ff1cdd7af6bddd0b52cb';
+    r'904e35a31ca8b088ffc614ff524955c5151083b7';
 
 /// See also [conditionCreateImage].
 @ProviderFor(conditionCreateImage)
@@ -461,7 +461,7 @@ class _ConditionCreateImageProviderElement
 }
 
 String _$conditionAudioStorageReferenceHash() =>
-    r'b92a571a34e6c51957d8cfa0c2166ee0fd95ebb2';
+    r'341ad8426a80b549d7a043df2373788e86fa880b';
 
 /// See also [conditionAudioStorageReference].
 @ProviderFor(conditionAudioStorageReference)
@@ -616,7 +616,7 @@ class _ConditionAudioStorageReferenceProviderElement
 }
 
 String _$conditionCreateAudioHash() =>
-    r'a4ec503ffb4437c2efb9488aa365aedcf9e3010f';
+    r'77f40f5ec34e0bbab2bfd42de5bcadd9e35d6a2c';
 
 /// See also [conditionCreateAudio].
 @ProviderFor(conditionCreateAudio)

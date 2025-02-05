@@ -24,7 +24,7 @@ part 'condition_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 CollectionReference<Condition> conditionCollectionReference(Ref ref) => ref
-    .read(firebaseFirestoreProvider)
+    .watch(firebaseFirestoreProvider)
     .collection(CollectionPath.kConditions)
     .withConverter(
       fromFirestore: Condition.fromFirestore,
@@ -40,7 +40,7 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
   }
 
   return ref
-      .read(conditionCollectionReferenceProvider)
+      .watch(conditionCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('subjectUid', isEqualTo: uid)
       .orderBy('createdAt', descending: true);
@@ -52,7 +52,7 @@ Future<void> conditionDelete(
   required String documentId,
 }) async {
   await ref
-      .read(conditionCollectionReferenceProvider)
+      .watch(conditionCollectionReferenceProvider)
       .doc(documentId)
       .update(deletedAt);
 }
@@ -62,12 +62,12 @@ Future<void> conditionCreateText(
   Ref ref, {
   required String text,
 }) async {
-  final uid = await ref.read(firebaseUserUidProvider.future);
+  final uid = await ref.watch(firebaseUserUidProvider.future);
   if (uid == null) {
     throw Exception('uid is null');
   }
 
-  await ref.read(conditionCollectionReferenceProvider).add(
+  await ref.watch(conditionCollectionReferenceProvider).add(
         Condition.text(
           uid: uid,
           text: text,
@@ -80,7 +80,7 @@ Future<void> conditionCreateImage(
   Ref ref, {
   required List<XFile> xFiles,
 }) async {
-  final uid = await ref.read(firebaseUserUidProvider.future);
+  final uid = await ref.watch(firebaseUserUidProvider.future);
   if (uid == null) {
     throw Exception('uid is null');
   }
@@ -94,7 +94,7 @@ Future<void> conditionCreateImage(
       );
 
       final response = await ref
-          .read(firebaseFunctionsProvider)
+          .watch(firebaseFunctionsProvider)
           .httpsCallable(
             'processConditionContentImage',
           )
@@ -116,7 +116,7 @@ Future<void> conditionCreateImage(
   );
 
   final attachments = await Future.wait(tasks);
-  await ref.read(conditionCollectionReferenceProvider).add(
+  await ref.watch(conditionCollectionReferenceProvider).add(
         Condition.image(
           uid: uid,
           attachments: attachments,
@@ -131,7 +131,7 @@ Future<Reference> conditionAudioStorageReference(
   required String fileName,
 }) async {
   return ref
-      .read(firebaseStorageProvider)
+      .watch(firebaseStorageProvider)
       .ref(StoragePath.kAudios)
       .child(uid)
       .child(fileName);
@@ -142,12 +142,12 @@ Future<void> conditionCreateAudio(
   Ref ref, {
   required XFile xFile,
 }) async {
-  final uid = await ref.read(firebaseUserUidProvider.future);
+  final uid = await ref.watch(firebaseUserUidProvider.future);
   if (uid == null) {
     throw Exception('uid is null');
   }
 
-  final reference = await ref.read(
+  final reference = await ref.watch(
     conditionAudioStorageReferenceProvider(
       uid: uid,
       fileName: xFile.name,
@@ -159,7 +159,7 @@ Future<void> conditionCreateAudio(
   );
   final mimeType = task.metadata?.contentType ?? '';
 
-  await ref.read(conditionCollectionReferenceProvider).add(
+  await ref.watch(conditionCollectionReferenceProvider).add(
         Condition.audio(
           uid: uid,
           attachments: [

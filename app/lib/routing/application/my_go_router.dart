@@ -49,7 +49,7 @@ GoRouter myGoRouter(Ref ref) => GoRouter(
       },
       refreshListenable: ref.watch(refreshListenableProvider),
       redirect: (context, state) async {
-        final refreshListenable = ref.read(refreshListenableProvider).value;
+        final refreshListenable = ref.watch(refreshListenableProvider).value;
 
         final appStartupState =
             refreshListenable.appStartupState ?? const AsyncLoading();

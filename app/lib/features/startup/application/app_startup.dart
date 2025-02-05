@@ -23,10 +23,10 @@ Future<void> appStartup(Ref ref) async {
   if (!kIsWeb) {
     /// error handling
     FlutterError.onError =
-        ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
+        ref.watch(firebaseCrashlyticsProvider).recordFlutterFatalError;
     PlatformDispatcher.instance.onError = (error, stack) {
       ref
-          .read(firebaseCrashlyticsProvider)
+          .watch(firebaseCrashlyticsProvider)
           .recordError(error, stack, fatal: true);
       return true;
     };
@@ -51,22 +51,22 @@ Future<void> appStartup(Ref ref) async {
     // リリースモードの場合のみCrashlyticsを有効化
     if (!kIsWeb)
       ref
-          .read(firebaseCrashlyticsProvider)
+          .watch(firebaseCrashlyticsProvider)
           .setCrashlyticsCollectionEnabled(kReleaseMode),
     // リリースモードの場合のみAnalyticsを有効化
     ref
-        .read(firebaseAnalyticsProvider)
+        .watch(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
-    ref.read(packageInfoProvider.future),
-    ref.read(deviceInfoProvider.future),
-    ref.read(firebaseAuthProvider).setSettings(
+    ref.watch(packageInfoProvider.future),
+    ref.watch(deviceInfoProvider.future),
+    ref.watch(firebaseAuthProvider).setSettings(
           userAccessGroup: kKeychainGroup,
         ),
-    ref.read(authSignOutWhenFirstRunProvider.future),
+    ref.watch(authSignOutWhenFirstRunProvider.future),
   ]);
 
   await Future.wait([
     // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
-    ref.read(firebaseAuthProvider).authStateChanges().first,
+    ref.watch(firebaseAuthProvider).authStateChanges().first,
   ]);
 }

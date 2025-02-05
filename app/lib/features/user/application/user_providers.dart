@@ -16,7 +16,7 @@ part 'user_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 CollectionReference<User> userCollectionReference(Ref ref) => ref
-    .read(firebaseFirestoreProvider)
+    .watch(firebaseFirestoreProvider)
     .collection(CollectionPath.kUsers)
     .withConverter(
       fromFirestore: User.fromFirestore,
@@ -25,15 +25,15 @@ CollectionReference<User> userCollectionReference(Ref ref) => ref
 
 @riverpod
 Stream<DocumentSnapshot<User>> userDocumentSnapshot(Ref ref, String uid) =>
-    ref.read(userCollectionReferenceProvider).doc(uid).snapshots();
+    ref.watch(userCollectionReferenceProvider).doc(uid).snapshots();
 
 @riverpod
 Future<void> userDelete(Ref ref) async {
-  await ref.read(firebaseAnalyticsProvider).logEvent(name: 'user_delete');
+  await ref.watch(firebaseAnalyticsProvider).logEvent(name: 'user_delete');
 
   logger.debug('add deletedAt');
 
-  final results = await ref.read(userProvider.future);
+  final results = await ref.watch(userProvider.future);
   if (results == null) {
     throw Exception('user is null');
   }
@@ -42,7 +42,7 @@ Future<void> userDelete(Ref ref) async {
 
   await reference.update(TimestampConverter.addDeletedAt(user.toJson()));
 
-  await ref.read(authSignOutProvider.future);
+  await ref.watch(authSignOutProvider.future);
   logger.debug('userDelete succeeded');
 }
 

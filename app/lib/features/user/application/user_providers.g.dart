@@ -9,7 +9,7 @@ part of 'user_providers.dart';
 // **************************************************************************
 
 String _$userCollectionReferenceHash() =>
-    r'05e21f6d8538e1242cb16008ce24be3faee1df32';
+    r'c2c2d5d6d979c6cdd18c3a9d25303c6d6df1b37d';
 
 /// See also [userCollectionReference].
 @ProviderFor(userCollectionReference)
@@ -28,7 +28,7 @@ final userCollectionReferenceProvider =
 // ignore: unused_element
 typedef UserCollectionReferenceRef = ProviderRef<CollectionReference<User>>;
 String _$userDocumentSnapshotHash() =>
-    r'f626dd4605c1537ddd8c78d16679a60894c26d02';
+    r'0819feb0eb14e41023de9556b8ec29cfe4c13598';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -184,7 +184,7 @@ class _UserDocumentSnapshotProviderElement
   String get uid => (origin as UserDocumentSnapshotProvider).uid;
 }
 
-String _$userDeleteHash() => r'7be94a947bfb417dbe0562403c4245df9552a852';
+String _$userDeleteHash() => r'33407c635b95184f2bc728e63f7a8327ce851a21';
 
 /// See also [userDelete].
 @ProviderFor(userDelete)

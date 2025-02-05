@@ -16,13 +16,13 @@ Future<void> authSignIn(Ref ref) async {
   logger.debug('signIn');
 
   // 初期化が完了するまで待つ
-  final current = await ref.read(firebaseAuthProvider).authStateChanges().first;
+  final current = await ref.watch(firebaseAuthProvider).authStateChanges().first;
 
   final String uid;
   if (current == null) {
     logger.info('not signed in');
 
-    final credential = await ref.read(firebaseAuthProvider).signInAnonymously();
+    final credential = await ref.watch(firebaseAuthProvider).signInAnonymously();
     uid = credential.user?.uid ?? '';
   } else {
     logger.info('already signed in');
@@ -36,12 +36,12 @@ Future<void> authSignIn(Ref ref) async {
 
   logger.debug('await user document');
   // Cloud FunctionsでUserドキュメントが作成されるまで待つ
-  await ref.read(userDocumentSnapshotProvider(uid).future).catchError((
+  await ref.watch(userDocumentSnapshotProvider(uid).future).catchError((
     _,
     __,
   ) async {
     logger.warning('error. signOut and throw error');
-    await ref.read(authSignOutProvider.future);
+    await ref.watch(authSignOutProvider.future);
     throw Exception('not found user document: $uid');
   });
 
@@ -50,15 +50,15 @@ Future<void> authSignIn(Ref ref) async {
 
 @riverpod
 Future<void> authSignOut(Ref ref) async {
-  await ref.read(firebaseAnalyticsProvider).logEvent(name: 'sign_out');
+  await ref.watch(firebaseAnalyticsProvider).logEvent(name: 'sign_out');
 
   logger.debug('clear local data');
   await Future.wait([
-    ref.read(sharedPreferencesProvider).clear(),
-    ref.read(firebaseAnalyticsControllerProvider).resetAnalyticsData(),
+    ref.watch(sharedPreferencesProvider).clear(),
+    ref.watch(firebaseAnalyticsControllerProvider).resetAnalyticsData(),
   ]);
 
-  await ref.read(firebaseAuthProvider).signOut();
+  await ref.watch(firebaseAuthProvider).signOut();
   logger.debug('signOut succeeded');
 }
 
@@ -68,13 +68,13 @@ Future<void> authSignOut(Ref ref) async {
 /// アプリを再インストールしたり、別の端末であっても認証情報が復元されてしまう可能性がある
 @riverpod
 Future<void> authSignOutWhenFirstRun(Ref ref) async {
-  final preferences = ref.read(sharedPreferencesProvider);
+  final preferences = ref.watch(sharedPreferencesProvider);
   const key = 'isFirstRun';
 
   final firstRun = await preferences.getBool(key).then((e) => e ?? true);
 
   if (firstRun) {
-    await ref.read(firebaseAuthProvider).signOut();
+    await ref.watch(firebaseAuthProvider).signOut();
     await preferences.setBool(key, false);
   }
 }

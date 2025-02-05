@@ -9,12 +9,12 @@ Future<PackageInfo> packageInfo(Ref ref) => PackageInfo.fromPlatform();
 
 @riverpod
 int packageInfoBuildNumber(Ref ref) =>
-    int.tryParse(ref.read(packageInfoProvider).requireValue.buildNumber) ?? 0;
+    int.tryParse(ref.watch(packageInfoProvider).requireValue.buildNumber) ?? 0;
 
 @riverpod
 String packageInfoVersion(Ref ref) =>
-    ref.read(packageInfoProvider).requireValue.version;
+    ref.watch(packageInfoProvider).requireValue.version;
 
 @riverpod
 String packageInfoAppName(Ref ref) =>
-    ref.read(packageInfoProvider).requireValue.appName;
+    ref.watch(packageInfoProvider).requireValue.appName;

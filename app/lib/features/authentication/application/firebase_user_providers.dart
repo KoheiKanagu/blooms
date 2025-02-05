@@ -15,7 +15,7 @@ part 'firebase_user_providers.g.dart';
 /// Providerの名称を変える場合は、[talkerRiverpodObserver] も変更すること
 @riverpod
 Stream<fb_auth.User?> firebaseUser(Ref ref) =>
-    ref.read(firebaseAuthProvider).userChanges();
+    ref.watch(firebaseAuthProvider).userChanges();
 
 /// UIDを取得する
 ///

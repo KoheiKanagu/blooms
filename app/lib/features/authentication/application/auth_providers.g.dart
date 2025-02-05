@@ -8,7 +8,7 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authSignInHash() => r'16fc684fd1130f3926f75f932f00e5fa291dc7d4';
+String _$authSignInHash() => r'842d8e9a44eab2d787db6da0d9441a279647aec2';
 
 /// サインインをした後、Userドキュメントが取得できるまで待つ
 ///
@@ -26,7 +26,7 @@ final authSignInProvider = AutoDisposeFutureProvider<void>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthSignInRef = AutoDisposeFutureProviderRef<void>;
-String _$authSignOutHash() => r'55ec4cb43fd258f03c624d28ad03ed59923ba4d1';
+String _$authSignOutHash() => r'3da2fa322852caa331f2c5caf581cd53f1269242';
 
 /// See also [authSignOut].
 @ProviderFor(authSignOut)
@@ -43,7 +43,7 @@ final authSignOutProvider = AutoDisposeFutureProvider<void>.internal(
 // ignore: unused_element
 typedef AuthSignOutRef = AutoDisposeFutureProviderRef<void>;
 String _$authSignOutWhenFirstRunHash() =>
-    r'225923ad04a42f8200800511d4ae8db3e3336451';
+    r'4a410d91777a74d0efa024bb26be5fa69c910534';
 
 /// アプリが初回起動かチェックして、初回起動の場合はサインアウトを実行する
 ///

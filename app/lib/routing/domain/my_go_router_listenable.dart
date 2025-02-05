@@ -49,7 +49,7 @@ Raw<ValueNotifier<MyGoRouterListenable>> refreshListenable(Ref ref) {
       (_, uid) async {
         if (!kIsWeb) {
           await ref
-              .read(firebaseCrashlyticsProvider)
+              .watch(firebaseCrashlyticsProvider)
               .setUserIdentifier(uid ?? '');
         }
       },

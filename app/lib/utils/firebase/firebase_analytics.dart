@@ -10,5 +10,5 @@ FirebaseAnalytics firebaseAnalytics(Ref ref) => FirebaseAnalytics.instance;
 @riverpod
 class FirebaseAnalyticsController extends _$FirebaseAnalyticsController {
   @override
-  FirebaseAnalytics build() => ref.read(firebaseAnalyticsProvider);
+  FirebaseAnalytics build() => ref.watch(firebaseAnalyticsProvider);
 }

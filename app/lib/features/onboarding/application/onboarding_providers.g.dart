@@ -9,7 +9,7 @@ part of 'onboarding_providers.dart';
 // **************************************************************************
 
 String _$onboardingIsCompletedHash() =>
-    r'157a97527c513163cd1ba52685ed77e325fb0600';
+    r'974714d7209fb10b05cb9c2e7df457e3a20de3ff';
 
 /// オンボーディングが完了しているかどうか
 ///
@@ -29,7 +29,7 @@ final onboardingIsCompletedProvider = AutoDisposeFutureProvider<bool>.internal(
 // ignore: unused_element
 typedef OnboardingIsCompletedRef = AutoDisposeFutureProviderRef<bool>;
 String _$onboardingCompleteHash() =>
-    r'020278280f8da90b6f5bcd76c10b206ba1c70489';
+    r'b067dcd4be8da0f6ac90a1396e3542e2b91971c9';
 
 /// オンボーディングが完了したことを記録
 ///

@@ -8,11 +8,11 @@ part 'about_provider.g.dart';
 
 @riverpod
 Future<Uri> inquiryUri(Ref ref) async {
-  final uid = await ref.read(firebaseUserUidProvider.future);
-  final version = ref.read(packageInfoVersionProvider);
+  final uid = await ref.watch(firebaseUserUidProvider.future);
+  final version = ref.watch(packageInfoVersionProvider);
 
-  final systemName = ref.read(deviceInfoSystemNameProvider);
-  final systemVersion = ref.read(deviceInfoSystemVersionProvider);
+  final systemName = ref.watch(deviceInfoSystemNameProvider);
+  final systemVersion = ref.watch(deviceInfoSystemVersionProvider);
 
   final systemInfo = '''
 uid: $uid

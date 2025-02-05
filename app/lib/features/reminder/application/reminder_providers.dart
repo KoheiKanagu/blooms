@@ -30,7 +30,7 @@ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin(Ref ref) =>
 
 @riverpod
 Future<void> flutterLocalNotificationPluginInitialize(Ref ref) =>
-    ref.read(flutterLocalNotificationsPluginProvider).initialize(
+    ref.watch(flutterLocalNotificationsPluginProvider).initialize(
           const InitializationSettings(
             iOS: DarwinInitializationSettings(),
           ),
@@ -44,12 +44,12 @@ Future<TimeOfDay> reminderTime(
 ) async {
   final results = switch (type) {
     ReminderType.condition => await Future.wait([
-        ref.read(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
-        ref.read(sharedPreferencesProvider).getInt(_reminderConditionMinuteKey),
+        ref.watch(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
+        ref.watch(sharedPreferencesProvider).getInt(_reminderConditionMinuteKey),
       ]),
     ReminderType.highlight => await Future.wait([
-        ref.read(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
-        ref.read(sharedPreferencesProvider).getInt(_reminderHighlightMinuteKey),
+        ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
+        ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightMinuteKey),
       ]),
   };
 
@@ -70,11 +70,11 @@ Future<bool> reminderStatus(
 ) {
   return switch (type) {
     ReminderType.condition => ref
-        .read(sharedPreferencesProvider)
+        .watch(sharedPreferencesProvider)
         .getBool(_reminderConditionEnableKey)
         .then((e) => e ?? false),
     ReminderType.highlight => ref
-        .read(sharedPreferencesProvider)
+        .watch(sharedPreferencesProvider)
         .getBool(_reminderHighlightEnableKey)
         .then((e) => e ?? false),
   };
@@ -91,12 +91,12 @@ Future<void> reminderSave(
   // オン
   if (enable) {
     // 通知を初期化
-    await ref.read(flutterLocalNotificationPluginInitializeProvider.future);
+    await ref.watch(flutterLocalNotificationPluginInitializeProvider.future);
 
     // スケジュール
     switch (type) {
       case ReminderType.condition:
-        await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
+        await ref.watch(flutterLocalNotificationsPluginProvider).zonedSchedule(
               _reminderConditionNotificationId,
               i18n.reminder.conditionReminderNotificationTitle,
               null,
@@ -111,7 +111,7 @@ Future<void> reminderSave(
             );
 
       case ReminderType.highlight:
-        await ref.read(flutterLocalNotificationsPluginProvider).zonedSchedule(
+        await ref.watch(flutterLocalNotificationsPluginProvider).zonedSchedule(
               _reminderHighlightNotificationId,
               i18n.reminder.highlightReminderNotificationTitle,
               null,
@@ -131,11 +131,11 @@ Future<void> reminderSave(
     switch (type) {
       case ReminderType.condition:
         await ref
-            .read(flutterLocalNotificationsPluginProvider)
+            .watch(flutterLocalNotificationsPluginProvider)
             .cancel(_reminderConditionNotificationId);
       case ReminderType.highlight:
         await ref
-            .read(flutterLocalNotificationsPluginProvider)
+            .watch(flutterLocalNotificationsPluginProvider)
             .cancel(_reminderHighlightNotificationId);
     }
   }
@@ -144,25 +144,25 @@ Future<void> reminderSave(
     case ReminderType.condition:
       await Future.wait([
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setInt(_reminderConditionHourKey, time.hour),
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setInt(_reminderConditionMinuteKey, time.minute),
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setBool(_reminderConditionEnableKey, enable),
       ]);
     case ReminderType.highlight:
       await Future.wait([
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setInt(_reminderHighlightHourKey, time.hour),
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setInt(_reminderHighlightMinuteKey, time.minute),
         ref
-            .read(sharedPreferencesProvider)
+            .watch(sharedPreferencesProvider)
             .setBool(_reminderHighlightEnableKey, enable),
       ]);
   }
