@@ -9,3 +9,17 @@
 ### ダーク
 
 <https://icon.kitchen/i/H4sIAAAAAAAAAz2PPw%2BCMBDFv8u5MvhvoZtxIA4aE9iMwzW9lobWYls0hvDdLRDY3r28%2B927Hj5oOgrAehDom6omS8AkmkAZSFX92jSCtqgIRuOOQuiXGvPRtcB2%2Bwy8VnWcJXcxOjtrQ3Jyh2SrszPOJ9ImJ7HNj4nFUSQmg7I6FZdbsThrUEriBz4dvWJo1lJclTVOrcK7Q0%2BQ%2BNaJzoxfPEC7kHa%2BxOE5%2FAE768i83gAAAA%3D%3D>
+
+## 環境
+
+ステージング環境(stg)と本番環境(prod)の 2 種類の環境があります。
+環境のことを以下`flavor`と呼称します。
+
+## 開発環境
+
+最新の[Visual Studio Code](https://code.visualstudio.com/)を強く推奨します。
+`blooms.code-workspace` より、ワークスペースを開いてください。
+
+## 独自の BLOOMS
+
+独自の BLOOMS を開発する場合は、[HOW_TO_BUILD_YOUR_OWN_BLOOMS.md](HOW_TO_BUILD_YOUR_OWN_BLOOMS.md)を参照してください。

@@ -15,9 +15,16 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
+# iOSのBundle Identifier
+# 独自のBLOOMSを構築する場合は変更する必要があります
 BUNDLE_ID="dev.kingu.BLOOMS"
 
+# Firebaseプロジェクト名
+# 独自のBLOOMSを構築する場合は変更する必要があります
 PROJECT_NAME_STG="blooms-stg"
+
+# Firebaseプロジェクト名
+# 独自のBLOOMSを構築する場合は変更する必要があります
 PROJECT_NAME_PROD="blooms-prod-43d74"
 
 for buildConfig in Debug-stg Release-stg Profile-stg; do
