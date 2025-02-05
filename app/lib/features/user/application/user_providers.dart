@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:blooms/constants/collection_path.dart';
+import 'package:blooms/constants/deleted_at.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
 import 'package:blooms/features/user/domain/user.dart';
@@ -28,19 +29,15 @@ Stream<DocumentSnapshot<User>> userDocumentSnapshot(Ref ref, String uid) =>
     ref.watch(userCollectionReferenceProvider).doc(uid).snapshots();
 
 @riverpod
-Future<void> userDelete(Ref ref) async {
+Future<void> userDelete(
+  Ref ref, {
+  required DocumentReference<User> reference,
+}) async {
   await ref.watch(firebaseAnalyticsProvider).logEvent(name: 'user_delete');
 
   logger.debug('add deletedAt');
 
-  final results = await ref.watch(userProvider.future);
-  if (results == null) {
-    throw Exception('user is null');
-  }
-
-  final (:reference, :user) = results;
-
-  await reference.update(TimestampConverter.addDeletedAt(user.toJson()));
+  await reference.update(deletedAt);
 
   await ref.watch(authSignOutProvider.future);
   logger.debug('userDelete succeeded');
