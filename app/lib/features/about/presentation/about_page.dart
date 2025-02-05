@@ -235,7 +235,13 @@ class AboutPage extends HookConsumerWidget {
     if (result == 'delete') {
       if (context.mounted) {
         final indicator = showMyProgressIndicator(context);
-        await ref.read(userDeleteProvider.future);
+
+        final reference =
+            await ref.read(userProvider.future).then((e) => e?.reference);
+        if (reference != null) {
+          await ref.read(userDeleteProvider(reference: reference).future);
+        }
+
         indicator.dismiss();
 
         if (context.mounted) {

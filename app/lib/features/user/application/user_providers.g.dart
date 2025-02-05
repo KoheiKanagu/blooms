@@ -184,22 +184,137 @@ class _UserDocumentSnapshotProviderElement
   String get uid => (origin as UserDocumentSnapshotProvider).uid;
 }
 
-String _$userDeleteHash() => r'33407c635b95184f2bc728e63f7a8327ce851a21';
+String _$userDeleteHash() => r'b55c58404e01a2c3ddf21075b14055ab4f924f5c';
 
 /// See also [userDelete].
 @ProviderFor(userDelete)
-final userDeleteProvider = AutoDisposeFutureProvider<void>.internal(
-  userDelete,
-  name: r'userDeleteProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userDeleteHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const userDeleteProvider = UserDeleteFamily();
+
+/// See also [userDelete].
+class UserDeleteFamily extends Family<AsyncValue<void>> {
+  /// See also [userDelete].
+  const UserDeleteFamily();
+
+  /// See also [userDelete].
+  UserDeleteProvider call({
+    required DocumentReference<User> reference,
+  }) {
+    return UserDeleteProvider(
+      reference: reference,
+    );
+  }
+
+  @override
+  UserDeleteProvider getProviderOverride(
+    covariant UserDeleteProvider provider,
+  ) {
+    return call(
+      reference: provider.reference,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'userDeleteProvider';
+}
+
+/// See also [userDelete].
+class UserDeleteProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [userDelete].
+  UserDeleteProvider({
+    required DocumentReference<User> reference,
+  }) : this._internal(
+          (ref) => userDelete(
+            ref as UserDeleteRef,
+            reference: reference,
+          ),
+          from: userDeleteProvider,
+          name: r'userDeleteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$userDeleteHash,
+          dependencies: UserDeleteFamily._dependencies,
+          allTransitiveDependencies:
+              UserDeleteFamily._allTransitiveDependencies,
+          reference: reference,
+        );
+
+  UserDeleteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.reference,
+  }) : super.internal();
+
+  final DocumentReference<User> reference;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(UserDeleteRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UserDeleteProvider._internal(
+        (ref) => create(ref as UserDeleteRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        reference: reference,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _UserDeleteProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserDeleteProvider && other.reference == reference;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, reference.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UserDeleteRef = AutoDisposeFutureProviderRef<void>;
+mixin UserDeleteRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `reference` of this provider.
+  DocumentReference<User> get reference;
+}
+
+class _UserDeleteProviderElement extends AutoDisposeFutureProviderElement<void>
+    with UserDeleteRef {
+  _UserDeleteProviderElement(super.provider);
+
+  @override
+  DocumentReference<User> get reference =>
+      (origin as UserDeleteProvider).reference;
+}
+
 String _$userHash() => r'9e15d0b0f2c01d7be55fb7aeb8ec502ebf5f69ab';
 
 /// See also [user].
