@@ -9,12 +9,12 @@ part of 'user_providers.dart';
 // **************************************************************************
 
 String _$userCollectionReferenceHash() =>
-    r'99ba79dc5f6b448535aa54b9be9de654514f37a5';
+    r'05e21f6d8538e1242cb16008ce24be3faee1df32';
 
 /// See also [userCollectionReference].
 @ProviderFor(userCollectionReference)
 final userCollectionReferenceProvider =
-    AutoDisposeProvider<CollectionReference<User>>.internal(
+    Provider<CollectionReference<User>>.internal(
   userCollectionReference,
   name: r'userCollectionReferenceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -26,8 +26,7 @@ final userCollectionReferenceProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UserCollectionReferenceRef
-    = AutoDisposeProviderRef<CollectionReference<User>>;
+typedef UserCollectionReferenceRef = ProviderRef<CollectionReference<User>>;
 String _$userDocumentSnapshotHash() =>
     r'f626dd4605c1537ddd8c78d16679a60894c26d02';
 

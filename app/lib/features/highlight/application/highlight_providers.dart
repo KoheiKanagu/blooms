@@ -13,7 +13,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'highlight_providers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 CollectionReference<Highlight> highlightCollectionReference(Ref ref) => ref
     .read(firebaseFirestoreProvider)
     .collection(CollectionPath.kHighlights)

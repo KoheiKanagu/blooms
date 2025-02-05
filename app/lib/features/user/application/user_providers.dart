@@ -14,7 +14,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_providers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 CollectionReference<User> userCollectionReference(Ref ref) => ref
     .read(firebaseFirestoreProvider)
     .collection(CollectionPath.kUsers)

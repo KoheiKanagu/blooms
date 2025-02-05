@@ -9,12 +9,12 @@ part of 'condition_providers.dart';
 // **************************************************************************
 
 String _$conditionCollectionReferenceHash() =>
-    r'f8307e781b15030663350a9f08858e8da6634ad0';
+    r'fdb36e4ca436832eb211b896d866fd915771df69';
 
 /// See also [conditionCollectionReference].
 @ProviderFor(conditionCollectionReference)
 final conditionCollectionReferenceProvider =
-    AutoDisposeProvider<CollectionReference<Condition>>.internal(
+    Provider<CollectionReference<Condition>>.internal(
   conditionCollectionReference,
   name: r'conditionCollectionReferenceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -27,7 +27,7 @@ final conditionCollectionReferenceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ConditionCollectionReferenceRef
-    = AutoDisposeProviderRef<CollectionReference<Condition>>;
+    = ProviderRef<CollectionReference<Condition>>;
 String _$conditionQueryHash() => r'dfb11c887004d561cf26df727d9454b1e7be534a';
 
 /// See also [conditionQuery].
