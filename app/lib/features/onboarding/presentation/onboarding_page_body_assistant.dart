@@ -68,6 +68,10 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
             Text(i18n.onboarding.assistant.description1),
             Text(i18n.onboarding.assistant.description2),
           ],
+          disclaimers: [
+            Text(i18n.onboarding.assistant.disclaimer1),
+            Text(i18n.onboarding.assistant.disclaimer2),
+          ],
         ),
       ],
     );

@@ -229,6 +229,8 @@ class TranslationsOnboardingAssistantJa {
 	String get subtitle => 'あなたの記録、アシストします';
 	String get description1 => 'あなたの記録を助けるパーソナルアシスタントが登場します。';
 	String get description2 => '提案された検索キーワードを使って、体調について理解を深めましょう。';
+	String get disclaimer1 => '症状の診断ではありません。事実とは異なる内容が含まれる可能性があります。';
+	String get disclaimer2 => '適切な検索キーワードが提案されない可能性があります。適切な対処法を知るためには、必ず産婦人科医や助産師に相談してください。';
 }
 
 // Path: onboarding.image
@@ -242,6 +244,7 @@ class TranslationsOnboardingImageJa {
 	String get subtitle => '文字だけ、ではありません';
 	String get description1 => '食事の内容やその日の体験を写真でも記録できます。';
 	String get description2 => 'BLOOMSは何が写っているかを認識し、記録をより鮮明にします。';
+	String get disclaimer1 => '被写体を正しく認識できない場合があります。';
 }
 
 // Path: onboarding.highlight
@@ -255,6 +258,7 @@ class TranslationsOnboardingHighlightJa {
 	String get subtitle => '記録をまとめて振り返りましょう';
 	String get description1 => 'たくさんの記録があっても、全てを見返す必要はありません。';
 	String get description2 => 'ハイライトを作成すれば、過去の記録を分かりやすく要約し、ひと目で把握できます。';
+	String get disclaimer1 => '診断ではありません。内容はあくまで参考であり、事実とは異なる内容が含まれる可能性があります。';
 }
 
 // Path: highlight.features.summary

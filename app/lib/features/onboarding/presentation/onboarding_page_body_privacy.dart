@@ -49,6 +49,7 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
                 ),
               ),
           ],
+          disclaimers: const [],
         ),
       ],
     );
