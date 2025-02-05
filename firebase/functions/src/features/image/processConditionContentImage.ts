@@ -29,6 +29,8 @@ export const processConditionContentImage = onCall({
 
   // リサイズ
   const resizedImage = sharp(buffer)
+    // 画像の向きを自動で修正
+    .rotate()
     .resize(
       {
         width: 1024,
