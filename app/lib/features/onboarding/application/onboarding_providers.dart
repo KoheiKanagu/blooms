@@ -10,7 +10,7 @@ const _onboardingCompletedKey = 'onboardingCompleted';
 @riverpod
 Future<bool> onboardingIsCompleted(Ref ref) async {
   return ref
-      .read(sharedPreferencesProvider)
+      .watch(sharedPreferencesProvider)
       .getBool(_onboardingCompletedKey)
       .then((e) => e ?? false);
 }
@@ -19,6 +19,6 @@ Future<bool> onboardingIsCompleted(Ref ref) async {
 @riverpod
 Future<void> onboardingComplete(Ref ref) async {
   return ref
-      .read(sharedPreferencesProvider)
+      .watch(sharedPreferencesProvider)
       .setBool(_onboardingCompletedKey, true);
 }

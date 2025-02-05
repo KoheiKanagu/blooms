@@ -25,7 +25,7 @@ final packageInfoProvider = FutureProvider<PackageInfo>.internal(
 // ignore: unused_element
 typedef PackageInfoRef = FutureProviderRef<PackageInfo>;
 String _$packageInfoBuildNumberHash() =>
-    r'c5c24a6b5decff4f506413195ea0794e7bfd4e5b';
+    r'7639a8503222a4978556762e25cb40acff4b8fdf';
 
 /// See also [packageInfoBuildNumber].
 @ProviderFor(packageInfoBuildNumber)
@@ -43,7 +43,7 @@ final packageInfoBuildNumberProvider = AutoDisposeProvider<int>.internal(
 // ignore: unused_element
 typedef PackageInfoBuildNumberRef = AutoDisposeProviderRef<int>;
 String _$packageInfoVersionHash() =>
-    r'8782c312e34c05aa49fbc649e446f42f2ac1aaee';
+    r'b122137425323c9433be0550cc9c78419dd73de6';
 
 /// See also [packageInfoVersion].
 @ProviderFor(packageInfoVersion)
@@ -61,7 +61,7 @@ final packageInfoVersionProvider = AutoDisposeProvider<String>.internal(
 // ignore: unused_element
 typedef PackageInfoVersionRef = AutoDisposeProviderRef<String>;
 String _$packageInfoAppNameHash() =>
-    r'de86ef30d16b9d2cfbf7331e4c31b534f0d74da7';
+    r'06ce5b04ace30069d593233a04c066c901f39319';
 
 /// See also [packageInfoAppName].
 @ProviderFor(packageInfoAppName)

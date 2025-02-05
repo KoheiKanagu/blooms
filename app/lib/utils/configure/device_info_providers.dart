@@ -11,7 +11,7 @@ Future<BaseDeviceInfo> deviceInfo(Ref ref) => DeviceInfoPlugin().deviceInfo;
 
 @riverpod
 String deviceInfoSystemName(Ref ref) {
-  return switch (ref.read(deviceInfoProvider).requireValue) {
+  return switch (ref.watch(deviceInfoProvider).requireValue) {
     IosDeviceInfo(:final systemName) => systemName,
     MacOsDeviceInfo(:final osRelease) => osRelease,
     WebBrowserInfo(:final browserName) => browserName.name,
@@ -21,7 +21,7 @@ String deviceInfoSystemName(Ref ref) {
 
 @riverpod
 String deviceInfoSystemVersion(Ref ref) {
-  return switch (ref.read(deviceInfoProvider).requireValue) {
+  return switch (ref.watch(deviceInfoProvider).requireValue) {
     IosDeviceInfo(:final systemVersion) => systemVersion,
     MacOsDeviceInfo(
       :final majorVersion,

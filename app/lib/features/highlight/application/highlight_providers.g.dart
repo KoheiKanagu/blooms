@@ -9,7 +9,7 @@ part of 'highlight_providers.dart';
 // **************************************************************************
 
 String _$highlightCollectionReferenceHash() =>
-    r'6073d585e8edffcd6ef2f5135ed288c760c3943c';
+    r'8168909becfd016f607c1bc7c5c1d5147fbb9e88';
 
 /// See also [highlightCollectionReference].
 @ProviderFor(highlightCollectionReference)
@@ -28,7 +28,7 @@ final highlightCollectionReferenceProvider =
 // ignore: unused_element
 typedef HighlightCollectionReferenceRef
     = ProviderRef<CollectionReference<Highlight>>;
-String _$highlightQueryHash() => r'dabbf2c37054c7f63279c5df11c4ee8a5281ffcf';
+String _$highlightQueryHash() => r'f8150593f79a025eadbd8ff791856c7bccf7ac63';
 
 /// See also [highlightQuery].
 @ProviderFor(highlightQuery)
@@ -46,7 +46,7 @@ final highlightQueryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HighlightQueryRef = AutoDisposeFutureProviderRef<Query<Highlight>>;
-String _$highlightCreateHash() => r'9ea75bb3317ca06a1edb65a371b1acef01a3dbac';
+String _$highlightCreateHash() => r'09a1a07f6bf1291f44b1f413d9e0553a3d777122';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -197,7 +197,7 @@ class _HighlightCreateProviderElement
   HighlightPeriod get period => (origin as HighlightCreateProvider).period;
 }
 
-String _$highlightDeleteHash() => r'260028c23eaa1ca4c9e487a2bb3e053d6824ca07';
+String _$highlightDeleteHash() => r'6bba2b2113f707cad94763958dce9dd86c3e5617';
 
 /// See also [highlightDelete].
 @ProviderFor(highlightDelete)
@@ -327,7 +327,7 @@ class _HighlightDeleteProviderElement
   String get documentId => (origin as HighlightDeleteProvider).documentId;
 }
 
-String _$highlightPromptHash() => r'31b52fa140c2fc37c97a5557f06b301f897c7eb7';
+String _$highlightPromptHash() => r'1767eb5f5b4e85802a79c7b4715f3a2cbddb950b';
 
 /// See also [highlightPrompt].
 @ProviderFor(highlightPrompt)

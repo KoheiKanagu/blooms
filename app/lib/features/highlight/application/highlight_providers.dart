@@ -15,7 +15,7 @@ part 'highlight_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 CollectionReference<Highlight> highlightCollectionReference(Ref ref) => ref
-    .read(firebaseFirestoreProvider)
+    .watch(firebaseFirestoreProvider)
     .collection(CollectionPath.kHighlights)
     .withConverter(
       fromFirestore: Highlight.fromFirestore,
@@ -31,7 +31,7 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
   }
 
   return ref
-      .read(highlightCollectionReferenceProvider)
+      .watch(highlightCollectionReferenceProvider)
       .where('deletedAt', isNull: true)
       .where('subjectUid', isEqualTo: uid)
       .orderBy('content.startAt', descending: true);
@@ -54,7 +54,7 @@ Future<void> highlightCreate(
     startAt: Timestamp.fromDate(clock.now()),
   );
 
-  await ref.read(highlightCollectionReferenceProvider).add(data);
+  await ref.watch(highlightCollectionReferenceProvider).add(data);
 }
 
 @riverpod
@@ -63,7 +63,7 @@ Future<void> highlightDelete(
   required String documentId,
 }) async {
   await ref
-      .read(highlightCollectionReferenceProvider)
+      .watch(highlightCollectionReferenceProvider)
       .doc(documentId)
       .update(deletedAt);
 }
@@ -78,7 +78,7 @@ Future<String?> highlightPrompt(
   }
 
   final data =
-      await ref.read(firebaseStorageProvider).refFromURL(gsFilePath).getData();
+      await ref.watch(firebaseStorageProvider).refFromURL(gsFilePath).getData();
   if (data == null) {
     return null;
   }
