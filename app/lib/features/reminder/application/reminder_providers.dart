@@ -45,11 +45,15 @@ Future<TimeOfDay> reminderTime(
   final results = switch (type) {
     ReminderType.condition => await Future.wait([
         ref.watch(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
-        ref.watch(sharedPreferencesProvider).getInt(_reminderConditionMinuteKey),
+        ref
+            .watch(sharedPreferencesProvider)
+            .getInt(_reminderConditionMinuteKey),
       ]),
     ReminderType.highlight => await Future.wait([
         ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
-        ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightMinuteKey),
+        ref
+            .watch(sharedPreferencesProvider)
+            .getInt(_reminderHighlightMinuteKey),
       ]),
   };
 
