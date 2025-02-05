@@ -25,6 +25,7 @@ class OnboardingPageBodyName extends StatelessWidget {
             Text(i18n.onboarding.name.description1),
             Text(i18n.onboarding.name.description2),
           ],
+          disclaimers: const [],
         ),
       ],
     );

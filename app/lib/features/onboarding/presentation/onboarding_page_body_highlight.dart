@@ -72,6 +72,9 @@ class OnboardingPageBodyHighlight extends StatelessWidget {
             Text(i18n.onboarding.highlight.description1),
             Text(i18n.onboarding.highlight.description2),
           ],
+          disclaimers: [
+            Text(i18n.onboarding.highlight.disclaimer1),
+          ],
         ),
       ],
     );

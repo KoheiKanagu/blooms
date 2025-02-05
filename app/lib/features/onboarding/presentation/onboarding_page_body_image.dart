@@ -80,6 +80,9 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
             Text(i18n.onboarding.image.description1),
             Text(i18n.onboarding.image.description2),
           ],
+          disclaimers: [
+            Text(i18n.onboarding.image.disclaimer1),
+          ],
         ),
       ],
     );
