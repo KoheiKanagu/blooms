@@ -60,6 +60,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get done => '完了';
 	String get howIsYourConditionNow => '今の体調は？';
 	String get appOnlyFeature => 'この機能はアプリ版でのみ利用できます';
+	late final TranslationsDisclaimerJa disclaimer = TranslationsDisclaimerJa.internal(_root);
 }
 
 // Path: highlight
@@ -150,6 +151,34 @@ class TranslationsReminderJa {
 	String get setHighlightReminder => '今週のハイライトを作成し忘れないように、通知が設定できます';
 	String get highlightReminderNotificationTitle => '今週のハイライトを確認してみましょう';
 	String get saturday => '土曜日';
+}
+
+// Path: disclaimer
+class TranslationsDisclaimerJa {
+	TranslationsDisclaimerJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'BLOOMSは誤った内容を提供する可能性があります';
+	String get title => '免責事項';
+	String get general => '一般';
+	String get general1 => 'BLOOMSを利用する前に、必ず医師や専門家に相談してください';
+	String get general2 => 'BLOOMSは医療情報を提供するものではありません';
+	String get general3 => 'BLOOMSは医師や専門家による診断や治療を代替するものではありません';
+	String get response => '回答';
+	String get response1 => 'BLOOMSの回答には、あなたの記録を要約した内容や関連する検索キーワードが含まれる場合があります';
+	String get response2 => 'BLOOMSの回答は、事実とは異なる内容が含まれる可能性があります';
+	String get response3 => 'BLOOMSの回答は、あなたの身体に悪影響を与える行動を促す可能性があります';
+	String get response4 => 'BLOOMSの回答は、医師や専門家によって提供される情報とは異なる可能性があります';
+	String get response5 => 'BLOOMSの回答は、医師や専門家に監修されたものではありません';
+	String get response6 => 'BLOOMSの回答を信じる前に、必ず医師や専門家に相談してください';
+	String get response7 => 'BLOOMSの回答を信じることで生じた損害について、開発者は一切の責任を負いません';
+	String get searchKeyword => '検索キーワード';
+	String get searchKeyword1 => 'BLOOMSが提案する検索キーワードを用いて得られた情報を元にして、適切な対処法を知ることができるとは限りません';
+	String get searchKeyword2 => 'BLOOMSが提案する検索キーワードを用いて得られた情報を元にして、自己判断で行動を起こすことは避けてください';
+	String get searchKeyword3 => 'BLOOMSが提案する検索キーワードを用いて得られた情報を元にして、自己判断で行動を起こすことで生じた損害について、開発者は一切の責任を負いません';
+	String get understood => '理解した上で利用する';
 }
 
 // Path: highlight.state
