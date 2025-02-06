@@ -1,4 +1,5 @@
 import 'package:blooms/features/condition/presentation/condition_bubble_blooms_icon.dart';
+import 'package:blooms/features/disclaimer/presentation/disclaimer_label.dart';
 import 'package:blooms/features/highlight/domain/highlight_content.dart';
 import 'package:blooms/features/highlight/presentation/highlight_prompt_page.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -53,6 +54,7 @@ class HighlightDetailTile extends HookConsumerWidget {
                       summary,
                       maxLines: 100,
                     ),
+                    const DisclaimerLabel(),
                   ],
                 ),
               ),
