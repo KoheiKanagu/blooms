@@ -88,7 +88,7 @@ export function setupGenerativeModel(): GenerativeModel {
 
   return vertexAI
     .getGenerativeModel({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-2.0-flash-001',
       safetySettings: safetySettings,
       generationConfig: {
         temperature: temperature,
