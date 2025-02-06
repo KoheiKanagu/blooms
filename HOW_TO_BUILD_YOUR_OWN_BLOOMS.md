@@ -19,7 +19,7 @@
 - [Firebase CLI](https://firebase.google.com/docs/cli?hl=ja)
 - [CocoaPods\.org](https://cocoapods.org/) (iOS 版をビルドする場合のみ)
 - [Node.js v20](https://nodejs.org/)
-- [Google Chrome](https://www.google.com/intl/ja_jp/chrome/)
+- [Google Chrome](https://www.google.com/intl/ja_jp/chrome/) (Web 版をビルドする場合のみ)
 
 ### 必要なライセンス（iOS 版をビルドしない場合は対応不要）
 
@@ -35,11 +35,9 @@ Web 版のみをビルドする場合は、前述の必要なツールが動作�
 ### Firebase プロジェクトの作成
 
 ステージング環境と本番環境用の 2 つの Firebase プロジェクトを作成してください。
-動作検証するだけであれば、ステージング環境用のプロジェクトのみで問題ありません。
+動作検証するだけであれば、ステージング環境用のプロジェクトのみで問題ありませんが、後述する各種スクリプトはステージング環境と本番環境の両方が存在していることが前提となっているため、2 つのプロジェクトを作成することを推奨します。
 
-Cloud Functions など利用するため、Blaze プランにアップグレードする必要があります。
-
-[Firebase Pricing](https://firebase.google.com/pricing?hl=ja)
+Cloud Functions など利用するため、[Blaze プラン](https://firebase.google.com/pricing?hl=ja)にアップグレードする必要があります。
 
 ### Firestore データベースを作成
 
@@ -90,7 +88,7 @@ reCAPTCHA Enterprise を有効にする場合は、サイトキーを[app/lib/co
 
 Keychain Groups に設定した値を[app/lib/constants/app_env.dart](app/lib/constants/app_env.dart)の`kKeychainGroup`変数に設定してください。
 
-以下のスクリプトを実行して、ビルドが成功することを確認してください。
+以下のスクリプトが成功することを確認してください。
 
 ```sh
 ./scripts/build-ios-config-only.sh --flavor stg
@@ -98,7 +96,7 @@ Keychain Groups に設定した値を[app/lib/constants/app_env.dart](app/lib/co
 
 ### .firebaserc の`projects`の修正
 
-`firebase/.firebaserc`の`projects`の項目には、Firebase プロジェクトのエイリアスを設定しています。
+[firebase/.firebaserc](firebase/.firebaserc)の`projects`の項目には、Firebase プロジェクトのエイリアスを設定しています。
 オリジナルの BLOOMS のプロジェクト名が含まれているため、修正する必要があります。
 
 `projects.stg`にステージング環境用の Firebase プロジェクト名を、`projects.prod`に本番環境用の Firebase プロジェクト名を設定してください。
@@ -106,11 +104,11 @@ Keychain Groups に設定した値を[app/lib/constants/app_env.dart](app/lib/co
 
 ### .firebaserc の`targets`の修正（Web 版を Firebase Hosting にデプロイしないのであれば対応不要）
 
-`firebase/.firebaserc`の`targets`の項目には、Firebase Hosting のサイトとサイト ID の紐付けが設定されています。
+[firebase/.firebaserc](firebase/.firebaserc)の`targets`の項目には、Firebase Hosting のサイトとサイト ID の紐付けが設定されています。
 
 オリジナルの BLOOMS では以下の 3 つのサイトが設定されています。
 
-- `public`: `firebase/hosting/public`の内容のサイト
+- `public`: [firebase/hosting/public](firebase/hosting/public)の内容のサイト
 - `app`: Flutter で構築された Web アプリケーション版の BLOOMS のサイト
 - `widgetbook`: Flutter で構築された Web アプリケーション版の BLOOMS の[Widgetbook](https://www.widgetbook.io/)のサイト
 
@@ -147,8 +145,11 @@ firebase deploy --except hosting
 
 ### Web 版の実行
 
-`flutter devices`を実行して、次のように`chrome`が表示されていることを確認してください。
-もし表示されていない場合は、`flutter doctor` で問題を解決してください。
+以下のコマンドを実行して、`chrome`が表示されていることを確認してください。
+
+```sh
+fvm flutter devices
+```
 
 ```sh
 Found 4 connected devices:
@@ -156,6 +157,12 @@ Found 4 connected devices:
   macOS (desktop)                 • macos                                • darwin-arm64   • macOS 15.2 24C101 darwin-arm64
   Mac Designed for iPad (desktop) • mac-designed-for-ipad                • darwin         • macOS 15.2 24C101 darwin-arm64
   Chrome (web)                    • chrome                               • web-javascript • Google Chrome 132.0.6834.162
+```
+
+もし表示されていない場合は、以下のコマンドを実行して問題を解決してください。
+
+```sh
+fvm flutter doctor
 ```
 
 以下のコマンドを実行すると、Web 版の BLOOMS が起動できます。
@@ -173,7 +180,11 @@ Simulator を起動して任意の iPhone で iOS 18 のランタイムを起動
 Simulator の環境構築は以下のドキュメントを参考にしてください。
 [Installing and managing Simulator runtimes \| Apple Developer Documentation](https://developer.apple.com/documentation/xcode/installing-additional-simulator-runtimes)
 
-`flutter devices`を実行して、次のように iOS 18 の iPhone Simulator が表示されていることを確認してください。
+以下のコマンドを実行して、iOS 18 の iPhone Simulator が表示されていることを確認してください。
+
+```sh
+fvm flutter devices
+```
 
 ```sh
 Found 4 connected devices:
@@ -181,6 +192,12 @@ Found 4 connected devices:
   macOS (desktop)                 • macos                                • darwin-arm64   • macOS 15.2 24C101 darwin-arm64
   Mac Designed for iPad (desktop) • mac-designed-for-ipad                • darwin         • macOS 15.2 24C101 darwin-arm64
   Chrome (web)                    • chrome                               • web-javascript • Google Chrome 132.0.6834.162
+```
+
+もし表示されていない場合は、以下のコマンドを実行して問題を解決してください。
+
+```sh
+fvm flutter doctor
 ```
 
 以下のコマンドを実行すると、iOS 版の BLOOMS が起動できます。
@@ -194,7 +211,7 @@ fvm flutter run --flavor stg --device-id iphone
 
 ### Firebase のリソースをデプロイ
 
-以下のスクリプトを実行すると、Firebase のリソースがデプロイされます。
+以下のコマンドを実行すると、Firebase のリソースがデプロイされます。
 
 ```sh
 cd firebase
@@ -209,11 +226,12 @@ firebase deploy --except hosting
 ### Web 版の BLOOMS をデプロイ
 
 以下のスクリプトを実行すると、Web 版の BLOOMS がビルドされます。
-成果物は `firebase/hosting/app` に出力されます。
+成果物は[firebase/hosting/app](firebase/hosting/app)に出力されます。
 
 ```sh
 cd app
 
+# flavorはデプロイしたい環境 stg または prod を指定してください
 ./scripts/flutter_build_web_app.sh --flavor stg
 ```
 
@@ -237,17 +255,18 @@ cd firebase
 
 #### `widgetbook`をデプロイする
 
-以下のようにスクリプトを実行すると、`widgetbook`のサイトが Firebase Hosting にデプロイされます。
+以下のようにスクリプトを実行すると、Widgetbook がビルドされます。
+成果物は[firebase/hosting/widgetbook](firebase/hosting/widgetbook)に出力されます。
 
 ```sh
 cd app
-
-# ビルド
 ./scripts/flutter_build_web_widgetbook.sh --flavor stg
+```
 
-cd ../firebase
+以下のスクリプトを実行すると、`widgetbook`のサイトが Firebase Hosting にデプロイされます。
 
-# デプロイ
+```sh
+cd firebase
 ./scripts/deploy_only_hosting_widgetbook.sh
 ```
 
@@ -264,7 +283,7 @@ cd ../firebase
 ```sh
 cd app
 
-# flavorは stg または prod を指定してください
+# flavorはデプロイしたい環境 stg または prod を指定してください
 ./scripts/build-ios-config-only.sh --flavor stg
 ```
 
