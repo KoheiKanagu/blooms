@@ -1,5 +1,6 @@
 import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/authentication/application/auth_providers.dart';
+import 'package:blooms/features/disclaimer/presentation/disclaimer_page.dart';
 import 'package:blooms/features/onboarding/application/onboarding_providers.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,6 +47,15 @@ class OnboardingFooter extends HookConsumerWidget {
                     ),
               onPressed: () async {
                 if (progress.value) {
+                  return;
+                }
+
+                // 免責事項について
+                final agree = await showCupertinoModalPopup<bool>(
+                  context: context,
+                  builder: (context) => const DisclaimerPage(),
+                );
+                if (agree == null || !agree) {
                   return;
                 }
 

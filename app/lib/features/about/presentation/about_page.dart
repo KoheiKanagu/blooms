@@ -2,6 +2,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/constants/my_url.dart';
 import 'package:blooms/features/about/application/about_provider.dart';
 import 'package:blooms/features/authentication/application/firebase_user_providers.dart';
+import 'package:blooms/features/disclaimer/presentation/disclaimer_page.dart';
 import 'package:blooms/features/onboarding/application/onboarding_page_route.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_app_icon.dart';
 import 'package:blooms/features/onboarding/presentation/onboarding_page.dart';
@@ -73,6 +74,19 @@ class AboutPage extends HookConsumerWidget {
                         name: OnboardingPageRoute.path,
                       ),
                     ),
+                  );
+                },
+              ),
+              CupertinoListTile.notched(
+                title: Text(i18n.aboutBLOOMS.termsAndConditions),
+                leading: Icon(
+                  CupertinoIcons.exclamationmark_triangle_fill,
+                  color: CupertinoColors.systemYellow.resolveFrom(context),
+                ),
+                onTap: () {
+                  showCupertinoModalPopup<bool>(
+                    context: context,
+                    builder: (context) => const DisclaimerPage(),
                   );
                 },
               ),
