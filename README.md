@@ -14,13 +14,13 @@ TODO
 
 ### 環境
 
-ステージング環境(stg)と本番環境(prod)の 2 種類の環境があります。
+ステージング環境(`stg`)と本番環境(`prod`)の 2 種類の環境があります。
 環境のことを`flavor`と呼称しています。
 
 ### 開発環境
 
 最新の[Visual Studio Code](https://code.visualstudio.com/)を強く推奨します。
-`blooms.code-workspace` より、ワークスペースを開いてください。
+[blooms.code-workspace](blooms.code-workspace) より、ワークスペースを開いてください。
 
 ### 独自の BLOOMS
 
