@@ -3,7 +3,7 @@
 ## 独自の BLOOMS を構築するには
 
 リポジトリを clone しただけでは BLOOMS は以下の理由から実行できません。
-（@KoheiKanagu が構築している環境の事を以下 **"オリジナルの BLOOMS"** と呼称します）
+（[@KoheiKanagu](https://github.com/KoheiKanagu) が構築している環境の事を以下 **"オリジナルの BLOOMS"** と呼称します）
 
 - [Firebase App Check](https://firebase.google.com/docs/app-check?hl=ja)を有効にしているため、オリジナルの BLOOMS の Firebase プロジェクトにはアクセスできません
 - iOS 版の場合は、所定のプロビジョニングファイルと証明書が必要です
