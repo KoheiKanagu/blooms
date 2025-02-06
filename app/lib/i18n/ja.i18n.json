@@ -96,6 +96,7 @@
     "aboutBLOOMS": "BLOOMSについて",
     "version": "バージョン: ${version}",
     "whatIsBLOOMS": "BLOOMSとは",
+    "termsAndConditions": "BLOOMSを利用する上での注意事項",
     "openSource": "オープンソース",
     "openSourceDescription": "BLOOMSはオープンソースで開発されています",
     "termsOfService": "利用規約",
