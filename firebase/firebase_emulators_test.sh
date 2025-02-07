@@ -5,5 +5,5 @@ npm --prefix functions run clean
 npm --prefix functions run build
 
 firebase emulators:exec \
-    --only functions \
+    --only functions,firestore \
     "npm --prefix functions run test"

@@ -1,6 +1,5 @@
-import { RulesTestEnvironment, initializeTestEnvironment } from '@firebase/rules-unit-testing';
-import { Timestamp } from 'firebase-admin/firestore';
-import { addDoc, doc, getDoc, getDocs, setDoc, setLogLevel, updateDoc } from 'firebase/firestore';
+import { initializeTestEnvironment, RulesTestEnvironment } from '@firebase/rules-unit-testing';
+import { addDoc, doc, getDoc, getDocs, setDoc, setLogLevel, Timestamp, updateDoc } from 'firebase/firestore';
 import { readFileSync, writeFileSync } from 'fs';
 import { Condition } from '../src/features/condition/domain/condition';
 import { Highlight } from '../src/features/highlight/domain/highlight';
@@ -26,11 +25,8 @@ beforeAll(async () => {
       port: 8080,
     },
   });
-},
-);
 
-beforeEach(async () => {
-  await testEnv.clearFirestore();
+  console.log('testEnv', testEnv);
 });
 
 afterAll(async () => {
@@ -102,11 +98,15 @@ describe('users_v1', () => {
     it('自分のuserが取得できること', async () => {
       const userUid = 'user1';
       const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore()
+            .doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       await expectFirestorePermissionSucceeds(
         getDoc(
@@ -118,12 +118,14 @@ describe('users_v1', () => {
     it('異なるユーザーがuserを取得できないこと', async () => {
       const userUid = 'user1';
       const otherUserUid = 'user2';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
@@ -135,12 +137,14 @@ describe('users_v1', () => {
 
     it('認証されていないユーザーがuserを取得できないこと', async () => {
       const userUid = 'user1';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
@@ -155,11 +159,14 @@ describe('users_v1', () => {
     it('自分のuserが更新できること', async () => {
       const userUid = 'user1';
       const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       await expectFirestorePermissionSucceeds(
         updateDoc(
@@ -174,12 +181,14 @@ describe('users_v1', () => {
     it('異なるユーザーがuserを更新できないこと', async () => {
       const userUid = 'user1';
       const otherUserUid = 'user2';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
@@ -194,12 +203,14 @@ describe('users_v1', () => {
 
     it('認証されていないユーザーがuserを更新できないこと', async () => {
       const userUid = 'user1';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
@@ -217,11 +228,14 @@ describe('users_v1', () => {
     it('自分のuserが削除できないこと', async () => {
       const userUid = 'user1';
       const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       await expectFirestorePermissionDenied(
         db.collection(collectionPath).doc(userUid).delete(),
@@ -231,12 +245,14 @@ describe('users_v1', () => {
     it('異なるユーザーがuserを削除できないこと', async () => {
       const userUid = 'user1';
       const otherUserUid = 'user2';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       await expectFirestorePermissionDenied(
         testEnv.authenticatedContext(otherUserUid).firestore().collection(collectionPath).doc(userUid).delete(),
@@ -245,12 +261,14 @@ describe('users_v1', () => {
 
     it('認証されていないユーザーがuserを削除できないこと', async () => {
       const userUid = 'user1';
-      const db = testEnv.authenticatedContext(userUid).firestore();
-      const userData = createUserData();
-      await setDoc(
-        db.doc(`${collectionPath}/${userUid}`),
-        userData,
-      );
+
+      await testEnv.withSecurityRulesDisabled(async (context) => {
+        const userData = createUserData();
+        await setDoc(
+          context.firestore().doc(`${collectionPath}/${userUid}`),
+          userData,
+        );
+      });
 
       await expectFirestorePermissionDenied(
         testEnv.unauthenticatedContext().firestore().collection(collectionPath).doc(userUid).delete(),

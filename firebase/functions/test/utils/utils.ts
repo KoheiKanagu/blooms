@@ -13,7 +13,7 @@ export async function expectFirestorePermissionDenied(
   const errorResult = await assertFails(promise);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   expect(errorResult.code as unknown).toBe(
-    'PERMISSION_DENIED',
+    'permission-denied',
   );
 }
 
