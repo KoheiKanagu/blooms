@@ -25,8 +25,6 @@ beforeAll(async () => {
       port: 8080,
     },
   });
-
-  console.log('testEnv', testEnv);
 });
 
 afterAll(async () => {
@@ -35,9 +33,7 @@ afterAll(async () => {
   const url = getFirestoreCoverageMeta(PROJECT_ID);
   const outPath = './firestore-coverage.html';
 
-  const response = await fetch(url);
-  const data = await response.text();
-
+  const data = await fetch(url).then(e => e.text());
   writeFileSync(outPath, data);
 });
 
