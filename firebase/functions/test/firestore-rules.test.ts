@@ -206,6 +206,49 @@ describe('users_v1', () => {
       ),
     );
   });
+
+  it('自分のuserの削除が拒否されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const userData = createUserData();
+    await setDoc(
+      db.doc(`${collectionPath}/${userUid}`),
+      userData,
+    );
+
+    await expectFirestorePermissionDenied(
+      db.collection(collectionPath).doc(userUid).delete(),
+    );
+  });
+
+  it('異なるユーザーがuserを削除できないこと', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const userData = createUserData();
+    await setDoc(
+      db.doc(`${collectionPath}/${userUid}`),
+      userData,
+    );
+
+    await expectFirestorePermissionDenied(
+      testEnv.authenticatedContext(otherUserUid).firestore().collection(collectionPath).doc(userUid).delete(),
+    );
+  });
+
+  it('認証されていないユーザーがuserを削除できないこと', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const userData = createUserData();
+    await setDoc(
+      db.doc(`${collectionPath}/${userUid}`),
+      userData,
+    );
+
+    await expectFirestorePermissionDenied(
+      testEnv.unauthenticatedContext().firestore().collection(collectionPath).doc(userUid).delete(),
+    );
+  });
 });
 
 describe('conditions_v1', () => {
