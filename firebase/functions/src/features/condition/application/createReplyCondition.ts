@@ -1,5 +1,4 @@
-import * as admin from 'firebase-admin';
-import { getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { FieldValue, getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { CollectionPath } from '../../../utils/collectionPath';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
@@ -53,8 +52,7 @@ export async function createReplyCondition(
     .where('deletedAt', '==', null)
     .where('creatorType', '==', creatorTypeModel);
 
-  await admin
-    .firestore()
+  await getFirestore()
     .runTransaction(async (transaction) => {
       const snapshot = await transaction.get(query);
       logger.info(`delete ${snapshot.size} conditions`);
@@ -62,7 +60,7 @@ export async function createReplyCondition(
       for (const doc of snapshot.docs) {
         transaction.update(doc.ref, {
           // 物理削除はTTLに任せる
-          deletedAt: admin.firestore.FieldValue.serverTimestamp(),
+          deletedAt: FieldValue.serverTimestamp(),
         });
       }
 

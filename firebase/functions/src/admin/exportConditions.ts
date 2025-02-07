@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { conditionConverter } from '../features/condition/domain/condition';
 import { CollectionPath } from '../utils/collectionPath';
@@ -13,8 +13,7 @@ async function main(): Promise<void> {
 
   const sourceUid = 'xxxx';
 
-  const results = await admin
-    .firestore()
+  const results = await getFirestore()
     .collection(CollectionPath.CONDITIONS)
     .withConverter(conditionConverter)
     .where('deletedAt', '==', null)

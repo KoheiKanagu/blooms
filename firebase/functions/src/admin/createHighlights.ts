@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import { FieldValue, getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { Highlight, highlightConverter } from '../features/highlight/domain/highlight';
 import { CollectionPath } from '../utils/collectionPath';
@@ -17,8 +17,7 @@ async function main(): Promise<void> {
   const startDate = new Date(2025, 0, 10);
   const length = 10;
 
-  const collection = admin
-    .firestore()
+  const collection = getFirestore()
     .collection(CollectionPath.HIGHLIGHTS)
     .withConverter(highlightConverter);
 
@@ -28,13 +27,13 @@ async function main(): Promise<void> {
     startAt.setDate(startAt.getDate() + i);
 
     const highlight: Highlight = {
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
       deletedAt: null,
       subjectUid: subjectUid,
       content: {
         type: 'summary',
-        startAt: admin.firestore.Timestamp.fromDate(startAt),
+        startAt: Timestamp.fromDate(startAt),
         period: 'past1day',
         summary: '',
         abstract: '',
