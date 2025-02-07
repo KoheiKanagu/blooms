@@ -17,7 +17,18 @@ export async function expectFirestorePermissionDenied(
   );
 }
 
-export async function expectFirestorePermissionSucceeds(
+export async function expectStoragePermissionDenied(
+  promise: Promise<unknown>,
+) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const errorResult = await assertFails(promise);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  expect(errorResult.code as unknown).toBe(
+    'storage/unauthorized',
+  );
+}
+
+export async function expectPermissionSucceeds(
   promise: Promise<unknown>,
 ) {
   const successResult = await assertSucceeds(promise);
