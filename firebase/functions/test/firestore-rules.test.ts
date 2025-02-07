@@ -1,5 +1,5 @@
-import { initializeTestEnvironment, RulesTestEnvironment } from '@firebase/rules-unit-testing';
-import { addDoc, doc, getDoc, getDocs, setDoc, setLogLevel, Timestamp, updateDoc } from 'firebase/firestore';
+import { assertSucceeds, initializeTestEnvironment, RulesTestEnvironment } from '@firebase/rules-unit-testing';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, setLogLevel, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { readFileSync, writeFileSync } from 'fs';
 import { Condition } from '../src/features/condition/domain/condition';
 import { Highlight } from '../src/features/highlight/domain/highlight';
@@ -15,7 +15,7 @@ let testEnv: RulesTestEnvironment;
 const PROJECT_ID = 'my-project';
 
 beforeAll(async () => {
-  setLogLevel('debug');
+  setLogLevel('error');
 
   testEnv = await initializeTestEnvironment({
     projectId: PROJECT_ID,
@@ -60,7 +60,7 @@ describe('users_v1', () => {
 
       await expectFirestorePermissionDenied(
         setDoc(
-          db.doc(`${collectionPath}/${userUid}`),
+          doc(db, collectionPath, userUid),
           userData,
         ),
       );
@@ -74,7 +74,7 @@ describe('users_v1', () => {
 
       await expectFirestorePermissionDenied(
         setDoc(
-          db.doc(`${collectionPath}/${userUid}`),
+          doc(db, collectionPath, userUid),
           userData,
         ),
       );
@@ -87,7 +87,7 @@ describe('users_v1', () => {
 
       await expectFirestorePermissionDenied(
         setDoc(
-          db.doc(`${collectionPath}/${userUid}`),
+          doc(db, collectionPath, userUid),
           userData,
         ),
       );
@@ -110,7 +110,7 @@ describe('users_v1', () => {
 
       await expectFirestorePermissionSucceeds(
         getDoc(
-          db.doc(`${collectionPath}/${userUid}`),
+          doc(db, collectionPath, userUid),
         ),
       );
     });
@@ -122,7 +122,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -130,7 +130,7 @@ describe('users_v1', () => {
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
         getDoc(
-          otherDb.doc(`${collectionPath}/${userUid}`),
+          doc(otherDb, collectionPath, userUid),
         ),
       );
     });
@@ -141,7 +141,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -149,7 +149,7 @@ describe('users_v1', () => {
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
         getDoc(
-          unauthDb.doc(`${collectionPath}/${userUid}`),
+          doc(unauthDb, collectionPath, userUid),
         ),
       );
     });
@@ -163,14 +163,14 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
 
-      await expectFirestorePermissionSucceeds(
+      await assertSucceeds(
         updateDoc(
-          db.doc(`${collectionPath}/${userUid}`),
+          doc(db, collectionPath, userUid),
           {
             deletedAt: Timestamp.now(),
           },
@@ -185,7 +185,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -193,7 +193,7 @@ describe('users_v1', () => {
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
         updateDoc(
-          otherDb.doc(`${collectionPath}/${userUid}`),
+          doc(otherDb, collectionPath, userUid),
           {
             deletedAt: Timestamp.now(),
           },
@@ -207,7 +207,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -215,7 +215,7 @@ describe('users_v1', () => {
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
         updateDoc(
-          unauthDb.doc(`${collectionPath}/${userUid}`),
+          doc(unauthDb, collectionPath, userUid),
           {
             deletedAt: Timestamp.now(),
           },
@@ -232,13 +232,15 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
 
       await expectFirestorePermissionDenied(
-        db.collection(collectionPath).doc(userUid).delete(),
+        deleteDoc(
+          doc(db, collectionPath, userUid),
+        ),
       );
     });
 
@@ -249,7 +251,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -265,7 +267,7 @@ describe('users_v1', () => {
       await testEnv.withSecurityRulesDisabled(async (context) => {
         const userData = createUserData();
         await setDoc(
-          context.firestore().doc(`${collectionPath}/${userUid}`),
+          doc(context.firestore(), collectionPath, userUid),
           userData,
         );
       });
@@ -303,7 +305,7 @@ describe('conditions_v1', () => {
 
       await expectFirestorePermissionSucceeds(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           conditionData,
         ),
       );
@@ -317,7 +319,7 @@ describe('conditions_v1', () => {
 
       await expectFirestorePermissionDenied(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           conditionData,
         ),
       );
@@ -329,7 +331,7 @@ describe('conditions_v1', () => {
 
       await expectFirestorePermissionDenied(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           conditionData,
         ),
       );
@@ -342,7 +344,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -359,7 +361,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -376,7 +378,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -395,14 +397,16 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       await expectFirestorePermissionSucceeds(
         getDocs(
-          db.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(db, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -413,15 +417,17 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
         getDocs(
-          otherDb.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(otherDb, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -431,15 +437,17 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
         getDocs(
-          unauthDb.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(unauthDb, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -451,11 +459,11 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
-      await expectFirestorePermissionSucceeds(
+      await assertSucceeds(
         updateDoc(
           doc(db, collectionPath, docRef.id),
           {
@@ -471,7 +479,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -491,7 +499,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -511,7 +519,7 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
@@ -532,12 +540,14 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       await expectFirestorePermissionDenied(
-        db.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(db, collectionPath, docRef.id),
+        ),
       );
     });
 
@@ -547,13 +557,15 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
-        otherDb.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(otherDb, collectionPath, docRef.id),
+        ),
       );
     });
 
@@ -562,13 +574,15 @@ describe('conditions_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const conditionData = createConditionData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         conditionData,
       );
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
-        unauthDb.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(unauthDb, collectionPath, docRef.id),
+        ),
       );
     });
   });
@@ -603,7 +617,7 @@ describe('highlights_v1', () => {
 
       await expectFirestorePermissionSucceeds(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           highlightData,
         ),
       );
@@ -617,7 +631,7 @@ describe('highlights_v1', () => {
 
       await expectFirestorePermissionDenied(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           highlightData,
         ),
       );
@@ -629,7 +643,7 @@ describe('highlights_v1', () => {
 
       await expectFirestorePermissionDenied(
         addDoc(
-          db.collection(collectionPath),
+          collection(db, collectionPath),
           highlightData,
         ),
       );
@@ -642,7 +656,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -659,7 +673,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -676,7 +690,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -695,14 +709,16 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       await expectFirestorePermissionSucceeds(
         getDocs(
-          db.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(db, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -713,15 +729,17 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
         getDocs(
-          otherDb.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(otherDb, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -731,15 +749,17 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
         getDocs(
-          unauthDb.collection(collectionPath)
-            .where('subjectUid', '==', userUid),
+          query(
+            collection(unauthDb, collectionPath),
+            where('subjectUid', '==', userUid),
+          ),
         ),
       );
     });
@@ -751,11 +771,11 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
-      await expectFirestorePermissionSucceeds(
+      await assertSucceeds(
         updateDoc(
           doc(db, collectionPath, docRef.id),
           { deletedAt: Timestamp.now() },
@@ -769,7 +789,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -787,7 +807,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -805,7 +825,7 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
@@ -824,12 +844,14 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       await expectFirestorePermissionDenied(
-        db.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(db, collectionPath, docRef.id),
+        ),
       );
     });
 
@@ -839,13 +861,15 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
       await expectFirestorePermissionDenied(
-        otherDb.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(otherDb, collectionPath, docRef.id),
+        ),
       );
     });
 
@@ -854,13 +878,15 @@ describe('highlights_v1', () => {
       const db = testEnv.authenticatedContext(userUid).firestore();
       const highlightData = createHighlightData(userUid);
       const docRef = await addDoc(
-        db.collection(collectionPath),
+        collection(db, collectionPath),
         highlightData,
       );
 
       const unauthDb = testEnv.unauthenticatedContext().firestore();
       await expectFirestorePermissionDenied(
-        unauthDb.collection(collectionPath).doc(docRef.id).delete(),
+        deleteDoc(
+          doc(unauthDb, collectionPath, docRef.id),
+        ),
       );
     });
   });
