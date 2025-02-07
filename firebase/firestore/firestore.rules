@@ -14,19 +14,25 @@ service cloud.firestore {
     }
 
     match /users_v1/{uid} {
-      // only the user can read and write their own data
-      allow get, update:
-        if isOwner(uid);
+      // only the user can read their own data
+      allow get: if isOwner(uid);
 
-      // only the user can create their own data
-      allow create:
-        if isAuthenticated() && request.auth.uid == uid;
+      // only the user can update their own data, specifically the 'deletedAt' field
+      allow update: if isOwner(uid)
+            && request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['deletedAt']);
     }
 
     match /conditions_v1/{document=**} {
       // only the user can read and write their own data
-      allow get, list, update:
+      allow get, list:
         if isAuthenticated() && resource.data.subjectUid == request.auth.uid;
+
+      allow update:
+        if isAuthenticated() && resource.data.subjectUid == request.auth.uid
+          // only allow updating the 'deletedAt' field
+          && request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['deletedAt']);
 
       // only the user can create their own data
       allow create:
