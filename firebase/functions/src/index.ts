@@ -1,9 +1,9 @@
-import * as admin from 'firebase-admin';
+import { initializeApp } from 'firebase-admin/app';
 import { initializeFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions';
 import * as f from 'firebase-functions/v1';
 
-const app = admin.initializeApp();
+const app = initializeApp();
 
 initializeFirestore(app, {
   preferRest: true,
