@@ -1,9 +1,9 @@
 import { assertSucceeds, initializeTestEnvironment, RulesTestEnvironment } from '@firebase/rules-unit-testing';
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, setLogLevel, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { readFileSync, writeFileSync } from 'fs';
+import { User } from '../src/features/auth/domain/user';
 import { Condition } from '../src/features/condition/domain/condition';
 import { Highlight } from '../src/features/highlight/domain/highlight';
-import { User } from '../src/models/user';
 import { CollectionPath } from '../src/utils/collectionPath';
 import {
   expectFirestorePermissionDenied,

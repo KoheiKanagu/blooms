@@ -2,9 +2,9 @@ import { firestore } from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions/v1';
 import { functionsV1 } from '../..';
-import { User, userConverter } from '../../models/user';
 import { CollectionPath } from '../../utils/collectionPath';
 import { Condition, conditionConverter } from '../condition/domain/condition';
+import { User, userConverter } from './domain/user';
 
 export const onCreateAuthUser = functionsV1()
   .auth
