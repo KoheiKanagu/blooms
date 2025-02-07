@@ -4,6 +4,7 @@ import { addDoc, doc, getDoc, getDocs, setDoc, setLogLevel, updateDoc } from 'fi
 import { readFileSync, writeFileSync } from 'fs';
 import { Condition } from '../src/features/condition/domain/condition';
 import { Highlight } from '../src/features/highlight/domain/highlight';
+import { User } from '../src/models/user';
 import { CollectionPath } from '../src/utils/collectionPath';
 import {
   expectFirestorePermissionDenied,
@@ -44,247 +45,10 @@ afterAll(async () => {
   writeFileSync(outPath, data);
 });
 
-describe('highlights_v1', () => {
-  const collectionPath = CollectionPath.HIGHLIGHTS;
-
-  function createHighlightData(subjectUid: string, deletedAt: Timestamp | null = null): Highlight {
-    return {
-      subjectUid: subjectUid,
-      content: {
-        type: 'summary',
-        startAt: Timestamp.now(),
-        period: 'past1day',
-        summary: 'This is a summary.',
-        abstract: 'This is an abstract.',
-        state: 'success',
-        promptFileUri: null,
-      },
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now(),
-      deletedAt: deletedAt,
-    };
-  }
-
-  it('ハイライトの作成が許可されること', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-
-    await expectFirestorePermissionSucceeds(
-      addDoc(
-        db.collection(collectionPath),
-        highlightData,
-      ),
-    );
-  });
-
-  it('異なるユーザーがハイライトを作成できないこと', async () => {
-    const userUid = 'user1';
-    const otherUserUid = 'user2';
-    const db = testEnv.authenticatedContext(otherUserUid).firestore();
-    const highlightData = createHighlightData(userUid);
-
-    await expectFirestorePermissionDenied(
-      addDoc(
-        db.collection(collectionPath),
-        highlightData,
-      ),
-    );
-  });
-
-  it('認証されていないユーザーがハイライトを作成できないこと', async () => {
-    const db = testEnv.unauthenticatedContext().firestore();
-    const highlightData = createHighlightData('user1');
-
-    await expectFirestorePermissionDenied(
-      addDoc(
-        db.collection(collectionPath),
-        highlightData,
-      ),
-    );
-  });
-
-  it('自分のハイライトの取得が許可されること', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    await expectFirestorePermissionSucceeds(
-      getDoc(
-        doc(db, collectionPath, docRef.id),
-      ),
-    );
-  });
-
-  it('異なるユーザーのハイライトの取得が拒否されること', async () => {
-    const userUid = 'user1';
-    const otherUserUid = 'user2';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
-    await expectFirestorePermissionDenied(
-      getDoc(
-        doc(otherDb, collectionPath, docRef.id),
-      ),
-    );
-  });
-
-  it('認証されていないユーザーがハイライトを取得できないこと', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const unauthDb = testEnv.unauthenticatedContext().firestore();
-    await expectFirestorePermissionDenied(
-      getDoc(
-        doc(unauthDb, collectionPath, docRef.id),
-      ),
-    );
-  });
-
-  it('自分のハイライトのリスト表示が許可されること', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    await expectFirestorePermissionSucceeds(
-      getDocs(
-        db.collection(collectionPath)
-          .where('subjectUid', '==', userUid),
-      ),
-    );
-  });
-
-  it('異なるユーザーのハイライトのリスト表示が拒否されること', async () => {
-    const userUid = 'user1';
-    const otherUserUid = 'user2';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
-    await expectFirestorePermissionDenied(
-      getDocs(
-        otherDb.collection(collectionPath)
-          .where('subjectUid', '==', userUid),
-      ),
-    );
-  });
-
-  it('認証されていないユーザーがハイライトをリスト表示できないこと', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const unauthDb = testEnv.unauthenticatedContext().firestore();
-    await expectFirestorePermissionDenied(
-      getDocs(
-        unauthDb.collection(collectionPath)
-          .where('subjectUid', '==', userUid),
-      ),
-    );
-  });
-
-  it('自分のハイライトの削除 (update deletedAt) が許可されること', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    await expectFirestorePermissionSucceeds(
-      updateDoc(
-        doc(db, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
-      ),
-    );
-  });
-
-  it('異なるユーザーがハイライトを削除できないこと', async () => {
-    const userUid = 'user1';
-    const otherUserUid = 'user2';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
-    await expectFirestorePermissionDenied(
-      updateDoc(
-        doc(otherDb, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
-      ),
-    );
-  });
-
-  it('認証されていないユーザーがハイライトを削除できないこと', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    const unauthDb = testEnv.unauthenticatedContext().firestore();
-    await expectFirestorePermissionDenied(
-      updateDoc(
-        doc(unauthDb, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
-      ),
-    );
-  });
-
-  it('deletedAt以外のフィールドの更新が拒否されること', async () => {
-    const userUid = 'user1';
-    const db = testEnv.authenticatedContext(userUid).firestore();
-    const highlightData = createHighlightData(userUid);
-    const docRef = await addDoc(
-      db.collection(collectionPath),
-      highlightData,
-    );
-
-    await expectFirestorePermissionDenied(
-      updateDoc(
-        doc(db, collectionPath, docRef.id),
-        { updatedAt: Timestamp.now() },
-      ),
-    );
-  });
-});
-
 describe('users_v1', () => {
   const collectionPath = CollectionPath.USERS;
 
-  function createUserData(uid: string) {
+  function createUserData(): User {
     return {
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -292,12 +56,12 @@ describe('users_v1', () => {
     };
   }
 
-  it('自分のユーザーデータの作成が許可されること', async () => {
+  it('自分のuserの作成が許可されないこと', async () => {
     const userUid = 'user1';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
 
-    await expectFirestorePermissionSucceeds(
+    await expectFirestorePermissionDenied(
       setDoc(
         db.doc(`${collectionPath}/${userUid}`),
         userData,
@@ -305,11 +69,11 @@ describe('users_v1', () => {
     );
   });
 
-  it('異なるユーザーがユーザーデータを作成できないこと', async () => {
+  it('異なるユーザーがuserを作成できないこと', async () => {
     const userUid = 'user1';
     const otherUserUid = 'user2';
     const db = testEnv.authenticatedContext(otherUserUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
 
     await expectFirestorePermissionDenied(
       setDoc(
@@ -319,10 +83,10 @@ describe('users_v1', () => {
     );
   });
 
-  it('認証されていないユーザーがユーザーデータを作成できないこと', async () => {
+  it('認証されていないユーザーがuserを作成できないこと', async () => {
     const userUid = 'user1';
     const db = testEnv.unauthenticatedContext().firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
 
     await expectFirestorePermissionDenied(
       setDoc(
@@ -332,10 +96,10 @@ describe('users_v1', () => {
     );
   });
 
-  it('自分のユーザーデータの取得が許可されること', async () => {
+  it('自分のuserの取得が許可されること', async () => {
     const userUid = 'user1';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -348,11 +112,11 @@ describe('users_v1', () => {
     );
   });
 
-  it('異なるユーザーのユーザーデータの取得が拒否されること', async () => {
+  it('異なるユーザーのuserの取得が拒否されること', async () => {
     const userUid = 'user1';
     const otherUserUid = 'user2';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -366,10 +130,10 @@ describe('users_v1', () => {
     );
   });
 
-  it('認証されていないユーザーがユーザーデータを取得できないこと', async () => {
+  it('認証されていないユーザーがuserを取得できないこと', async () => {
     const userUid = 'user1';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -383,10 +147,10 @@ describe('users_v1', () => {
     );
   });
 
-  it('自分のユーザーデータの更新が許可されること', async () => {
+  it('自分のuserの更新が許可されること', async () => {
     const userUid = 'user1';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -395,16 +159,18 @@ describe('users_v1', () => {
     await expectFirestorePermissionSucceeds(
       updateDoc(
         db.doc(`${collectionPath}/${userUid}`),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
 
-  it('異なるユーザーがユーザーデータを更新できないこと', async () => {
+  it('異なるユーザーがuserを更新できないこと', async () => {
     const userUid = 'user1';
     const otherUserUid = 'user2';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -414,15 +180,17 @@ describe('users_v1', () => {
     await expectFirestorePermissionDenied(
       updateDoc(
         otherDb.doc(`${collectionPath}/${userUid}`),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
 
-  it('認証されていないユーザーがユーザーデータを更新できないこと', async () => {
+  it('認証されていないユーザーがuserを更新できないこと', async () => {
     const userUid = 'user1';
     const db = testEnv.authenticatedContext(userUid).firestore();
-    const userData = createUserData(userUid);
+    const userData = createUserData();
     await setDoc(
       db.doc(`${collectionPath}/${userUid}`),
       userData,
@@ -432,7 +200,9 @@ describe('users_v1', () => {
     await expectFirestorePermissionDenied(
       updateDoc(
         unauthDb.doc(`${collectionPath}/${userUid}`),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
@@ -557,7 +327,8 @@ describe('conditions_v1', () => {
 
     await expectFirestorePermissionSucceeds(
       getDocs(
-        db.collection(collectionPath).where('subjectUid', '==', userUid),
+        db.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
       ),
     );
   });
@@ -575,7 +346,8 @@ describe('conditions_v1', () => {
     const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
     await expectFirestorePermissionDenied(
       getDocs(
-        otherDb.collection(collectionPath).where('subjectUid', '==', userUid),
+        otherDb.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
       ),
     );
   });
@@ -592,7 +364,8 @@ describe('conditions_v1', () => {
     const unauthDb = testEnv.unauthenticatedContext().firestore();
     await expectFirestorePermissionDenied(
       getDocs(
-        unauthDb.collection(collectionPath).where('subjectUid', '==', userUid),
+        unauthDb.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
       ),
     );
   });
@@ -609,7 +382,9 @@ describe('conditions_v1', () => {
     await expectFirestorePermissionSucceeds(
       updateDoc(
         doc(db, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
@@ -628,7 +403,9 @@ describe('conditions_v1', () => {
     await expectFirestorePermissionDenied(
       updateDoc(
         doc(otherDb, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
@@ -646,7 +423,9 @@ describe('conditions_v1', () => {
     await expectFirestorePermissionDenied(
       updateDoc(
         doc(unauthDb, collectionPath, docRef.id),
-        { deletedAt: Timestamp.now() },
+        {
+          deletedAt: Timestamp.now(),
+        },
       ),
     );
   });
@@ -658,6 +437,290 @@ describe('conditions_v1', () => {
     const docRef = await addDoc(
       db.collection(collectionPath),
       conditionData,
+    );
+
+    await expectFirestorePermissionDenied(
+      updateDoc(
+        doc(db, collectionPath, docRef.id),
+        {
+          updatedAt: Timestamp.now(),
+        },
+      ),
+    );
+  });
+
+  it('conditionの削除が拒否されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const conditionData = createConditionData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      conditionData,
+    );
+
+    await expectFirestorePermissionDenied(
+      db.collection(collectionPath).doc(docRef.id).delete(),
+    );
+  });
+
+  it('異なるユーザーがconditionを削除できないこと', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const conditionData = createConditionData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      conditionData,
+    );
+
+    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
+    await expectFirestorePermissionDenied(
+      otherDb.collection(collectionPath).doc(docRef.id).delete(),
+    );
+  });
+
+  it('認証されていないユーザーがconditionを削除できないこと', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const conditionData = createConditionData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      conditionData,
+    );
+
+    const unauthDb = testEnv.unauthenticatedContext().firestore();
+    await expectFirestorePermissionDenied(
+      unauthDb.collection(collectionPath).doc(docRef.id).delete(),
+    );
+  });
+});
+
+describe('highlights_v1', () => {
+  const collectionPath = CollectionPath.HIGHLIGHTS;
+
+  function createHighlightData(subjectUid: string, deletedAt: Timestamp | null = null): Highlight {
+    return {
+      subjectUid: subjectUid,
+      content: {
+        type: 'summary',
+        startAt: Timestamp.now(),
+        period: 'past1day',
+        summary: 'This is a summary.',
+        abstract: 'This is an abstract.',
+        state: 'success',
+        promptFileUri: null,
+      },
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      deletedAt: deletedAt,
+    };
+  }
+
+  it('highlightの作成が許可されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+
+    await expectFirestorePermissionSucceeds(
+      addDoc(
+        db.collection(collectionPath),
+        highlightData,
+      ),
+    );
+  });
+
+  it('異なるユーザーがhighlightを作成できないこと', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(otherUserUid).firestore();
+    const highlightData = createHighlightData(userUid);
+
+    await expectFirestorePermissionDenied(
+      addDoc(
+        db.collection(collectionPath),
+        highlightData,
+      ),
+    );
+  });
+
+  it('認証されていないユーザーがhighlightを作成できないこと', async () => {
+    const db = testEnv.unauthenticatedContext().firestore();
+    const highlightData = createHighlightData('user1');
+
+    await expectFirestorePermissionDenied(
+      addDoc(
+        db.collection(collectionPath),
+        highlightData,
+      ),
+    );
+  });
+
+  it('自分のhighlightの取得が許可されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    await expectFirestorePermissionSucceeds(
+      getDoc(
+        doc(db, collectionPath, docRef.id),
+      ),
+    );
+  });
+
+  it('異なるユーザーのhighlightの取得が拒否されること', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
+    await expectFirestorePermissionDenied(
+      getDoc(
+        doc(otherDb, collectionPath, docRef.id),
+      ),
+    );
+  });
+
+  it('認証されていないユーザーがhighlightを取得できないこと', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const unauthDb = testEnv.unauthenticatedContext().firestore();
+    await expectFirestorePermissionDenied(
+      getDoc(
+        doc(unauthDb, collectionPath, docRef.id),
+      ),
+    );
+  });
+
+  it('自分のhighlightのリスト表示が許可されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    await expectFirestorePermissionSucceeds(
+      getDocs(
+        db.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
+      ),
+    );
+  });
+
+  it('異なるユーザーのhighlightのリスト表示が拒否されること', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
+    await expectFirestorePermissionDenied(
+      getDocs(
+        otherDb.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
+      ),
+    );
+  });
+
+  it('認証されていないユーザーがhighlightをリスト表示できないこと', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const unauthDb = testEnv.unauthenticatedContext().firestore();
+    await expectFirestorePermissionDenied(
+      getDocs(
+        unauthDb.collection(collectionPath)
+          .where('subjectUid', '==', userUid),
+      ),
+    );
+  });
+
+  it('自分のhighlightの削除 (update deletedAt) が許可されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    await expectFirestorePermissionSucceeds(
+      updateDoc(
+        doc(db, collectionPath, docRef.id),
+        { deletedAt: Timestamp.now() },
+      ),
+    );
+  });
+
+  it('異なるユーザーがhighlightを削除できないこと', async () => {
+    const userUid = 'user1';
+    const otherUserUid = 'user2';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const otherDb = testEnv.authenticatedContext(otherUserUid).firestore();
+    await expectFirestorePermissionDenied(
+      updateDoc(
+        doc(otherDb, collectionPath, docRef.id),
+        { deletedAt: Timestamp.now() },
+      ),
+    );
+  });
+
+  it('認証されていないユーザーがhighlightを削除できないこと', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
+    );
+
+    const unauthDb = testEnv.unauthenticatedContext().firestore();
+    await expectFirestorePermissionDenied(
+      updateDoc(
+        doc(unauthDb, collectionPath, docRef.id),
+        { deletedAt: Timestamp.now() },
+      ),
+    );
+  });
+
+  it('deletedAt以外のフィールドの更新が拒否されること', async () => {
+    const userUid = 'user1';
+    const db = testEnv.authenticatedContext(userUid).firestore();
+    const highlightData = createHighlightData(userUid);
+    const docRef = await addDoc(
+      db.collection(collectionPath),
+      highlightData,
     );
 
     await expectFirestorePermissionDenied(
