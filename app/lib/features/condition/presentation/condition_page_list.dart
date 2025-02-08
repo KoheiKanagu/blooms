@@ -97,7 +97,7 @@ class _ListView extends HookConsumerWidget {
       query: query,
       builder: (context, snapshot, _) {
         if (snapshot.hasError) {
-          logger.error(snapshot.error);
+          logger.handle(Exception(snapshot.error));
           return const _ErrorWidget();
         }
 

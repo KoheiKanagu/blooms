@@ -35,3 +35,4 @@ export { onCreateAuthUser } from './features/auth/onCreateAuthUser';
 export { onConditionDocumentCreated } from './features/condition/onConditionDocumentCreated';
 export { onHighlightDocumentCreated } from './features/highlight/onHighlightDocumentCreated';
 export { processConditionContentImage } from './features/image/processConditionContentImage';
+export { writeLog } from './features/log/writeLog';
