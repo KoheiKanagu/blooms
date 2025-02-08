@@ -4,10 +4,12 @@ import 'package:blooms/utils/configure/device_info_providers.dart';
 import 'package:blooms/utils/configure/package_info_providers.dart';
 import 'package:blooms/utils/firebase/firebase_analytics.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
+import 'package:blooms/utils/my_logger.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:talker/talker.dart';
 
 part 'app_startup.g.dart';
 
@@ -20,13 +22,37 @@ Future<void> appStartup(Ref ref) async {
       ..invalidate(deviceInfoProvider);
   });
 
-  if (!kIsWeb) {
-    /// error handling
+  // error handling
+  if (kIsWeb) {
+    // Webの場合はTalkerに送る
+    FlutterError.onError = (details) {
+      logger.handle(
+        TalkerException(
+          Exception(details.exceptionAsString()),
+          message: details.context?.toString(),
+          stackTrace: details.stack,
+          logLevel: LogLevel.error,
+        ),
+      );
+    };
+    PlatformDispatcher.instance.onError = (error, stack) {
+      logger.handle(
+        TalkerException(
+          Exception(error.toString()),
+          message: error.toString(),
+          stackTrace: stack,
+          logLevel: LogLevel.error,
+        ),
+      );
+      return true;
+    };
+  } else {
+    // モバイルの場合はCrashlyticsに送る
     FlutterError.onError =
-        ref.read(firebaseCrashlyticsProvider).recordFlutterFatalError;
+        ref.watch(firebaseCrashlyticsProvider).recordFlutterFatalError;
     PlatformDispatcher.instance.onError = (error, stack) {
       ref
-          .read(firebaseCrashlyticsProvider)
+          .watch(firebaseCrashlyticsProvider)
           .recordError(error, stack, fatal: true);
       return true;
     };
@@ -51,22 +77,22 @@ Future<void> appStartup(Ref ref) async {
     // リリースモードの場合のみCrashlyticsを有効化
     if (!kIsWeb)
       ref
-          .read(firebaseCrashlyticsProvider)
+          .watch(firebaseCrashlyticsProvider)
           .setCrashlyticsCollectionEnabled(kReleaseMode),
     // リリースモードの場合のみAnalyticsを有効化
     ref
-        .read(firebaseAnalyticsProvider)
+        .watch(firebaseAnalyticsProvider)
         .setAnalyticsCollectionEnabled(kReleaseMode),
-    ref.read(packageInfoProvider.future),
-    ref.read(deviceInfoProvider.future),
-    ref.read(firebaseAuthProvider).setSettings(
+    ref.watch(packageInfoProvider.future),
+    ref.watch(deviceInfoProvider.future),
+    ref.watch(firebaseAuthProvider).setSettings(
           userAccessGroup: kKeychainGroup,
         ),
-    ref.read(authSignOutWhenFirstRunProvider.future),
+    ref.watch(authSignOutWhenFirstRunProvider.future),
   ]);
 
   await Future.wait([
     // authStateChangesが取得できたらFirebase Authの初期化が完了したと言える
-    ref.read(firebaseAuthProvider).authStateChanges().first,
+    ref.watch(firebaseAuthProvider).authStateChanges().first,
   ]);
 }

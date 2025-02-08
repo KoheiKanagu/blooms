@@ -1,3 +1,4 @@
+import 'package:blooms/features/disclaimer/presentation/disclaimer_label.dart';
 import 'package:blooms/features/highlight/domain/highlight_period.dart';
 import 'package:blooms/features/highlight/domain/highlight_state.dart';
 import 'package:blooms/features/highlight/presentation/highlight_type_label.dart';
@@ -208,6 +209,7 @@ class _Content extends StatelessWidget {
             ),
         maxLines: 100,
       ),
+      subtitle: const DisclaimerLabel(),
     );
   }
 }

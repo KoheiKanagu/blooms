@@ -164,13 +164,24 @@ class _PlusButton extends HookConsumerWidget {
               return;
             }
 
-            await ref.read(
-              conditionCreateImageProvider(
-                xFiles: [
-                  xFile,
-                ].toList(),
-              ).future,
-            );
+            if (context.mounted) {
+              final indicator = showMyProgressIndicator(context);
+
+              try {
+                await ref.read(
+                  conditionCreateImageProvider(
+                    xFiles: [
+                      xFile,
+                    ].toList(),
+                  ).future,
+                );
+              } on Exception catch (error, stack) {
+                // TODO: エラーダイアログ
+                logger.handle(error, stack);
+              } finally {
+                indicator.dismiss();
+              }
+            }
           },
         ),
         PullDownMenuItem(
@@ -197,7 +208,7 @@ class _PlusButton extends HookConsumerWidget {
                 );
               } on Exception catch (error, stack) {
                 // TODO: エラーダイアログ
-                logger.error(error, stack);
+                logger.handle(error, stack);
               } finally {
                 indicator.dismiss();
               }

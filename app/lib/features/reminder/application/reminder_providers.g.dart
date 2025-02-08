@@ -29,7 +29,7 @@ final flutterLocalNotificationsPluginProvider =
 typedef FlutterLocalNotificationsPluginRef
     = ProviderRef<FlutterLocalNotificationsPlugin>;
 String _$flutterLocalNotificationPluginInitializeHash() =>
-    r'62d9d1ef220f863aeb6c85cade1624ef89fb484c';
+    r'cbce7d0e20d7fbba27ce4ee1b7737a549c99c802';
 
 /// See also [flutterLocalNotificationPluginInitialize].
 @ProviderFor(flutterLocalNotificationPluginInitialize)
@@ -48,7 +48,7 @@ final flutterLocalNotificationPluginInitializeProvider =
 // ignore: unused_element
 typedef FlutterLocalNotificationPluginInitializeRef
     = AutoDisposeFutureProviderRef<void>;
-String _$reminderTimeHash() => r'2ee00786c89149c4eadd9edeb6a40bd3e7bc99a6';
+String _$reminderTimeHash() => r'5af5e8c62cd95e2255eb04d7869b0cdae5b9ea51';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -211,7 +211,7 @@ class _ReminderTimeProviderElement
   ReminderType get type => (origin as ReminderTimeProvider).type;
 }
 
-String _$reminderStatusHash() => r'acc027d05806fce80e61ec1522885afc9e2996f2';
+String _$reminderStatusHash() => r'927f1f06883f5f088cf4e1ea4957ae388de25c2c';
 
 /// 通知の有効状態を取得
 ///
@@ -353,7 +353,7 @@ class _ReminderStatusProviderElement
   ReminderType get type => (origin as ReminderStatusProvider).type;
 }
 
-String _$reminderSaveHash() => r'4980bc28fe0f2e27ae82f50d2c829aa38c0ed2bd';
+String _$reminderSaveHash() => r'f3e90cd38f8859ea15e87dc4aac155096976d14c';
 
 /// リマインダーを保存
 ///

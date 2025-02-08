@@ -1,10 +1,9 @@
-import { firestore } from 'firebase-admin';
-import { FieldValue } from 'firebase-admin/firestore';
+import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions/v1';
 import { functionsV1 } from '../..';
-import { User, userConverter } from '../../models/user';
 import { CollectionPath } from '../../utils/collectionPath';
 import { Condition, conditionConverter } from '../condition/domain/condition';
+import { User, userConverter } from './domain/user';
 
 export const onCreateAuthUser = functionsV1()
   .auth
@@ -25,7 +24,7 @@ export const onCreateAuthUser = functionsV1()
       null,
     );
 
-    await firestore()
+    await getFirestore()
       .collection(CollectionPath.USERS)
       .withConverter(userConverter)
       .doc(user.uid)
@@ -52,7 +51,7 @@ export const onCreateAuthUser = functionsV1()
       },
     };
 
-    await firestore()
+    await getFirestore()
       .collection(CollectionPath.CONDITIONS)
       .doc()
       .withConverter(conditionConverter)

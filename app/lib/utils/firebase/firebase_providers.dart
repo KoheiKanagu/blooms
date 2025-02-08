@@ -31,7 +31,7 @@ Future<String> firebaseStorageGsFileDownloadUrl(
 
   if (fileUri.startsWith('gs://')) {
     return ref
-        .read(firebaseStorageProvider)
+        .watch(firebaseStorageProvider)
         .refFromURL(fileUri)
         .getDownloadURL();
   } else {

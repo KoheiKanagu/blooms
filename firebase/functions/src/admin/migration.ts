@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { CollectionPath } from '../utils/collectionPath';
 import { adminInitializeAppStg } from './adminInitializeApp';
@@ -13,12 +13,11 @@ async function main(): Promise<void> {
   const sourceUid = 'xxxx';
   const toUid = 'yyyy';
 
-  const conditionQuery = admin
-    .firestore()
+  const conditionQuery = getFirestore()
     .collection(CollectionPath.CONDITIONS)
     .where('subjectUid', '==', sourceUid);
 
-  await admin.firestore().runTransaction(async (transaction) => {
+  await getFirestore().runTransaction(async (transaction) => {
     const conditions = await transaction.get(conditionQuery);
     logger.info(`Found ${conditions.size} conditions`);
 
@@ -29,12 +28,11 @@ async function main(): Promise<void> {
     }
   });
 
-  const highlightQuery = admin
-    .firestore()
+  const highlightQuery = getFirestore()
     .collection(CollectionPath.HIGHLIGHTS)
     .where('subjectUid', '==', sourceUid);
 
-  await admin.firestore().runTransaction(async (transaction) => {
+  await getFirestore().runTransaction(async (transaction) => {
     const highlights = await transaction.get(highlightQuery);
     logger.info(`Found ${highlights.size} highlights`);
 

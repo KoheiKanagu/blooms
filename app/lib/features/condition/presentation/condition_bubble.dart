@@ -6,6 +6,7 @@ import 'package:blooms/features/condition/presentation/condition_bubble_empty.da
 import 'package:blooms/features/condition/presentation/condition_bubble_image.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_text.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_text_with_search_keywords.dart';
+import 'package:blooms/features/disclaimer/presentation/disclaimer_label.dart';
 import 'package:blooms/theme/my_date_format.dart';
 import 'package:blooms/theme/my_decoration.dart';
 import 'package:blooms/theme/my_theme.dart';
@@ -135,27 +136,35 @@ class ConditionBubble extends HookConsumerWidget {
                     ConditionCreatorType.model => [],
                   },
                 ),
-                child: switch (content) {
-                  ConditionContentText() => ConditionBubbleText(
-                      content as ConditionContentText,
-                      creatorType: creatorType,
-                    ),
-                  ConditionContentTextWithSearchKeywords() =>
-                    ConditionBubbleTextWithSearchKeywords(
-                      content as ConditionContentTextWithSearchKeywords,
-                      creatorType: creatorType,
-                    ),
-                  ConditionContentImage() => ConditionBubbleImage(
-                      content as ConditionContentImage,
-                      creatorType: creatorType,
-                    ),
-                  ConditionContentAudio() => ConditionBubbleAudio(
-                      content as ConditionContentAudio,
-                      creatorType: creatorType,
-                    ),
-                  ConditionContentEmpty() =>
-                    ConditionBubbleEmpty(content as ConditionContentEmpty),
-                },
+                child: Column(
+                  children: [
+                    switch (content) {
+                      ConditionContentText() => ConditionBubbleText(
+                          content as ConditionContentText,
+                          creatorType: creatorType,
+                        ),
+                      ConditionContentTextWithSearchKeywords() =>
+                        ConditionBubbleTextWithSearchKeywords(
+                          content as ConditionContentTextWithSearchKeywords,
+                          creatorType: creatorType,
+                        ),
+                      ConditionContentImage() => ConditionBubbleImage(
+                          content as ConditionContentImage,
+                          creatorType: creatorType,
+                        ),
+                      ConditionContentAudio() => ConditionBubbleAudio(
+                          content as ConditionContentAudio,
+                          creatorType: creatorType,
+                        ),
+                      ConditionContentEmpty() =>
+                        ConditionBubbleEmpty(content as ConditionContentEmpty),
+                    },
+                    switch (creatorType) {
+                      ConditionCreatorType.user => const SizedBox.shrink(),
+                      ConditionCreatorType.model => const DisclaimerLabel()
+                    },
+                  ],
+                ),
               ),
             ),
           ),

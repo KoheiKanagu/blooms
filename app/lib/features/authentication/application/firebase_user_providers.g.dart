@@ -8,7 +8,7 @@ part of 'firebase_user_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseUserHash() => r'7129c21d8859a9a6f1d0266d7ddccb69dc059cd9';
+String _$firebaseUserHash() => r'710e1fe7cb0ec52f6295486471c98075311e1274';
 
 /// [fb_auth.User]を取得する
 ///

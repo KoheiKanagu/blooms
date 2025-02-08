@@ -25,7 +25,7 @@ final deviceInfoProvider = FutureProvider<BaseDeviceInfo>.internal(
 // ignore: unused_element
 typedef DeviceInfoRef = FutureProviderRef<BaseDeviceInfo>;
 String _$deviceInfoSystemNameHash() =>
-    r'b462bad538f16f4e6062f64d3427cffede23df79';
+    r'de51263d74967c6a63d83d4494d983a32013f437';
 
 /// See also [deviceInfoSystemName].
 @ProviderFor(deviceInfoSystemName)
@@ -43,7 +43,7 @@ final deviceInfoSystemNameProvider = AutoDisposeProvider<String>.internal(
 // ignore: unused_element
 typedef DeviceInfoSystemNameRef = AutoDisposeProviderRef<String>;
 String _$deviceInfoSystemVersionHash() =>
-    r'16936b77a425b935968edb2967c663f30a93d273';
+    r'851be8e60b6f8f9aac3cc3e2bc93e42c6a4f5bed';
 
 /// See also [deviceInfoSystemVersion].
 @ProviderFor(deviceInfoSystemVersion)
