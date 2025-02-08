@@ -6,7 +6,7 @@
 
 ## iOS 版
 
-TODO
+<https://apps.apple.com/jp/app/blooms/id6740260241>
 
 ## Web 版
 
