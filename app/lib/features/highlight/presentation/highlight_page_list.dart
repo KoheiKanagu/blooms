@@ -45,7 +45,7 @@ class HighlightPageList extends HookConsumerWidget {
             query: query,
             builder: (context, snapshot, _) {
               if (snapshot.hasError) {
-                logger.error(snapshot.error);
+                logger.handle(Exception(snapshot.error));
               }
 
               if (snapshot.isFetching) {

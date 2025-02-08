@@ -177,7 +177,7 @@ class _PlusButton extends HookConsumerWidget {
                 );
               } on Exception catch (error, stack) {
                 // TODO: エラーダイアログ
-                logger.error(error, stack);
+                logger.handle(error, stack);
               } finally {
                 indicator.dismiss();
               }
@@ -208,7 +208,7 @@ class _PlusButton extends HookConsumerWidget {
                 );
               } on Exception catch (error, stack) {
                 // TODO: エラーダイアログ
-                logger.error(error, stack);
+                logger.handle(error, stack);
               } finally {
                 indicator.dismiss();
               }

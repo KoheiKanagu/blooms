@@ -14,7 +14,7 @@ class AppStartupWidget extends HookConsumerWidget {
     return ref.watch(appStartupProvider).maybeWhen(
           orElse: () => const AppStartupLoadingWidget(),
           error: (error, trace) {
-            logger.error(error, trace);
+            logger.handle(error, trace);
 
             return AppStartupErrorWidget(
               // Discard and try to initialize again
