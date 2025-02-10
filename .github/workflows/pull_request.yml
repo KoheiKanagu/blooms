@@ -123,7 +123,7 @@ jobs:
         if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
         run: |
           # pod installが実行された時、パスの違いなどでSPEC CHECKSUMSが変わるため、差分を無視する
-          git config diff.ignore_spec_checksums.textconv "sed '/SPEC CHECKSUMS/,$d'"
+          git config diff.ignore_spec_checksums.textconv "sed '/SPEC CHECKSUMS:/,\$d'"
           git config diff.ignore_spec_checksums.ignore all
 
       - name: Run script
