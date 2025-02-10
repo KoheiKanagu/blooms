@@ -15,7 +15,7 @@ dependencies:
   clock: ^1.1.1
   cloud_firestore: ^5.6.2
   cloud_functions: ^5.3.1
-  cupertino_calendar_picker: ^2.1.5
+  cupertino_calendar_picker: ^2.1.7
   cupertino_icons: ^1.0.8
   device_info_plus: ^10.1.2
   firebase_analytics: ^11.4.1
