@@ -21,6 +21,7 @@ updates:
         patterns:
           - "firebase_*"
           - "cloud_firestore"
+          - "cloud_functions"
 
       freezed:
         patterns:
