@@ -15,6 +15,7 @@ jobs:
     outputs:
       app_any_changed: ${{ steps.changed-files.outputs.app_any_changed == 'true' }}
       firebase_any_changed: ${{ steps.changed-files.outputs.firebase_any_changed == 'true' }}
+      pubspec_any_changed: ${{ steps.changed-files.outputs.pubspec_any_changed == 'true' }}
     steps:
       - uses: actions/checkout@v4.1.7
         with:
@@ -29,23 +30,33 @@ jobs:
               - app/**
             firebase:
               - firebase/**
+            pubspec:
+              - app/pubspec.yaml
+              - app/pubspec.lock
 
   check_app:
     needs: changed-files
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       actions: read
     strategy:
       fail-fast: false
       matrix:
-        script:
-          - build_runner-build.sh
-          - dart-analyze.sh
-          - dart-fix.sh
-          - dart-format.sh
-          - test.sh
+        include:
+          - script: build_runner-build.sh
+            os: ubuntu-latest
+          - script: dart-analyze.sh
+            os: ubuntu-latest
+          - script: dart-fix.sh
+            os: ubuntu-latest
+          - script: dart-format.sh
+            os: ubuntu-latest
+          - script: test.sh
+            os: ubuntu-latest
+          - script: build-ios-config-only.sh
+            os: macos-latest
 
     env:
       execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
