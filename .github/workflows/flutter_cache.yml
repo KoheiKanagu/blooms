@@ -60,5 +60,7 @@ jobs:
       - name: Build iOS Config
         if: ${{ runner.os == 'macOS' }}
         working-directory: app
+        env:
+          USE_FVM: false
         run: |
           ./scripts/build-ios-config-only.sh --flavor stg
