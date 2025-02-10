@@ -21,7 +21,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-15
+          - macos-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -29,6 +29,17 @@ jobs:
         id: fvm-config-action
         with:
           path: app/.fvmrc
+
+      - name: Pods Cache
+        if: ${{ runner.os == 'macOS' }}
+        uses: actions/cache@v4.2.0
+        with:
+          path: |
+            */ios/Pods
+            ~/Library/Caches/CocoaPods/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.18.0
@@ -45,3 +56,9 @@ jobs:
 
       - run: flutter pub get
         working-directory: app
+
+      - name: Build iOS Config
+        if: ${{ runner.os == 'macOS' }}
+        working-directory: app
+        run: |
+          ./scripts/build-ios-config-only.sh --flavor stg
