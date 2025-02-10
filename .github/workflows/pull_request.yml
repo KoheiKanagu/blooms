@@ -74,7 +74,7 @@ jobs:
 
       - name: Pods Cache
         uses: actions/cache@v4.2.0
-        if: ${{ runner.name == 'macOS' }}
+        if: ${{ runner.os == 'macOS' }}
         with:
           path: |
             */ios/Pods
@@ -84,11 +84,11 @@ jobs:
             ${{ runner.name }}-pods-
 
       - name: Update CocoaPods
-        if: ${{ runner.name == 'macOS' }}
+        if: ${{ runner.os == 'macos-latest' }}
         run: gem update cocoapods
 
       - name: Verify CocoaPods Installation
-        if: ${{ runner.name == 'macOS' }}
+        if: ${{ runner.os == 'macos-latest' }}
         run: pod --version
 
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
