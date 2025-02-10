@@ -19,8 +19,6 @@ rm -rf lib/gen/
 dart run build_runner build --delete-conflicting-outputs || exit_status=$?
 dart run slang || exit_status=$?
 
-git diff --exit-code || exit_status=$?
-
 if [ $exit_status -ne 0 ]; then
   echo "One or more commands failed"
   exit $exit_status

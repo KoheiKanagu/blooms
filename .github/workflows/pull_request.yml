@@ -55,7 +55,7 @@ jobs:
             os: ubuntu-latest
           - script: test.sh
             os: ubuntu-latest
-          - script: build-ios-config-only.sh
+          - script: build-ios-config-only.sh --flavor stg
             os: macos-latest
 
     env:
@@ -105,6 +105,8 @@ jobs:
         working-directory: app
         run: |
           ./scripts/${{ matrix.script }}
+
+          git diff --exit-code
         env:
           USE_FVM: false
 

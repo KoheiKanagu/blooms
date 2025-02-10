@@ -17,8 +17,6 @@ exit_status=0
 
 dart fix --apply lib || exit_status=$?
 
-git diff --exit-code || exit_status=$?
-
 if [ $exit_status -ne 0 ]; then
   echo "One or more commands failed"
   exit $exit_status
