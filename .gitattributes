@@ -2,3 +2,5 @@
 *.freezed.dart linguist-generated=true
 *.gen.dart linguist-generated=true
 *.mocks.dart linguist-generated=true
+
+/app/ios/Podfile.lock diff=ignore_spec_checksums
