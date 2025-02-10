@@ -55,7 +55,7 @@ jobs:
             os: ubuntu-latest
           - script: test.sh
             os: ubuntu-latest
-          - script: build-ios-config-only.sh --flavor stg
+          - script: build-ios-config-only.sh --flavor stg && cd ios && pod install
             os: macos-latest
 
     env:
