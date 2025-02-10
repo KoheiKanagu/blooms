@@ -26,6 +26,8 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
+pod repo update
+
 flutter build ios \
   --config-only \
   --flavor "$flavor"

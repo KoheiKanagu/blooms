@@ -15,6 +15,7 @@ jobs:
     outputs:
       app_any_changed: ${{ steps.changed-files.outputs.app_any_changed == 'true' }}
       firebase_any_changed: ${{ steps.changed-files.outputs.firebase_any_changed == 'true' }}
+      pubspec_any_changed: ${{ steps.changed-files.outputs.pubspec_any_changed == 'true' }}
     steps:
       - uses: actions/checkout@v4.1.7
         with:
@@ -29,23 +30,33 @@ jobs:
               - app/**
             firebase:
               - firebase/**
+            pubspec:
+              - app/pubspec.yaml
+              - app/pubspec.lock
 
   check_app:
     needs: changed-files
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       actions: read
     strategy:
       fail-fast: false
       matrix:
-        script:
-          - build_runner-build.sh
-          - dart-analyze.sh
-          - dart-fix.sh
-          - dart-format.sh
-          - test.sh
+        include:
+          - script: build_runner-build.sh
+            os: ubuntu-latest
+          - script: dart-analyze.sh
+            os: ubuntu-latest
+          - script: dart-fix.sh
+            os: ubuntu-latest
+          - script: dart-format.sh
+            os: ubuntu-latest
+          - script: test.sh
+            os: ubuntu-latest
+          - script: build-ios-config-only.sh --flavor stg
+            os: macos-latest
 
     env:
       execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
@@ -60,6 +71,25 @@ jobs:
       ### Set up ###
       - uses: actions/checkout@v4
         if: ${{ env.execute == 'true' }}
+
+      - name: Pods Cache
+        uses: actions/cache@v4.2.0
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
+        with:
+          path: |
+            */ios/Pods
+            ~/Library/Caches/CocoaPods/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Update CocoaPods
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
+        run: gem update cocoapods
+
+      - name: Verify CocoaPods Installation
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
+        run: pod --version
 
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
         if: ${{ env.execute == 'true' }}
@@ -89,11 +119,20 @@ jobs:
           dart pub get
 
       ### Run script ###
+      - name: Configure git to ignore SPEC CHECKSUMS in Podfile.lock
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
+        run: |
+          # pod installが実行された時、パスの違いなどでSPEC CHECKSUMSが変わるため、差分を無視する
+          git config diff.ignore_spec_checksums.textconv "sed '/SPEC CHECKSUMS:/,\$d'"
+          git config diff.ignore_spec_checksums.ignore all
+
       - name: Run script
         if: ${{ env.execute == 'true' }}
         working-directory: app
         run: |
           ./scripts/${{ matrix.script }}
+
+          git diff --exit-code
         env:
           USE_FVM: false
 
