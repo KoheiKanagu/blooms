@@ -50,10 +50,10 @@ dependencies:
   slang_flutter: ^4.4.0
   smooth_page_indicator: ^1.2.0+3
   super_context_menu: ^0.8.24
-  talker: ^4.6.7
-  talker_dio_logger: ^4.6.7
-  talker_flutter: ^4.6.7
-  talker_riverpod_logger: ^4.6.7
+  talker: ^4.6.11
+  talker_dio_logger: ^4.6.11
+  talker_flutter: ^4.6.11
+  talker_riverpod_logger: ^4.6.11
   timezone: ^0.10.0
   url_launcher: ^6.3.1
   widgetbook: ^3.10.2
