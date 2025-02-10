@@ -72,6 +72,25 @@ jobs:
       - uses: actions/checkout@v4
         if: ${{ env.execute == 'true' }}
 
+      - name: Pods Cache
+        uses: actions/cache@v4.2.0
+        if: ${{ runner.name == 'macOS' }}
+        with:
+          path: |
+            */ios/Pods
+            ~/Library/Caches/CocoaPods/Pods
+          key: ${{ runner.name }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.name }}-pods-
+
+      - name: Update CocoaPods
+        if: ${{ runner.name == 'macOS' }}
+        run: gem update cocoapods
+
+      - name: Verify CocoaPods Installation
+        if: ${{ runner.name == 'macOS' }}
+        run: pod --version
+
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
         if: ${{ env.execute == 'true' }}
         id: fvm-config-action
