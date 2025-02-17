@@ -370,10 +370,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_calendar_picker
-      sha256: b35a1adf54f1462c99859e4fdf7d57d05d64389fb2dc2b89fb2349c3c5d08fa9
+      sha256: "785a1d039c1ce80d705207d12948ea3bb7d9679dcdcae64fde8aa1d618862cbe"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.7"
+    version: "2.2.0"
   cupertino_icons:
     dependency: "direct main"
     description:
