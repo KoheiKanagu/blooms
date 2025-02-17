@@ -56,8 +56,8 @@ dependencies:
   talker_riverpod_logger: ^4.6.11
   timezone: ^0.10.0
   url_launcher: ^6.3.1
-  widgetbook: ^3.10.2
-  widgetbook_annotation: ^3.2.0
+  widgetbook: ^3.11.0
+  widgetbook_annotation: ^3.3.0
 
 dev_dependencies:
   build_runner: ^2.4.15
@@ -76,7 +76,7 @@ dev_dependencies:
   slang_build_runner: ^4.4.2
   test: any
   very_good_analysis: ^7.0.0
-  widgetbook_generator: ^3.9.1
+  widgetbook_generator: ^3.10.0
 
 flutter:
   uses-material-design: true
