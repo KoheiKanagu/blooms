@@ -4,6 +4,8 @@ linter:
     public_member_api_docs: false
     flutter_style_todos: false
 analyzer:
+  errors:
+    require_trailing_commas: ignore
   exclude:
     - "**/firebase_options*.dart"
     - "build/**"
