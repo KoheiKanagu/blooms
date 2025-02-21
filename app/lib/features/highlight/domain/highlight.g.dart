@@ -9,28 +9,24 @@ part of 'highlight.dart';
 // **************************************************************************
 
 _$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(r'_$HighlightImpl', json, ($checkedConvert) {
-      final val = _$HighlightImpl(
-        subjectUid: $checkedConvert('subjectUid', (v) => v as String),
-        content: $checkedConvert(
-          'content',
-          (v) => HighlightContent.fromJson(v as Map<String, dynamic>),
-        ),
-        createdAt: $checkedConvert(
-          'createdAt',
-          (v) => const TimestampConverter().fromJson(v),
-        ),
-        updatedAt: $checkedConvert(
-          'updatedAt',
-          (v) => const TimestampConverter().fromJson(v),
-        ),
-        deletedAt: $checkedConvert(
-          'deletedAt',
-          (v) => const TimestampConverter().fromJson(v),
-        ),
-      );
-      return val;
-    });
+    $checkedCreate(
+      r'_$HighlightImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$HighlightImpl(
+          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+          content: $checkedConvert('content',
+              (v) => HighlightContent.fromJson(v as Map<String, dynamic>)),
+          createdAt: $checkedConvert(
+              'createdAt', (v) => const TimestampConverter().fromJson(v)),
+          updatedAt: $checkedConvert(
+              'updatedAt', (v) => const TimestampConverter().fromJson(v)),
+          deletedAt: $checkedConvert(
+              'deletedAt', (v) => const TimestampConverter().fromJson(v)),
+        );
+        return val;
+      },
+    );
 
 Map<String, dynamic> _$$HighlightImplToJson(_$HighlightImpl instance) =>
     <String, dynamic>{

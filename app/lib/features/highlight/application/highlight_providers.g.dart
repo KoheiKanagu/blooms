@@ -15,35 +15,33 @@ String _$highlightCollectionReferenceHash() =>
 @ProviderFor(highlightCollectionReference)
 final highlightCollectionReferenceProvider =
     Provider<CollectionReference<Highlight>>.internal(
-      highlightCollectionReference,
-      name: r'highlightCollectionReferenceProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$highlightCollectionReferenceHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  highlightCollectionReference,
+  name: r'highlightCollectionReferenceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$highlightCollectionReferenceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef HighlightCollectionReferenceRef =
-    ProviderRef<CollectionReference<Highlight>>;
+typedef HighlightCollectionReferenceRef
+    = ProviderRef<CollectionReference<Highlight>>;
 String _$highlightQueryHash() => r'f8150593f79a025eadbd8ff791856c7bccf7ac63';
 
 /// See also [highlightQuery].
 @ProviderFor(highlightQuery)
 final highlightQueryProvider =
     AutoDisposeFutureProvider<Query<Highlight>>.internal(
-      highlightQuery,
-      name: r'highlightQueryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$highlightQueryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  highlightQuery,
+  name: r'highlightQueryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$highlightQueryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -81,15 +79,21 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
   const HighlightCreateFamily();
 
   /// See also [highlightCreate].
-  HighlightCreateProvider call({required HighlightPeriod period}) {
-    return HighlightCreateProvider(period: period);
+  HighlightCreateProvider call({
+    required HighlightPeriod period,
+  }) {
+    return HighlightCreateProvider(
+      period: period,
+    );
   }
 
   @override
   HighlightCreateProvider getProviderOverride(
     covariant HighlightCreateProvider provider,
   ) {
-    return call(period: provider.period);
+    return call(
+      period: provider.period,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -110,20 +114,24 @@ class HighlightCreateFamily extends Family<AsyncValue<void>> {
 /// See also [highlightCreate].
 class HighlightCreateProvider extends AutoDisposeFutureProvider<void> {
   /// See also [highlightCreate].
-  HighlightCreateProvider({required HighlightPeriod period})
-    : this._internal(
-        (ref) => highlightCreate(ref as HighlightCreateRef, period: period),
-        from: highlightCreateProvider,
-        name: r'highlightCreateProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$highlightCreateHash,
-        dependencies: HighlightCreateFamily._dependencies,
-        allTransitiveDependencies:
-            HighlightCreateFamily._allTransitiveDependencies,
-        period: period,
-      );
+  HighlightCreateProvider({
+    required HighlightPeriod period,
+  }) : this._internal(
+          (ref) => highlightCreate(
+            ref as HighlightCreateRef,
+            period: period,
+          ),
+          from: highlightCreateProvider,
+          name: r'highlightCreateProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$highlightCreateHash,
+          dependencies: HighlightCreateFamily._dependencies,
+          allTransitiveDependencies:
+              HighlightCreateFamily._allTransitiveDependencies,
+          period: period,
+        );
 
   HighlightCreateProvider._internal(
     super._createNotifier, {
@@ -182,8 +190,7 @@ mixin HighlightCreateRef on AutoDisposeFutureProviderRef<void> {
 }
 
 class _HighlightCreateProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with HighlightCreateRef {
+    extends AutoDisposeFutureProviderElement<void> with HighlightCreateRef {
   _HighlightCreateProviderElement(super.provider);
 
   @override
@@ -202,15 +209,21 @@ class HighlightDeleteFamily extends Family<AsyncValue<void>> {
   const HighlightDeleteFamily();
 
   /// See also [highlightDelete].
-  HighlightDeleteProvider call({required String documentId}) {
-    return HighlightDeleteProvider(documentId: documentId);
+  HighlightDeleteProvider call({
+    required String documentId,
+  }) {
+    return HighlightDeleteProvider(
+      documentId: documentId,
+    );
   }
 
   @override
   HighlightDeleteProvider getProviderOverride(
     covariant HighlightDeleteProvider provider,
   ) {
-    return call(documentId: provider.documentId);
+    return call(
+      documentId: provider.documentId,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -231,21 +244,24 @@ class HighlightDeleteFamily extends Family<AsyncValue<void>> {
 /// See also [highlightDelete].
 class HighlightDeleteProvider extends AutoDisposeFutureProvider<void> {
   /// See also [highlightDelete].
-  HighlightDeleteProvider({required String documentId})
-    : this._internal(
-        (ref) =>
-            highlightDelete(ref as HighlightDeleteRef, documentId: documentId),
-        from: highlightDeleteProvider,
-        name: r'highlightDeleteProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$highlightDeleteHash,
-        dependencies: HighlightDeleteFamily._dependencies,
-        allTransitiveDependencies:
-            HighlightDeleteFamily._allTransitiveDependencies,
-        documentId: documentId,
-      );
+  HighlightDeleteProvider({
+    required String documentId,
+  }) : this._internal(
+          (ref) => highlightDelete(
+            ref as HighlightDeleteRef,
+            documentId: documentId,
+          ),
+          from: highlightDeleteProvider,
+          name: r'highlightDeleteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$highlightDeleteHash,
+          dependencies: HighlightDeleteFamily._dependencies,
+          allTransitiveDependencies:
+              HighlightDeleteFamily._allTransitiveDependencies,
+          documentId: documentId,
+        );
 
   HighlightDeleteProvider._internal(
     super._createNotifier, {
@@ -304,8 +320,7 @@ mixin HighlightDeleteRef on AutoDisposeFutureProviderRef<void> {
 }
 
 class _HighlightDeleteProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with HighlightDeleteRef {
+    extends AutoDisposeFutureProviderElement<void> with HighlightDeleteRef {
   _HighlightDeleteProviderElement(super.provider);
 
   @override
@@ -324,15 +339,21 @@ class HighlightPromptFamily extends Family<AsyncValue<String?>> {
   const HighlightPromptFamily();
 
   /// See also [highlightPrompt].
-  HighlightPromptProvider call({required String? gsFilePath}) {
-    return HighlightPromptProvider(gsFilePath: gsFilePath);
+  HighlightPromptProvider call({
+    required String? gsFilePath,
+  }) {
+    return HighlightPromptProvider(
+      gsFilePath: gsFilePath,
+    );
   }
 
   @override
   HighlightPromptProvider getProviderOverride(
     covariant HighlightPromptProvider provider,
   ) {
-    return call(gsFilePath: provider.gsFilePath);
+    return call(
+      gsFilePath: provider.gsFilePath,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -353,21 +374,24 @@ class HighlightPromptFamily extends Family<AsyncValue<String?>> {
 /// See also [highlightPrompt].
 class HighlightPromptProvider extends AutoDisposeFutureProvider<String?> {
   /// See also [highlightPrompt].
-  HighlightPromptProvider({required String? gsFilePath})
-    : this._internal(
-        (ref) =>
-            highlightPrompt(ref as HighlightPromptRef, gsFilePath: gsFilePath),
-        from: highlightPromptProvider,
-        name: r'highlightPromptProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$highlightPromptHash,
-        dependencies: HighlightPromptFamily._dependencies,
-        allTransitiveDependencies:
-            HighlightPromptFamily._allTransitiveDependencies,
-        gsFilePath: gsFilePath,
-      );
+  HighlightPromptProvider({
+    required String? gsFilePath,
+  }) : this._internal(
+          (ref) => highlightPrompt(
+            ref as HighlightPromptRef,
+            gsFilePath: gsFilePath,
+          ),
+          from: highlightPromptProvider,
+          name: r'highlightPromptProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$highlightPromptHash,
+          dependencies: HighlightPromptFamily._dependencies,
+          allTransitiveDependencies:
+              HighlightPromptFamily._allTransitiveDependencies,
+          gsFilePath: gsFilePath,
+        );
 
   HighlightPromptProvider._internal(
     super._createNotifier, {
@@ -426,13 +450,11 @@ mixin HighlightPromptRef on AutoDisposeFutureProviderRef<String?> {
 }
 
 class _HighlightPromptProviderElement
-    extends AutoDisposeFutureProviderElement<String?>
-    with HighlightPromptRef {
+    extends AutoDisposeFutureProviderElement<String?> with HighlightPromptRef {
   _HighlightPromptProviderElement(super.provider);
 
   @override
   String? get gsFilePath => (origin as HighlightPromptProvider).gsFilePath;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

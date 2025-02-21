@@ -15,20 +15,19 @@ String _$flutterLocalNotificationsPluginHash() =>
 @ProviderFor(flutterLocalNotificationsPlugin)
 final flutterLocalNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>.internal(
-      flutterLocalNotificationsPlugin,
-      name: r'flutterLocalNotificationsPluginProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$flutterLocalNotificationsPluginHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  flutterLocalNotificationsPlugin,
+  name: r'flutterLocalNotificationsPluginProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$flutterLocalNotificationsPluginHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FlutterLocalNotificationsPluginRef =
-    ProviderRef<FlutterLocalNotificationsPlugin>;
+typedef FlutterLocalNotificationsPluginRef
+    = ProviderRef<FlutterLocalNotificationsPlugin>;
 String _$flutterLocalNotificationPluginInitializeHash() =>
     r'cbce7d0e20d7fbba27ce4ee1b7737a549c99c802';
 
@@ -36,20 +35,19 @@ String _$flutterLocalNotificationPluginInitializeHash() =>
 @ProviderFor(flutterLocalNotificationPluginInitialize)
 final flutterLocalNotificationPluginInitializeProvider =
     AutoDisposeFutureProvider<void>.internal(
-      flutterLocalNotificationPluginInitialize,
-      name: r'flutterLocalNotificationPluginInitializeProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$flutterLocalNotificationPluginInitializeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  flutterLocalNotificationPluginInitialize,
+  name: r'flutterLocalNotificationPluginInitializeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$flutterLocalNotificationPluginInitializeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FlutterLocalNotificationPluginInitializeRef =
-    AutoDisposeFutureProviderRef<void>;
+typedef FlutterLocalNotificationPluginInitializeRef
+    = AutoDisposeFutureProviderRef<void>;
 String _$reminderTimeHash() => r'5af5e8c62cd95e2255eb04d7869b0cdae5b9ea51';
 
 /// Copied from Dart SDK
@@ -91,15 +89,21 @@ class ReminderTimeFamily extends Family<AsyncValue<TimeOfDay>> {
   /// 通知の時間を取得
   ///
   /// Copied from [reminderTime].
-  ReminderTimeProvider call(ReminderType type) {
-    return ReminderTimeProvider(type);
+  ReminderTimeProvider call(
+    ReminderType type,
+  ) {
+    return ReminderTimeProvider(
+      type,
+    );
   }
 
   @override
   ReminderTimeProvider getProviderOverride(
     covariant ReminderTimeProvider provider,
   ) {
-    return call(provider.type);
+    return call(
+      provider.type,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -124,20 +128,24 @@ class ReminderTimeProvider extends AutoDisposeFutureProvider<TimeOfDay> {
   /// 通知の時間を取得
   ///
   /// Copied from [reminderTime].
-  ReminderTimeProvider(ReminderType type)
-    : this._internal(
-        (ref) => reminderTime(ref as ReminderTimeRef, type),
-        from: reminderTimeProvider,
-        name: r'reminderTimeProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$reminderTimeHash,
-        dependencies: ReminderTimeFamily._dependencies,
-        allTransitiveDependencies:
-            ReminderTimeFamily._allTransitiveDependencies,
-        type: type,
-      );
+  ReminderTimeProvider(
+    ReminderType type,
+  ) : this._internal(
+          (ref) => reminderTime(
+            ref as ReminderTimeRef,
+            type,
+          ),
+          from: reminderTimeProvider,
+          name: r'reminderTimeProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$reminderTimeHash,
+          dependencies: ReminderTimeFamily._dependencies,
+          allTransitiveDependencies:
+              ReminderTimeFamily._allTransitiveDependencies,
+          type: type,
+        );
 
   ReminderTimeProvider._internal(
     super._createNotifier, {
@@ -196,8 +204,7 @@ mixin ReminderTimeRef on AutoDisposeFutureProviderRef<TimeOfDay> {
 }
 
 class _ReminderTimeProviderElement
-    extends AutoDisposeFutureProviderElement<TimeOfDay>
-    with ReminderTimeRef {
+    extends AutoDisposeFutureProviderElement<TimeOfDay> with ReminderTimeRef {
   _ReminderTimeProviderElement(super.provider);
 
   @override
@@ -224,15 +231,21 @@ class ReminderStatusFamily extends Family<AsyncValue<bool>> {
   /// 通知の有効状態を取得
   ///
   /// Copied from [reminderStatus].
-  ReminderStatusProvider call(ReminderType type) {
-    return ReminderStatusProvider(type);
+  ReminderStatusProvider call(
+    ReminderType type,
+  ) {
+    return ReminderStatusProvider(
+      type,
+    );
   }
 
   @override
   ReminderStatusProvider getProviderOverride(
     covariant ReminderStatusProvider provider,
   ) {
-    return call(provider.type);
+    return call(
+      provider.type,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -257,20 +270,24 @@ class ReminderStatusProvider extends AutoDisposeFutureProvider<bool> {
   /// 通知の有効状態を取得
   ///
   /// Copied from [reminderStatus].
-  ReminderStatusProvider(ReminderType type)
-    : this._internal(
-        (ref) => reminderStatus(ref as ReminderStatusRef, type),
-        from: reminderStatusProvider,
-        name: r'reminderStatusProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$reminderStatusHash,
-        dependencies: ReminderStatusFamily._dependencies,
-        allTransitiveDependencies:
-            ReminderStatusFamily._allTransitiveDependencies,
-        type: type,
-      );
+  ReminderStatusProvider(
+    ReminderType type,
+  ) : this._internal(
+          (ref) => reminderStatus(
+            ref as ReminderStatusRef,
+            type,
+          ),
+          from: reminderStatusProvider,
+          name: r'reminderStatusProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$reminderStatusHash,
+          dependencies: ReminderStatusFamily._dependencies,
+          allTransitiveDependencies:
+              ReminderStatusFamily._allTransitiveDependencies,
+          type: type,
+        );
 
   ReminderStatusProvider._internal(
     super._createNotifier, {
@@ -329,8 +346,7 @@ mixin ReminderStatusRef on AutoDisposeFutureProviderRef<bool> {
 }
 
 class _ReminderStatusProviderElement
-    extends AutoDisposeFutureProviderElement<bool>
-    with ReminderStatusRef {
+    extends AutoDisposeFutureProviderElement<bool> with ReminderStatusRef {
   _ReminderStatusProviderElement(super.provider);
 
   @override
@@ -362,7 +378,11 @@ class ReminderSaveFamily extends Family<AsyncValue<void>> {
     required bool enable,
     required TimeOfDay time,
   }) {
-    return ReminderSaveProvider(type: type, enable: enable, time: time);
+    return ReminderSaveProvider(
+      type: type,
+      enable: enable,
+      time: time,
+    );
   }
 
   @override
@@ -403,25 +423,25 @@ class ReminderSaveProvider extends AutoDisposeFutureProvider<void> {
     required bool enable,
     required TimeOfDay time,
   }) : this._internal(
-         (ref) => reminderSave(
-           ref as ReminderSaveRef,
-           type: type,
-           enable: enable,
-           time: time,
-         ),
-         from: reminderSaveProvider,
-         name: r'reminderSaveProvider',
-         debugGetCreateSourceHash:
-             const bool.fromEnvironment('dart.vm.product')
-                 ? null
-                 : _$reminderSaveHash,
-         dependencies: ReminderSaveFamily._dependencies,
-         allTransitiveDependencies:
-             ReminderSaveFamily._allTransitiveDependencies,
-         type: type,
-         enable: enable,
-         time: time,
-       );
+          (ref) => reminderSave(
+            ref as ReminderSaveRef,
+            type: type,
+            enable: enable,
+            time: time,
+          ),
+          from: reminderSaveProvider,
+          name: r'reminderSaveProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$reminderSaveHash,
+          dependencies: ReminderSaveFamily._dependencies,
+          allTransitiveDependencies:
+              ReminderSaveFamily._allTransitiveDependencies,
+          type: type,
+          enable: enable,
+          time: time,
+        );
 
   ReminderSaveProvider._internal(
     super._createNotifier, {
@@ -497,8 +517,7 @@ mixin ReminderSaveRef on AutoDisposeFutureProviderRef<void> {
 }
 
 class _ReminderSaveProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with ReminderSaveRef {
+    extends AutoDisposeFutureProviderElement<void> with ReminderSaveRef {
   _ReminderSaveProviderElement(super.provider);
 
   @override
@@ -508,6 +527,5 @@ class _ReminderSaveProviderElement
   @override
   TimeOfDay get time => (origin as ReminderSaveProvider).time;
 }
-
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

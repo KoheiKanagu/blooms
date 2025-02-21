@@ -18,10 +18,9 @@ String _$onboardingIsCompletedHash() =>
 final onboardingIsCompletedProvider = AutoDisposeFutureProvider<bool>.internal(
   onboardingIsCompleted,
   name: r'onboardingIsCompletedProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$onboardingIsCompletedHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$onboardingIsCompletedHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -39,10 +38,9 @@ String _$onboardingCompleteHash() =>
 final onboardingCompleteProvider = AutoDisposeFutureProvider<void>.internal(
   onboardingComplete,
   name: r'onboardingCompleteProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$onboardingCompleteHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$onboardingCompleteHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

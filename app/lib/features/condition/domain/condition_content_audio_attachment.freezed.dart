@@ -12,12 +12,10 @@ part of 'condition_content_audio_attachment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ConditionContentAudioAttachment _$ConditionContentAudioAttachmentFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _ConditionContentAudioAttachment.fromJson(json);
 }
 
@@ -34,28 +32,23 @@ mixin _$ConditionContentAudioAttachment {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $ConditionContentAudioAttachmentCopyWith<ConditionContentAudioAttachment>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ConditionContentAudioAttachmentCopyWith<$Res> {
   factory $ConditionContentAudioAttachmentCopyWith(
-    ConditionContentAudioAttachment value,
-    $Res Function(ConditionContentAudioAttachment) then,
-  ) =
-      _$ConditionContentAudioAttachmentCopyWithImpl<
-        $Res,
-        ConditionContentAudioAttachment
-      >;
+          ConditionContentAudioAttachment value,
+          $Res Function(ConditionContentAudioAttachment) then) =
+      _$ConditionContentAudioAttachmentCopyWithImpl<$Res,
+          ConditionContentAudioAttachment>;
   @useResult
   $Res call({String fileUri, String mimeType});
 }
 
 /// @nodoc
-class _$ConditionContentAudioAttachmentCopyWithImpl<
-  $Res,
-  $Val extends ConditionContentAudioAttachment
->
+class _$ConditionContentAudioAttachmentCopyWithImpl<$Res,
+        $Val extends ConditionContentAudioAttachment>
     implements $ConditionContentAudioAttachmentCopyWith<$Res> {
   _$ConditionContentAudioAttachmentCopyWithImpl(this._value, this._then);
 
@@ -68,22 +61,20 @@ class _$ConditionContentAudioAttachmentCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? fileUri = null, Object? mimeType = null}) {
-    return _then(
-      _value.copyWith(
-            fileUri:
-                null == fileUri
-                    ? _value.fileUri
-                    : fileUri // ignore: cast_nullable_to_non_nullable
-                        as String,
-            mimeType:
-                null == mimeType
-                    ? _value.mimeType
-                    : mimeType // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? fileUri = null,
+    Object? mimeType = null,
+  }) {
+    return _then(_value.copyWith(
+      fileUri: null == fileUri
+          ? _value.fileUri
+          : fileUri // ignore: cast_nullable_to_non_nullable
+              as String,
+      mimeType: null == mimeType
+          ? _value.mimeType
+          : mimeType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -91,9 +82,9 @@ class _$ConditionContentAudioAttachmentCopyWithImpl<
 abstract class _$$ConditionContentAudioAttachmentImplCopyWith<$Res>
     implements $ConditionContentAudioAttachmentCopyWith<$Res> {
   factory _$$ConditionContentAudioAttachmentImplCopyWith(
-    _$ConditionContentAudioAttachmentImpl value,
-    $Res Function(_$ConditionContentAudioAttachmentImpl) then,
-  ) = __$$ConditionContentAudioAttachmentImplCopyWithImpl<$Res>;
+          _$ConditionContentAudioAttachmentImpl value,
+          $Res Function(_$ConditionContentAudioAttachmentImpl) then) =
+      __$$ConditionContentAudioAttachmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String fileUri, String mimeType});
@@ -101,36 +92,32 @@ abstract class _$$ConditionContentAudioAttachmentImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ConditionContentAudioAttachmentImplCopyWithImpl<$Res>
-    extends
-        _$ConditionContentAudioAttachmentCopyWithImpl<
-          $Res,
-          _$ConditionContentAudioAttachmentImpl
-        >
+    extends _$ConditionContentAudioAttachmentCopyWithImpl<$Res,
+        _$ConditionContentAudioAttachmentImpl>
     implements _$$ConditionContentAudioAttachmentImplCopyWith<$Res> {
   __$$ConditionContentAudioAttachmentImplCopyWithImpl(
-    _$ConditionContentAudioAttachmentImpl _value,
-    $Res Function(_$ConditionContentAudioAttachmentImpl) _then,
-  ) : super(_value, _then);
+      _$ConditionContentAudioAttachmentImpl _value,
+      $Res Function(_$ConditionContentAudioAttachmentImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ConditionContentAudioAttachment
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? fileUri = null, Object? mimeType = null}) {
-    return _then(
-      _$ConditionContentAudioAttachmentImpl(
-        fileUri:
-            null == fileUri
-                ? _value.fileUri
-                : fileUri // ignore: cast_nullable_to_non_nullable
-                    as String,
-        mimeType:
-            null == mimeType
-                ? _value.mimeType
-                : mimeType // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? fileUri = null,
+    Object? mimeType = null,
+  }) {
+    return _then(_$ConditionContentAudioAttachmentImpl(
+      fileUri: null == fileUri
+          ? _value.fileUri
+          : fileUri // ignore: cast_nullable_to_non_nullable
+              as String,
+      mimeType: null == mimeType
+          ? _value.mimeType
+          : mimeType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -138,14 +125,12 @@ class __$$ConditionContentAudioAttachmentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConditionContentAudioAttachmentImpl
     implements _ConditionContentAudioAttachment {
-  const _$ConditionContentAudioAttachmentImpl({
-    required this.fileUri,
-    required this.mimeType,
-  });
+  const _$ConditionContentAudioAttachmentImpl(
+      {required this.fileUri, required this.mimeType});
 
   factory _$ConditionContentAudioAttachmentImpl.fromJson(
-    Map<String, dynamic> json,
-  ) => _$$ConditionContentAudioAttachmentImplFromJson(json);
+          Map<String, dynamic> json) =>
+      _$$ConditionContentAudioAttachmentImplFromJson(json);
 
   /// gs://パス
   @override
@@ -178,24 +163,23 @@ class _$ConditionContentAudioAttachmentImpl
   @override
   @pragma('vm:prefer-inline')
   _$$ConditionContentAudioAttachmentImplCopyWith<
-    _$ConditionContentAudioAttachmentImpl
-  >
-  get copyWith => __$$ConditionContentAudioAttachmentImplCopyWithImpl<
-    _$ConditionContentAudioAttachmentImpl
-  >(this, _$identity);
+          _$ConditionContentAudioAttachmentImpl>
+      get copyWith => __$$ConditionContentAudioAttachmentImplCopyWithImpl<
+          _$ConditionContentAudioAttachmentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConditionContentAudioAttachmentImplToJson(this);
+    return _$$ConditionContentAudioAttachmentImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ConditionContentAudioAttachment
     implements ConditionContentAudioAttachment {
-  const factory _ConditionContentAudioAttachment({
-    required final String fileUri,
-    required final String mimeType,
-  }) = _$ConditionContentAudioAttachmentImpl;
+  const factory _ConditionContentAudioAttachment(
+      {required final String fileUri,
+      required final String mimeType}) = _$ConditionContentAudioAttachmentImpl;
 
   factory _ConditionContentAudioAttachment.fromJson(Map<String, dynamic> json) =
       _$ConditionContentAudioAttachmentImpl.fromJson;
@@ -211,7 +195,6 @@ abstract class _ConditionContentAudioAttachment
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConditionContentAudioAttachmentImplCopyWith<
-    _$ConditionContentAudioAttachmentImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          _$ConditionContentAudioAttachmentImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -15,35 +15,33 @@ String _$conditionCollectionReferenceHash() =>
 @ProviderFor(conditionCollectionReference)
 final conditionCollectionReferenceProvider =
     Provider<CollectionReference<Condition>>.internal(
-      conditionCollectionReference,
-      name: r'conditionCollectionReferenceProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$conditionCollectionReferenceHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  conditionCollectionReference,
+  name: r'conditionCollectionReferenceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$conditionCollectionReferenceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ConditionCollectionReferenceRef =
-    ProviderRef<CollectionReference<Condition>>;
+typedef ConditionCollectionReferenceRef
+    = ProviderRef<CollectionReference<Condition>>;
 String _$conditionQueryHash() => r'04fd14e241ad1a678be5bf33dc2483c8b2f8bf26';
 
 /// See also [conditionQuery].
 @ProviderFor(conditionQuery)
 final conditionQueryProvider =
     AutoDisposeFutureProvider<Query<Condition>>.internal(
-      conditionQuery,
-      name: r'conditionQueryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$conditionQueryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  conditionQuery,
+  name: r'conditionQueryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$conditionQueryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -81,15 +79,21 @@ class ConditionDeleteFamily extends Family<AsyncValue<void>> {
   const ConditionDeleteFamily();
 
   /// See also [conditionDelete].
-  ConditionDeleteProvider call({required String documentId}) {
-    return ConditionDeleteProvider(documentId: documentId);
+  ConditionDeleteProvider call({
+    required String documentId,
+  }) {
+    return ConditionDeleteProvider(
+      documentId: documentId,
+    );
   }
 
   @override
   ConditionDeleteProvider getProviderOverride(
     covariant ConditionDeleteProvider provider,
   ) {
-    return call(documentId: provider.documentId);
+    return call(
+      documentId: provider.documentId,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -110,21 +114,24 @@ class ConditionDeleteFamily extends Family<AsyncValue<void>> {
 /// See also [conditionDelete].
 class ConditionDeleteProvider extends AutoDisposeFutureProvider<void> {
   /// See also [conditionDelete].
-  ConditionDeleteProvider({required String documentId})
-    : this._internal(
-        (ref) =>
-            conditionDelete(ref as ConditionDeleteRef, documentId: documentId),
-        from: conditionDeleteProvider,
-        name: r'conditionDeleteProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$conditionDeleteHash,
-        dependencies: ConditionDeleteFamily._dependencies,
-        allTransitiveDependencies:
-            ConditionDeleteFamily._allTransitiveDependencies,
-        documentId: documentId,
-      );
+  ConditionDeleteProvider({
+    required String documentId,
+  }) : this._internal(
+          (ref) => conditionDelete(
+            ref as ConditionDeleteRef,
+            documentId: documentId,
+          ),
+          from: conditionDeleteProvider,
+          name: r'conditionDeleteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionDeleteHash,
+          dependencies: ConditionDeleteFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionDeleteFamily._allTransitiveDependencies,
+          documentId: documentId,
+        );
 
   ConditionDeleteProvider._internal(
     super._createNotifier, {
@@ -183,8 +190,7 @@ mixin ConditionDeleteRef on AutoDisposeFutureProviderRef<void> {
 }
 
 class _ConditionDeleteProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with ConditionDeleteRef {
+    extends AutoDisposeFutureProviderElement<void> with ConditionDeleteRef {
   _ConditionDeleteProviderElement(super.provider);
 
   @override
@@ -204,15 +210,21 @@ class ConditionCreateTextFamily extends Family<AsyncValue<void>> {
   const ConditionCreateTextFamily();
 
   /// See also [conditionCreateText].
-  ConditionCreateTextProvider call({required String text}) {
-    return ConditionCreateTextProvider(text: text);
+  ConditionCreateTextProvider call({
+    required String text,
+  }) {
+    return ConditionCreateTextProvider(
+      text: text,
+    );
   }
 
   @override
   ConditionCreateTextProvider getProviderOverride(
     covariant ConditionCreateTextProvider provider,
   ) {
-    return call(text: provider.text);
+    return call(
+      text: provider.text,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -233,20 +245,24 @@ class ConditionCreateTextFamily extends Family<AsyncValue<void>> {
 /// See also [conditionCreateText].
 class ConditionCreateTextProvider extends AutoDisposeFutureProvider<void> {
   /// See also [conditionCreateText].
-  ConditionCreateTextProvider({required String text})
-    : this._internal(
-        (ref) => conditionCreateText(ref as ConditionCreateTextRef, text: text),
-        from: conditionCreateTextProvider,
-        name: r'conditionCreateTextProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$conditionCreateTextHash,
-        dependencies: ConditionCreateTextFamily._dependencies,
-        allTransitiveDependencies:
-            ConditionCreateTextFamily._allTransitiveDependencies,
-        text: text,
-      );
+  ConditionCreateTextProvider({
+    required String text,
+  }) : this._internal(
+          (ref) => conditionCreateText(
+            ref as ConditionCreateTextRef,
+            text: text,
+          ),
+          from: conditionCreateTextProvider,
+          name: r'conditionCreateTextProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionCreateTextHash,
+          dependencies: ConditionCreateTextFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionCreateTextFamily._allTransitiveDependencies,
+          text: text,
+        );
 
   ConditionCreateTextProvider._internal(
     super._createNotifier, {
@@ -305,8 +321,7 @@ mixin ConditionCreateTextRef on AutoDisposeFutureProviderRef<void> {
 }
 
 class _ConditionCreateTextProviderElement
-    extends AutoDisposeFutureProviderElement<void>
-    with ConditionCreateTextRef {
+    extends AutoDisposeFutureProviderElement<void> with ConditionCreateTextRef {
   _ConditionCreateTextProviderElement(super.provider);
 
   @override
@@ -326,15 +341,21 @@ class ConditionCreateImageFamily extends Family<AsyncValue<void>> {
   const ConditionCreateImageFamily();
 
   /// See also [conditionCreateImage].
-  ConditionCreateImageProvider call({required List<XFile> xFiles}) {
-    return ConditionCreateImageProvider(xFiles: xFiles);
+  ConditionCreateImageProvider call({
+    required List<XFile> xFiles,
+  }) {
+    return ConditionCreateImageProvider(
+      xFiles: xFiles,
+    );
   }
 
   @override
   ConditionCreateImageProvider getProviderOverride(
     covariant ConditionCreateImageProvider provider,
   ) {
-    return call(xFiles: provider.xFiles);
+    return call(
+      xFiles: provider.xFiles,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -355,23 +376,24 @@ class ConditionCreateImageFamily extends Family<AsyncValue<void>> {
 /// See also [conditionCreateImage].
 class ConditionCreateImageProvider extends AutoDisposeFutureProvider<void> {
   /// See also [conditionCreateImage].
-  ConditionCreateImageProvider({required List<XFile> xFiles})
-    : this._internal(
-        (ref) => conditionCreateImage(
-          ref as ConditionCreateImageRef,
+  ConditionCreateImageProvider({
+    required List<XFile> xFiles,
+  }) : this._internal(
+          (ref) => conditionCreateImage(
+            ref as ConditionCreateImageRef,
+            xFiles: xFiles,
+          ),
+          from: conditionCreateImageProvider,
+          name: r'conditionCreateImageProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionCreateImageHash,
+          dependencies: ConditionCreateImageFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionCreateImageFamily._allTransitiveDependencies,
           xFiles: xFiles,
-        ),
-        from: conditionCreateImageProvider,
-        name: r'conditionCreateImageProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$conditionCreateImageHash,
-        dependencies: ConditionCreateImageFamily._dependencies,
-        allTransitiveDependencies:
-            ConditionCreateImageFamily._allTransitiveDependencies,
-        xFiles: xFiles,
-      );
+        );
 
   ConditionCreateImageProvider._internal(
     super._createNotifier, {
@@ -457,14 +479,20 @@ class ConditionAudioStorageReferenceFamily
     required String uid,
     required String fileName,
   }) {
-    return ConditionAudioStorageReferenceProvider(uid: uid, fileName: fileName);
+    return ConditionAudioStorageReferenceProvider(
+      uid: uid,
+      fileName: fileName,
+    );
   }
 
   @override
   ConditionAudioStorageReferenceProvider getProviderOverride(
     covariant ConditionAudioStorageReferenceProvider provider,
   ) {
-    return call(uid: provider.uid, fileName: provider.fileName);
+    return call(
+      uid: provider.uid,
+      fileName: provider.fileName,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -490,23 +518,23 @@ class ConditionAudioStorageReferenceProvider
     required String uid,
     required String fileName,
   }) : this._internal(
-         (ref) => conditionAudioStorageReference(
-           ref as ConditionAudioStorageReferenceRef,
-           uid: uid,
-           fileName: fileName,
-         ),
-         from: conditionAudioStorageReferenceProvider,
-         name: r'conditionAudioStorageReferenceProvider',
-         debugGetCreateSourceHash:
-             const bool.fromEnvironment('dart.vm.product')
-                 ? null
-                 : _$conditionAudioStorageReferenceHash,
-         dependencies: ConditionAudioStorageReferenceFamily._dependencies,
-         allTransitiveDependencies:
-             ConditionAudioStorageReferenceFamily._allTransitiveDependencies,
-         uid: uid,
-         fileName: fileName,
-       );
+          (ref) => conditionAudioStorageReference(
+            ref as ConditionAudioStorageReferenceRef,
+            uid: uid,
+            fileName: fileName,
+          ),
+          from: conditionAudioStorageReferenceProvider,
+          name: r'conditionAudioStorageReferenceProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionAudioStorageReferenceHash,
+          dependencies: ConditionAudioStorageReferenceFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionAudioStorageReferenceFamily._allTransitiveDependencies,
+          uid: uid,
+          fileName: fileName,
+        );
 
   ConditionAudioStorageReferenceProvider._internal(
     super._createNotifier, {
@@ -525,7 +553,7 @@ class ConditionAudioStorageReferenceProvider
   @override
   Override overrideWith(
     FutureOr<Reference> Function(ConditionAudioStorageReferenceRef provider)
-    create,
+        create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -600,15 +628,21 @@ class ConditionCreateAudioFamily extends Family<AsyncValue<void>> {
   const ConditionCreateAudioFamily();
 
   /// See also [conditionCreateAudio].
-  ConditionCreateAudioProvider call({required XFile xFile}) {
-    return ConditionCreateAudioProvider(xFile: xFile);
+  ConditionCreateAudioProvider call({
+    required XFile xFile,
+  }) {
+    return ConditionCreateAudioProvider(
+      xFile: xFile,
+    );
   }
 
   @override
   ConditionCreateAudioProvider getProviderOverride(
     covariant ConditionCreateAudioProvider provider,
   ) {
-    return call(xFile: provider.xFile);
+    return call(
+      xFile: provider.xFile,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -629,21 +663,24 @@ class ConditionCreateAudioFamily extends Family<AsyncValue<void>> {
 /// See also [conditionCreateAudio].
 class ConditionCreateAudioProvider extends AutoDisposeFutureProvider<void> {
   /// See also [conditionCreateAudio].
-  ConditionCreateAudioProvider({required XFile xFile})
-    : this._internal(
-        (ref) =>
-            conditionCreateAudio(ref as ConditionCreateAudioRef, xFile: xFile),
-        from: conditionCreateAudioProvider,
-        name: r'conditionCreateAudioProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$conditionCreateAudioHash,
-        dependencies: ConditionCreateAudioFamily._dependencies,
-        allTransitiveDependencies:
-            ConditionCreateAudioFamily._allTransitiveDependencies,
-        xFile: xFile,
-      );
+  ConditionCreateAudioProvider({
+    required XFile xFile,
+  }) : this._internal(
+          (ref) => conditionCreateAudio(
+            ref as ConditionCreateAudioRef,
+            xFile: xFile,
+          ),
+          from: conditionCreateAudioProvider,
+          name: r'conditionCreateAudioProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$conditionCreateAudioHash,
+          dependencies: ConditionCreateAudioFamily._dependencies,
+          allTransitiveDependencies:
+              ConditionCreateAudioFamily._allTransitiveDependencies,
+          xFile: xFile,
+        );
 
   ConditionCreateAudioProvider._internal(
     super._createNotifier, {
@@ -719,15 +756,14 @@ String _$conditionFormHeightControllerHash() =>
 @ProviderFor(ConditionFormHeightController)
 final conditionFormHeightControllerProvider =
     AutoDisposeNotifierProvider<ConditionFormHeightController, double>.internal(
-      ConditionFormHeightController.new,
-      name: r'conditionFormHeightControllerProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$conditionFormHeightControllerHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  ConditionFormHeightController.new,
+  name: r'conditionFormHeightControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$conditionFormHeightControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$ConditionFormHeightController = AutoDisposeNotifier<double>;
 // ignore_for_file: type=lint

@@ -40,10 +40,9 @@ String _$firebaseUserUidHash() => r'ea65d2d85049f0f7fbcc90abede0fbd6cffbb3e9';
 final firebaseUserUidProvider = AutoDisposeFutureProvider<String?>.internal(
   firebaseUserUid,
   name: r'firebaseUserUidProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$firebaseUserUidHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseUserUidHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

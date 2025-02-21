@@ -32,10 +32,9 @@ String _$packageInfoBuildNumberHash() =>
 final packageInfoBuildNumberProvider = AutoDisposeProvider<int>.internal(
   packageInfoBuildNumber,
   name: r'packageInfoBuildNumberProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$packageInfoBuildNumberHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$packageInfoBuildNumberHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -51,10 +50,9 @@ String _$packageInfoVersionHash() =>
 final packageInfoVersionProvider = AutoDisposeProvider<String>.internal(
   packageInfoVersion,
   name: r'packageInfoVersionProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$packageInfoVersionHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$packageInfoVersionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -70,10 +68,9 @@ String _$packageInfoAppNameHash() =>
 final packageInfoAppNameProvider = AutoDisposeProvider<String>.internal(
   packageInfoAppName,
   name: r'packageInfoAppNameProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$packageInfoAppNameHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$packageInfoAppNameHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

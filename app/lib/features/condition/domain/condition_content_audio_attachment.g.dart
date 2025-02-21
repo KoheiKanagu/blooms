@@ -9,20 +9,22 @@ part of 'condition_content_audio_attachment.dart';
 // **************************************************************************
 
 _$ConditionContentAudioAttachmentImpl
-_$$ConditionContentAudioAttachmentImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(r'_$ConditionContentAudioAttachmentImpl', json, (
-      $checkedConvert,
-    ) {
-      final val = _$ConditionContentAudioAttachmentImpl(
-        fileUri: $checkedConvert('fileUri', (v) => v as String),
-        mimeType: $checkedConvert('mimeType', (v) => v as String),
-      );
-      return val;
-    });
+    _$$ConditionContentAudioAttachmentImplFromJson(Map<String, dynamic> json) =>
+        $checkedCreate(
+          r'_$ConditionContentAudioAttachmentImpl',
+          json,
+          ($checkedConvert) {
+            final val = _$ConditionContentAudioAttachmentImpl(
+              fileUri: $checkedConvert('fileUri', (v) => v as String),
+              mimeType: $checkedConvert('mimeType', (v) => v as String),
+            );
+            return val;
+          },
+        );
 
 Map<String, dynamic> _$$ConditionContentAudioAttachmentImplToJson(
-  _$ConditionContentAudioAttachmentImpl instance,
-) => <String, dynamic>{
-  'fileUri': instance.fileUri,
-  'mimeType': instance.mimeType,
-};
+        _$ConditionContentAudioAttachmentImpl instance) =>
+    <String, dynamic>{
+      'fileUri': instance.fileUri,
+      'mimeType': instance.mimeType,
+    };

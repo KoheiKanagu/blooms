@@ -9,16 +9,18 @@ part of 'write_log_data.dart';
 // **************************************************************************
 
 _$WriteLogDataImpl _$$WriteLogDataImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(r'_$WriteLogDataImpl', json, ($checkedConvert) {
-      final val = _$WriteLogDataImpl(
-        level: $checkedConvert(
-          'level',
-          (v) => $enumDecode(_$LogLevelEnumMap, v),
-        ),
-        log: $checkedConvert('log', (v) => v as Map<String, dynamic>),
-      );
-      return val;
-    });
+    $checkedCreate(
+      r'_$WriteLogDataImpl',
+      json,
+      ($checkedConvert) {
+        final val = _$WriteLogDataImpl(
+          level: $checkedConvert(
+              'level', (v) => $enumDecode(_$LogLevelEnumMap, v)),
+          log: $checkedConvert('log', (v) => v as Map<String, dynamic>),
+        );
+        return val;
+      },
+    );
 
 Map<String, dynamic> _$$WriteLogDataImplToJson(_$WriteLogDataImpl instance) =>
     <String, dynamic>{

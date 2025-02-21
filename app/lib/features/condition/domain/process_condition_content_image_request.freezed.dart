@@ -12,11 +12,10 @@ part of 'process_condition_content_image_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProcessConditionContentImageRequest
-_$ProcessConditionContentImageRequestFromJson(Map<String, dynamic> json) {
+    _$ProcessConditionContentImageRequestFromJson(Map<String, dynamic> json) {
   return _ProcessConditionContentImageRequest.fromJson(json);
 }
 
@@ -31,30 +30,24 @@ mixin _$ProcessConditionContentImageRequest {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $ProcessConditionContentImageRequestCopyWith<
-    ProcessConditionContentImageRequest
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          ProcessConditionContentImageRequest>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ProcessConditionContentImageRequestCopyWith<$Res> {
   factory $ProcessConditionContentImageRequestCopyWith(
-    ProcessConditionContentImageRequest value,
-    $Res Function(ProcessConditionContentImageRequest) then,
-  ) =
-      _$ProcessConditionContentImageRequestCopyWithImpl<
-        $Res,
-        ProcessConditionContentImageRequest
-      >;
+          ProcessConditionContentImageRequest value,
+          $Res Function(ProcessConditionContentImageRequest) then) =
+      _$ProcessConditionContentImageRequestCopyWithImpl<$Res,
+          ProcessConditionContentImageRequest>;
   @useResult
   $Res call({String base64});
 }
 
 /// @nodoc
-class _$ProcessConditionContentImageRequestCopyWithImpl<
-  $Res,
-  $Val extends ProcessConditionContentImageRequest
->
+class _$ProcessConditionContentImageRequestCopyWithImpl<$Res,
+        $Val extends ProcessConditionContentImageRequest>
     implements $ProcessConditionContentImageRequestCopyWith<$Res> {
   _$ProcessConditionContentImageRequestCopyWithImpl(this._value, this._then);
 
@@ -67,17 +60,15 @@ class _$ProcessConditionContentImageRequestCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? base64 = null}) {
-    return _then(
-      _value.copyWith(
-            base64:
-                null == base64
-                    ? _value.base64
-                    : base64 // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? base64 = null,
+  }) {
+    return _then(_value.copyWith(
+      base64: null == base64
+          ? _value.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -85,9 +76,9 @@ class _$ProcessConditionContentImageRequestCopyWithImpl<
 abstract class _$$ProcessConditionContentImageRequestImplCopyWith<$Res>
     implements $ProcessConditionContentImageRequestCopyWith<$Res> {
   factory _$$ProcessConditionContentImageRequestImplCopyWith(
-    _$ProcessConditionContentImageRequestImpl value,
-    $Res Function(_$ProcessConditionContentImageRequestImpl) then,
-  ) = __$$ProcessConditionContentImageRequestImplCopyWithImpl<$Res>;
+          _$ProcessConditionContentImageRequestImpl value,
+          $Res Function(_$ProcessConditionContentImageRequestImpl) then) =
+      __$$ProcessConditionContentImageRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String base64});
@@ -95,31 +86,27 @@ abstract class _$$ProcessConditionContentImageRequestImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ProcessConditionContentImageRequestImplCopyWithImpl<$Res>
-    extends
-        _$ProcessConditionContentImageRequestCopyWithImpl<
-          $Res,
-          _$ProcessConditionContentImageRequestImpl
-        >
+    extends _$ProcessConditionContentImageRequestCopyWithImpl<$Res,
+        _$ProcessConditionContentImageRequestImpl>
     implements _$$ProcessConditionContentImageRequestImplCopyWith<$Res> {
   __$$ProcessConditionContentImageRequestImplCopyWithImpl(
-    _$ProcessConditionContentImageRequestImpl _value,
-    $Res Function(_$ProcessConditionContentImageRequestImpl) _then,
-  ) : super(_value, _then);
+      _$ProcessConditionContentImageRequestImpl _value,
+      $Res Function(_$ProcessConditionContentImageRequestImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ProcessConditionContentImageRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? base64 = null}) {
-    return _then(
-      _$ProcessConditionContentImageRequestImpl(
-        base64:
-            null == base64
-                ? _value.base64
-                : base64 // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? base64 = null,
+  }) {
+    return _then(_$ProcessConditionContentImageRequestImpl(
+      base64: null == base64
+          ? _value.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -130,8 +117,8 @@ class _$ProcessConditionContentImageRequestImpl
   const _$ProcessConditionContentImageRequestImpl({required this.base64});
 
   factory _$ProcessConditionContentImageRequestImpl.fromJson(
-    Map<String, dynamic> json,
-  ) => _$$ProcessConditionContentImageRequestImplFromJson(json);
+          Map<String, dynamic> json) =>
+      _$$ProcessConditionContentImageRequestImplFromJson(json);
 
   @override
   final String base64;
@@ -159,27 +146,27 @@ class _$ProcessConditionContentImageRequestImpl
   @override
   @pragma('vm:prefer-inline')
   _$$ProcessConditionContentImageRequestImplCopyWith<
-    _$ProcessConditionContentImageRequestImpl
-  >
-  get copyWith => __$$ProcessConditionContentImageRequestImplCopyWithImpl<
-    _$ProcessConditionContentImageRequestImpl
-  >(this, _$identity);
+          _$ProcessConditionContentImageRequestImpl>
+      get copyWith => __$$ProcessConditionContentImageRequestImplCopyWithImpl<
+          _$ProcessConditionContentImageRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProcessConditionContentImageRequestImplToJson(this);
+    return _$$ProcessConditionContentImageRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ProcessConditionContentImageRequest
     implements ProcessConditionContentImageRequest {
-  const factory _ProcessConditionContentImageRequest({
-    required final String base64,
-  }) = _$ProcessConditionContentImageRequestImpl;
+  const factory _ProcessConditionContentImageRequest(
+          {required final String base64}) =
+      _$ProcessConditionContentImageRequestImpl;
 
   factory _ProcessConditionContentImageRequest.fromJson(
-    Map<String, dynamic> json,
-  ) = _$ProcessConditionContentImageRequestImpl.fromJson;
+          Map<String, dynamic> json) =
+      _$ProcessConditionContentImageRequestImpl.fromJson;
 
   @override
   String get base64;
@@ -189,7 +176,6 @@ abstract class _ProcessConditionContentImageRequest
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProcessConditionContentImageRequestImplCopyWith<
-    _$ProcessConditionContentImageRequestImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          _$ProcessConditionContentImageRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
