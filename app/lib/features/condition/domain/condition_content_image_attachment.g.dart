@@ -9,51 +9,49 @@ part of 'condition_content_image_attachment.dart';
 // **************************************************************************
 
 _$ConditionContentImageAttachmentImpl
-    _$$ConditionContentImageAttachmentImplFromJson(Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ConditionContentImageAttachmentImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ConditionContentImageAttachmentImpl(
-              fileUri: $checkedConvert('fileUri', (v) => v as String),
-              mimeType: $checkedConvert('mimeType', (v) => v as String),
-              width: $checkedConvert('width', (v) => (v as num).toInt()),
-              height: $checkedConvert('height', (v) => (v as num).toInt()),
-              additionalInfo: $checkedConvert(
-                  'additionalInfo',
-                  (v) => ConditionContentImageAttachmentAdditionalInfo.fromJson(
-                      v as Map<String, dynamic>)),
-            );
-            return val;
-          },
-        );
+_$$ConditionContentImageAttachmentImplFromJson(Map<String, dynamic> json) =>
+    $checkedCreate(r'_$ConditionContentImageAttachmentImpl', json, (
+      $checkedConvert,
+    ) {
+      final val = _$ConditionContentImageAttachmentImpl(
+        fileUri: $checkedConvert('fileUri', (v) => v as String),
+        mimeType: $checkedConvert('mimeType', (v) => v as String),
+        width: $checkedConvert('width', (v) => (v as num).toInt()),
+        height: $checkedConvert('height', (v) => (v as num).toInt()),
+        additionalInfo: $checkedConvert(
+          'additionalInfo',
+          (v) => ConditionContentImageAttachmentAdditionalInfo.fromJson(
+            v as Map<String, dynamic>,
+          ),
+        ),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$$ConditionContentImageAttachmentImplToJson(
-        _$ConditionContentImageAttachmentImpl instance) =>
-    <String, dynamic>{
-      'fileUri': instance.fileUri,
-      'mimeType': instance.mimeType,
-      'width': instance.width,
-      'height': instance.height,
-      'additionalInfo': instance.additionalInfo.toJson(),
-    };
+  _$ConditionContentImageAttachmentImpl instance,
+) => <String, dynamic>{
+  'fileUri': instance.fileUri,
+  'mimeType': instance.mimeType,
+  'width': instance.width,
+  'height': instance.height,
+  'additionalInfo': instance.additionalInfo.toJson(),
+};
 
 _$ConditionContentImageAttachmentAdditionalInfoImpl
-    _$$ConditionContentImageAttachmentAdditionalInfoImplFromJson(
-            Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ConditionContentImageAttachmentAdditionalInfoImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ConditionContentImageAttachmentAdditionalInfoImpl(
-              blurHash: $checkedConvert('blurHash', (v) => v as String?),
-            );
-            return val;
-          },
-        );
+_$$ConditionContentImageAttachmentAdditionalInfoImplFromJson(
+  Map<String, dynamic> json,
+) => $checkedCreate(
+  r'_$ConditionContentImageAttachmentAdditionalInfoImpl',
+  json,
+  ($checkedConvert) {
+    final val = _$ConditionContentImageAttachmentAdditionalInfoImpl(
+      blurHash: $checkedConvert('blurHash', (v) => v as String?),
+    );
+    return val;
+  },
+);
 
 Map<String, dynamic> _$$ConditionContentImageAttachmentAdditionalInfoImplToJson(
-        _$ConditionContentImageAttachmentAdditionalInfoImpl instance) =>
-    <String, dynamic>{
-      'blurHash': instance.blurHash,
-    };
+  _$ConditionContentImageAttachmentAdditionalInfoImpl instance,
+) => <String, dynamic>{'blurHash': instance.blurHash};

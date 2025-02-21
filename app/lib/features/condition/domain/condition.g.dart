@@ -9,28 +9,36 @@ part of 'condition.dart';
 // **************************************************************************
 
 _$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$ConditionImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$ConditionImpl(
-          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
-          creatorType: $checkedConvert('creatorType',
-              (v) => $enumDecode(_$ConditionCreatorTypeEnumMap, v)),
-          content: $checkedConvert('content',
-              (v) => ConditionContent.fromJson(v as Map<String, dynamic>)),
-          createdAtIso8601:
-              $checkedConvert('createdAtIso8601', (v) => v as String?),
-          createdAt: $checkedConvert(
-              'createdAt', (v) => const TimestampConverter().fromJson(v)),
-          updatedAt: $checkedConvert(
-              'updatedAt', (v) => const TimestampConverter().fromJson(v)),
-          deletedAt: $checkedConvert(
-              'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-        );
-        return val;
-      },
-    );
+    $checkedCreate(r'_$ConditionImpl', json, ($checkedConvert) {
+      final val = _$ConditionImpl(
+        subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+        creatorType: $checkedConvert(
+          'creatorType',
+          (v) => $enumDecode(_$ConditionCreatorTypeEnumMap, v),
+        ),
+        content: $checkedConvert(
+          'content',
+          (v) => ConditionContent.fromJson(v as Map<String, dynamic>),
+        ),
+        createdAtIso8601: $checkedConvert(
+          'createdAtIso8601',
+          (v) => v as String?,
+        ),
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        deletedAt: $checkedConvert(
+          'deletedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$$ConditionImplToJson(_$ConditionImpl instance) =>
     <String, dynamic>{

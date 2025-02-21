@@ -9,21 +9,16 @@ part of 'process_condition_content_image_request.dart';
 // **************************************************************************
 
 _$ProcessConditionContentImageRequestImpl
-    _$$ProcessConditionContentImageRequestImplFromJson(
-            Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ProcessConditionContentImageRequestImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ProcessConditionContentImageRequestImpl(
-              base64: $checkedConvert('base64', (v) => v as String),
-            );
-            return val;
-          },
-        );
+_$$ProcessConditionContentImageRequestImplFromJson(Map<String, dynamic> json) =>
+    $checkedCreate(r'_$ProcessConditionContentImageRequestImpl', json, (
+      $checkedConvert,
+    ) {
+      final val = _$ProcessConditionContentImageRequestImpl(
+        base64: $checkedConvert('base64', (v) => v as String),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$$ProcessConditionContentImageRequestImplToJson(
-        _$ProcessConditionContentImageRequestImpl instance) =>
-    <String, dynamic>{
-      'base64': instance.base64,
-    };
+  _$ProcessConditionContentImageRequestImpl instance,
+) => <String, dynamic>{'base64': instance.base64};

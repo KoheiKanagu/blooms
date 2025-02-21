@@ -12,7 +12,8 @@ part of 'write_log_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 WriteLogRequest _$WriteLogRequestFromJson(Map<String, dynamic> json) {
   return _WriteLogRequest.fromJson(json);
@@ -35,8 +36,9 @@ mixin _$WriteLogRequest {
 /// @nodoc
 abstract class $WriteLogRequestCopyWith<$Res> {
   factory $WriteLogRequestCopyWith(
-          WriteLogRequest value, $Res Function(WriteLogRequest) then) =
-      _$WriteLogRequestCopyWithImpl<$Res, WriteLogRequest>;
+    WriteLogRequest value,
+    $Res Function(WriteLogRequest) then,
+  ) = _$WriteLogRequestCopyWithImpl<$Res, WriteLogRequest>;
   @useResult
   $Res call({List<WriteLogData> logs});
 }
@@ -55,24 +57,27 @@ class _$WriteLogRequestCopyWithImpl<$Res, $Val extends WriteLogRequest>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? logs = null,
-  }) {
-    return _then(_value.copyWith(
-      logs: null == logs
-          ? _value.logs
-          : logs // ignore: cast_nullable_to_non_nullable
-              as List<WriteLogData>,
-    ) as $Val);
+  $Res call({Object? logs = null}) {
+    return _then(
+      _value.copyWith(
+            logs:
+                null == logs
+                    ? _value.logs
+                    : logs // ignore: cast_nullable_to_non_nullable
+                        as List<WriteLogData>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$WriteLogRequestImplCopyWith<$Res>
     implements $WriteLogRequestCopyWith<$Res> {
-  factory _$$WriteLogRequestImplCopyWith(_$WriteLogRequestImpl value,
-          $Res Function(_$WriteLogRequestImpl) then) =
-      __$$WriteLogRequestImplCopyWithImpl<$Res>;
+  factory _$$WriteLogRequestImplCopyWith(
+    _$WriteLogRequestImpl value,
+    $Res Function(_$WriteLogRequestImpl) then,
+  ) = __$$WriteLogRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<WriteLogData> logs});
@@ -83,22 +88,24 @@ class __$$WriteLogRequestImplCopyWithImpl<$Res>
     extends _$WriteLogRequestCopyWithImpl<$Res, _$WriteLogRequestImpl>
     implements _$$WriteLogRequestImplCopyWith<$Res> {
   __$$WriteLogRequestImplCopyWithImpl(
-      _$WriteLogRequestImpl _value, $Res Function(_$WriteLogRequestImpl) _then)
-      : super(_value, _then);
+    _$WriteLogRequestImpl _value,
+    $Res Function(_$WriteLogRequestImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of WriteLogRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? logs = null,
-  }) {
-    return _then(_$WriteLogRequestImpl(
-      logs: null == logs
-          ? _value._logs
-          : logs // ignore: cast_nullable_to_non_nullable
-              as List<WriteLogData>,
-    ));
+  $Res call({Object? logs = null}) {
+    return _then(
+      _$WriteLogRequestImpl(
+        logs:
+            null == logs
+                ? _value._logs
+                : logs // ignore: cast_nullable_to_non_nullable
+                    as List<WriteLogData>,
+      ),
+    );
   }
 }
 
@@ -106,7 +113,7 @@ class __$$WriteLogRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WriteLogRequestImpl implements _WriteLogRequest {
   const _$WriteLogRequestImpl({required final List<WriteLogData> logs})
-      : _logs = logs;
+    : _logs = logs;
 
   factory _$WriteLogRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$WriteLogRequestImplFromJson(json);
@@ -144,13 +151,13 @@ class _$WriteLogRequestImpl implements _WriteLogRequest {
   @pragma('vm:prefer-inline')
   _$$WriteLogRequestImplCopyWith<_$WriteLogRequestImpl> get copyWith =>
       __$$WriteLogRequestImplCopyWithImpl<_$WriteLogRequestImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WriteLogRequestImplToJson(
-      this,
-    );
+    return _$$WriteLogRequestImplToJson(this);
   }
 }
 

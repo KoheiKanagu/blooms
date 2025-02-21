@@ -32,9 +32,10 @@ String _$deviceInfoSystemNameHash() =>
 final deviceInfoSystemNameProvider = AutoDisposeProvider<String>.internal(
   deviceInfoSystemName,
   name: r'deviceInfoSystemNameProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$deviceInfoSystemNameHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deviceInfoSystemNameHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -50,9 +51,10 @@ String _$deviceInfoSystemVersionHash() =>
 final deviceInfoSystemVersionProvider = AutoDisposeProvider<String>.internal(
   deviceInfoSystemVersion,
   name: r'deviceInfoSystemVersionProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$deviceInfoSystemVersionHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deviceInfoSystemVersionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

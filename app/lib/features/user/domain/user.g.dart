@@ -8,21 +8,24 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
-      r'_$UserImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$UserImpl(
-          createdAt: $checkedConvert(
-              'createdAt', (v) => const TimestampConverter().fromJson(v)),
-          updatedAt: $checkedConvert(
-              'updatedAt', (v) => const TimestampConverter().fromJson(v)),
-          deletedAt: $checkedConvert(
-              'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-        );
-        return val;
-      },
-    );
+_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) =>
+    $checkedCreate(r'_$UserImpl', json, ($checkedConvert) {
+      final val = _$UserImpl(
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        deletedAt: $checkedConvert(
+          'deletedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{

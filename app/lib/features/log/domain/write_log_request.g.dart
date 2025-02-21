@@ -9,24 +9,20 @@ part of 'write_log_request.dart';
 // **************************************************************************
 
 _$WriteLogRequestImpl _$$WriteLogRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$WriteLogRequestImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$WriteLogRequestImpl(
-          logs: $checkedConvert(
-              'logs',
-              (v) => (v as List<dynamic>)
-                  .map((e) => WriteLogData.fromJson(e as Map<String, dynamic>))
-                  .toList()),
-        );
-        return val;
-      },
-    );
+  Map<String, dynamic> json,
+) => $checkedCreate(r'_$WriteLogRequestImpl', json, ($checkedConvert) {
+  final val = _$WriteLogRequestImpl(
+    logs: $checkedConvert(
+      'logs',
+      (v) =>
+          (v as List<dynamic>)
+              .map((e) => WriteLogData.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    ),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$$WriteLogRequestImplToJson(
-        _$WriteLogRequestImpl instance) =>
-    <String, dynamic>{
-      'logs': instance.logs.map((e) => e.toJson()).toList(),
-    };
+  _$WriteLogRequestImpl instance,
+) => <String, dynamic>{'logs': instance.logs.map((e) => e.toJson()).toList()};

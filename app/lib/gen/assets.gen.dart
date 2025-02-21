@@ -13,19 +13,16 @@ class Assets {
   const Assets._();
 
   static const AssetGenImage blooms = AssetGenImage('assets/blooms.webp');
-  static const AssetGenImage bloomsDark =
-      AssetGenImage('assets/blooms_dark.webp');
+  static const AssetGenImage bloomsDark = AssetGenImage(
+    'assets/blooms_dark.webp',
+  );
 
   /// List of all assets
   static List<AssetGenImage> get values => [blooms, bloomsDark];
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -85,15 +82,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;

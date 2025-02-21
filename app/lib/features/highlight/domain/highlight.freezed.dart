@@ -12,7 +12,8 @@ part of 'highlight.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Highlight _$HighlightFromJson(Map<String, dynamic> json) {
   return _Highlight.fromJson(json);
@@ -47,12 +48,13 @@ abstract class $HighlightCopyWith<$Res> {
   factory $HighlightCopyWith(Highlight value, $Res Function(Highlight) then) =
       _$HighlightCopyWithImpl<$Res, Highlight>;
   @useResult
-  $Res call(
-      {String subjectUid,
-      HighlightContent content,
-      @TimestampConverter() Timestamp? createdAt,
-      @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt});
+  $Res call({
+    String subjectUid,
+    HighlightContent content,
+    @TimestampConverter() Timestamp? createdAt,
+    @TimestampConverter() Timestamp? updatedAt,
+    @TimestampConverter() Timestamp? deletedAt,
+  });
 
   $HighlightContentCopyWith<$Res> get content;
 }
@@ -78,28 +80,36 @@ class _$HighlightCopyWithImpl<$Res, $Val extends Highlight>
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      subjectUid: null == subjectUid
-          ? _value.subjectUid
-          : subjectUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as HighlightContent,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            subjectUid:
+                null == subjectUid
+                    ? _value.subjectUid
+                    : subjectUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            content:
+                null == content
+                    ? _value.content
+                    : content // ignore: cast_nullable_to_non_nullable
+                        as HighlightContent,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+            deletedAt:
+                freezed == deletedAt
+                    ? _value.deletedAt
+                    : deletedAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Highlight
@@ -117,16 +127,18 @@ class _$HighlightCopyWithImpl<$Res, $Val extends Highlight>
 abstract class _$$HighlightImplCopyWith<$Res>
     implements $HighlightCopyWith<$Res> {
   factory _$$HighlightImplCopyWith(
-          _$HighlightImpl value, $Res Function(_$HighlightImpl) then) =
-      __$$HighlightImplCopyWithImpl<$Res>;
+    _$HighlightImpl value,
+    $Res Function(_$HighlightImpl) then,
+  ) = __$$HighlightImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String subjectUid,
-      HighlightContent content,
-      @TimestampConverter() Timestamp? createdAt,
-      @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt});
+  $Res call({
+    String subjectUid,
+    HighlightContent content,
+    @TimestampConverter() Timestamp? createdAt,
+    @TimestampConverter() Timestamp? updatedAt,
+    @TimestampConverter() Timestamp? deletedAt,
+  });
 
   @override
   $HighlightContentCopyWith<$Res> get content;
@@ -137,8 +149,9 @@ class __$$HighlightImplCopyWithImpl<$Res>
     extends _$HighlightCopyWithImpl<$Res, _$HighlightImpl>
     implements _$$HighlightImplCopyWith<$Res> {
   __$$HighlightImplCopyWithImpl(
-      _$HighlightImpl _value, $Res Function(_$HighlightImpl) _then)
-      : super(_value, _then);
+    _$HighlightImpl _value,
+    $Res Function(_$HighlightImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Highlight
   /// with the given fields replaced by the non-null parameter values.
@@ -151,41 +164,48 @@ class __$$HighlightImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
   }) {
-    return _then(_$HighlightImpl(
-      subjectUid: null == subjectUid
-          ? _value.subjectUid
-          : subjectUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as HighlightContent,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-    ));
+    return _then(
+      _$HighlightImpl(
+        subjectUid:
+            null == subjectUid
+                ? _value.subjectUid
+                : subjectUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        content:
+            null == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                    as HighlightContent,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+        deletedAt:
+            freezed == deletedAt
+                ? _value.deletedAt
+                : deletedAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$HighlightImpl extends _Highlight {
-  const _$HighlightImpl(
-      {required this.subjectUid,
-      required this.content,
-      @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt,
-      @TimestampConverter() this.deletedAt})
-      : super._();
+  const _$HighlightImpl({
+    required this.subjectUid,
+    required this.content,
+    @TimestampConverter() this.createdAt,
+    @TimestampConverter() this.updatedAt,
+    @TimestampConverter() this.deletedAt,
+  }) : super._();
 
   factory _$HighlightImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightImplFromJson(json);
@@ -231,7 +251,13 @@ class _$HighlightImpl extends _Highlight {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, subjectUid, content, createdAt, updatedAt, deletedAt);
+    runtimeType,
+    subjectUid,
+    content,
+    createdAt,
+    updatedAt,
+    deletedAt,
+  );
 
   /// Create a copy of Highlight
   /// with the given fields replaced by the non-null parameter values.
@@ -243,19 +269,18 @@ class _$HighlightImpl extends _Highlight {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HighlightImplToJson(
-      this,
-    );
+    return _$$HighlightImplToJson(this);
   }
 }
 
 abstract class _Highlight extends Highlight {
-  const factory _Highlight(
-      {required final String subjectUid,
-      required final HighlightContent content,
-      @TimestampConverter() final Timestamp? createdAt,
-      @TimestampConverter() final Timestamp? updatedAt,
-      @TimestampConverter() final Timestamp? deletedAt}) = _$HighlightImpl;
+  const factory _Highlight({
+    required final String subjectUid,
+    required final HighlightContent content,
+    @TimestampConverter() final Timestamp? createdAt,
+    @TimestampConverter() final Timestamp? updatedAt,
+    @TimestampConverter() final Timestamp? deletedAt,
+  }) = _$HighlightImpl;
   const _Highlight._() : super._();
 
   factory _Highlight.fromJson(Map<String, dynamic> json) =

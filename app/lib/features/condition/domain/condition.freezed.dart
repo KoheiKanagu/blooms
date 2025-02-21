@@ -12,7 +12,8 @@ part of 'condition.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Condition _$ConditionFromJson(Map<String, dynamic> json) {
   return _Condition.fromJson(json);
@@ -53,14 +54,15 @@ abstract class $ConditionCopyWith<$Res> {
   factory $ConditionCopyWith(Condition value, $Res Function(Condition) then) =
       _$ConditionCopyWithImpl<$Res, Condition>;
   @useResult
-  $Res call(
-      {String subjectUid,
-      ConditionCreatorType creatorType,
-      ConditionContent content,
-      String? createdAtIso8601,
-      @TimestampConverter() Timestamp? createdAt,
-      @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt});
+  $Res call({
+    String subjectUid,
+    ConditionCreatorType creatorType,
+    ConditionContent content,
+    String? createdAtIso8601,
+    @TimestampConverter() Timestamp? createdAt,
+    @TimestampConverter() Timestamp? updatedAt,
+    @TimestampConverter() Timestamp? deletedAt,
+  });
 
   $ConditionContentCopyWith<$Res> get content;
 }
@@ -88,36 +90,46 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      subjectUid: null == subjectUid
-          ? _value.subjectUid
-          : subjectUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      creatorType: null == creatorType
-          ? _value.creatorType
-          : creatorType // ignore: cast_nullable_to_non_nullable
-              as ConditionCreatorType,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as ConditionContent,
-      createdAtIso8601: freezed == createdAtIso8601
-          ? _value.createdAtIso8601
-          : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            subjectUid:
+                null == subjectUid
+                    ? _value.subjectUid
+                    : subjectUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            creatorType:
+                null == creatorType
+                    ? _value.creatorType
+                    : creatorType // ignore: cast_nullable_to_non_nullable
+                        as ConditionCreatorType,
+            content:
+                null == content
+                    ? _value.content
+                    : content // ignore: cast_nullable_to_non_nullable
+                        as ConditionContent,
+            createdAtIso8601:
+                freezed == createdAtIso8601
+                    ? _value.createdAtIso8601
+                    : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+            deletedAt:
+                freezed == deletedAt
+                    ? _value.deletedAt
+                    : deletedAt // ignore: cast_nullable_to_non_nullable
+                        as Timestamp?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Condition
@@ -135,18 +147,20 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
 abstract class _$$ConditionImplCopyWith<$Res>
     implements $ConditionCopyWith<$Res> {
   factory _$$ConditionImplCopyWith(
-          _$ConditionImpl value, $Res Function(_$ConditionImpl) then) =
-      __$$ConditionImplCopyWithImpl<$Res>;
+    _$ConditionImpl value,
+    $Res Function(_$ConditionImpl) then,
+  ) = __$$ConditionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String subjectUid,
-      ConditionCreatorType creatorType,
-      ConditionContent content,
-      String? createdAtIso8601,
-      @TimestampConverter() Timestamp? createdAt,
-      @TimestampConverter() Timestamp? updatedAt,
-      @TimestampConverter() Timestamp? deletedAt});
+  $Res call({
+    String subjectUid,
+    ConditionCreatorType creatorType,
+    ConditionContent content,
+    String? createdAtIso8601,
+    @TimestampConverter() Timestamp? createdAt,
+    @TimestampConverter() Timestamp? updatedAt,
+    @TimestampConverter() Timestamp? deletedAt,
+  });
 
   @override
   $ConditionContentCopyWith<$Res> get content;
@@ -157,8 +171,9 @@ class __$$ConditionImplCopyWithImpl<$Res>
     extends _$ConditionCopyWithImpl<$Res, _$ConditionImpl>
     implements _$$ConditionImplCopyWith<$Res> {
   __$$ConditionImplCopyWithImpl(
-      _$ConditionImpl _value, $Res Function(_$ConditionImpl) _then)
-      : super(_value, _then);
+    _$ConditionImpl _value,
+    $Res Function(_$ConditionImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -173,50 +188,60 @@ class __$$ConditionImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
   }) {
-    return _then(_$ConditionImpl(
-      subjectUid: null == subjectUid
-          ? _value.subjectUid
-          : subjectUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      creatorType: null == creatorType
-          ? _value.creatorType
-          : creatorType // ignore: cast_nullable_to_non_nullable
-              as ConditionCreatorType,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as ConditionContent,
-      createdAtIso8601: freezed == createdAtIso8601
-          ? _value.createdAtIso8601
-          : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
-    ));
+    return _then(
+      _$ConditionImpl(
+        subjectUid:
+            null == subjectUid
+                ? _value.subjectUid
+                : subjectUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        creatorType:
+            null == creatorType
+                ? _value.creatorType
+                : creatorType // ignore: cast_nullable_to_non_nullable
+                    as ConditionCreatorType,
+        content:
+            null == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                    as ConditionContent,
+        createdAtIso8601:
+            freezed == createdAtIso8601
+                ? _value.createdAtIso8601
+                : createdAtIso8601 // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+        deletedAt:
+            freezed == deletedAt
+                ? _value.deletedAt
+                : deletedAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConditionImpl implements _Condition {
-  const _$ConditionImpl(
-      {required this.subjectUid,
-      required this.creatorType,
-      required this.content,
-      this.createdAtIso8601,
-      @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt,
-      @TimestampConverter() this.deletedAt});
+  const _$ConditionImpl({
+    required this.subjectUid,
+    required this.creatorType,
+    required this.content,
+    this.createdAtIso8601,
+    @TimestampConverter() this.createdAt,
+    @TimestampConverter() this.updatedAt,
+    @TimestampConverter() this.deletedAt,
+  });
 
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
@@ -273,8 +298,16 @@ class _$ConditionImpl implements _Condition {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, subjectUid, creatorType, content,
-      createdAtIso8601, createdAt, updatedAt, deletedAt);
+  int get hashCode => Object.hash(
+    runtimeType,
+    subjectUid,
+    creatorType,
+    content,
+    createdAtIso8601,
+    createdAt,
+    updatedAt,
+    deletedAt,
+  );
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -286,21 +319,20 @@ class _$ConditionImpl implements _Condition {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConditionImplToJson(
-      this,
-    );
+    return _$$ConditionImplToJson(this);
   }
 }
 
 abstract class _Condition implements Condition {
-  const factory _Condition(
-      {required final String subjectUid,
-      required final ConditionCreatorType creatorType,
-      required final ConditionContent content,
-      final String? createdAtIso8601,
-      @TimestampConverter() final Timestamp? createdAt,
-      @TimestampConverter() final Timestamp? updatedAt,
-      @TimestampConverter() final Timestamp? deletedAt}) = _$ConditionImpl;
+  const factory _Condition({
+    required final String subjectUid,
+    required final ConditionCreatorType creatorType,
+    required final ConditionContent content,
+    final String? createdAtIso8601,
+    @TimestampConverter() final Timestamp? createdAt,
+    @TimestampConverter() final Timestamp? updatedAt,
+    @TimestampConverter() final Timestamp? deletedAt,
+  }) = _$ConditionImpl;
 
   factory _Condition.fromJson(Map<String, dynamic> json) =
       _$ConditionImpl.fromJson;

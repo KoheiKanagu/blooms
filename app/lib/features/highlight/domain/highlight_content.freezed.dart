@@ -12,7 +12,8 @@ part of 'highlight_content.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 HighlightContent _$HighlightContentFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
@@ -29,62 +30,59 @@ mixin _$HighlightContent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )
+    summary,
     required TResult Function() empty,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult? Function()? empty,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult Function()? empty,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HighlightContentSummary value) summary,
     required TResult Function(HighlightContentEmpty value) empty,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HighlightContentSummary value)? summary,
     TResult? Function(HighlightContentEmpty value)? empty,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HighlightContentSummary value)? summary,
     TResult Function(HighlightContentEmpty value)? empty,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Serializes this HighlightContent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -93,8 +91,9 @@ mixin _$HighlightContent {
 /// @nodoc
 abstract class $HighlightContentCopyWith<$Res> {
   factory $HighlightContentCopyWith(
-          HighlightContent value, $Res Function(HighlightContent) then) =
-      _$HighlightContentCopyWithImpl<$Res, HighlightContent>;
+    HighlightContent value,
+    $Res Function(HighlightContent) then,
+  ) = _$HighlightContentCopyWithImpl<$Res, HighlightContent>;
 }
 
 /// @nodoc
@@ -114,17 +113,18 @@ class _$HighlightContentCopyWithImpl<$Res, $Val extends HighlightContent>
 /// @nodoc
 abstract class _$$HighlightContentSummaryImplCopyWith<$Res> {
   factory _$$HighlightContentSummaryImplCopyWith(
-          _$HighlightContentSummaryImpl value,
-          $Res Function(_$HighlightContentSummaryImpl) then) =
-      __$$HighlightContentSummaryImplCopyWithImpl<$Res>;
+    _$HighlightContentSummaryImpl value,
+    $Res Function(_$HighlightContentSummaryImpl) then,
+  ) = __$$HighlightContentSummaryImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {@TimestampConverterNotNull() Timestamp startAt,
-      HighlightPeriod period,
-      String summary,
-      String abstract,
-      HighlightState state,
-      String? promptFileUri});
+  $Res call({
+    @TimestampConverterNotNull() Timestamp startAt,
+    HighlightPeriod period,
+    String summary,
+    String abstract,
+    HighlightState state,
+    String? promptFileUri,
+  });
 }
 
 /// @nodoc
@@ -132,9 +132,9 @@ class __$$HighlightContentSummaryImplCopyWithImpl<$Res>
     extends _$HighlightContentCopyWithImpl<$Res, _$HighlightContentSummaryImpl>
     implements _$$HighlightContentSummaryImplCopyWith<$Res> {
   __$$HighlightContentSummaryImplCopyWithImpl(
-      _$HighlightContentSummaryImpl _value,
-      $Res Function(_$HighlightContentSummaryImpl) _then)
-      : super(_value, _then);
+    _$HighlightContentSummaryImpl _value,
+    $Res Function(_$HighlightContentSummaryImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
@@ -148,48 +148,56 @@ class __$$HighlightContentSummaryImplCopyWithImpl<$Res>
     Object? state = null,
     Object? promptFileUri = freezed,
   }) {
-    return _then(_$HighlightContentSummaryImpl(
-      startAt: null == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as HighlightPeriod,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      abstract: null == abstract
-          ? _value.abstract
-          : abstract // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as HighlightState,
-      promptFileUri: freezed == promptFileUri
-          ? _value.promptFileUri
-          : promptFileUri // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$HighlightContentSummaryImpl(
+        startAt:
+            null == startAt
+                ? _value.startAt
+                : startAt // ignore: cast_nullable_to_non_nullable
+                    as Timestamp,
+        period:
+            null == period
+                ? _value.period
+                : period // ignore: cast_nullable_to_non_nullable
+                    as HighlightPeriod,
+        summary:
+            null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                    as String,
+        abstract:
+            null == abstract
+                ? _value.abstract
+                : abstract // ignore: cast_nullable_to_non_nullable
+                    as String,
+        state:
+            null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                    as HighlightState,
+        promptFileUri:
+            freezed == promptFileUri
+                ? _value.promptFileUri
+                : promptFileUri // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$HighlightContentSummaryImpl extends HighlightContentSummary {
-  const _$HighlightContentSummaryImpl(
-      {@TimestampConverterNotNull() required this.startAt,
-      required this.period,
-      required this.summary,
-      required this.abstract,
-      this.state = HighlightState.pending,
-      this.promptFileUri,
-      final String? $type})
-      : $type = $type ?? 'summary',
-        super._();
+  const _$HighlightContentSummaryImpl({
+    @TimestampConverterNotNull() required this.startAt,
+    required this.period,
+    required this.summary,
+    required this.abstract,
+    this.state = HighlightState.pending,
+    this.promptFileUri,
+    final String? $type,
+  }) : $type = $type ?? 'summary',
+       super._();
 
   factory _$HighlightContentSummaryImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightContentSummaryImplFromJson(json);
@@ -246,7 +254,14 @@ class _$HighlightContentSummaryImpl extends HighlightContentSummary {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, startAt, period, summary, abstract, state, promptFileUri);
+    runtimeType,
+    startAt,
+    period,
+    summary,
+    abstract,
+    state,
+    promptFileUri,
+  );
 
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
@@ -254,60 +269,82 @@ class _$HighlightContentSummaryImpl extends HighlightContentSummary {
   @override
   @pragma('vm:prefer-inline')
   _$$HighlightContentSummaryImplCopyWith<_$HighlightContentSummaryImpl>
-      get copyWith => __$$HighlightContentSummaryImplCopyWithImpl<
-          _$HighlightContentSummaryImpl>(this, _$identity);
+  get copyWith => __$$HighlightContentSummaryImplCopyWithImpl<
+    _$HighlightContentSummaryImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )
+    summary,
     required TResult Function() empty,
   }) {
     return summary(
-        startAt, period, this.summary, abstract, state, promptFileUri);
+      startAt,
+      period,
+      this.summary,
+      abstract,
+      state,
+      promptFileUri,
+    );
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult? Function()? empty,
   }) {
     return summary?.call(
-        startAt, period, this.summary, abstract, state, promptFileUri);
+      startAt,
+      period,
+      this.summary,
+      abstract,
+      state,
+      promptFileUri,
+    );
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (summary != null) {
       return summary(
-          startAt, period, this.summary, abstract, state, promptFileUri);
+        startAt,
+        period,
+        this.summary,
+        abstract,
+        state,
+        promptFileUri,
+      );
     }
     return orElse();
   }
@@ -345,20 +382,19 @@ class _$HighlightContentSummaryImpl extends HighlightContentSummary {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HighlightContentSummaryImplToJson(
-      this,
-    );
+    return _$$HighlightContentSummaryImplToJson(this);
   }
 }
 
 abstract class HighlightContentSummary extends HighlightContent {
-  const factory HighlightContentSummary(
-      {@TimestampConverterNotNull() required final Timestamp startAt,
-      required final HighlightPeriod period,
-      required final String summary,
-      required final String abstract,
-      final HighlightState state,
-      final String? promptFileUri}) = _$HighlightContentSummaryImpl;
+  const factory HighlightContentSummary({
+    @TimestampConverterNotNull() required final Timestamp startAt,
+    required final HighlightPeriod period,
+    required final String summary,
+    required final String abstract,
+    final HighlightState state,
+    final String? promptFileUri,
+  }) = _$HighlightContentSummaryImpl;
   const HighlightContentSummary._() : super._();
 
   factory HighlightContentSummary.fromJson(Map<String, dynamic> json) =
@@ -387,24 +423,25 @@ abstract class HighlightContentSummary extends HighlightContent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HighlightContentSummaryImplCopyWith<_$HighlightContentSummaryImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$HighlightContentEmptyImplCopyWith<$Res> {
   factory _$$HighlightContentEmptyImplCopyWith(
-          _$HighlightContentEmptyImpl value,
-          $Res Function(_$HighlightContentEmptyImpl) then) =
-      __$$HighlightContentEmptyImplCopyWithImpl<$Res>;
+    _$HighlightContentEmptyImpl value,
+    $Res Function(_$HighlightContentEmptyImpl) then,
+  ) = __$$HighlightContentEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$HighlightContentEmptyImplCopyWithImpl<$Res>
     extends _$HighlightContentCopyWithImpl<$Res, _$HighlightContentEmptyImpl>
     implements _$$HighlightContentEmptyImplCopyWith<$Res> {
-  __$$HighlightContentEmptyImplCopyWithImpl(_$HighlightContentEmptyImpl _value,
-      $Res Function(_$HighlightContentEmptyImpl) _then)
-      : super(_value, _then);
+  __$$HighlightContentEmptyImplCopyWithImpl(
+    _$HighlightContentEmptyImpl _value,
+    $Res Function(_$HighlightContentEmptyImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of HighlightContent
   /// with the given fields replaced by the non-null parameter values.
@@ -414,8 +451,8 @@ class __$$HighlightContentEmptyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
   const _$HighlightContentEmptyImpl({final String? $type})
-      : $type = $type ?? 'empty',
-        super._();
+    : $type = $type ?? 'empty',
+      super._();
 
   factory _$HighlightContentEmptyImpl.fromJson(Map<String, dynamic> json) =>
       _$$HighlightContentEmptyImplFromJson(json);
@@ -443,13 +480,14 @@ class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )
+    summary,
     required TResult Function() empty,
   }) {
     return empty();
@@ -459,13 +497,14 @@ class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult? Function()? empty,
   }) {
     return empty?.call();
@@ -475,13 +514,14 @@ class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            @TimestampConverterNotNull() Timestamp startAt,
-            HighlightPeriod period,
-            String summary,
-            String abstract,
-            HighlightState state,
-            String? promptFileUri)?
-        summary,
+      @TimestampConverterNotNull() Timestamp startAt,
+      HighlightPeriod period,
+      String summary,
+      String abstract,
+      HighlightState state,
+      String? promptFileUri,
+    )?
+    summary,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
@@ -524,9 +564,7 @@ class _$HighlightContentEmptyImpl extends HighlightContentEmpty {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HighlightContentEmptyImplToJson(
-      this,
-    );
+    return _$$HighlightContentEmptyImplToJson(this);
   }
 }
 
