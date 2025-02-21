@@ -8,9 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyLetsStart extends HookConsumerWidget {
-  const OnboardingPageBodyLetsStart({
-    super.key,
-  });
+  const OnboardingPageBodyLetsStart({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,14 +26,9 @@ class OnboardingPageBodyLetsStart extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'lets start',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'lets start', type: OnboardingPage)
 Widget onboardingPageBodyLetsStart(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyLetsStart(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyLetsStart()),
   );
 }

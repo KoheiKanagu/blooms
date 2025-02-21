@@ -8,19 +8,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 class HighlightPage extends HookConsumerWidget {
-  const HighlightPage({
-    super.key,
-  });
+  const HighlightPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
+      backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          i18n.highlight.highlight,
-        ),
+        middle: Text(i18n.highlight.highlight),
         trailing: PullDownButton(
           itemBuilder: (context) {
             return [
@@ -28,12 +25,10 @@ class HighlightPage extends HookConsumerWidget {
                 onTap: () {
                   showModalBottomSheet<void>(
                     context: context,
-                    builder: (context) => const ReminderPage(
-                      type: ReminderType.highlight,
-                    ),
-                    routeSettings: const RouteSettings(
-                      name: ReminderPage.path,
-                    ),
+                    builder:
+                        (context) =>
+                            const ReminderPage(type: ReminderType.highlight),
+                    routeSettings: const RouteSettings(name: ReminderPage.path),
                     useRootNavigator: true,
                   );
                 },
@@ -43,14 +38,17 @@ class HighlightPage extends HookConsumerWidget {
               ),
             ];
           },
-          buttonBuilder: (context, showMenu) => CupertinoButton(
-            onPressed: showMenu,
-            padding: EdgeInsets.zero,
-            child: const Icon(CupertinoIcons.ellipsis_circle),
-          ),
+          buttonBuilder:
+              (context, showMenu) => CupertinoButton(
+                onPressed: showMenu,
+                padding: EdgeInsets.zero,
+                child: const Icon(CupertinoIcons.ellipsis_circle),
+              ),
         ),
       ),
-      child: ref.watch(highlightQueryProvider).maybeWhen(
+      child: ref
+          .watch(highlightQueryProvider)
+          .maybeWhen(
             orElse: () => const CupertinoActivityIndicator(),
             data: (query) => HighlightPageList(query: query),
           ),

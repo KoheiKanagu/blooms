@@ -15,11 +15,9 @@ class OnboardingPageRoute extends GoRouteData {
     return CustomTransitionPage(
       child: const OnboardingPage(),
       name: state.matchedLocation,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
     );
   }
 }

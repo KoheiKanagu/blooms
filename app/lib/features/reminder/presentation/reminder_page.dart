@@ -9,17 +9,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-enum ReminderType {
-  condition,
-  highlight,
-  ;
-}
+enum ReminderType { condition, highlight }
 
 class ReminderPage extends HookConsumerWidget {
-  const ReminderPage({
-    required this.type,
-    super.key,
-  });
+  const ReminderPage({required this.type, super.key});
 
   static const path = '/reminder';
 
@@ -39,15 +32,14 @@ class ReminderPage extends HookConsumerWidget {
       });
 
     return MyCupertinoPageScaffoldWithLargeNavigationBar(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
+      backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(
         middle: Text(i18n.reminder.reminder),
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
-          child: Text(
-            MaterialLocalizations.of(context).cancelButtonLabel,
-          ),
+          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -101,26 +93,16 @@ class ReminderPage extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'condition',
-  type: ReminderPage,
-)
+@widgetbook.UseCase(name: 'condition', type: ReminderPage)
 Widget reminderPageCondition(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: ReminderPage(
-      type: ReminderType.condition,
-    ),
+    child: ReminderPage(type: ReminderType.condition),
   );
 }
 
-@widgetbook.UseCase(
-  name: 'highlight',
-  type: ReminderPage,
-)
+@widgetbook.UseCase(name: 'highlight', type: ReminderPage)
 Widget reminderPageHighlight(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: ReminderPage(
-      type: ReminderType.highlight,
-    ),
+    child: ReminderPage(type: ReminderType.highlight),
   );
 }

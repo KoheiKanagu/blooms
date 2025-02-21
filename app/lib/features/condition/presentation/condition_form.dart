@@ -13,10 +13,7 @@ import 'package:pull_down_button/pull_down_button.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class ConditionForm extends HookConsumerWidget {
-  const ConditionForm({
-    super.key,
-    this.initialValue,
-  });
+  const ConditionForm({super.key, this.initialValue});
 
   final String? initialValue;
 
@@ -24,32 +21,22 @@ class ConditionForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textController = useTextEditingController(
-      text: initialValue,
-    );
+    final textController = useTextEditingController(text: initialValue);
 
     final hideSendButton = useState(true);
-    useEffect(
-      () {
-        textController.addListener(() {
-          final text = textController.text;
-          hideSendButton.value = text.isEmpty;
-        });
-        return null;
-      },
-      [textController],
-    );
+    useEffect(() {
+      textController.addListener(() {
+        final text = textController.text;
+        hideSendButton.value = text.isEmpty;
+      });
+      return null;
+    }, [textController]);
 
     return ClipRRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 16,
-          sigmaY: 16,
-        ),
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -62,8 +49,9 @@ class ConditionForm extends HookConsumerWidget {
                   controller: textController,
                   maxLength: 256,
                   decoration: BoxDecoration(
-                    color:
-                        CupertinoColors.systemBackground.resolveFrom(context),
+                    color: CupertinoColors.systemBackground.resolveFrom(
+                      context,
+                    ),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: CupertinoColors.systemGrey4.resolveFrom(context),
@@ -78,9 +66,7 @@ class ConditionForm extends HookConsumerWidget {
                     visible: !hideSendButton.value,
                     child: Padding(
                       padding: const EdgeInsets.all(4),
-                      child: _SendButton(
-                        textController: textController,
-                      ),
+                      child: _SendButton(textController: textController),
                     ),
                   ),
                   maxLines: maxLines,
@@ -99,9 +85,7 @@ class ConditionForm extends HookConsumerWidget {
 }
 
 class _SendButton extends HookConsumerWidget {
-  const _SendButton({
-    required this.textController,
-  });
+  const _SendButton({required this.textController});
 
   final TextEditingController textController;
 
@@ -118,11 +102,7 @@ class _SendButton extends HookConsumerWidget {
             return;
           }
 
-          await ref.read(
-            conditionCreateTextProvider(
-              text: text,
-            ).future,
-          );
+          await ref.read(conditionCreateTextProvider(text: text).future);
 
           textController.clear();
         },
@@ -131,10 +111,8 @@ class _SendButton extends HookConsumerWidget {
           // 太さが変えられないようなのでshadowで太く見せる
           shadows: List.generate(
             10,
-            (_) => const BoxShadow(
-              color: CupertinoColors.white,
-              blurRadius: 1.5,
-            ),
+            (_) =>
+                const BoxShadow(color: CupertinoColors.white, blurRadius: 1.5),
           ),
         ),
       ),
@@ -148,109 +126,100 @@ class _PlusButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PullDownButton(
-      itemBuilder: (context) => [
-        PullDownMenuItem(
-          title: i18n.camera,
-          icon: CupertinoIcons.camera,
-          onTap: () async {
-            final xFile = await ImagePicker().pickImage(
-              source: ImageSource.camera,
-              maxHeight: 1024,
-              maxWidth: 1024,
-              imageQuality: 50,
-              requestFullMetadata: false,
-            );
-            if (xFile == null) {
-              return;
-            }
-
-            if (context.mounted) {
-              final indicator = showMyProgressIndicator(context);
-
-              try {
-                await ref.read(
-                  conditionCreateImageProvider(
-                    xFiles: [
-                      xFile,
-                    ].toList(),
-                  ).future,
+      itemBuilder:
+          (context) => [
+            PullDownMenuItem(
+              title: i18n.camera,
+              icon: CupertinoIcons.camera,
+              onTap: () async {
+                final xFile = await ImagePicker().pickImage(
+                  source: ImageSource.camera,
+                  maxHeight: 1024,
+                  maxWidth: 1024,
+                  imageQuality: 50,
+                  requestFullMetadata: false,
                 );
-              } on Exception catch (error, stack) {
-                // TODO: エラーダイアログ
-                logger.handle(error, stack);
-              } finally {
-                indicator.dismiss();
-              }
-            }
-          },
-        ),
-        PullDownMenuItem(
-          title: i18n.photoLibrary,
-          icon: CupertinoIcons.photo_fill,
-          onTap: () async {
-            final xFiles = await ImagePicker().pickMultiImage(
-              maxHeight: 1024,
-              maxWidth: 1024,
-              imageQuality: 50,
-              limit: 4,
-              requestFullMetadata: false,
-            );
-            if (xFiles.isEmpty) {
-              return;
-            }
+                if (xFile == null) {
+                  return;
+                }
 
-            if (context.mounted) {
-              final indicator = showMyProgressIndicator(context);
+                if (context.mounted) {
+                  final indicator = showMyProgressIndicator(context);
 
-              try {
-                await ref.read(
-                  conditionCreateImageProvider(xFiles: xFiles).future,
+                  try {
+                    await ref.read(
+                      conditionCreateImageProvider(
+                        xFiles: [xFile].toList(),
+                      ).future,
+                    );
+                  } on Exception catch (error, stack) {
+                    // TODO: エラーダイアログ
+                    logger.handle(error, stack);
+                  } finally {
+                    indicator.dismiss();
+                  }
+                }
+              },
+            ),
+            PullDownMenuItem(
+              title: i18n.photoLibrary,
+              icon: CupertinoIcons.photo_fill,
+              onTap: () async {
+                final xFiles = await ImagePicker().pickMultiImage(
+                  maxHeight: 1024,
+                  maxWidth: 1024,
+                  imageQuality: 50,
+                  limit: 4,
+                  requestFullMetadata: false,
                 );
-              } on Exception catch (error, stack) {
-                // TODO: エラーダイアログ
-                logger.handle(error, stack);
-              } finally {
-                indicator.dismiss();
-              }
-            }
-          },
-        ),
-      ],
-      buttonBuilder: (context, showMenu) => ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: CupertinoButton.tinted(
-          sizeStyle: CupertinoButtonSize.medium,
-          onPressed: showMenu,
-          padding: EdgeInsets.zero,
-          child: const Padding(
-            padding: EdgeInsets.all(8),
-            child: Icon(CupertinoIcons.add),
+                if (xFiles.isEmpty) {
+                  return;
+                }
+
+                if (context.mounted) {
+                  final indicator = showMyProgressIndicator(context);
+
+                  try {
+                    await ref.read(
+                      conditionCreateImageProvider(xFiles: xFiles).future,
+                    );
+                  } on Exception catch (error, stack) {
+                    // TODO: エラーダイアログ
+                    logger.handle(error, stack);
+                  } finally {
+                    indicator.dismiss();
+                  }
+                }
+              },
+            ),
+          ],
+      buttonBuilder:
+          (context, showMenu) => ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: CupertinoButton.tinted(
+              sizeStyle: CupertinoButtonSize.medium,
+              onPressed: showMenu,
+              padding: EdgeInsets.zero,
+              child: const Padding(
+                padding: EdgeInsets.all(8),
+                child: Icon(CupertinoIcons.add),
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 }
 
-@widgetbook.UseCase(
-  name: 'ConditionForm',
-  type: ConditionForm,
-)
+@widgetbook.UseCase(name: 'ConditionForm', type: ConditionForm)
 Widget conditionForm(BuildContext context) {
   return const CupertinoPageScaffold(
     child: Column(
       spacing: 16,
       children: [
         ConditionForm(),
-        ConditionForm(
-          initialValue: 'あいうえおかきくけこ',
-        ),
-        ConditionForm(
-          initialValue: 'あ\nい\nう\nえ\nお\nか\nき\nく\nけ\nこ\n',
-        ),
-        ConditionForm(
-          initialValue: 'abcdefghijklmnopqrstuvwxyz',
-        ),
+        ConditionForm(initialValue: 'あいうえおかきくけこ'),
+        ConditionForm(initialValue: 'あ\nい\nう\nえ\nお\nか\nき\nく\nけ\nこ\n'),
+        ConditionForm(initialValue: 'abcdefghijklmnopqrstuvwxyz'),
         ConditionForm(
           initialValue: '''
     This is a long text example to test how the ConditionForm handles long strings of text.

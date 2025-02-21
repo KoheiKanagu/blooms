@@ -4,9 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'device_info_providers.g.dart';
 
-@Riverpod(
-  keepAlive: true,
-)
+@Riverpod(keepAlive: true)
 Future<BaseDeviceInfo> deviceInfo(Ref ref) => DeviceInfoPlugin().deviceInfo;
 
 @riverpod
@@ -26,7 +24,7 @@ String deviceInfoSystemVersion(Ref ref) {
     MacOsDeviceInfo(
       :final majorVersion,
       :final minorVersion,
-      :final patchVersion
+      :final patchVersion,
     ) =>
       '$majorVersion.$minorVersion.$patchVersion',
     _ => '',

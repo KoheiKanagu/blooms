@@ -4,9 +4,7 @@ import 'package:blooms/widgets/blooms_logo.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingAppIcon extends StatelessWidget {
-  const OnboardingAppIcon({
-    super.key,
-  });
+  const OnboardingAppIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

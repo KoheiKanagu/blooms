@@ -6,27 +6,20 @@ MyProgressIndicator showMyProgressIndicator(
 }) {
   showCupertinoDialog<void>(
     context: context,
-    builder: builder ??
+    builder:
+        builder ??
         (context) => const CupertinoAlertDialog(
-              title: Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            ),
-    routeSettings: const RouteSettings(
-      name: 'MyProgressIndicator',
-    ),
+          title: Center(child: CupertinoActivityIndicator()),
+        ),
+    routeSettings: const RouteSettings(name: 'MyProgressIndicator'),
   );
 
   return MyProgressIndicator(context);
 }
 
 class MyProgressIndicator {
-  MyProgressIndicator(
-    BuildContext context,
-  ) : state = Navigator.of(
-          context,
-          rootNavigator: true,
-        );
+  MyProgressIndicator(BuildContext context)
+    : state = Navigator.of(context, rootNavigator: true);
 
   final NavigatorState state;
 

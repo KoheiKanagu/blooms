@@ -48,8 +48,8 @@ class HighlightCreatePageTile extends StatelessWidget {
       HighlightPeriod.past7days ||
       HighlightPeriod.past14days ||
       HighlightPeriod.past21days ||
-      HighlightPeriod.past28days =>
-        i18n.highlight.xToYTarget(x: pastDate, y: nowDate),
+      HighlightPeriod
+          .past28days => i18n.highlight.xToYTarget(x: pastDate, y: nowDate),
     };
   }
 }
@@ -61,23 +61,22 @@ class HighlightCreatePageTile extends StatelessWidget {
 Widget highlightCreatePageTile(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightPeriod.values
-          .map(
-            (period) => HighlightCreatePageTile(
-              period: period,
-              selected: context.knobs.boolean(
-                label: 'Selected',
-              ),
-              today: context.knobs.dateTime(
-                label: 'Today',
-                initialValue: DateTime(2025),
-                start: DateTime(2025),
-                end: DateTime(2025, 12, 31),
-              ),
-              onTap: () {},
-            ),
-          )
-          .toList(),
+      children:
+          HighlightPeriod.values
+              .map(
+                (period) => HighlightCreatePageTile(
+                  period: period,
+                  selected: context.knobs.boolean(label: 'Selected'),
+                  today: context.knobs.dateTime(
+                    label: 'Today',
+                    initialValue: DateTime(2025),
+                    start: DateTime(2025),
+                    end: DateTime(2025, 12, 31),
+                  ),
+                  onTap: () {},
+                ),
+              )
+              .toList(),
     ),
   );
 }

@@ -42,7 +42,7 @@ sealed class HighlightContent with _$HighlightContent {
       _$HighlightContentFromJson(json);
 
   String? get promptFileUri => switch (this) {
-        HighlightContentSummary(:final promptFileUri) => promptFileUri,
-        HighlightContentEmpty() => null,
-      };
+    HighlightContentSummary(:final promptFileUri) => promptFileUri,
+    HighlightContentEmpty() => null,
+  };
 }

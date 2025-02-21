@@ -85,9 +85,9 @@ Future<void> appStartup(Ref ref) async {
         .setAnalyticsCollectionEnabled(kReleaseMode),
     ref.watch(packageInfoProvider.future),
     ref.watch(deviceInfoProvider.future),
-    ref.watch(firebaseAuthProvider).setSettings(
-          userAccessGroup: kKeychainGroup,
-        ),
+    ref
+        .watch(firebaseAuthProvider)
+        .setSettings(userAccessGroup: kKeychainGroup),
     ref.watch(authSignOutWhenFirstRunProvider.future),
   ]);
 

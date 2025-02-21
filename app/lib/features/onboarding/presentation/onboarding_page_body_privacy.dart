@@ -11,9 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyPrivacy extends StatelessWidget {
-  const OnboardingPageBodyPrivacy({
-    super.key,
-  });
+  const OnboardingPageBodyPrivacy({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +29,23 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
             if (!kIsWeb)
               Text.rich(
                 i18n.onboarding.privacy.description3(
-                  appLock: (text) => TextSpan(
-                    text: text,
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .textStyle
-                        .copyWith(
-                          color:
-                              CupertinoColors.activeBlue.resolveFrom(context),
+                  appLock:
+                      (text) => TextSpan(
+                        text: text,
+                        style: CupertinoTheme.of(
+                          context,
+                        ).textTheme.textStyle.copyWith(
+                          color: CupertinoColors.activeBlue.resolveFrom(
+                            context,
+                          ),
                           fontSize: 14,
                         ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        launchUrl(MyUrl.iphoneAppLock);
-                      },
-                  ),
+                        recognizer:
+                            TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(MyUrl.iphoneAppLock);
+                              },
+                      ),
                 ),
               ),
           ],
@@ -81,14 +81,9 @@ class _Icon extends StatelessWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'privacy',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'privacy', type: OnboardingPage)
 Widget onboardingPageBodyPrivacy(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyPrivacy(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyPrivacy()),
   );
 }

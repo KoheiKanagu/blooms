@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
 class ConditionBubbleBloomsIcon extends StatelessWidget {
-  const ConditionBubbleBloomsIcon({
-    super.key,
-  });
+  const ConditionBubbleBloomsIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +17,9 @@ class ConditionBubbleBloomsIcon extends StatelessWidget {
             Text(
               i18n.blooms,
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 12,
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                  ),
+                fontSize: 12,
+                color: CupertinoColors.secondaryLabel.resolveFrom(context),
+              ),
             ),
           ],
         ),

@@ -41,28 +41,22 @@ class Condition with _$Condition {
   factory Condition.image({
     required String uid,
     required List<ConditionContentImageAttachment> attachments,
-  }) =>
-      Condition(
-        subjectUid: uid,
-        creatorType: ConditionCreatorType.user,
-        content: ConditionContent.image(
-          attachments: attachments,
-        ),
-        createdAtIso8601: clock.now().toIso8601String(),
-      );
+  }) => Condition(
+    subjectUid: uid,
+    creatorType: ConditionCreatorType.user,
+    content: ConditionContent.image(attachments: attachments),
+    createdAtIso8601: clock.now().toIso8601String(),
+  );
 
   factory Condition.audio({
     required String uid,
     required List<ConditionContentAudioAttachment> attachments,
-  }) =>
-      Condition(
-        subjectUid: uid,
-        creatorType: ConditionCreatorType.user,
-        content: ConditionContent.audio(
-          attachments: attachments,
-        ),
-        createdAtIso8601: clock.now().toIso8601String(),
-      );
+  }) => Condition(
+    subjectUid: uid,
+    creatorType: ConditionCreatorType.user,
+    content: ConditionContent.audio(attachments: attachments),
+    createdAtIso8601: clock.now().toIso8601String(),
+  );
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
 

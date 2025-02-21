@@ -1,5 +1,1 @@
-enum ConditionCreatorType {
-  user,
-  model,
-  ;
-}
+enum ConditionCreatorType { user, model }

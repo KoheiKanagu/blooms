@@ -23,24 +23,20 @@ class MyCupertinoPageScaffoldWithLargeNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: clipTop
-          ? const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-            )
-          : BorderRadius.zero,
+      borderRadius:
+          clipTop
+              ? const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              )
+              : BorderRadius.zero,
       child: CupertinoPageScaffold(
         backgroundColor: backgroundColor,
         child: Scaffold(
           backgroundColor: backgroundColor,
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(
-              _navigationBarHeight,
-            ),
-            child: SizedBox(
-              height: _navigationBarHeight,
-              child: navigationBar,
-            ),
+            preferredSize: const Size.fromHeight(_navigationBarHeight),
+            child: SizedBox(height: _navigationBarHeight, child: navigationBar),
           ),
           body: child,
         ),

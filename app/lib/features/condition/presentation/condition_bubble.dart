@@ -50,10 +50,10 @@ class ConditionBubble extends HookConsumerWidget {
             createdAtString,
             textAlign: TextAlign.center,
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Align(
@@ -61,61 +61,66 @@ class ConditionBubble extends HookConsumerWidget {
           child: Padding(
             padding: switch (creatorType) {
               ConditionCreatorType.user => const EdgeInsets.only(
-                  left: 64,
-                  right: 16,
-                ),
+                left: 64,
+                right: 16,
+              ),
               ConditionCreatorType.model => const EdgeInsets.only(
-                  left: 16,
-                  right: 64,
-                ),
+                left: 16,
+                right: 64,
+              ),
             },
             child: ContextMenuWidget(
-              menuProvider: (_) => Menu(
-                children: [
-                  MenuAction(
-                    callback: () async {
-                      await Future.wait([
-                        ref.read(
-                          conditionDeleteProvider(documentId: documentId)
-                              .future,
-                        ),
-                        HapticFeedback.heavyImpact(),
-                      ]);
-                    },
-                    title:
-                        MaterialLocalizations.of(context).deleteButtonTooltip,
-                    image: MenuImage.icon(CupertinoIcons.delete),
-                    attributes: const MenuActionAttributes(
-                      destructive: true,
-                    ),
-                  ),
-                ],
-              ),
-              previewBuilder: (context, child) => ColoredBox(
-                color: CupertinoColors.systemGroupedBackground
-                    .resolveFrom(context),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    spacing: 8,
+              menuProvider:
+                  (_) => Menu(
                     children: [
-                      Text(
-                        createdAtString,
-                        textAlign: TextAlign.center,
-                        style: CupertinoTheme.of(context)
-                            .textTheme
-                            .textStyle
-                            .copyWith(
+                      MenuAction(
+                        callback: () async {
+                          await Future.wait([
+                            ref.read(
+                              conditionDeleteProvider(
+                                documentId: documentId,
+                              ).future,
+                            ),
+                            HapticFeedback.heavyImpact(),
+                          ]);
+                        },
+                        title:
+                            MaterialLocalizations.of(
+                              context,
+                            ).deleteButtonTooltip,
+                        image: MenuImage.icon(CupertinoIcons.delete),
+                        attributes: const MenuActionAttributes(
+                          destructive: true,
+                        ),
+                      ),
+                    ],
+                  ),
+              previewBuilder:
+                  (context, child) => ColoredBox(
+                    color: CupertinoColors.systemGroupedBackground.resolveFrom(
+                      context,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        spacing: 8,
+                        children: [
+                          Text(
+                            createdAtString,
+                            textAlign: TextAlign.center,
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          child,
+                        ],
                       ),
-                      child,
-                    ],
+                    ),
                   ),
-                ),
-              ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -126,8 +131,9 @@ class ConditionBubble extends HookConsumerWidget {
                     ConditionCreatorType.user => CupertinoColors
                         .secondarySystemGroupedBackground
                         .resolveFrom(context),
-                    ConditionCreatorType.model =>
-                      myColorGreen2.resolveFrom(context).withOpacity(0.1),
+                    ConditionCreatorType.model => myColorGreen2
+                        .resolveFrom(context)
+                        .withOpacity(0.1),
                   },
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: switch (creatorType) {
@@ -140,28 +146,29 @@ class ConditionBubble extends HookConsumerWidget {
                   children: [
                     switch (content) {
                       ConditionContentText() => ConditionBubbleText(
-                          content as ConditionContentText,
-                          creatorType: creatorType,
-                        ),
+                        content as ConditionContentText,
+                        creatorType: creatorType,
+                      ),
                       ConditionContentTextWithSearchKeywords() =>
                         ConditionBubbleTextWithSearchKeywords(
                           content as ConditionContentTextWithSearchKeywords,
                           creatorType: creatorType,
                         ),
                       ConditionContentImage() => ConditionBubbleImage(
-                          content as ConditionContentImage,
-                          creatorType: creatorType,
-                        ),
+                        content as ConditionContentImage,
+                        creatorType: creatorType,
+                      ),
                       ConditionContentAudio() => ConditionBubbleAudio(
-                          content as ConditionContentAudio,
-                          creatorType: creatorType,
-                        ),
-                      ConditionContentEmpty() =>
-                        ConditionBubbleEmpty(content as ConditionContentEmpty),
+                        content as ConditionContentAudio,
+                        creatorType: creatorType,
+                      ),
+                      ConditionContentEmpty() => ConditionBubbleEmpty(
+                        content as ConditionContentEmpty,
+                      ),
                     },
                     switch (creatorType) {
                       ConditionCreatorType.user => const SizedBox.shrink(),
-                      ConditionCreatorType.model => const DisclaimerLabel()
+                      ConditionCreatorType.model => const DisclaimerLabel(),
                     },
                   ],
                 ),

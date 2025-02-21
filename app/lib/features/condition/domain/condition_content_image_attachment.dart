@@ -21,16 +21,15 @@ class ConditionContentImageAttachment with _$ConditionContentImageAttachment {
     required int width,
     required int height,
     required String blurHash,
-  }) =>
-      ConditionContentImageAttachment(
-        fileUri: gsFilePath,
-        mimeType: mimeType,
-        width: width,
-        height: height,
-        additionalInfo: ConditionContentImageAttachmentAdditionalInfo(
-          blurHash: blurHash,
-        ),
-      );
+  }) => ConditionContentImageAttachment(
+    fileUri: gsFilePath,
+    mimeType: mimeType,
+    width: width,
+    height: height,
+    additionalInfo: ConditionContentImageAttachmentAdditionalInfo(
+      blurHash: blurHash,
+    ),
+  );
 
   factory ConditionContentImageAttachment.fromJson(Json json) =>
       _$ConditionContentImageAttachmentFromJson(json);

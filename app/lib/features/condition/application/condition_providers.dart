@@ -47,10 +47,7 @@ Future<Query<Condition>> conditionQuery(Ref ref) async {
 }
 
 @riverpod
-Future<void> conditionDelete(
-  Ref ref, {
-  required String documentId,
-}) async {
+Future<void> conditionDelete(Ref ref, {required String documentId}) async {
   await ref
       .watch(conditionCollectionReferenceProvider)
       .doc(documentId)
@@ -58,21 +55,15 @@ Future<void> conditionDelete(
 }
 
 @riverpod
-Future<void> conditionCreateText(
-  Ref ref, {
-  required String text,
-}) async {
+Future<void> conditionCreateText(Ref ref, {required String text}) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
   if (uid == null) {
     throw Exception('uid is null');
   }
 
-  await ref.watch(conditionCollectionReferenceProvider).add(
-        Condition.text(
-          uid: uid,
-          text: text,
-        ),
-      );
+  await ref
+      .watch(conditionCollectionReferenceProvider)
+      .add(Condition.text(uid: uid, text: text));
 }
 
 @riverpod
@@ -85,43 +76,32 @@ Future<void> conditionCreateImage(
     throw Exception('uid is null');
   }
 
-  final tasks = xFiles.map(
-    (xFile) async {
-      logger.info('Upload image: ${xFile.path}');
+  final tasks = xFiles.map((xFile) async {
+    logger.info('Upload image: ${xFile.path}');
 
-      final request = ProcessConditionContentImageRequest(
-        base64: base64.encode(await xFile.readAsBytes()),
-      );
+    final request = ProcessConditionContentImageRequest(
+      base64: base64.encode(await xFile.readAsBytes()),
+    );
 
-      final response = await ref
-          .watch(firebaseFunctionsProvider)
-          .httpsCallable(
-            'processConditionContentImage',
-          )
-          .call<Map<String, dynamic>>(
-            request.toJson(),
-          )
-          .then(
-            (e) => ProcessConditionContentImageResponse.fromJson(e.data),
-          );
+    final response = await ref
+        .watch(firebaseFunctionsProvider)
+        .httpsCallable('processConditionContentImage')
+        .call<Map<String, dynamic>>(request.toJson())
+        .then((e) => ProcessConditionContentImageResponse.fromJson(e.data));
 
-      return ConditionContentImageAttachment.gs(
-        gsFilePath: response.gsFilePath,
-        mimeType: response.mimeType,
-        width: response.width,
-        height: response.height,
-        blurHash: response.blurHash,
-      );
-    },
-  );
+    return ConditionContentImageAttachment.gs(
+      gsFilePath: response.gsFilePath,
+      mimeType: response.mimeType,
+      width: response.width,
+      height: response.height,
+      blurHash: response.blurHash,
+    );
+  });
 
   final attachments = await Future.wait(tasks);
-  await ref.watch(conditionCollectionReferenceProvider).add(
-        Condition.image(
-          uid: uid,
-          attachments: attachments,
-        ),
-      );
+  await ref
+      .watch(conditionCollectionReferenceProvider)
+      .add(Condition.image(uid: uid, attachments: attachments));
 }
 
 @riverpod
@@ -138,10 +118,7 @@ Future<Reference> conditionAudioStorageReference(
 }
 
 @riverpod
-Future<void> conditionCreateAudio(
-  Ref ref, {
-  required XFile xFile,
-}) async {
+Future<void> conditionCreateAudio(Ref ref, {required XFile xFile}) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
   if (uid == null) {
     throw Exception('uid is null');
@@ -154,12 +131,12 @@ Future<void> conditionCreateAudio(
     ).future,
   );
 
-  final task = await reference.putFile(
-    File(xFile.path),
-  );
+  final task = await reference.putFile(File(xFile.path));
   final mimeType = task.metadata?.contentType ?? '';
 
-  await ref.watch(conditionCollectionReferenceProvider).add(
+  await ref
+      .watch(conditionCollectionReferenceProvider)
+      .add(
         Condition.audio(
           uid: uid,
           attachments: [

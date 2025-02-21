@@ -14,28 +14,17 @@ extension StringExtension on String {
   Widget wrapBudouX(
     Text Function(String e) wrapText, {
     WrapAlignment alignment = WrapAlignment.start,
-  }) =>
-      Wrap(
-        alignment: alignment,
-        children: budouX
-            .parse(this)
-            .map(
-              (e) => wrapText(e),
-            )
-            .toList(),
-      );
+  }) => Wrap(
+    alignment: alignment,
+    children: budouX.parse(this).map((e) => wrapText(e)).toList(),
+  );
 
   Widget wrapBudouXText({
     TextStyle? style,
     TextAlign? textAlign,
     WrapAlignment alignment = WrapAlignment.start,
-  }) =>
-      wrapBudouX(
-        (e) => Text(
-          e,
-          style: style,
-          textAlign: textAlign,
-        ),
-        alignment: alignment,
-      );
+  }) => wrapBudouX(
+    (e) => Text(e, style: style, textAlign: textAlign),
+    alignment: alignment,
+  );
 }

@@ -19,14 +19,10 @@ class OnboardingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          IgnorePointer(
-            child: child,
-          ),
+          IgnorePointer(child: child),
           const Gap(12),
           FittedBox(
             fit: BoxFit.scaleDown,

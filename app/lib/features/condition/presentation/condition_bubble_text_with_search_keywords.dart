@@ -32,34 +32,37 @@ class ConditionBubbleTextWithSearchKeywords extends StatelessWidget {
           visible: content.searchKeywords.isNotEmpty,
           child: Column(
             spacing: 4,
-            children: [
-              const Gap(4),
-              ...content.searchKeywords.map(
-                (e) => CupertinoButton.tinted(
-                  sizeStyle: CupertinoButtonSize.small,
-                  child: Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.compass,
-                        color: CupertinoColors.systemBlue.resolveFrom(context),
+            children:
+                [
+                  const Gap(4),
+                  ...content.searchKeywords.map(
+                    (e) => CupertinoButton.tinted(
+                      sizeStyle: CupertinoButtonSize.small,
+                      child: Row(
+                        children: [
+                          Icon(
+                            CupertinoIcons.compass,
+                            color: CupertinoColors.systemBlue.resolveFrom(
+                              context,
+                            ),
+                          ),
+                          const Gap(4),
+                          Text(e),
+                          const Spacer(),
+                          Icon(
+                            CupertinoIcons.right_chevron,
+                            color: CupertinoColors.systemBlue.resolveFrom(
+                              context,
+                            ),
+                          ),
+                        ],
                       ),
-                      const Gap(4),
-                      Text(e),
-                      const Spacer(),
-                      Icon(
-                        CupertinoIcons.right_chevron,
-                        color: CupertinoColors.systemBlue.resolveFrom(context),
-                      ),
-                    ],
+                      onPressed: () {
+                        launchUrl(MyUrl.buildSearchURL(e));
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    launchUrl(
-                      MyUrl.buildSearchURL(e),
-                    );
-                  },
-                ),
-              ),
-            ].toList(),
+                ].toList(),
           ),
         ),
       ],

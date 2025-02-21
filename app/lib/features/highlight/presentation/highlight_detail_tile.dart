@@ -9,10 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightDetailTile extends HookConsumerWidget {
-  const HighlightDetailTile({
-    required this.content,
-    super.key,
-  });
+  const HighlightDetailTile({required this.content, super.key});
 
   final HighlightContent content;
 
@@ -21,9 +18,7 @@ class HighlightDetailTile extends HookConsumerWidget {
     if (content is HighlightContentEmpty) {
       return Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(
-          child: Text(i18n.unknownContent),
-        ),
+        child: Center(child: Text(i18n.unknownContent)),
       );
     }
 
@@ -32,51 +27,36 @@ class HighlightDetailTile extends HookConsumerWidget {
       children: [
         switch (content) {
           HighlightContentSummary(:final summary) => Padding(
-              padding: const EdgeInsets.only(
-                top: 16,
-                left: 16,
-                right: 16,
+            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              decoration: BoxDecoration(
+                color: myColorGreen2.resolveFrom(context).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: myColorGreen2.resolveFrom(context).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const ConditionBubbleBloomsIcon(),
-                    Text(
-                      summary,
-                      maxLines: 100,
-                    ),
-                    const DisclaimerLabel(),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const ConditionBubbleBloomsIcon(),
+                  Text(summary, maxLines: 100),
+                  const DisclaimerLabel(),
+                ],
               ),
             ),
+          ),
           HighlightContentEmpty() => throw UnimplementedError(),
         },
         const Gap(8),
         CupertinoButton(
           sizeStyle: CupertinoButtonSize.small,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 32,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Builder(
               builder: (context) {
-                final textStyle = CupertinoTheme.of(context)
-                    .textTheme
-                    .actionSmallTextStyle
-                    .copyWith(
-                      fontSize: 14,
-                    );
+                final textStyle = CupertinoTheme.of(
+                  context,
+                ).textTheme.actionSmallTextStyle.copyWith(fontSize: 14);
 
                 return Row(
                   children: [
@@ -98,12 +78,11 @@ class HighlightDetailTile extends HookConsumerWidget {
           onPressed: () {
             Navigator.of(context).push(
               CupertinoPageRoute<void>(
-                builder: (_) => HighlightPromptPage(
-                  promptFileUri: content.promptFileUri,
-                ),
-                settings: const RouteSettings(
-                  name: HighlightPromptPage.path,
-                ),
+                builder:
+                    (_) => HighlightPromptPage(
+                      promptFileUri: content.promptFileUri,
+                    ),
+                settings: const RouteSettings(name: HighlightPromptPage.path),
               ),
             );
           },

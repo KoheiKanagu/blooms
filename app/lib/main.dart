@@ -57,9 +57,10 @@ class MyApp extends HookConsumerWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         routerConfig: router,
-        theme: MediaQuery.of(context).platformBrightness == Brightness.light
-            ? myLightThemeData
-            : myDarkThemeData,
+        theme:
+            MediaQuery.of(context).platformBrightness == Brightness.light
+                ? myLightThemeData
+                : myDarkThemeData,
       ),
     );
   }

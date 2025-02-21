@@ -28,16 +28,15 @@ class Highlight with _$Highlight {
     required HighlightPeriod period,
     required String subjectUid,
     required Timestamp startAt,
-  }) =>
-      Highlight(
-        subjectUid: subjectUid,
-        content: HighlightContentSummary(
-          startAt: startAt,
-          period: period,
-          summary: '',
-          abstract: '',
-        ),
-      );
+  }) => Highlight(
+    subjectUid: subjectUid,
+    content: HighlightContentSummary(
+      startAt: startAt,
+      period: period,
+      summary: '',
+      abstract: '',
+    ),
+  );
 
   const Highlight._();
 
@@ -52,25 +51,18 @@ class Highlight with _$Highlight {
   HighlightRange get highlightRange {
     final (startAt, period) = switch (content) {
       HighlightContentSummary(:final startAt, :final period) => (
-          startAt,
-          period
-        ),
+        startAt,
+        period,
+      ),
       HighlightContentEmpty() => throw UnimplementedError(),
     };
 
     final startDate = myDateFormat(
-      startAt.toDate().subtract(
-            Duration(
-              days: period.days,
-            ),
-          ),
+      startAt.toDate().subtract(Duration(days: period.days)),
     );
     final endDate = myDateFormat(startAt.toDate());
 
-    return (
-      startDate: startDate,
-      endDate: endDate,
-    );
+    return (startDate: startDate, endDate: endDate);
   }
 
   /// ハイライトの対象期間を表す文字列
@@ -85,10 +77,7 @@ class Highlight with _$Highlight {
       return endDate;
     }
 
-    return i18n.highlight.xToY(
-      x: startDate,
-      y: endDate,
-    );
+    return i18n.highlight.xToY(x: startDate, y: endDate);
   }
 
   HighlightPeriod? get period {
@@ -106,7 +95,4 @@ class Highlight with _$Highlight {
   }
 }
 
-typedef HighlightRange = ({
-  String startDate,
-  String endDate,
-});
+typedef HighlightRange = ({String startDate, String endDate});

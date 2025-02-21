@@ -38,10 +38,7 @@ Future<Query<Highlight>> highlightQuery(Ref ref) async {
 }
 
 @riverpod
-Future<void> highlightCreate(
-  Ref ref, {
-  required HighlightPeriod period,
-}) async {
+Future<void> highlightCreate(Ref ref, {required HighlightPeriod period}) async {
   final uid = await ref.watch(firebaseUserUidProvider.future);
 
   if (uid == null) {
@@ -58,10 +55,7 @@ Future<void> highlightCreate(
 }
 
 @riverpod
-Future<void> highlightDelete(
-  Ref ref, {
-  required String documentId,
-}) async {
+Future<void> highlightDelete(Ref ref, {required String documentId}) async {
   await ref
       .watch(highlightCollectionReferenceProvider)
       .doc(documentId)
@@ -69,10 +63,7 @@ Future<void> highlightDelete(
 }
 
 @riverpod
-Future<String?> highlightPrompt(
-  Ref ref, {
-  required String? gsFilePath,
-}) async {
+Future<String?> highlightPrompt(Ref ref, {required String? gsFilePath}) async {
   if (gsFilePath == null) {
     return null;
   }

@@ -11,18 +11,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OnboardingFooter extends HookConsumerWidget {
-  const OnboardingFooter({
-    super.key,
-  });
+  const OnboardingFooter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final progress = useState(false);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
           const _Terms(),
@@ -30,21 +26,23 @@ class OnboardingFooter extends HookConsumerWidget {
           FractionallySizedBox(
             widthFactor: 1,
             child: CupertinoButton.filled(
-              child: progress.value
-                  ? CupertinoActivityIndicator(
-                      color:
-                          CupertinoColors.systemBackground.resolveFrom(context),
-                    )
-                  : Text(
-                      i18n.kContinue,
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .textStyle
-                          .copyWith(
-                            color: CupertinoColors.systemBackground
-                                .resolveFrom(context),
+              child:
+                  progress.value
+                      ? CupertinoActivityIndicator(
+                        color: CupertinoColors.systemBackground.resolveFrom(
+                          context,
+                        ),
+                      )
+                      : Text(
+                        i18n.kContinue,
+                        style: CupertinoTheme.of(
+                          context,
+                        ).textTheme.textStyle.copyWith(
+                          color: CupertinoColors.systemBackground.resolveFrom(
+                            context,
                           ),
-                    ),
+                        ),
+                      ),
               onPressed: () async {
                 if (progress.value) {
                   return;
@@ -79,32 +77,36 @@ class _Terms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text.rich(
-      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-            fontSize: 14,
-          ),
+      style: CupertinoTheme.of(
+        context,
+      ).textTheme.textStyle.copyWith(fontSize: 14),
       i18n.ackTerm(
-        termOfService: (text) => TextSpan(
-          text: text,
-          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+        termOfService:
+            (text) => TextSpan(
+              text: text,
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                 color: CupertinoColors.activeBlue.resolveFrom(context),
                 fontSize: 14,
               ),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              launchUrl(MyUrl.termsOfService);
-            },
-        ),
-        privacyPolicy: (text) => TextSpan(
-          text: text,
-          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+              recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(MyUrl.termsOfService);
+                    },
+            ),
+        privacyPolicy:
+            (text) => TextSpan(
+              text: text,
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                 color: CupertinoColors.activeBlue.resolveFrom(context),
                 fontSize: 14,
               ),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              launchUrl(MyUrl.privacyPolicy);
-            },
-        ),
+              recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(MyUrl.privacyPolicy);
+                    },
+            ),
       ),
     );
   }

@@ -13,9 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyHighlight extends StatelessWidget {
-  const OnboardingPageBodyHighlight({
-    super.key,
-  });
+  const OnboardingPageBodyHighlight({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +70,16 @@ class OnboardingPageBodyHighlight extends StatelessWidget {
             Text(i18n.onboarding.highlight.description1),
             Text(i18n.onboarding.highlight.description2),
           ],
-          disclaimers: [
-            Text(i18n.onboarding.highlight.disclaimer1),
-          ],
+          disclaimers: [Text(i18n.onboarding.highlight.disclaimer1)],
         ),
       ],
     );
   }
 }
 
-@widgetbook.UseCase(
-  name: 'highlight',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'highlight', type: OnboardingPage)
 Widget onboardingPageBodyHighlight(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyHighlight(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyHighlight()),
   );
 }

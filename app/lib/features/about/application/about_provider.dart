@@ -27,9 +27,6 @@ system version: $systemVersion
     host: 'docs.google.com',
     path:
         'forms/d/e/1FAIpQLSesrBpQGaPl1siIwauy9fwlVUlFvDdpGrf9yVjqcGFYMcvdHQ/viewform',
-    queryParameters: {
-      'usp': 'pp_url',
-      'entry.637067867': systemInfo,
-    },
+    queryParameters: {'usp': 'pp_url', 'entry.637067867': systemInfo},
   );
 }
