@@ -15,18 +15,12 @@ Future<void> main() async {
   Intl.defaultLocale = AppLocale.ja.languageCode;
   await initBudouX();
 
-  runApp(
-    const ProviderScope(
-      child: WidgetbookApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: WidgetbookApp()));
 }
 
 @widgetbook.App()
 class WidgetbookApp extends StatelessWidget {
-  const WidgetbookApp({
-    super.key,
-  });
+  const WidgetbookApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +29,8 @@ class WidgetbookApp extends StatelessWidget {
       addons: [
         CupertinoThemeAddon(
           themes: [
-            WidgetbookTheme(
-              name: 'Light',
-              data: myLightThemeData,
-            ),
-            WidgetbookTheme(
-              name: 'Dark',
-              data: myDarkThemeData,
-            ),
+            WidgetbookTheme(name: 'Light', data: myLightThemeData),
+            WidgetbookTheme(name: 'Dark', data: myDarkThemeData),
           ],
         ),
         DeviceFrameAddon(

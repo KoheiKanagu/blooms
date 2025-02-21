@@ -7,9 +7,8 @@ part 'write_log_request.g.dart';
 
 @freezed
 class WriteLogRequest with _$WriteLogRequest {
-  const factory WriteLogRequest({
-    required List<WriteLogData> logs,
-  }) = _WriteLogRequest;
+  const factory WriteLogRequest({required List<WriteLogData> logs}) =
+      _WriteLogRequest;
 
   factory WriteLogRequest.fromJson(Json json) =>
       _$WriteLogRequestFromJson(json);

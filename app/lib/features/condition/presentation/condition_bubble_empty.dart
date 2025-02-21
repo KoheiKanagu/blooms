@@ -3,10 +3,7 @@ import 'package:blooms/gen/strings.g.dart';
 import 'package:flutter/cupertino.dart';
 
 class ConditionBubbleEmpty extends StatelessWidget {
-  const ConditionBubbleEmpty(
-    this.content, {
-    super.key,
-  });
+  const ConditionBubbleEmpty(this.content, {super.key});
 
   final ConditionContentEmpty content;
 

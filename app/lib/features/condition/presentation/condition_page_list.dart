@@ -25,25 +25,24 @@ class ConditionPageList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const conditionFormKey = GlobalObjectKey('conditionFormKey');
-    final conditionFormHeight =
-        ref.watch(conditionFormHeightControllerProvider);
-
-    useEffect(
-      () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref
-              .read(conditionFormHeightControllerProvider.notifier)
-              .calculateHeight(conditionFormKey);
-        });
-        return null;
-      },
-      [context],
+    final conditionFormHeight = ref.watch(
+      conditionFormHeightControllerProvider,
     );
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref
+            .read(conditionFormHeightControllerProvider.notifier)
+            .calculateHeight(conditionFormKey);
+      });
+      return null;
+    }, [context]);
 
     return SafeArea(
       child: CupertinoPageScaffold(
-        backgroundColor:
-            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+          context,
+        ),
         child: NotificationListener<SizeChangedLayoutNotification>(
           onNotification: (notification) {
             // ConditionFormで改行されて高さが変わったときに起きる
@@ -60,15 +59,10 @@ class ConditionPageList extends HookConsumerWidget {
               _ListView(
                 query: query,
                 onItemDisplayed: onItemDisplayed,
-                padding: EdgeInsets.only(
-                  top: 24,
-                  bottom: conditionFormHeight,
-                ),
+                padding: EdgeInsets.only(top: 24, bottom: conditionFormHeight),
               ),
               const SizeChangedLayoutNotifier(
-                child: ConditionForm(
-                  key: conditionFormKey,
-                ),
+                child: ConditionForm(key: conditionFormKey),
               ),
             ],
           ),
@@ -102,9 +96,7 @@ class _ListView extends HookConsumerWidget {
         }
 
         if (snapshot.isFetching) {
-          return const Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return const Center(child: CupertinoActivityIndicator());
         }
 
         final itemCount = snapshot.docs.length;
@@ -136,10 +128,12 @@ class _ListView extends HookConsumerWidget {
               // 一つ前のindexのsnapshotのcreatedAtと比較して1時間以上経過していたら
               // 日時を表示する
               final existPreview = index + 1 < itemCount;
-              final previewCreatedAt = existPreview
-                  ? snapshot.docs[index + 1].data().createdAt?.toDate()
-                  : null;
-              final showDateTime = previewCreatedAt == null ||
+              final previewCreatedAt =
+                  existPreview
+                      ? snapshot.docs[index + 1].data().createdAt?.toDate()
+                      : null;
+              final showDateTime =
+                  previewCreatedAt == null ||
                   createdAt.difference(previewCreatedAt).inHours >= 1;
 
               return ConditionBubble(
@@ -150,9 +144,7 @@ class _ListView extends HookConsumerWidget {
                 creatorType: condition.creatorType,
               );
             },
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 16,
-            ),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           ),
         );

@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 
 part 'home_route.g.dart';
 
-@TypedGoRoute<HomeTabRoute>(
-  path: HomeTabRoute.path,
-)
+@TypedGoRoute<HomeTabRoute>(path: HomeTabRoute.path)
 class HomeTabRoute extends GoRouteData {
   const HomeTabRoute();
 
@@ -17,11 +15,9 @@ class HomeTabRoute extends GoRouteData {
     return CustomTransitionPage(
       child: const HomeTab(),
       name: state.matchedLocation,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
     );
   }
 }

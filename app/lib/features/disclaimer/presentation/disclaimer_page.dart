@@ -4,9 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DisclaimerPage extends HookConsumerWidget {
-  const DisclaimerPage({
-    super.key,
-  });
+  const DisclaimerPage({super.key});
 
   static const path = '/disclaimer';
 
@@ -38,8 +36,9 @@ class DisclaimerPage extends HookConsumerWidget {
     final agreeSearchKeyword = useState(false);
 
     return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
+      backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(
         automaticallyImplyLeading: false,
         middle: Text(i18n.disclaimer.title),
@@ -48,13 +47,14 @@ class DisclaimerPage extends HookConsumerWidget {
         children: [
           CupertinoListSection.insetGrouped(
             header: Text(i18n.disclaimer.general),
-            children: general
-                .map(
-                  (e) => CupertinoListTile.notched(
-                    title: Text(e, maxLines: 10),
-                  ),
-                )
-                .toList(),
+            children:
+                general
+                    .map(
+                      (e) => CupertinoListTile.notched(
+                        title: Text(e, maxLines: 10),
+                      ),
+                    )
+                    .toList(),
           ),
           AnimatedOpacity(
             opacity: agreeSearchKeyword.value ? 1 : 0,
@@ -63,13 +63,14 @@ class DisclaimerPage extends HookConsumerWidget {
               visible: agreeSearchKeyword.value,
               child: CupertinoListSection.insetGrouped(
                 header: Text(i18n.disclaimer.response),
-                children: response
-                    .map(
-                      (e) => CupertinoListTile.notched(
-                        title: Text(e, maxLines: 10),
-                      ),
-                    )
-                    .toList(),
+                children:
+                    response
+                        .map(
+                          (e) => CupertinoListTile.notched(
+                            title: Text(e, maxLines: 10),
+                          ),
+                        )
+                        .toList(),
               ),
             ),
           ),
@@ -80,28 +81,27 @@ class DisclaimerPage extends HookConsumerWidget {
               visible: agreeGeneral.value,
               child: CupertinoListSection.insetGrouped(
                 header: Text(i18n.disclaimer.searchKeyword),
-                children: searchKeyword
-                    .map(
-                      (e) => CupertinoListTile.notched(
-                        title: Text(e, maxLines: 10),
-                      ),
-                    )
-                    .toList(),
+                children:
+                    searchKeyword
+                        .map(
+                          (e) => CupertinoListTile.notched(
+                            title: Text(e, maxLines: 10),
+                          ),
+                        )
+                        .toList(),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: CupertinoButton(
               color: CupertinoColors.systemRed.resolveFrom(context),
               child: Text(
                 i18n.disclaimer.understood,
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      color: CupertinoColors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: CupertinoColors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               onPressed: () {
                 if (!agreeSearchKeyword.value) {

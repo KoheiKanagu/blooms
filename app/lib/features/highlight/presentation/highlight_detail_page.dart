@@ -4,10 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightDetailPage extends HookConsumerWidget {
-  const HighlightDetailPage({
-    required this.highlight,
-    super.key,
-  });
+  const HighlightDetailPage({required this.highlight, super.key});
 
   static const path = '/highlight_detail';
 
@@ -16,19 +13,14 @@ class HighlightDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
+      backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          highlight.highlightRangeString,
-        ),
+        middle: Text(highlight.highlightRangeString),
       ),
       child: ListView(
-        children: [
-          HighlightDetailTile(
-            content: highlight.content,
-          ),
-        ],
+        children: [HighlightDetailTile(content: highlight.content)],
       ),
     );
   }

@@ -7,9 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyName extends StatelessWidget {
-  const OnboardingPageBodyName({
-    super.key,
-  });
+  const OnboardingPageBodyName({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +30,9 @@ class OnboardingPageBodyName extends StatelessWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'name',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'name', type: OnboardingPage)
 Widget onboardingPageBodyName(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyName(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyName()),
   );
 }

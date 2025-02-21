@@ -14,10 +14,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPage extends HookConsumerWidget {
-  const OnboardingPage({
-    super.key,
-    this.enableLetsStartPage = true,
-  });
+  const OnboardingPage({super.key, this.enableLetsStartPage = true});
 
   final bool enableLetsStartPage;
 
@@ -38,23 +35,20 @@ class OnboardingPage extends HookConsumerWidget {
       if (enableLetsStartPage) const OnboardingPageBodyLetsStart(),
     ];
 
-    useEffect(
-      () {
-        pageController.addListener(() {
-          // 最後のページではスキップボタンを表示しない
-          visibleSkipButton.value = pageController.page == bodyItems.length - 1;
+    useEffect(() {
+      pageController.addListener(() {
+        // 最後のページではスキップボタンを表示しない
+        visibleSkipButton.value = pageController.page == bodyItems.length - 1;
 
-          // 最初のページでは前に戻るボタンは無効
-          enableMoveToPreviousButton.value = pageController.page != 0;
+        // 最初のページでは前に戻るボタンは無効
+        enableMoveToPreviousButton.value = pageController.page != 0;
 
-          // 最後のページでは次に進むボタンは無効
-          enableMoveToNextButton.value =
-              pageController.page != bodyItems.length - 1;
-        });
-        return null;
-      },
-      [context],
-    );
+        // 最後のページでは次に進むボタンは無効
+        enableMoveToNextButton.value =
+            pageController.page != bodyItems.length - 1;
+      });
+      return null;
+    }, [context]);
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -107,28 +101,30 @@ class OnboardingPage extends HookConsumerWidget {
                   CupertinoButton.tinted(
                     sizeStyle: CupertinoButtonSize.small,
                     padding: EdgeInsets.zero,
-                    onPressed: enableMoveToPreviousButton.value
-                        ? () {
-                            pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        : null,
+                    onPressed:
+                        enableMoveToPreviousButton.value
+                            ? () {
+                              pageController.previousPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                            : null,
                     child: const Icon(CupertinoIcons.back),
                   ),
                   const Spacer(),
                   CupertinoButton.tinted(
                     sizeStyle: CupertinoButtonSize.small,
                     padding: EdgeInsets.zero,
-                    onPressed: enableMoveToNextButton.value
-                        ? () {
-                            pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        : null,
+                    onPressed:
+                        enableMoveToNextButton.value
+                            ? () {
+                              pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                            : null,
                     child: const Icon(CupertinoIcons.forward),
                   ),
                   const Gap(8),
@@ -142,10 +138,7 @@ class OnboardingPage extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'OnboardingPage',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'OnboardingPage', type: OnboardingPage)
 Widget onboardingPage(BuildContext context) {
   return const OnboardingPage();
 }

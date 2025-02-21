@@ -22,56 +22,40 @@ const _reminderHighlightEnableKey = 'reminder_highlight_enable';
 
 const kReminderDefaultTime = TimeOfDay(hour: 20, minute: 0);
 
-@Riverpod(
-  keepAlive: true,
-)
+@Riverpod(keepAlive: true)
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin(Ref ref) =>
     FlutterLocalNotificationsPlugin();
 
 @riverpod
-Future<void> flutterLocalNotificationPluginInitialize(Ref ref) =>
-    ref.watch(flutterLocalNotificationsPluginProvider).initialize(
-          const InitializationSettings(
-            iOS: DarwinInitializationSettings(),
-          ),
-        );
+Future<void> flutterLocalNotificationPluginInitialize(Ref ref) => ref
+    .watch(flutterLocalNotificationsPluginProvider)
+    .initialize(
+      const InitializationSettings(iOS: DarwinInitializationSettings()),
+    );
 
 /// 通知の時間を取得
 @riverpod
-Future<TimeOfDay> reminderTime(
-  Ref ref,
-  ReminderType type,
-) async {
+Future<TimeOfDay> reminderTime(Ref ref, ReminderType type) async {
   final results = switch (type) {
     ReminderType.condition => await Future.wait([
-        ref.watch(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
-        ref
-            .watch(sharedPreferencesProvider)
-            .getInt(_reminderConditionMinuteKey),
-      ]),
+      ref.watch(sharedPreferencesProvider).getInt(_reminderConditionHourKey),
+      ref.watch(sharedPreferencesProvider).getInt(_reminderConditionMinuteKey),
+    ]),
     ReminderType.highlight => await Future.wait([
-        ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
-        ref
-            .watch(sharedPreferencesProvider)
-            .getInt(_reminderHighlightMinuteKey),
-      ]),
+      ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightHourKey),
+      ref.watch(sharedPreferencesProvider).getInt(_reminderHighlightMinuteKey),
+    ]),
   };
 
   final hour = results[0];
   final minute = results[1];
 
-  return TimeOfDay(
-    hour: hour ?? 20,
-    minute: minute ?? 0,
-  );
+  return TimeOfDay(hour: hour ?? 20, minute: minute ?? 0);
 }
 
 /// 通知の有効状態を取得
 @riverpod
-Future<bool> reminderStatus(
-  Ref ref,
-  ReminderType type,
-) {
+Future<bool> reminderStatus(Ref ref, ReminderType type) {
   return switch (type) {
     ReminderType.condition => ref
         .watch(sharedPreferencesProvider)
@@ -100,14 +84,14 @@ Future<void> reminderSave(
     // スケジュール
     switch (type) {
       case ReminderType.condition:
-        await ref.watch(flutterLocalNotificationsPluginProvider).zonedSchedule(
+        await ref
+            .watch(flutterLocalNotificationsPluginProvider)
+            .zonedSchedule(
               _reminderConditionNotificationId,
               i18n.reminder.conditionReminderNotificationTitle,
               null,
               nextInstance(time),
-              const NotificationDetails(
-                iOS: DarwinNotificationDetails(),
-              ),
+              const NotificationDetails(iOS: DarwinNotificationDetails()),
               androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
               uiLocalNotificationDateInterpretation:
                   UILocalNotificationDateInterpretation.absoluteTime,
@@ -115,14 +99,14 @@ Future<void> reminderSave(
             );
 
       case ReminderType.highlight:
-        await ref.watch(flutterLocalNotificationsPluginProvider).zonedSchedule(
+        await ref
+            .watch(flutterLocalNotificationsPluginProvider)
+            .zonedSchedule(
               _reminderHighlightNotificationId,
               i18n.reminder.highlightReminderNotificationTitle,
               null,
               nextSaturdayInstance(time),
-              const NotificationDetails(
-                iOS: DarwinNotificationDetails(),
-              ),
+              const NotificationDetails(iOS: DarwinNotificationDetails()),
               androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
               uiLocalNotificationDateInterpretation:
                   UILocalNotificationDateInterpretation.absoluteTime,
@@ -186,9 +170,7 @@ tz.TZDateTime nextInstance(TimeOfDay time) {
   );
 
   if (scheduledDate.isBefore(now)) {
-    scheduledDate = scheduledDate.add(
-      const Duration(days: 1),
-    );
+    scheduledDate = scheduledDate.add(const Duration(days: 1));
   }
   return scheduledDate;
 }

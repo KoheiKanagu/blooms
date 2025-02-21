@@ -20,25 +20,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends HookConsumerWidget {
-  const AboutPage({
-    super.key,
-  });
+  const AboutPage({super.key});
 
   static const path = '/about';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoPageScaffold(
-      backgroundColor:
-          CupertinoColors.systemGroupedBackground.resolveFrom(context),
+      backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(
         middle: Text(i18n.aboutBLOOMS.aboutBLOOMS),
         automaticallyImplyLeading: false,
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
-          child: Text(
-            MaterialLocalizations.of(context).closeButtonLabel,
-          ),
+          child: Text(MaterialLocalizations.of(context).closeButtonLabel),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -53,9 +50,9 @@ class AboutPage extends HookConsumerWidget {
               version: ref.watch(packageInfoVersionProvider),
             ),
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                  fontSize: 14,
-                ),
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+              fontSize: 14,
+            ),
             textAlign: TextAlign.center,
           ),
           CupertinoListSection.insetGrouped(
@@ -67,9 +64,9 @@ class AboutPage extends HookConsumerWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     CupertinoPageRoute<void>(
-                      builder: (_) => const OnboardingPage(
-                        enableLetsStartPage: false,
-                      ),
+                      builder:
+                          (_) =>
+                              const OnboardingPage(enableLetsStartPage: false),
                       settings: const RouteSettings(
                         name: OnboardingPageRoute.path,
                       ),
@@ -118,11 +115,7 @@ class AboutPage extends HookConsumerWidget {
                   );
 
                   if (result == 'copy') {
-                    await Clipboard.setData(
-                      ClipboardData(
-                        text: uid,
-                      ),
-                    );
+                    await Clipboard.setData(ClipboardData(text: uid));
                     await HapticFeedback.heavyImpact();
                   }
                 },
@@ -203,12 +196,11 @@ class AboutPage extends HookConsumerWidget {
               CupertinoListTile.notched(
                 title: Text(
                   i18n.aboutBLOOMS.deleteAllData,
-                  style: CupertinoTheme.of(context)
-                      .textTheme
-                      .textStyle
-                      .copyWith(
-                        color: CupertinoColors.systemRed.resolveFrom(context),
-                      ),
+                  style: CupertinoTheme.of(
+                    context,
+                  ).textTheme.textStyle.copyWith(
+                    color: CupertinoColors.systemRed.resolveFrom(context),
+                  ),
                 ),
                 leading: Icon(
                   CupertinoIcons.trash_fill,
@@ -233,9 +225,7 @@ class AboutPage extends HookConsumerWidget {
       context: context,
       title: i18n.deleteAll.title,
       message: i18n.deleteAll.message,
-      routeSettings: const RouteSettings(
-        name: 'deleteAllConfirmationDialog',
-      ),
+      routeSettings: const RouteSettings(name: 'deleteAllConfirmationDialog'),
       actions: [
         AlertDialogAction(
           key: 'delete',
@@ -250,8 +240,9 @@ class AboutPage extends HookConsumerWidget {
       if (context.mounted) {
         final indicator = showMyProgressIndicator(context);
 
-        final reference =
-            await ref.read(userProvider.future).then((e) => e?.reference);
+        final reference = await ref
+            .read(userProvider.future)
+            .then((e) => e?.reference);
         if (reference != null) {
           await ref.read(userDeleteProvider(reference: reference).future);
         }
@@ -263,9 +254,7 @@ class AboutPage extends HookConsumerWidget {
 
           await showOkAlertDialog(
             context: rootContext!,
-            routeSettings: const RouteSettings(
-              name: 'deleteAllThankYouDialog',
-            ),
+            routeSettings: const RouteSettings(name: 'deleteAllThankYouDialog'),
             title: i18n.thankYouForUsing,
             style: AdaptiveStyle.iOS,
           );

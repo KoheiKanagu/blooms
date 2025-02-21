@@ -15,9 +15,9 @@ class HighlightTile extends StatelessWidget {
     this.selected,
     super.key,
   }) : assert(
-          selected != null || state != null,
-          'selectedかstateのどちらか一方を指定してください',
-        );
+         selected != null || state != null,
+         'selectedかstateのどちらか一方を指定してください',
+       );
 
   final HighlightPeriod period;
 
@@ -38,22 +38,21 @@ class HighlightTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: CupertinoListSection.insetGrouped(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 8,
-        ),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         additionalDividerMargin: 0,
         dividerMargin: 0,
         decoration: BoxDecoration(
-          border: selected != null && selected!
-              ? Border.all(
-                  color: CupertinoTheme.of(context).primaryColor,
-                  width: 2,
-                )
-              : null,
+          border:
+              selected != null && selected!
+                  ? Border.all(
+                    color: CupertinoTheme.of(context).primaryColor,
+                    width: 2,
+                  )
+                  : null,
           borderRadius: BorderRadius.circular(10),
-          color: CupertinoColors.secondarySystemGroupedBackground
-              .resolveFrom(context),
+          color: CupertinoColors.secondarySystemGroupedBackground.resolveFrom(
+            context,
+          ),
         ),
         children: [
           _Title(
@@ -63,9 +62,7 @@ class HighlightTile extends StatelessWidget {
             selected: selected,
           ),
           if (state == HighlightState.success || selected != null)
-            _Content(
-              text: contentText,
-            ),
+            _Content(text: contentText),
         ],
       ),
     );
@@ -95,19 +92,11 @@ class _Title extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (selected == null)
-            _Label(
-              period: period,
-              state: state!,
-            )
+            _Label(period: period, state: state!)
           else
-            _LabelCheckMark(
-              period: period,
-              selected: selected!,
-            ),
+            _LabelCheckMark(period: period, selected: selected!),
           const Gap(8),
-          _Description(
-            text: description,
-          ),
+          _Description(text: description),
         ],
       ),
     );
@@ -115,10 +104,7 @@ class _Title extends StatelessWidget {
 }
 
 class _Label extends StatelessWidget {
-  const _Label({
-    required this.period,
-    required this.state,
-  });
+  const _Label({required this.period, required this.state});
 
   final HighlightPeriod period;
 
@@ -132,15 +118,15 @@ class _Label extends StatelessWidget {
         const Spacer(),
         switch (state) {
           HighlightState.pending => Icon(
-              CupertinoIcons.time,
-              color: CupertinoColors.systemGrey2.resolveFrom(context),
-            ),
+            CupertinoIcons.time,
+            color: CupertinoColors.systemGrey2.resolveFrom(context),
+          ),
           HighlightState.inProgress => const CupertinoActivityIndicator(),
           HighlightState.success => const CupertinoListTileChevron(),
           HighlightState.failure => Icon(
-              CupertinoIcons.xmark_circle,
-              color: CupertinoColors.systemRed.resolveFrom(context),
-            ),
+            CupertinoIcons.xmark_circle,
+            color: CupertinoColors.systemRed.resolveFrom(context),
+          ),
         },
       ],
     );
@@ -148,10 +134,7 @@ class _Label extends StatelessWidget {
 }
 
 class _LabelCheckMark extends StatelessWidget {
-  const _LabelCheckMark({
-    required this.period,
-    required this.selected,
-  });
+  const _LabelCheckMark({required this.period, required this.selected});
 
   final HighlightPeriod period;
 
@@ -174,9 +157,7 @@ class _LabelCheckMark extends StatelessWidget {
 }
 
 class _Description extends StatelessWidget {
-  const _Description({
-    required this.text,
-  });
+  const _Description({required this.text});
 
   final String text;
 
@@ -184,18 +165,16 @@ class _Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+      style: CupertinoTheme.of(
+        context,
+      ).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold),
       maxLines: 10,
     );
   }
 }
 
 class _Content extends StatelessWidget {
-  const _Content({
-    required this.text,
-  });
+  const _Content({required this.text});
 
   final String text;
 
@@ -204,9 +183,9 @@ class _Content extends StatelessWidget {
     return CupertinoListTile.notched(
       title: Text(
         text,
-        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-              fontSize: 14,
-            ),
+        style: CupertinoTheme.of(
+          context,
+        ).textTheme.textStyle.copyWith(fontSize: 14),
         maxLines: 100,
       ),
       subtitle: const DisclaimerLabel(),

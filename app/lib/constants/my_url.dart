@@ -9,7 +9,6 @@ class MyUrl {
 
   static Uri github = Uri.parse('https://github.com/KoheiKanagu/blooms');
 
-  static Uri buildSearchURL(String query) => Uri.parse(
-        'https://www.google.com/search?q=$query',
-      );
+  static Uri buildSearchURL(String query) =>
+      Uri.parse('https://www.google.com/search?q=$query');
 }

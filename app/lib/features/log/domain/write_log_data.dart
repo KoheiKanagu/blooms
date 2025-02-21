@@ -7,10 +7,8 @@ part 'write_log_data.g.dart';
 
 @freezed
 class WriteLogData with _$WriteLogData {
-  const factory WriteLogData({
-    required LogLevel level,
-    required Json log,
-  }) = _WriteLogData;
+  const factory WriteLogData({required LogLevel level, required Json log}) =
+      _WriteLogData;
 
   factory WriteLogData.fromJson(Json json) => _$WriteLogDataFromJson(json);
 }

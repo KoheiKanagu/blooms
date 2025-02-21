@@ -13,9 +13,8 @@ part 'condition_content.g.dart';
 )
 sealed class ConditionContent with _$ConditionContent {
   /// テキストの記録
-  const factory ConditionContent.text({
-    required String text,
-  }) = ConditionContentText;
+  const factory ConditionContent.text({required String text}) =
+      ConditionContentText;
 
   /// テキストの記録（検索キーワード付き）
   const factory ConditionContent.textWithSearchKeywords({

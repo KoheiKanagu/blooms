@@ -12,9 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 class ConditionPage extends HookConsumerWidget {
-  const ConditionPage({
-    super.key,
-  });
+  const ConditionPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,12 +29,10 @@ class ConditionPage extends HookConsumerWidget {
                 onTap: () {
                   showModalBottomSheet<void>(
                     context: context,
-                    builder: (context) => const ReminderPage(
-                      type: ReminderType.condition,
-                    ),
-                    routeSettings: const RouteSettings(
-                      name: ReminderPage.path,
-                    ),
+                    builder:
+                        (context) =>
+                            const ReminderPage(type: ReminderType.condition),
+                    routeSettings: const RouteSettings(name: ReminderPage.path),
                     useRootNavigator: true,
                   );
                 },
@@ -49,9 +45,7 @@ class ConditionPage extends HookConsumerWidget {
                   showCupertinoModalPopup<void>(
                     context: context,
                     builder: (context) => const AboutPage(),
-                    routeSettings: const RouteSettings(
-                      name: AboutPage.path,
-                    ),
+                    routeSettings: const RouteSettings(name: AboutPage.path),
                   );
                 },
                 title: i18n.aboutBLOOMS.aboutBLOOMS,
@@ -60,28 +54,32 @@ class ConditionPage extends HookConsumerWidget {
               ),
             ];
           },
-          buttonBuilder: (context, showMenu) => CupertinoButton(
-            onPressed: showMenu,
-            padding: EdgeInsets.zero,
-            child: const Icon(CupertinoIcons.ellipsis_circle),
-          ),
+          buttonBuilder:
+              (context, showMenu) => CupertinoButton(
+                onPressed: showMenu,
+                padding: EdgeInsets.zero,
+                child: const Icon(CupertinoIcons.ellipsis_circle),
+              ),
         ),
       ),
-      child: ref.watch(conditionQueryProvider).maybeWhen(
+      child: ref
+          .watch(conditionQueryProvider)
+          .maybeWhen(
             orElse: () => const CupertinoActivityIndicator(),
-            data: (query) => ConditionPageList(
-              query,
-              onItemDisplayed: (value) {
-                final createdAt = value.createdAt?.toDate();
-                if (createdAt != null) {
-                  if (DateUtils.isSameDay(clock.now(), createdAt)) {
-                    title.value = i18n.today;
-                  } else {
-                    title.value = myDateFormat(createdAt);
-                  }
-                }
-              },
-            ),
+            data:
+                (query) => ConditionPageList(
+                  query,
+                  onItemDisplayed: (value) {
+                    final createdAt = value.createdAt?.toDate();
+                    if (createdAt != null) {
+                      if (DateUtils.isSameDay(clock.now(), createdAt)) {
+                        title.value = i18n.today;
+                      } else {
+                        title.value = myDateFormat(createdAt);
+                      }
+                    }
+                  },
+                ),
           ),
     );
   }

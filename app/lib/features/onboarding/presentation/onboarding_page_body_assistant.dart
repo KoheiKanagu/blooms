@@ -13,9 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyAssistant extends HookConsumerWidget {
-  const OnboardingPageBodyAssistant({
-    super.key,
-  });
+  const OnboardingPageBodyAssistant({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,8 +24,9 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
           subtitle: i18n.onboarding.assistant.subtitle,
           child: Container(
             decoration: BoxDecoration(
-              color:
-                  CupertinoColors.systemGroupedBackground.resolveFrom(context),
+              color: CupertinoColors.systemGroupedBackground.resolveFrom(
+                context,
+              ),
               borderRadius: BorderRadius.circular(10),
               boxShadow: MyDecoration.dropShadow(context).boxShadow,
             ),
@@ -37,9 +36,7 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
                 ConditionBubble(
                   documentId: '',
                   createdAt: DateTime(2025, 2, 10, 9, 41),
-                  content: const ConditionContentText(
-                    text: '腰が痛い',
-                  ),
+                  content: const ConditionContentText(text: '腰が痛い'),
                   showDateTime: true,
                   creatorType: ConditionCreatorType.user,
                 ),
@@ -49,11 +46,7 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
                   createdAt: clock.now(),
                   content: const ConditionContentTextWithSearchKeywords(
                     text: '腰が痛いのですね、つらいですね。少しでも楽になるように、調べてみると良いかもしれません。',
-                    searchKeywords: [
-                      '妊婦　腰痛',
-                      '妊婦　腰痛　対処法',
-                      '妊婦　腰痛　原因',
-                    ],
+                    searchKeywords: ['妊婦　腰痛', '妊婦　腰痛　対処法', '妊婦　腰痛　原因'],
                   ),
                   showDateTime: false,
                   creatorType: ConditionCreatorType.model,
@@ -78,14 +71,9 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'assistant',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'assistant', type: OnboardingPage)
 Widget onboardingPageBodyAssistant(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyAssistant(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyAssistant()),
   );
 }

@@ -3,10 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HighlightPromptPage extends HookConsumerWidget {
-  const HighlightPromptPage({
-    required this.promptFileUri,
-    super.key,
-  });
+  const HighlightPromptPage({required this.promptFileUri, super.key});
 
   static const path = '/highlight_prompt';
 
@@ -22,15 +19,11 @@ class HighlightPromptPage extends HookConsumerWidget {
               .watch(highlightPromptProvider(gsFilePath: promptFileUri))
               .maybeWhen(
                 orElse: CupertinoActivityIndicator.new,
-                data: (data) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                  ),
-                  child: Text(
-                    data ?? '',
-                    maxLines: 1000,
-                  ),
-                ),
+                data:
+                    (data) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 28),
+                      child: Text(data ?? '', maxLines: 1000),
+                    ),
               ),
         ],
       ),

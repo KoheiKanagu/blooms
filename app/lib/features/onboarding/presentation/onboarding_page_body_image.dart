@@ -14,9 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class OnboardingPageBodyImage extends HookConsumerWidget {
-  const OnboardingPageBodyImage({
-    super.key,
-  });
+  const OnboardingPageBodyImage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,8 +25,9 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
           subtitle: i18n.onboarding.image.subtitle,
           child: Container(
             decoration: BoxDecoration(
-              color:
-                  CupertinoColors.systemGroupedBackground.resolveFrom(context),
+              color: CupertinoColors.systemGroupedBackground.resolveFrom(
+                context,
+              ),
               borderRadius: BorderRadius.circular(10),
               boxShadow: MyDecoration.dropShadow(context).boxShadow,
             ),
@@ -49,8 +48,8 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
                         height: 480,
                         additionalInfo:
                             ConditionContentImageAttachmentAdditionalInfo(
-                          blurHash: r'LDJ7s_$#~U.7RjWW$%xZ?Gxu8^M{',
-                        ),
+                              blurHash: r'LDJ7s_$#~U.7RjWW$%xZ?Gxu8^M{',
+                            ),
                       ),
                     ],
                   ),
@@ -80,23 +79,16 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
             Text(i18n.onboarding.image.description1),
             Text(i18n.onboarding.image.description2),
           ],
-          disclaimers: [
-            Text(i18n.onboarding.image.disclaimer1),
-          ],
+          disclaimers: [Text(i18n.onboarding.image.disclaimer1)],
         ),
       ],
     );
   }
 }
 
-@widgetbook.UseCase(
-  name: 'image',
-  type: OnboardingPage,
-)
+@widgetbook.UseCase(name: 'image', type: OnboardingPage)
 Widget onboardingPageBodyAssistant(BuildContext context) {
   return const CupertinoPageScaffold(
-    child: SafeArea(
-      child: OnboardingPageBodyImage(),
-    ),
+    child: SafeArea(child: OnboardingPageBodyImage()),
   );
 }

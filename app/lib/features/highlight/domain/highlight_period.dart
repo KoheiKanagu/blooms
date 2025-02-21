@@ -5,7 +5,7 @@ enum HighlightPeriod {
   past7days,
   past14days,
   past21days,
-  past28days, //
+  past28days //
   ;
 
   int get days {
@@ -34,7 +34,10 @@ enum HighlightPeriod {
   }
 
   DateTime pastDate(DateTime today) {
-    return DateTime(today.year, today.month, today.day)
-        .subtract(Duration(days: days));
+    return DateTime(
+      today.year,
+      today.month,
+      today.day,
+    ).subtract(Duration(days: days));
   }
 }

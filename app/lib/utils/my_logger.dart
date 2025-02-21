@@ -30,11 +30,9 @@ class WriteLogTalkerObserver extends TalkerObserver {
   static const int _bufferSize = 64;
 
   Future<void> sendLog() async {
-    await FirebaseFunctions.instanceFor(
-      region: 'asia-northeast1',
-    ).httpsCallable('writeLog').call<void>(
-          WriteLogRequest(logs: logBuffer).toJson(),
-        );
+    await FirebaseFunctions.instanceFor(region: 'asia-northeast1')
+        .httpsCallable('writeLog')
+        .call<void>(WriteLogRequest(logs: logBuffer).toJson());
     logBuffer.clear();
   }
 
@@ -79,9 +77,7 @@ class WriteLogTalkerObserver extends TalkerObserver {
     logBuffer.add(
       WriteLogData(
         level: log.logLevel ?? LogLevel.verbose,
-        log: {
-          'text': data,
-        },
+        log: {'text': data},
       ),
     );
 
@@ -146,9 +142,7 @@ final talkerRiverpodObserver = TalkerRiverpodObserver(
         }
       }
 
-      final hidden = {
-        'conditionFormHeightControllerProvider',
-      };
+      final hidden = {'conditionFormHeightControllerProvider'};
       // 冗長なログを抑制
       if (hidden.contains(provider.name)) {
         return false;

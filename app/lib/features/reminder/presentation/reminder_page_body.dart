@@ -29,42 +29,43 @@ class ReminderPageBody extends HookConsumerWidget {
       children: [
         CupertinoListSection.insetGrouped(
           footer: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 28,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 28),
             child: Text(
               switch (type) {
                 ReminderType.condition => i18n.reminder.setConditionReminder,
                 ReminderType.highlight => i18n.reminder.setHighlightReminder,
               },
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
-                    fontSize: 12,
-                  ),
+                color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                fontSize: 12,
+              ),
             ),
           ),
           children: [
             CupertinoListTile.notched(
               title: FittedBox(
-                child: ref.watch(reminderTimeProvider(type)).maybeWhen(
+                child: ref
+                    .watch(reminderTimeProvider(type))
+                    .maybeWhen(
                       orElse: CupertinoActivityIndicator.new,
-                      data: (time) => Row(
-                        children: [
-                          Visibility(
-                            visible: type == ReminderType.highlight,
-                            child: Row(
-                              children: [
-                                Text(i18n.reminder.saturday),
-                                const Gap(8),
-                              ],
-                            ),
+                      data:
+                          (time) => Row(
+                            children: [
+                              Visibility(
+                                visible: type == ReminderType.highlight,
+                                child: Row(
+                                  children: [
+                                    Text(i18n.reminder.saturday),
+                                    const Gap(8),
+                                  ],
+                                ),
+                              ),
+                              CupertinoTimePickerButton(
+                                initialTime: time,
+                                onTimeChanged: onTimeChanged,
+                              ),
+                            ],
                           ),
-                          CupertinoTimePickerButton(
-                            initialTime: time,
-                            onTimeChanged: onTimeChanged,
-                          ),
-                        ],
-                      ),
                     ),
               ),
               trailing: CupertinoSwitch(

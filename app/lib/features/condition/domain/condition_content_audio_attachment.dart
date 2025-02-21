@@ -16,11 +16,10 @@ class ConditionContentAudioAttachment with _$ConditionContentAudioAttachment {
   factory ConditionContentAudioAttachment.gs({
     required Reference reference,
     required String mimeType,
-  }) =>
-      ConditionContentAudioAttachment(
-        fileUri: 'gs://${reference.bucket}/${reference.fullPath}',
-        mimeType: mimeType,
-      );
+  }) => ConditionContentAudioAttachment(
+    fileUri: 'gs://${reference.bucket}/${reference.fullPath}',
+    mimeType: mimeType,
+  );
 
   factory ConditionContentAudioAttachment.fromJson(Json json) =>
       _$ConditionContentAudioAttachmentFromJson(json);

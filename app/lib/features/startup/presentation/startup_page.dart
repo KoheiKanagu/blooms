@@ -11,7 +11,9 @@ class AppStartupWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(appStartupProvider).maybeWhen(
+    return ref
+        .watch(appStartupProvider)
+        .maybeWhen(
           orElse: () => const AppStartupLoadingWidget(),
           error: (error, trace) {
             logger.handle(error, trace);
@@ -33,9 +35,7 @@ class AppStartupLoadingWidget extends StatelessWidget {
     return CupertinoPageScaffold(
       backgroundColor: CupertinoTheme.of(context).primaryColor,
       child: const Center(
-        child: CupertinoActivityIndicator(
-          color: CupertinoColors.white,
-        ),
+        child: CupertinoActivityIndicator(color: CupertinoColors.white),
       ),
     );
   }
@@ -56,12 +56,8 @@ class AppStartupErrorWidget extends StatelessWidget {
           children: [
             Text(
               i18n.anUnexpectedErrorOccurred,
-              style: CupertinoTheme.of(context)
-                  .textTheme
-                  .navTitleTextStyle
-                  .copyWith(
-                    color: CupertinoColors.white,
-                  ),
+              style: CupertinoTheme.of(context).textTheme.navTitleTextStyle
+                  .copyWith(color: CupertinoColors.white),
             ),
             const Gap(16),
             CupertinoButton(
@@ -84,12 +80,7 @@ Widget startupPage(BuildContext context) {
   return const AppStartupLoadingWidget();
 }
 
-@widgetbook.UseCase(
-  name: 'AppStartupErrorWidget',
-  type: AppStartupErrorWidget,
-)
+@widgetbook.UseCase(name: 'AppStartupErrorWidget', type: AppStartupErrorWidget)
 Widget startupPageError(BuildContext context) {
-  return AppStartupErrorWidget(
-    onRetry: () {},
-  );
+  return AppStartupErrorWidget(onRetry: () {});
 }

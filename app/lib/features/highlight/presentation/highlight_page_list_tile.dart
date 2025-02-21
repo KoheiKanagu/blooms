@@ -29,25 +29,24 @@ class HighlightPageListTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ContextMenuWidget(
-      menuProvider: (_) => Menu(
-        children: [
-          MenuAction(
-            callback: () async {
-              await Future.wait([
-                ref.read(
-                  highlightDeleteProvider(documentId: documentId).future,
-                ),
-                HapticFeedback.heavyImpact(),
-              ]);
-            },
-            title: MaterialLocalizations.of(context).deleteButtonTooltip,
-            image: MenuImage.icon(CupertinoIcons.delete),
-            attributes: const MenuActionAttributes(
-              destructive: true,
-            ),
+      menuProvider:
+          (_) => Menu(
+            children: [
+              MenuAction(
+                callback: () async {
+                  await Future.wait([
+                    ref.read(
+                      highlightDeleteProvider(documentId: documentId).future,
+                    ),
+                    HapticFeedback.heavyImpact(),
+                  ]);
+                },
+                title: MaterialLocalizations.of(context).deleteButtonTooltip,
+                image: MenuImage.icon(CupertinoIcons.delete),
+                attributes: const MenuActionAttributes(destructive: true),
+              ),
+            ],
           ),
-        ],
-      ),
       child: HighlightTile(
         period: highlight.period ?? HighlightPeriod.past1day,
         state: highlight.state,
@@ -64,9 +63,7 @@ class HighlightPageListTile extends HookConsumerWidget {
                 title: i18n.highlight.state.pending,
                 message: i18n.highlight.state.pendingDescription,
                 style: AdaptiveStyle.iOS,
-                routeSettings: const RouteSettings(
-                  name: 'highlightPending',
-                ),
+                routeSettings: const RouteSettings(name: 'highlightPending'),
               );
             case HighlightState.inProgress:
               await showOkAlertDialog(
@@ -74,19 +71,14 @@ class HighlightPageListTile extends HookConsumerWidget {
                 title: i18n.highlight.state.inProgress,
                 message: i18n.highlight.state.inProgressDescription,
                 style: AdaptiveStyle.iOS,
-                routeSettings: const RouteSettings(
-                  name: 'highlightInProgress',
-                ),
+                routeSettings: const RouteSettings(name: 'highlightInProgress'),
               );
             case HighlightState.success:
               await Navigator.of(context).push(
                 CupertinoPageRoute<void>(
-                  builder: (context) => HighlightDetailPage(
-                    highlight: highlight,
-                  ),
-                  settings: const RouteSettings(
-                    name: HighlightDetailPage.path,
-                  ),
+                  builder:
+                      (context) => HighlightDetailPage(highlight: highlight),
+                  settings: const RouteSettings(name: HighlightDetailPage.path),
                 ),
               );
             case HighlightState.failure:
@@ -102,9 +94,7 @@ class HighlightPageListTile extends HookConsumerWidget {
                     isDefaultAction: true,
                   ),
                 ],
-                routeSettings: const RouteSettings(
-                  name: 'highlightFailure',
-                ),
+                routeSettings: const RouteSettings(name: 'highlightFailure'),
               );
               if (result == 'delete') {
                 await ref.read(
@@ -118,109 +108,101 @@ class HighlightPageListTile extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'pending',
-  type: HighlightPageListTile,
-)
+@widgetbook.UseCase(name: 'pending', type: HighlightPageListTile)
 Widget highlightPageListTile(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightPeriod.values
-          .map(
-            (period) => HighlightPageListTile(
-              documentId: 'documentId',
-              highlight: Highlight.summary(
-                period: period,
-                subjectUid: 'subjectUid',
-                startAt: Timestamp.now(),
-              ),
-            ),
-          )
-          .toList(),
+      children:
+          HighlightPeriod.values
+              .map(
+                (period) => HighlightPageListTile(
+                  documentId: 'documentId',
+                  highlight: Highlight.summary(
+                    period: period,
+                    subjectUid: 'subjectUid',
+                    startAt: Timestamp.now(),
+                  ),
+                ),
+              )
+              .toList(),
     ),
   );
 }
 
-@widgetbook.UseCase(
-  name: 'inProgress',
-  type: HighlightPageListTile,
-)
+@widgetbook.UseCase(name: 'inProgress', type: HighlightPageListTile)
 Widget highlightPageListTileInProgress(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightPeriod.values
-          .map(
-            (period) => HighlightPageListTile(
-              documentId: 'documentId',
-              highlight: Highlight(
-                subjectUid: 'subjectUid',
-                content: HighlightContent.summary(
-                  startAt: Timestamp.now(),
-                  period: period,
-                  state: HighlightState.inProgress,
-                  summary: 'summary',
-                  abstract: 'abstract',
+      children:
+          HighlightPeriod.values
+              .map(
+                (period) => HighlightPageListTile(
+                  documentId: 'documentId',
+                  highlight: Highlight(
+                    subjectUid: 'subjectUid',
+                    content: HighlightContent.summary(
+                      startAt: Timestamp.now(),
+                      period: period,
+                      state: HighlightState.inProgress,
+                      summary: 'summary',
+                      abstract: 'abstract',
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-          .toList(),
+              )
+              .toList(),
     ),
   );
 }
 
-@widgetbook.UseCase(
-  name: 'success',
-  type: HighlightPageListTile,
-)
+@widgetbook.UseCase(name: 'success', type: HighlightPageListTile)
 Widget highlightPageListTileSuccess(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightPeriod.values
-          .map(
-            (period) => HighlightPageListTile(
-              documentId: 'documentId',
-              highlight: Highlight(
-                subjectUid: 'subjectUid',
-                content: HighlightContent.summary(
-                  period: period,
-                  startAt: Timestamp.now(),
-                  state: HighlightState.success,
-                  summary: 'summary',
-                  abstract: 'abstract',
+      children:
+          HighlightPeriod.values
+              .map(
+                (period) => HighlightPageListTile(
+                  documentId: 'documentId',
+                  highlight: Highlight(
+                    subjectUid: 'subjectUid',
+                    content: HighlightContent.summary(
+                      period: period,
+                      startAt: Timestamp.now(),
+                      state: HighlightState.success,
+                      summary: 'summary',
+                      abstract: 'abstract',
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-          .toList(),
+              )
+              .toList(),
     ),
   );
 }
 
-@widgetbook.UseCase(
-  name: 'failure',
-  type: HighlightPageListTile,
-)
+@widgetbook.UseCase(name: 'failure', type: HighlightPageListTile)
 Widget highlightPageListTileFailure(BuildContext context) {
   return CupertinoPageScaffold(
     child: ListView(
-      children: HighlightPeriod.values
-          .map(
-            (type) => HighlightPageListTile(
-              documentId: 'documentId',
-              highlight: Highlight(
-                subjectUid: 'subjectUid',
-                content: HighlightContent.summary(
-                  period: type,
-                  startAt: Timestamp.now(),
-                  state: HighlightState.failure,
-                  summary: 'summary',
-                  abstract: 'abstract',
+      children:
+          HighlightPeriod.values
+              .map(
+                (type) => HighlightPageListTile(
+                  documentId: 'documentId',
+                  highlight: Highlight(
+                    subjectUid: 'subjectUid',
+                    content: HighlightContent.summary(
+                      period: type,
+                      startAt: Timestamp.now(),
+                      state: HighlightState.failure,
+                      summary: 'summary',
+                      abstract: 'abstract',
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-          .toList(),
+              )
+              .toList(),
     ),
   );
 }

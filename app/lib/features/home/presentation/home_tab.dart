@@ -9,9 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeTab extends HookConsumerWidget {
-  const HomeTab({
-    super.key,
-  });
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,15 +18,11 @@ class HomeTab extends HookConsumerWidget {
         iconSize: 28,
         items: [
           BottomNavigationBarItem(
-            icon: _wrapIcon(
-              CupertinoIcons.heart_fill,
-            ),
+            icon: _wrapIcon(CupertinoIcons.heart_fill),
             label: i18n.condition,
           ),
           BottomNavigationBarItem(
-            icon: _wrapIcon(
-              CupertinoIcons.square_favorites_alt_fill,
-            ),
+            icon: _wrapIcon(CupertinoIcons.square_favorites_alt_fill),
             label: i18n.highlight.highlight,
           ),
         ],
@@ -43,25 +37,20 @@ class HomeTab extends HookConsumerWidget {
 
         return switch (index) {
           0 => CupertinoTabView(
-              builder: (context) => const ConditionPage(),
-              navigatorObservers: navigatorObservers,
-            ),
+            builder: (context) => const ConditionPage(),
+            navigatorObservers: navigatorObservers,
+          ),
           1 => CupertinoTabView(
-              builder: (context) => const HighlightPage(),
-              navigatorObservers: navigatorObservers,
-            ),
-          _ => throw UnimplementedError()
+            builder: (context) => const HighlightPage(),
+            navigatorObservers: navigatorObservers,
+          ),
+          _ => throw UnimplementedError(),
         };
       },
     );
   }
 
   Widget _wrapIcon(IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 4,
-      ),
-      child: Icon(icon),
-    );
+    return Padding(padding: const EdgeInsets.only(top: 4), child: Icon(icon));
   }
 }

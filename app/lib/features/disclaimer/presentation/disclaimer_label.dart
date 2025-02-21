@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 
 class DisclaimerLabel extends StatelessWidget {
-  const DisclaimerLabel({
-    super.key,
-  });
+  const DisclaimerLabel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,13 @@ class DisclaimerLabel extends StatelessWidget {
         const Gap(8),
         CupertinoButton(
           padding: EdgeInsets.zero,
-          minSize: 0,
+          onPressed: () {
+            showCupertinoModalPopup<bool>(
+              context: context,
+              builder: (context) => const DisclaimerPage(),
+            );
+          },
+          minimumSize: Size.zero,
           child: Row(
             children: [
               Icon(
@@ -30,24 +34,20 @@ class DisclaimerLabel extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     i18n.disclaimer.label,
-                    style:
-                        CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                              color: CupertinoColors.secondaryLabel
-                                  .resolveFrom(context),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    style: CupertinoTheme.of(
+                      context,
+                    ).textTheme.textStyle.copyWith(
+                      color: CupertinoColors.secondaryLabel.resolveFrom(
+                        context,
+                      ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          onPressed: () {
-            showCupertinoModalPopup<bool>(
-              context: context,
-              builder: (context) => const DisclaimerPage(),
-            );
-          },
         ),
       ],
     );

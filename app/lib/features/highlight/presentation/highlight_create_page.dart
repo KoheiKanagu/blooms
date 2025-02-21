@@ -11,9 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class HighlightCreatePage extends HookConsumerWidget {
-  const HighlightCreatePage({
-    super.key,
-  });
+  const HighlightCreatePage({super.key});
 
   static const path = '/highlight_create';
 
@@ -31,12 +29,11 @@ class HighlightCreatePage extends HookConsumerWidget {
               Navigator.of(context).pop();
             },
           ),
-          middle: Text(
-            i18n.highlight.createNewHighlight.title,
-          ),
+          middle: Text(i18n.highlight.createNewHighlight.title),
         ),
-        backgroundColor:
-            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(
+          context,
+        ),
         child: ListView(
           children: [
             const Gap(16),
@@ -51,18 +48,13 @@ class HighlightCreatePage extends HookConsumerWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _BottomNavigationBar(
-        period: selectedPeriod.value,
-      ),
+      bottomNavigationBar: _BottomNavigationBar(period: selectedPeriod.value),
     );
   }
 }
 
 class _CreateTiles extends StatelessWidget {
-  const _CreateTiles({
-    required this.selectedPeriod,
-    required this.onTap,
-  });
+  const _CreateTiles({required this.selectedPeriod, required this.onTap});
 
   final HighlightPeriod selectedPeriod;
 
@@ -71,25 +63,24 @@ class _CreateTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: HighlightPeriod.values
-          .map(
-            (e) => HighlightCreatePageTile(
-              period: e,
-              selected: selectedPeriod == e,
-              onTap: () {
-                onTap(e);
-              },
-            ),
-          )
-          .toList(),
+      children:
+          HighlightPeriod.values
+              .map(
+                (e) => HighlightCreatePageTile(
+                  period: e,
+                  selected: selectedPeriod == e,
+                  onTap: () {
+                    onTap(e);
+                  },
+                ),
+              )
+              .toList(),
     );
   }
 }
 
 class _BottomNavigationBar extends HookConsumerWidget {
-  const _BottomNavigationBar({
-    required this.period,
-  });
+  const _BottomNavigationBar({required this.period});
 
   final HighlightPeriod period;
 
@@ -97,17 +88,10 @@ class _BottomNavigationBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 16,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: CupertinoButton.filled(
           onPressed: () async {
-            await ref.read(
-              highlightCreateProvider(
-                period: period,
-              ).future,
-            );
+            await ref.read(highlightCreateProvider(period: period).future);
 
             if (context.mounted) {
               Navigator.of(context).pop();
@@ -116,9 +100,9 @@ class _BottomNavigationBar extends HookConsumerWidget {
           child: Text(
             i18n.highlight.createHighlight,
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: CupertinoColors.systemBackground.resolveFrom(context),
-                  fontWeight: FontWeight.bold,
-                ),
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -126,12 +110,7 @@ class _BottomNavigationBar extends HookConsumerWidget {
   }
 }
 
-@widgetbook.UseCase(
-  name: 'HighlightCreatePage',
-  type: HighlightCreatePage,
-)
+@widgetbook.UseCase(name: 'HighlightCreatePage', type: HighlightCreatePage)
 Widget highlightCreatePage(BuildContext context) {
-  return const CupertinoPageScaffold(
-    child: HighlightCreatePage(),
-  );
+  return const CupertinoPageScaffold(child: HighlightCreatePage());
 }

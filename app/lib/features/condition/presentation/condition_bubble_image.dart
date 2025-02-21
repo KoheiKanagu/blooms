@@ -29,57 +29,62 @@ class ConditionBubbleImage extends HookConsumerWidget {
           const ConditionBubbleBloomsIcon(),
         Column(
           spacing: 4,
-          children: content.attachments
-              .map<Widget>(
-                (attachment) => ref
-                    .watch(
-                      firebaseStorageGsFileDownloadUrlProvider(
-                        fileUri: attachment.fileUri,
-                      ),
-                    )
-                    .maybeWhen(
-                      orElse: () => _BlurHashImage(attachment),
-                      data: (url) => CachedNetworkImage(
-                        imageUrl: url,
-                        placeholder: (context, url) =>
-                            _BlurHashImage(attachment),
-                        errorWidget: (context, url, error) => Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            _BlurHashImage(attachment),
-                            CupertinoButton(
-                              color: CupertinoColors.white,
-                              sizeStyle: CupertinoButtonSize.small,
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                showOkAlertDialog(
-                                  context: context,
-                                  title: i18n.imageLoadFailed,
-                                  style: AdaptiveStyle.iOS,
-                                  routeSettings: const RouteSettings(
-                                    name: 'imageLoadFailed',
-                                  ),
-                                );
-                              },
-                              child: Icon(
-                                CupertinoIcons.clear_circled_solid,
-                                color: CupertinoColors.systemRed
-                                    .resolveFrom(context),
-                                size: 32,
+          children:
+              content.attachments
+                  .map<Widget>(
+                    (attachment) => ref
+                        .watch(
+                          firebaseStorageGsFileDownloadUrlProvider(
+                            fileUri: attachment.fileUri,
+                          ),
+                        )
+                        .maybeWhen(
+                          orElse: () => _BlurHashImage(attachment),
+                          data:
+                              (url) => CachedNetworkImage(
+                                imageUrl: url,
+                                placeholder:
+                                    (context, url) =>
+                                        _BlurHashImage(attachment),
+                                errorWidget:
+                                    (context, url, error) => Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        _BlurHashImage(attachment),
+                                        CupertinoButton(
+                                          color: CupertinoColors.white,
+                                          sizeStyle: CupertinoButtonSize.small,
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () {
+                                            showOkAlertDialog(
+                                              context: context,
+                                              title: i18n.imageLoadFailed,
+                                              style: AdaptiveStyle.iOS,
+                                              routeSettings:
+                                                  const RouteSettings(
+                                                    name: 'imageLoadFailed',
+                                                  ),
+                                            );
+                                          },
+                                          child: Icon(
+                                            CupertinoIcons.clear_circled_solid,
+                                            color: CupertinoColors.systemRed
+                                                .resolveFrom(context),
+                                            size: 32,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                               ),
-                            ),
-                          ],
                         ),
-                      ),
+                  )
+                  .map(
+                    (e) => ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: e,
                     ),
-              )
-              .map(
-                (e) => ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: e,
-                ),
-              )
-              .toList(),
+                  )
+                  .toList(),
         ),
       ],
     );
@@ -98,17 +103,12 @@ class _BlurHashImage extends StatelessWidget {
     final height = attachment.height;
 
     if (blurHash == null || width == 0 || height == 0) {
-      return const SizedBox(
-        width: 128,
-        height: 128,
-      );
+      return const SizedBox(width: 128, height: 128);
     }
 
     return AspectRatio(
       aspectRatio: width / height,
-      child: BlurHash(
-        hash: blurHash,
-      ),
+      child: BlurHash(hash: blurHash),
     );
   }
 }
