@@ -19,7 +19,7 @@ class DisclaimerLabel extends StatelessWidget {
               builder: (context) => const DisclaimerPage(),
             );
           },
-          minimumSize: const Size(0, 0),
+          minimumSize: Size.zero,
           child: Row(
             children: [
               Icon(
