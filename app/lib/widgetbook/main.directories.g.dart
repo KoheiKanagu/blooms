@@ -1,4 +1,3 @@
-// dart format width=80
 // coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_import, prefer_relative_imports, directives_ordering
@@ -55,9 +54,9 @@ final directories = <_i1.WidgetbookNode>[
                   name: 'ConditionForm',
                   builder: _i2.conditionForm,
                 ),
-              ),
+              )
             ],
-          ),
+          )
         ],
       ),
       _i1.WidgetbookFolder(
@@ -109,7 +108,7 @@ final directories = <_i1.WidgetbookNode>[
                 ),
               ),
             ],
-          ),
+          )
         ],
       ),
       _i1.WidgetbookFolder(
@@ -150,9 +149,9 @@ final directories = <_i1.WidgetbookNode>[
                     builder: _i13.onboardingPageBodyPrivacy,
                   ),
                 ],
-              ),
+              )
             ],
-          ),
+          )
         ],
       ),
       _i1.WidgetbookFolder(
@@ -173,9 +172,9 @@ final directories = <_i1.WidgetbookNode>[
                     builder: _i14.reminderPageHighlight,
                   ),
                 ],
-              ),
+              )
             ],
-          ),
+          )
         ],
       ),
       _i1.WidgetbookFolder(
@@ -199,9 +198,9 @@ final directories = <_i1.WidgetbookNode>[
                 ),
               ),
             ],
-          ),
+          )
         ],
       ),
     ],
-  ),
+  )
 ];

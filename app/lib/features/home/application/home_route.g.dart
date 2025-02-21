@@ -8,18 +8,21 @@ part of 'home_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$homeTabRoute];
+List<RouteBase> get $appRoutes => [
+      $homeTabRoute,
+    ];
 
 RouteBase get $homeTabRoute => GoRouteData.$route(
-  path: '/home',
-
-  factory: $HomeTabRouteExtension._fromState,
-);
+      path: '/home',
+      factory: $HomeTabRouteExtension._fromState,
+    );
 
 extension $HomeTabRouteExtension on HomeTabRoute {
   static HomeTabRoute _fromState(GoRouterState state) => const HomeTabRoute();
 
-  String get location => GoRouteData.$location('/home');
+  String get location => GoRouteData.$location(
+        '/home',
+      );
 
   void go(BuildContext context) => context.go(location);
 
