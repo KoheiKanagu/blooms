@@ -1,16 +1,16 @@
-const stylistic = require('@stylistic/eslint-plugin');
-const tsEslint = require('typescript-eslint');
-const jestPlugin = require('eslint-plugin-jest');
+import stylistic from '@stylistic/eslint-plugin';
+import jestPlugin from 'eslint-plugin-jest';
+import * as tsEslint from 'typescript-eslint';
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
-module.exports = [
+/** @type {import("eslint").Linter.Config[]} */
+export default [
   {
     ignores: [
       '**/lib/**',
       '**/src/openapi/**',
     ],
   },
-  stylistic.configs['recommended-flat'],
+  stylistic.configs['recommended'],
   stylistic.configs.customize({
     semi: true,
     braceStyle: '1tbs',
