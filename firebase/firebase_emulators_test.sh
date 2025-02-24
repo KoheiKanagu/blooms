@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 npm --prefix functions run clean
+npm --prefix functions run lint
 npm --prefix functions run build
 
 firebase emulators:exec \
