@@ -73,6 +73,17 @@ class ConditionForm extends HookConsumerWidget {
                   minLines: 1,
                   keyboardType: TextInputType.multiline,
                   placeholder: i18n.howIsYourConditionNow,
+                  contextMenuBuilder: (context, editableTextState) {
+                    if (SystemContextMenu.isSupported(context)) {
+                      return SystemContextMenu.editableText(
+                        editableTextState: editableTextState,
+                      );
+                    }
+
+                    return CupertinoAdaptiveTextSelectionToolbar.editableText(
+                      editableTextState: editableTextState,
+                    );
+                  },
                 ),
               ),
               const Gap(16),
