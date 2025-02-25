@@ -51,5 +51,9 @@
 	<string>体調の記録に画像を利用するため、フォトライブラリにアクセスします</string>
 	<key>NSCameraUsageDescription</key>
 	<string>体調の記録に写真を利用するため、カメラにアクセスします</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ja</string>
+	</array>
 </dict>
 </plist>
