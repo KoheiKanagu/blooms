@@ -5,6 +5,7 @@ import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/my_logger.dart';
 import 'package:blooms/widgets/show_my_progress_indicator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -73,6 +74,17 @@ class ConditionForm extends HookConsumerWidget {
                   minLines: 1,
                   keyboardType: TextInputType.multiline,
                   placeholder: i18n.howIsYourConditionNow,
+                  contextMenuBuilder: (context, editableTextState) {
+                    if (SystemContextMenu.isSupported(context)) {
+                      return SystemContextMenu.editableText(
+                        editableTextState: editableTextState,
+                      );
+                    }
+
+                    return AdaptiveTextSelectionToolbar.editableText(
+                      editableTextState: editableTextState,
+                    );
+                  },
                 ),
               ),
               const Gap(16),
