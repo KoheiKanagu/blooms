@@ -2,9 +2,16 @@ import { getStorage } from 'firebase-admin/storage';
 import { logger } from 'firebase-functions';
 
 /**
- * Storageからファイルを削除する
+ * Deletes a file from Firebase Storage.
  *
- * @param fileUri　gs:// で始まるファイルのURI
+ * This asynchronous function removes the file identified by the given URI from Firebase Storage.
+ * The URI must begin with `gs://` and include both the bucket name and the file path. The function
+ * logs the deletion attempt, validates the URI format, extracts the necessary components, and then
+ * performs the deletion.
+ *
+ * @param fileUri A URI starting with `gs://` that specifies the file to be deleted.
+ *
+ * @throws {Error} If the provided fileUri does not start with `gs://`.
  */
 export async function deleteStorageFile(fileUri: string): Promise<void> {
   logger.info(`Delete file: ${fileUri}`);
