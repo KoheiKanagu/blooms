@@ -11,7 +11,7 @@ export async function deleteStorageFile(fileUri: string): Promise<void> {
 
   // gs:// で始める必要がある
   if (!fileUri.startsWith('gs://')) {
-    throw new Error('Invalid fileUri');
+    throw new Error(`Invalid fileUri: ${fileUri}`);
   }
 
   const raw = fileUri.replace('gs://', '');
