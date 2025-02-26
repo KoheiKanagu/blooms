@@ -55,7 +55,7 @@
       "**/*.test.ts"
     ],
     "setupFiles": [
-      "./jest.setup.ts"
+      "./test/jest.setup.ts"
     ]
   }
 }
