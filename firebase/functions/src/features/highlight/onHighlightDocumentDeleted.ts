@@ -1,8 +1,7 @@
-import { getStorage } from 'firebase-admin/storage';
 import { logger } from 'firebase-functions';
 import { onDocumentDeleted } from 'firebase-functions/firestore';
-import { assertUnreachable } from '../../utils/assertUnreachable';
 import { CollectionPath } from '../../utils/collectionPath';
+import { deletePrompt } from './application/deletePrompt';
 import { highlightConverter } from './domain/highlight';
 
 /**
@@ -18,27 +17,5 @@ export const onHighlightDocumentDeleted = onDocumentDeleted(
     }
 
     const highlight = highlightConverter.fromFirestore(snapshot);
-
-    const type = highlight.content.type;
-    switch (type) {
-      case 'summary': {
-        const uri = highlight.content.promptFileUri;
-        if (uri == null) {
-          logger.info(`No attachments to delete.`);
-          break;
-        }
-        logger.info(`Delete file: ${uri}`);
-
-        // Storageのデータを削除する
-        await getStorage().bucket().file(uri).delete();
-        break;
-      }
-
-      case 'empty':
-        logger.info(`No attachments to delete.`);
-        break;
-
-      default:
-        assertUnreachable(type);
-    }
+    await deletePrompt(highlight.content);
   });

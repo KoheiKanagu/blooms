@@ -4,6 +4,7 @@ import { logger } from 'firebase-functions';
 export type HighlightPeriod = 'past1day' | 'past7days' | 'past14days' | 'past21days' | 'past28days';
 export type HighlightType = 'summary' | 'empty';
 export type HighlightState = 'pending' | 'inProgress' | 'success' | 'failure';
+export type HighlightContentInterfaces = HighlightContentSummary | HighlightContentEmpty;
 
 export interface HighlightContentSummary {
   type: 'summary';
@@ -25,7 +26,7 @@ export class Highlight {
     readonly updatedAt: Timestamp | FieldValue,
     readonly deletedAt: Timestamp | null,
     readonly subjectUid: string,
-    readonly content: HighlightContentSummary | HighlightContentEmpty,
+    readonly content: HighlightContentInterfaces,
   ) { }
 }
 
