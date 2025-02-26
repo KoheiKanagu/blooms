@@ -19,7 +19,7 @@ export async function deleteAttachment(content: ConditionContentInterfaces): Pro
     case 'text':
     case 'textWithSearchKeywords':
     case 'empty':
-      logger.info(`No attachments to delete.`);
+      logger.info(`No attachments to delete for content type: ${type}.`);
       return;
 
     default:

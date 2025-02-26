@@ -10,7 +10,7 @@ export async function deletePrompt(content: HighlightContentInterfaces) {
     case 'summary': {
       const uri = content.promptFileUri;
       if (uri == null) {
-        logger.info(`No attachments to delete.`);
+        logger.info(`No prompt file to delete for content type: ${type}.`);
         break;
       }
       logger.info(`Delete file: ${uri}`);
