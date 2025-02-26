@@ -7,7 +7,7 @@ import { logger } from 'firebase-functions';
  * @param fileUri　gs:// で始まるファイルのURI
  */
 export async function deleteStorageFile(fileUri: string): Promise<void> {
-  logger.info(`Delete file: ${fileUri}`);
+  logger.info(`Deleting file: ${fileUri}`);
 
   // gs:// で始める必要がある
   if (!fileUri.startsWith('gs://')) {
@@ -19,8 +19,17 @@ export async function deleteStorageFile(fileUri: string): Promise<void> {
 
   // 先頭からバケット名を取得
   const bucketName = paths.shift();
+  if (!bucketName) {
+    throw new Error(`Invalid fileUri, bucket name is missing: ${fileUri}`);
+  }
   const bucket = getStorage().bucket(bucketName);
 
   // Storageのデータを削除する
-  await bucket.file(paths.join('/')).delete();
+  const file = bucket.file(paths.join('/'));
+  const [exists] = await file.exists();
+  if (exists) {
+    await file.delete();
+  } else {
+    logger.warn(`File not found: ${fileUri}`);
+  }
 }

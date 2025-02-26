@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 import { getStorage } from 'firebase-admin/storage';
 import { deleteStorageFile } from '../../../../src/features/storage/application/deleteStorageFile';
 import { StoragePath } from '../../../../src/utils/storagePath';
