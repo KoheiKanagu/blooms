@@ -40,6 +40,7 @@
     "@types/node": "22.13.8",
     "eslint": "^9.21.0",
     "eslint-plugin-jest": "^28.11.0",
+    "firebase-functions-test": "^3.4.0",
     "jest": "^29.7.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.25.0"
@@ -53,6 +54,9 @@
     },
     "testMatch": [
       "**/*.test.ts"
+    ],
+    "setupFiles": [
+      "./test/jest.setup.ts"
     ]
   }
 }
