@@ -5,7 +5,8 @@ part 'condition_content_image_attachment.freezed.dart';
 part 'condition_content_image_attachment.g.dart';
 
 @freezed
-class ConditionContentImageAttachment with _$ConditionContentImageAttachment {
+abstract class ConditionContentImageAttachment
+    with _$ConditionContentImageAttachment {
   const factory ConditionContentImageAttachment({
     /// gs://パス
     required String fileUri,
@@ -36,7 +37,7 @@ class ConditionContentImageAttachment with _$ConditionContentImageAttachment {
 }
 
 @freezed
-class ConditionContentImageAttachmentAdditionalInfo
+abstract class ConditionContentImageAttachmentAdditionalInfo
     with _$ConditionContentImageAttachmentAdditionalInfo {
   const factory ConditionContentImageAttachmentAdditionalInfo({
     String? blurHash,

@@ -6,7 +6,8 @@ part 'condition_content_audio_attachment.freezed.dart';
 part 'condition_content_audio_attachment.g.dart';
 
 @freezed
-class ConditionContentAudioAttachment with _$ConditionContentAudioAttachment {
+abstract class ConditionContentAudioAttachment
+    with _$ConditionContentAudioAttachment {
   const factory ConditionContentAudioAttachment({
     /// gs://パス
     required String fileUri,

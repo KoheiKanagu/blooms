@@ -12,7 +12,7 @@ part 'highlight.freezed.dart';
 part 'highlight.g.dart';
 
 @freezed
-class Highlight with _$Highlight {
+abstract class Highlight with _$Highlight {
   const factory Highlight({
     /// ハイライトの対象者のUID
     required String subjectUid,
