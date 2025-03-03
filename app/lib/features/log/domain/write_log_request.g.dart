@@ -8,25 +8,19 @@ part of 'write_log_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WriteLogRequestImpl _$$WriteLogRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$WriteLogRequestImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$WriteLogRequestImpl(
-          logs: $checkedConvert(
-              'logs',
-              (v) => (v as List<dynamic>)
+_WriteLogRequest _$WriteLogRequestFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_WriteLogRequest', json, ($checkedConvert) {
+      final val = _WriteLogRequest(
+        logs: $checkedConvert(
+          'logs',
+          (v) =>
+              (v as List<dynamic>)
                   .map((e) => WriteLogData.fromJson(e as Map<String, dynamic>))
-                  .toList()),
-        );
-        return val;
-      },
-    );
+                  .toList(),
+        ),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$WriteLogRequestImplToJson(
-        _$WriteLogRequestImpl instance) =>
-    <String, dynamic>{
-      'logs': instance.logs.map((e) => e.toJson()).toList(),
-    };
+Map<String, dynamic> _$WriteLogRequestToJson(_WriteLogRequest instance) =>
+    <String, dynamic>{'logs': instance.logs.map((e) => e.toJson()).toList()};

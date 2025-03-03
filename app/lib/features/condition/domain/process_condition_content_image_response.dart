@@ -5,7 +5,7 @@ part 'process_condition_content_image_response.freezed.dart';
 part 'process_condition_content_image_response.g.dart';
 
 @freezed
-class ProcessConditionContentImageResponse
+abstract class ProcessConditionContentImageResponse
     with _$ProcessConditionContentImageResponse {
   const factory ProcessConditionContentImageResponse({
     required String gsFilePath,

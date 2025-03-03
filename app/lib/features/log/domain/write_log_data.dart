@@ -5,8 +5,8 @@ import 'package:talker_flutter/talker_flutter.dart';
 part 'write_log_data.freezed.dart';
 part 'write_log_data.g.dart';
 
-@freezed
-class WriteLogData with _$WriteLogData {
+@Freezed(copyWith: false)
+abstract class WriteLogData with _$WriteLogData {
   const factory WriteLogData({required LogLevel level, required Json log}) =
       _WriteLogData;
 

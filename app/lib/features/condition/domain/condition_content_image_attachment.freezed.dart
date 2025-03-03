@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,454 +10,304 @@ part of 'condition_content_image_attachment.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ConditionContentImageAttachment _$ConditionContentImageAttachmentFromJson(
-    Map<String, dynamic> json) {
-  return _ConditionContentImageAttachment.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ConditionContentImageAttachment {
-  /// gs://パス
-  String get fileUri => throw _privateConstructorUsedError;
-  String get mimeType => throw _privateConstructorUsedError;
-  int get width => throw _privateConstructorUsedError;
-  int get height => throw _privateConstructorUsedError;
-  ConditionContentImageAttachmentAdditionalInfo get additionalInfo =>
-      throw _privateConstructorUsedError;
+
+/// gs://パス
+ String get fileUri; String get mimeType; int get width; int get height; ConditionContentImageAttachmentAdditionalInfo get additionalInfo;
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ConditionContentImageAttachmentCopyWith<ConditionContentImageAttachment> get copyWith => _$ConditionContentImageAttachmentCopyWithImpl<ConditionContentImageAttachment>(this as ConditionContentImageAttachment, _$identity);
 
   /// Serializes this ConditionContentImageAttachment to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConditionContentImageAttachmentCopyWith<ConditionContentImageAttachment>
-      get copyWith => throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionContentImageAttachment&&(identical(other.fileUri, fileUri) || other.fileUri == fileUri)&&(identical(other.mimeType, mimeType) || other.mimeType == mimeType)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,fileUri,mimeType,width,height,additionalInfo);
+
+@override
+String toString() {
+  return 'ConditionContentImageAttachment(fileUri: $fileUri, mimeType: $mimeType, width: $width, height: $height, additionalInfo: $additionalInfo)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ConditionContentImageAttachmentCopyWith<$Res> {
-  factory $ConditionContentImageAttachmentCopyWith(
-          ConditionContentImageAttachment value,
-          $Res Function(ConditionContentImageAttachment) then) =
-      _$ConditionContentImageAttachmentCopyWithImpl<$Res,
-          ConditionContentImageAttachment>;
-  @useResult
-  $Res call(
-      {String fileUri,
-      String mimeType,
-      int width,
-      int height,
-      ConditionContentImageAttachmentAdditionalInfo additionalInfo});
+abstract mixin class $ConditionContentImageAttachmentCopyWith<$Res>  {
+  factory $ConditionContentImageAttachmentCopyWith(ConditionContentImageAttachment value, $Res Function(ConditionContentImageAttachment) _then) = _$ConditionContentImageAttachmentCopyWithImpl;
+@useResult
+$Res call({
+ String fileUri, String mimeType, int width, int height, ConditionContentImageAttachmentAdditionalInfo additionalInfo
+});
 
-  $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>
-      get additionalInfo;
+
+$ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> get additionalInfo;
+
 }
-
 /// @nodoc
-class _$ConditionContentImageAttachmentCopyWithImpl<$Res,
-        $Val extends ConditionContentImageAttachment>
+class _$ConditionContentImageAttachmentCopyWithImpl<$Res>
     implements $ConditionContentImageAttachmentCopyWith<$Res> {
-  _$ConditionContentImageAttachmentCopyWithImpl(this._value, this._then);
+  _$ConditionContentImageAttachmentCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ConditionContentImageAttachment _self;
+  final $Res Function(ConditionContentImageAttachment) _then;
 
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileUri = null,
-    Object? mimeType = null,
-    Object? width = null,
-    Object? height = null,
-    Object? additionalInfo = null,
-  }) {
-    return _then(_value.copyWith(
-      fileUri: null == fileUri
-          ? _value.fileUri
-          : fileUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      mimeType: null == mimeType
-          ? _value.mimeType
-          : mimeType // ignore: cast_nullable_to_non_nullable
-              as String,
-      width: null == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      additionalInfo: null == additionalInfo
-          ? _value.additionalInfo
-          : additionalInfo // ignore: cast_nullable_to_non_nullable
-              as ConditionContentImageAttachmentAdditionalInfo,
-    ) as $Val);
-  }
-
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>
-      get additionalInfo {
-    return $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>(
-        _value.additionalInfo, (value) {
-      return _then(_value.copyWith(additionalInfo: value) as $Val);
-    });
-  }
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? fileUri = null,Object? mimeType = null,Object? width = null,Object? height = null,Object? additionalInfo = null,}) {
+  return _then(_self.copyWith(
+fileUri: null == fileUri ? _self.fileUri : fileUri // ignore: cast_nullable_to_non_nullable
+as String,mimeType: null == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
+as String,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as int,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,additionalInfo: null == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable
+as ConditionContentImageAttachmentAdditionalInfo,
+  ));
+}
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> get additionalInfo {
+  
+  return $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>(_self.additionalInfo, (value) {
+    return _then(_self.copyWith(additionalInfo: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$ConditionContentImageAttachmentImplCopyWith<$Res>
-    implements $ConditionContentImageAttachmentCopyWith<$Res> {
-  factory _$$ConditionContentImageAttachmentImplCopyWith(
-          _$ConditionContentImageAttachmentImpl value,
-          $Res Function(_$ConditionContentImageAttachmentImpl) then) =
-      __$$ConditionContentImageAttachmentImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String fileUri,
-      String mimeType,
-      int width,
-      int height,
-      ConditionContentImageAttachmentAdditionalInfo additionalInfo});
-
-  @override
-  $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>
-      get additionalInfo;
-}
-
-/// @nodoc
-class __$$ConditionContentImageAttachmentImplCopyWithImpl<$Res>
-    extends _$ConditionContentImageAttachmentCopyWithImpl<$Res,
-        _$ConditionContentImageAttachmentImpl>
-    implements _$$ConditionContentImageAttachmentImplCopyWith<$Res> {
-  __$$ConditionContentImageAttachmentImplCopyWithImpl(
-      _$ConditionContentImageAttachmentImpl _value,
-      $Res Function(_$ConditionContentImageAttachmentImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileUri = null,
-    Object? mimeType = null,
-    Object? width = null,
-    Object? height = null,
-    Object? additionalInfo = null,
-  }) {
-    return _then(_$ConditionContentImageAttachmentImpl(
-      fileUri: null == fileUri
-          ? _value.fileUri
-          : fileUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      mimeType: null == mimeType
-          ? _value.mimeType
-          : mimeType // ignore: cast_nullable_to_non_nullable
-              as String,
-      width: null == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      additionalInfo: null == additionalInfo
-          ? _value.additionalInfo
-          : additionalInfo // ignore: cast_nullable_to_non_nullable
-              as ConditionContentImageAttachmentAdditionalInfo,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionContentImageAttachmentImpl
-    implements _ConditionContentImageAttachment {
-  const _$ConditionContentImageAttachmentImpl(
-      {required this.fileUri,
-      required this.mimeType,
-      required this.width,
-      required this.height,
-      required this.additionalInfo});
 
-  factory _$ConditionContentImageAttachmentImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$ConditionContentImageAttachmentImplFromJson(json);
+class _ConditionContentImageAttachment implements ConditionContentImageAttachment {
+  const _ConditionContentImageAttachment({required this.fileUri, required this.mimeType, required this.width, required this.height, required this.additionalInfo});
+  factory _ConditionContentImageAttachment.fromJson(Map<String, dynamic> json) => _$ConditionContentImageAttachmentFromJson(json);
 
-  /// gs://パス
-  @override
-  final String fileUri;
-  @override
-  final String mimeType;
-  @override
-  final int width;
-  @override
-  final int height;
-  @override
-  final ConditionContentImageAttachmentAdditionalInfo additionalInfo;
+/// gs://パス
+@override final  String fileUri;
+@override final  String mimeType;
+@override final  int width;
+@override final  int height;
+@override final  ConditionContentImageAttachmentAdditionalInfo additionalInfo;
 
-  @override
-  String toString() {
-    return 'ConditionContentImageAttachment(fileUri: $fileUri, mimeType: $mimeType, width: $width, height: $height, additionalInfo: $additionalInfo)';
-  }
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ConditionContentImageAttachmentCopyWith<_ConditionContentImageAttachment> get copyWith => __$ConditionContentImageAttachmentCopyWithImpl<_ConditionContentImageAttachment>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConditionContentImageAttachmentImpl &&
-            (identical(other.fileUri, fileUri) || other.fileUri == fileUri) &&
-            (identical(other.mimeType, mimeType) ||
-                other.mimeType == mimeType) &&
-            (identical(other.width, width) || other.width == width) &&
-            (identical(other.height, height) || other.height == height) &&
-            (identical(other.additionalInfo, additionalInfo) ||
-                other.additionalInfo == additionalInfo));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, fileUri, mimeType, width, height, additionalInfo);
-
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConditionContentImageAttachmentImplCopyWith<
-          _$ConditionContentImageAttachmentImpl>
-      get copyWith => __$$ConditionContentImageAttachmentImplCopyWithImpl<
-          _$ConditionContentImageAttachmentImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionContentImageAttachmentImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ConditionContentImageAttachmentToJson(this, );
 }
 
-abstract class _ConditionContentImageAttachment
-    implements ConditionContentImageAttachment {
-  const factory _ConditionContentImageAttachment(
-      {required final String fileUri,
-      required final String mimeType,
-      required final int width,
-      required final int height,
-      required final ConditionContentImageAttachmentAdditionalInfo
-          additionalInfo}) = _$ConditionContentImageAttachmentImpl;
-
-  factory _ConditionContentImageAttachment.fromJson(Map<String, dynamic> json) =
-      _$ConditionContentImageAttachmentImpl.fromJson;
-
-  /// gs://パス
-  @override
-  String get fileUri;
-  @override
-  String get mimeType;
-  @override
-  int get width;
-  @override
-  int get height;
-  @override
-  ConditionContentImageAttachmentAdditionalInfo get additionalInfo;
-
-  /// Create a copy of ConditionContentImageAttachment
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionContentImageAttachmentImplCopyWith<
-          _$ConditionContentImageAttachmentImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConditionContentImageAttachment&&(identical(other.fileUri, fileUri) || other.fileUri == fileUri)&&(identical(other.mimeType, mimeType) || other.mimeType == mimeType)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
 }
 
-ConditionContentImageAttachmentAdditionalInfo
-    _$ConditionContentImageAttachmentAdditionalInfoFromJson(
-        Map<String, dynamic> json) {
-  return _ConditionContentImageAttachmentAdditionalInfo.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,fileUri,mimeType,width,height,additionalInfo);
+
+@override
+String toString() {
+  return 'ConditionContentImageAttachment(fileUri: $fileUri, mimeType: $mimeType, width: $width, height: $height, additionalInfo: $additionalInfo)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ConditionContentImageAttachmentCopyWith<$Res> implements $ConditionContentImageAttachmentCopyWith<$Res> {
+  factory _$ConditionContentImageAttachmentCopyWith(_ConditionContentImageAttachment value, $Res Function(_ConditionContentImageAttachment) _then) = __$ConditionContentImageAttachmentCopyWithImpl;
+@override @useResult
+$Res call({
+ String fileUri, String mimeType, int width, int height, ConditionContentImageAttachmentAdditionalInfo additionalInfo
+});
+
+
+@override $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> get additionalInfo;
+
+}
+/// @nodoc
+class __$ConditionContentImageAttachmentCopyWithImpl<$Res>
+    implements _$ConditionContentImageAttachmentCopyWith<$Res> {
+  __$ConditionContentImageAttachmentCopyWithImpl(this._self, this._then);
+
+  final _ConditionContentImageAttachment _self;
+  final $Res Function(_ConditionContentImageAttachment) _then;
+
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? fileUri = null,Object? mimeType = null,Object? width = null,Object? height = null,Object? additionalInfo = null,}) {
+  return _then(_ConditionContentImageAttachment(
+fileUri: null == fileUri ? _self.fileUri : fileUri // ignore: cast_nullable_to_non_nullable
+as String,mimeType: null == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
+as String,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as int,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,additionalInfo: null == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable
+as ConditionContentImageAttachmentAdditionalInfo,
+  ));
+}
+
+/// Create a copy of ConditionContentImageAttachment
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> get additionalInfo {
+  
+  return $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>(_self.additionalInfo, (value) {
+    return _then(_self.copyWith(additionalInfo: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$ConditionContentImageAttachmentAdditionalInfo {
-  String? get blurHash => throw _privateConstructorUsedError;
+
+ String? get blurHash;
+/// Create a copy of ConditionContentImageAttachmentAdditionalInfo
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ConditionContentImageAttachmentAdditionalInfoCopyWith<ConditionContentImageAttachmentAdditionalInfo> get copyWith => _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<ConditionContentImageAttachmentAdditionalInfo>(this as ConditionContentImageAttachmentAdditionalInfo, _$identity);
 
   /// Serializes this ConditionContentImageAttachmentAdditionalInfo to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of ConditionContentImageAttachmentAdditionalInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConditionContentImageAttachmentAdditionalInfoCopyWith<
-          ConditionContentImageAttachmentAdditionalInfo>
-      get copyWith => throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionContentImageAttachmentAdditionalInfo&&(identical(other.blurHash, blurHash) || other.blurHash == blurHash));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,blurHash);
+
+@override
+String toString() {
+  return 'ConditionContentImageAttachmentAdditionalInfo(blurHash: $blurHash)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> {
-  factory $ConditionContentImageAttachmentAdditionalInfoCopyWith(
-          ConditionContentImageAttachmentAdditionalInfo value,
-          $Res Function(ConditionContentImageAttachmentAdditionalInfo) then) =
-      _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<$Res,
-          ConditionContentImageAttachmentAdditionalInfo>;
-  @useResult
-  $Res call({String? blurHash});
-}
+abstract mixin class $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res>  {
+  factory $ConditionContentImageAttachmentAdditionalInfoCopyWith(ConditionContentImageAttachmentAdditionalInfo value, $Res Function(ConditionContentImageAttachmentAdditionalInfo) _then) = _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl;
+@useResult
+$Res call({
+ String? blurHash
+});
 
+
+
+
+}
 /// @nodoc
-class _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<$Res,
-        $Val extends ConditionContentImageAttachmentAdditionalInfo>
+class _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<$Res>
     implements $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> {
-  _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl(
-      this._value, this._then);
+  _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ConditionContentImageAttachmentAdditionalInfo _self;
+  final $Res Function(ConditionContentImageAttachmentAdditionalInfo) _then;
 
-  /// Create a copy of ConditionContentImageAttachmentAdditionalInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? blurHash = freezed,
-  }) {
-    return _then(_value.copyWith(
-      blurHash: freezed == blurHash
-          ? _value.blurHash
-          : blurHash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
+/// Create a copy of ConditionContentImageAttachmentAdditionalInfo
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? blurHash = freezed,}) {
+  return _then(_self.copyWith(
+blurHash: freezed == blurHash ? _self.blurHash : blurHash // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$ConditionContentImageAttachmentAdditionalInfoImplCopyWith<
-        $Res>
-    implements $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> {
-  factory _$$ConditionContentImageAttachmentAdditionalInfoImplCopyWith(
-          _$ConditionContentImageAttachmentAdditionalInfoImpl value,
-          $Res Function(_$ConditionContentImageAttachmentAdditionalInfoImpl)
-              then) =
-      __$$ConditionContentImageAttachmentAdditionalInfoImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? blurHash});
 }
 
-/// @nodoc
-class __$$ConditionContentImageAttachmentAdditionalInfoImplCopyWithImpl<$Res>
-    extends _$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<$Res,
-        _$ConditionContentImageAttachmentAdditionalInfoImpl>
-    implements
-        _$$ConditionContentImageAttachmentAdditionalInfoImplCopyWith<$Res> {
-  __$$ConditionContentImageAttachmentAdditionalInfoImplCopyWithImpl(
-      _$ConditionContentImageAttachmentAdditionalInfoImpl _value,
-      $Res Function(_$ConditionContentImageAttachmentAdditionalInfoImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ConditionContentImageAttachmentAdditionalInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? blurHash = freezed,
-  }) {
-    return _then(_$ConditionContentImageAttachmentAdditionalInfoImpl(
-      blurHash: freezed == blurHash
-          ? _value.blurHash
-          : blurHash // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionContentImageAttachmentAdditionalInfoImpl
-    implements _ConditionContentImageAttachmentAdditionalInfo {
-  const _$ConditionContentImageAttachmentAdditionalInfoImpl({this.blurHash});
 
-  factory _$ConditionContentImageAttachmentAdditionalInfoImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$ConditionContentImageAttachmentAdditionalInfoImplFromJson(json);
+class _ConditionContentImageAttachmentAdditionalInfo implements ConditionContentImageAttachmentAdditionalInfo {
+  const _ConditionContentImageAttachmentAdditionalInfo({this.blurHash});
+  factory _ConditionContentImageAttachmentAdditionalInfo.fromJson(Map<String, dynamic> json) => _$ConditionContentImageAttachmentAdditionalInfoFromJson(json);
 
-  @override
-  final String? blurHash;
+@override final  String? blurHash;
 
-  @override
-  String toString() {
-    return 'ConditionContentImageAttachmentAdditionalInfo(blurHash: $blurHash)';
-  }
+/// Create a copy of ConditionContentImageAttachmentAdditionalInfo
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ConditionContentImageAttachmentAdditionalInfoCopyWith<_ConditionContentImageAttachmentAdditionalInfo> get copyWith => __$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<_ConditionContentImageAttachmentAdditionalInfo>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConditionContentImageAttachmentAdditionalInfoImpl &&
-            (identical(other.blurHash, blurHash) ||
-                other.blurHash == blurHash));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, blurHash);
-
-  /// Create a copy of ConditionContentImageAttachmentAdditionalInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConditionContentImageAttachmentAdditionalInfoImplCopyWith<
-          _$ConditionContentImageAttachmentAdditionalInfoImpl>
-      get copyWith =>
-          __$$ConditionContentImageAttachmentAdditionalInfoImplCopyWithImpl<
-                  _$ConditionContentImageAttachmentAdditionalInfoImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionContentImageAttachmentAdditionalInfoImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ConditionContentImageAttachmentAdditionalInfoToJson(this, );
 }
 
-abstract class _ConditionContentImageAttachmentAdditionalInfo
-    implements ConditionContentImageAttachmentAdditionalInfo {
-  const factory _ConditionContentImageAttachmentAdditionalInfo(
-          {final String? blurHash}) =
-      _$ConditionContentImageAttachmentAdditionalInfoImpl;
-
-  factory _ConditionContentImageAttachmentAdditionalInfo.fromJson(
-          Map<String, dynamic> json) =
-      _$ConditionContentImageAttachmentAdditionalInfoImpl.fromJson;
-
-  @override
-  String? get blurHash;
-
-  /// Create a copy of ConditionContentImageAttachmentAdditionalInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionContentImageAttachmentAdditionalInfoImplCopyWith<
-          _$ConditionContentImageAttachmentAdditionalInfoImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConditionContentImageAttachmentAdditionalInfo&&(identical(other.blurHash, blurHash) || other.blurHash == blurHash));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,blurHash);
+
+@override
+String toString() {
+  return 'ConditionContentImageAttachmentAdditionalInfo(blurHash: $blurHash)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> implements $ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> {
+  factory _$ConditionContentImageAttachmentAdditionalInfoCopyWith(_ConditionContentImageAttachmentAdditionalInfo value, $Res Function(_ConditionContentImageAttachmentAdditionalInfo) _then) = __$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl;
+@override @useResult
+$Res call({
+ String? blurHash
+});
+
+
+
+
+}
+/// @nodoc
+class __$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl<$Res>
+    implements _$ConditionContentImageAttachmentAdditionalInfoCopyWith<$Res> {
+  __$ConditionContentImageAttachmentAdditionalInfoCopyWithImpl(this._self, this._then);
+
+  final _ConditionContentImageAttachmentAdditionalInfo _self;
+  final $Res Function(_ConditionContentImageAttachmentAdditionalInfo) _then;
+
+/// Create a copy of ConditionContentImageAttachmentAdditionalInfo
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? blurHash = freezed,}) {
+  return _then(_ConditionContentImageAttachmentAdditionalInfo(
+blurHash: freezed == blurHash ? _self.blurHash : blurHash // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+// dart format on

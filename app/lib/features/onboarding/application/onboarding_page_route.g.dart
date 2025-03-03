@@ -8,22 +8,19 @@ part of 'onboarding_page_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $onboardingPageRoute,
-    ];
+List<RouteBase> get $appRoutes => [$onboardingPageRoute];
 
 RouteBase get $onboardingPageRoute => GoRouteData.$route(
-      path: '/onboarding',
-      factory: $OnboardingPageRouteExtension._fromState,
-    );
+  path: '/onboarding',
+
+  factory: $OnboardingPageRouteExtension._fromState,
+);
 
 extension $OnboardingPageRouteExtension on OnboardingPageRoute {
   static OnboardingPageRoute _fromState(GoRouterState state) =>
       const OnboardingPageRoute();
 
-  String get location => GoRouteData.$location(
-        '/onboarding',
-      );
+  String get location => GoRouteData.$location('/onboarding');
 
   void go(BuildContext context) => context.go(location);
 

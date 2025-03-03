@@ -8,23 +8,20 @@ part of 'condition_content_audio_attachment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ConditionContentAudioAttachmentImpl
-    _$$ConditionContentAudioAttachmentImplFromJson(Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ConditionContentAudioAttachmentImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ConditionContentAudioAttachmentImpl(
-              fileUri: $checkedConvert('fileUri', (v) => v as String),
-              mimeType: $checkedConvert('mimeType', (v) => v as String),
-            );
-            return val;
-          },
-        );
+_ConditionContentAudioAttachment _$ConditionContentAudioAttachmentFromJson(
+  Map<String, dynamic> json,
+) =>
+    $checkedCreate('_ConditionContentAudioAttachment', json, ($checkedConvert) {
+      final val = _ConditionContentAudioAttachment(
+        fileUri: $checkedConvert('fileUri', (v) => v as String),
+        mimeType: $checkedConvert('mimeType', (v) => v as String),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$ConditionContentAudioAttachmentImplToJson(
-        _$ConditionContentAudioAttachmentImpl instance) =>
-    <String, dynamic>{
-      'fileUri': instance.fileUri,
-      'mimeType': instance.mimeType,
-    };
+Map<String, dynamic> _$ConditionContentAudioAttachmentToJson(
+  _ConditionContentAudioAttachment instance,
+) => <String, dynamic>{
+  'fileUri': instance.fileUri,
+  'mimeType': instance.mimeType,
+};

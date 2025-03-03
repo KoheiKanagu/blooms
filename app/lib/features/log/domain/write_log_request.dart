@@ -6,7 +6,7 @@ part 'write_log_request.freezed.dart';
 part 'write_log_request.g.dart';
 
 @freezed
-class WriteLogRequest with _$WriteLogRequest {
+abstract class WriteLogRequest with _$WriteLogRequest {
   const factory WriteLogRequest({required List<WriteLogData> logs}) =
       _WriteLogRequest;
 

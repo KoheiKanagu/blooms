@@ -5,7 +5,7 @@ part 'process_condition_content_image_request.freezed.dart';
 part 'process_condition_content_image_request.g.dart';
 
 @freezed
-class ProcessConditionContentImageRequest
+abstract class ProcessConditionContentImageRequest
     with _$ProcessConditionContentImageRequest {
   const factory ProcessConditionContentImageRequest({required String base64}) =
       _ProcessConditionContentImageRequest;

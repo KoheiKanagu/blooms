@@ -12,7 +12,7 @@ part 'condition.freezed.dart';
 part 'condition.g.dart';
 
 @freezed
-class Condition with _$Condition {
+abstract class Condition with _$Condition {
   const factory Condition({
     /// 対象者のUID
     required String subjectUid,

@@ -13,7 +13,7 @@ part 'my_go_router_listenable.freezed.dart';
 part 'my_go_router_listenable.g.dart';
 
 @freezed
-class MyGoRouterListenable with _$MyGoRouterListenable {
+abstract class MyGoRouterListenable with _$MyGoRouterListenable {
   const factory MyGoRouterListenable({
     @Default(false) bool signedIn,
     @Default(false) bool createdUserDocument,

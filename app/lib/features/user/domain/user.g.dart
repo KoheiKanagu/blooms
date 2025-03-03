@@ -8,25 +8,27 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => $checkedCreate(
-      r'_$UserImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$UserImpl(
-          createdAt: $checkedConvert(
-              'createdAt', (v) => const TimestampConverter().fromJson(v)),
-          updatedAt: $checkedConvert(
-              'updatedAt', (v) => const TimestampConverter().fromJson(v)),
-          deletedAt: $checkedConvert(
-              'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-        );
-        return val;
-      },
-    );
+_User _$UserFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_User', json, ($checkedConvert) {
+      final val = _User(
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        deletedAt: $checkedConvert(
+          'deletedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
-      'createdAt': const TimestampConverter().toJson(instance.createdAt),
-      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
-      'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
-    };
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+  'createdAt': const TimestampConverter().toJson(instance.createdAt),
+  'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+  'deletedAt': const TimestampConverter().toJson(instance.deletedAt),
+};
