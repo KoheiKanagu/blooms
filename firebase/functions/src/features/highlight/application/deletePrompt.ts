@@ -13,7 +13,6 @@ export async function deletePrompt(content: HighlightContentInterfaces) {
         logger.info(`No prompt file to delete for content type: ${type}.`);
         break;
       }
-      logger.info(`Delete file: ${uri}`);
 
       // Storageのデータを削除する
       await deleteStorageFile(uri);
