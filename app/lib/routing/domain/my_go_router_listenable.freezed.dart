@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,200 +10,151 @@ part of 'my_go_router_listenable.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$MyGoRouterListenable {
-  bool get signedIn => throw _privateConstructorUsedError;
-  bool get createdUserDocument => throw _privateConstructorUsedError;
-  AsyncValue<void>? get appStartupState => throw _privateConstructorUsedError;
+mixin _$MyGoRouterListenable implements DiagnosticableTreeMixin {
 
-  /// Create a copy of MyGoRouterListenable
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $MyGoRouterListenableCopyWith<MyGoRouterListenable> get copyWith =>
-      throw _privateConstructorUsedError;
+ bool get signedIn; bool get createdUserDocument; AsyncValue<void>? get appStartupState;
+/// Create a copy of MyGoRouterListenable
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MyGoRouterListenableCopyWith<MyGoRouterListenable> get copyWith => _$MyGoRouterListenableCopyWithImpl<MyGoRouterListenable>(this as MyGoRouterListenable, _$identity);
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'MyGoRouterListenable'))
+    ..add(DiagnosticsProperty('signedIn', signedIn))..add(DiagnosticsProperty('createdUserDocument', createdUserDocument))..add(DiagnosticsProperty('appStartupState', appStartupState));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyGoRouterListenable&&(identical(other.signedIn, signedIn) || other.signedIn == signedIn)&&(identical(other.createdUserDocument, createdUserDocument) || other.createdUserDocument == createdUserDocument)&&(identical(other.appStartupState, appStartupState) || other.appStartupState == appStartupState));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,signedIn,createdUserDocument,appStartupState);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'MyGoRouterListenable(signedIn: $signedIn, createdUserDocument: $createdUserDocument, appStartupState: $appStartupState)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $MyGoRouterListenableCopyWith<$Res> {
-  factory $MyGoRouterListenableCopyWith(MyGoRouterListenable value,
-          $Res Function(MyGoRouterListenable) then) =
-      _$MyGoRouterListenableCopyWithImpl<$Res, MyGoRouterListenable>;
-  @useResult
-  $Res call(
-      {bool signedIn,
-      bool createdUserDocument,
-      AsyncValue<void>? appStartupState});
-}
+abstract mixin class $MyGoRouterListenableCopyWith<$Res>  {
+  factory $MyGoRouterListenableCopyWith(MyGoRouterListenable value, $Res Function(MyGoRouterListenable) _then) = _$MyGoRouterListenableCopyWithImpl;
+@useResult
+$Res call({
+ bool signedIn, bool createdUserDocument, AsyncValue<void>? appStartupState
+});
 
+
+
+
+}
 /// @nodoc
-class _$MyGoRouterListenableCopyWithImpl<$Res,
-        $Val extends MyGoRouterListenable>
+class _$MyGoRouterListenableCopyWithImpl<$Res>
     implements $MyGoRouterListenableCopyWith<$Res> {
-  _$MyGoRouterListenableCopyWithImpl(this._value, this._then);
+  _$MyGoRouterListenableCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final MyGoRouterListenable _self;
+  final $Res Function(MyGoRouterListenable) _then;
 
-  /// Create a copy of MyGoRouterListenable
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? signedIn = null,
-    Object? createdUserDocument = null,
-    Object? appStartupState = freezed,
-  }) {
-    return _then(_value.copyWith(
-      signedIn: null == signedIn
-          ? _value.signedIn
-          : signedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdUserDocument: null == createdUserDocument
-          ? _value.createdUserDocument
-          : createdUserDocument // ignore: cast_nullable_to_non_nullable
-              as bool,
-      appStartupState: freezed == appStartupState
-          ? _value.appStartupState
-          : appStartupState // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<void>?,
-    ) as $Val);
-  }
+/// Create a copy of MyGoRouterListenable
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? signedIn = null,Object? createdUserDocument = null,Object? appStartupState = freezed,}) {
+  return _then(_self.copyWith(
+signedIn: null == signedIn ? _self.signedIn : signedIn // ignore: cast_nullable_to_non_nullable
+as bool,createdUserDocument: null == createdUserDocument ? _self.createdUserDocument : createdUserDocument // ignore: cast_nullable_to_non_nullable
+as bool,appStartupState: freezed == appStartupState ? _self.appStartupState : appStartupState // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$MyGoRouterListenableImplCopyWith<$Res>
-    implements $MyGoRouterListenableCopyWith<$Res> {
-  factory _$$MyGoRouterListenableImplCopyWith(_$MyGoRouterListenableImpl value,
-          $Res Function(_$MyGoRouterListenableImpl) then) =
-      __$$MyGoRouterListenableImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {bool signedIn,
-      bool createdUserDocument,
-      AsyncValue<void>? appStartupState});
 }
 
-/// @nodoc
-class __$$MyGoRouterListenableImplCopyWithImpl<$Res>
-    extends _$MyGoRouterListenableCopyWithImpl<$Res, _$MyGoRouterListenableImpl>
-    implements _$$MyGoRouterListenableImplCopyWith<$Res> {
-  __$$MyGoRouterListenableImplCopyWithImpl(_$MyGoRouterListenableImpl _value,
-      $Res Function(_$MyGoRouterListenableImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MyGoRouterListenable
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? signedIn = null,
-    Object? createdUserDocument = null,
-    Object? appStartupState = freezed,
-  }) {
-    return _then(_$MyGoRouterListenableImpl(
-      signedIn: null == signedIn
-          ? _value.signedIn
-          : signedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdUserDocument: null == createdUserDocument
-          ? _value.createdUserDocument
-          : createdUserDocument // ignore: cast_nullable_to_non_nullable
-              as bool,
-      appStartupState: freezed == appStartupState
-          ? _value.appStartupState
-          : appStartupState // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<void>?,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$MyGoRouterListenableImpl
-    with DiagnosticableTreeMixin
-    implements _MyGoRouterListenable {
-  const _$MyGoRouterListenableImpl(
-      {this.signedIn = false,
-      this.createdUserDocument = false,
-      this.appStartupState});
 
-  @override
-  @JsonKey()
-  final bool signedIn;
-  @override
-  @JsonKey()
-  final bool createdUserDocument;
-  @override
-  final AsyncValue<void>? appStartupState;
+class _MyGoRouterListenable with DiagnosticableTreeMixin implements MyGoRouterListenable {
+  const _MyGoRouterListenable({this.signedIn = false, this.createdUserDocument = false, this.appStartupState});
+  
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MyGoRouterListenable(signedIn: $signedIn, createdUserDocument: $createdUserDocument, appStartupState: $appStartupState)';
-  }
+@override@JsonKey() final  bool signedIn;
+@override@JsonKey() final  bool createdUserDocument;
+@override final  AsyncValue<void>? appStartupState;
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'MyGoRouterListenable'))
-      ..add(DiagnosticsProperty('signedIn', signedIn))
-      ..add(DiagnosticsProperty('createdUserDocument', createdUserDocument))
-      ..add(DiagnosticsProperty('appStartupState', appStartupState));
-  }
+/// Create a copy of MyGoRouterListenable
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MyGoRouterListenableCopyWith<_MyGoRouterListenable> get copyWith => __$MyGoRouterListenableCopyWithImpl<_MyGoRouterListenable>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MyGoRouterListenableImpl &&
-            (identical(other.signedIn, signedIn) ||
-                other.signedIn == signedIn) &&
-            (identical(other.createdUserDocument, createdUserDocument) ||
-                other.createdUserDocument == createdUserDocument) &&
-            (identical(other.appStartupState, appStartupState) ||
-                other.appStartupState == appStartupState));
-  }
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, signedIn, createdUserDocument, appStartupState);
-
-  /// Create a copy of MyGoRouterListenable
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MyGoRouterListenableImplCopyWith<_$MyGoRouterListenableImpl>
-      get copyWith =>
-          __$$MyGoRouterListenableImplCopyWithImpl<_$MyGoRouterListenableImpl>(
-              this, _$identity);
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'MyGoRouterListenable'))
+    ..add(DiagnosticsProperty('signedIn', signedIn))..add(DiagnosticsProperty('createdUserDocument', createdUserDocument))..add(DiagnosticsProperty('appStartupState', appStartupState));
 }
 
-abstract class _MyGoRouterListenable implements MyGoRouterListenable {
-  const factory _MyGoRouterListenable(
-      {final bool signedIn,
-      final bool createdUserDocument,
-      final AsyncValue<void>? appStartupState}) = _$MyGoRouterListenableImpl;
-
-  @override
-  bool get signedIn;
-  @override
-  bool get createdUserDocument;
-  @override
-  AsyncValue<void>? get appStartupState;
-
-  /// Create a copy of MyGoRouterListenable
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MyGoRouterListenableImplCopyWith<_$MyGoRouterListenableImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyGoRouterListenable&&(identical(other.signedIn, signedIn) || other.signedIn == signedIn)&&(identical(other.createdUserDocument, createdUserDocument) || other.createdUserDocument == createdUserDocument)&&(identical(other.appStartupState, appStartupState) || other.appStartupState == appStartupState));
 }
+
+
+@override
+int get hashCode => Object.hash(runtimeType,signedIn,createdUserDocument,appStartupState);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'MyGoRouterListenable(signedIn: $signedIn, createdUserDocument: $createdUserDocument, appStartupState: $appStartupState)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MyGoRouterListenableCopyWith<$Res> implements $MyGoRouterListenableCopyWith<$Res> {
+  factory _$MyGoRouterListenableCopyWith(_MyGoRouterListenable value, $Res Function(_MyGoRouterListenable) _then) = __$MyGoRouterListenableCopyWithImpl;
+@override @useResult
+$Res call({
+ bool signedIn, bool createdUserDocument, AsyncValue<void>? appStartupState
+});
+
+
+
+
+}
+/// @nodoc
+class __$MyGoRouterListenableCopyWithImpl<$Res>
+    implements _$MyGoRouterListenableCopyWith<$Res> {
+  __$MyGoRouterListenableCopyWithImpl(this._self, this._then);
+
+  final _MyGoRouterListenable _self;
+  final $Res Function(_MyGoRouterListenable) _then;
+
+/// Create a copy of MyGoRouterListenable
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? signedIn = null,Object? createdUserDocument = null,Object? appStartupState = freezed,}) {
+  return _then(_MyGoRouterListenable(
+signedIn: null == signedIn ? _self.signedIn : signedIn // ignore: cast_nullable_to_non_nullable
+as bool,createdUserDocument: null == createdUserDocument ? _self.createdUserDocument : createdUserDocument // ignore: cast_nullable_to_non_nullable
+as bool,appStartupState: freezed == appStartupState ? _self.appStartupState : appStartupState // ignore: cast_nullable_to_non_nullable
+as AsyncValue<void>?,
+  ));
+}
+
+
+}
+
+// dart format on

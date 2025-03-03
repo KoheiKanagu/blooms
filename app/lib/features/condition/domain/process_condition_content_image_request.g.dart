@@ -8,22 +8,17 @@ part of 'process_condition_content_image_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProcessConditionContentImageRequestImpl
-    _$$ProcessConditionContentImageRequestImplFromJson(
-            Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ProcessConditionContentImageRequestImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ProcessConditionContentImageRequestImpl(
-              base64: $checkedConvert('base64', (v) => v as String),
-            );
-            return val;
-          },
-        );
+_ProcessConditionContentImageRequest
+_$ProcessConditionContentImageRequestFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_ProcessConditionContentImageRequest', json, (
+      $checkedConvert,
+    ) {
+      final val = _ProcessConditionContentImageRequest(
+        base64: $checkedConvert('base64', (v) => v as String),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$ProcessConditionContentImageRequestImplToJson(
-        _$ProcessConditionContentImageRequestImpl instance) =>
-    <String, dynamic>{
-      'base64': instance.base64,
-    };
+Map<String, dynamic> _$ProcessConditionContentImageRequestToJson(
+  _ProcessConditionContentImageRequest instance,
+) => <String, dynamic>{'base64': instance.base64};

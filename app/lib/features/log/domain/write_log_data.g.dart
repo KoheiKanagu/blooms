@@ -8,21 +8,19 @@ part of 'write_log_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WriteLogDataImpl _$$WriteLogDataImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$WriteLogDataImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$WriteLogDataImpl(
-          level: $checkedConvert(
-              'level', (v) => $enumDecode(_$LogLevelEnumMap, v)),
-          log: $checkedConvert('log', (v) => v as Map<String, dynamic>),
-        );
-        return val;
-      },
-    );
+_WriteLogData _$WriteLogDataFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_WriteLogData', json, ($checkedConvert) {
+      final val = _WriteLogData(
+        level: $checkedConvert(
+          'level',
+          (v) => $enumDecode(_$LogLevelEnumMap, v),
+        ),
+        log: $checkedConvert('log', (v) => v as Map<String, dynamic>),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$WriteLogDataImplToJson(_$WriteLogDataImpl instance) =>
+Map<String, dynamic> _$WriteLogDataToJson(_WriteLogData instance) =>
     <String, dynamic>{
       'level': _$LogLevelEnumMap[instance.level]!,
       'log': instance.log,

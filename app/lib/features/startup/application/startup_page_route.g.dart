@@ -8,22 +8,19 @@ part of 'startup_page_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $appStartupPageRoute,
-    ];
+List<RouteBase> get $appRoutes => [$appStartupPageRoute];
 
 RouteBase get $appStartupPageRoute => GoRouteData.$route(
-      path: '/startup',
-      factory: $AppStartupPageRouteExtension._fromState,
-    );
+  path: '/startup',
+
+  factory: $AppStartupPageRouteExtension._fromState,
+);
 
 extension $AppStartupPageRouteExtension on AppStartupPageRoute {
   static AppStartupPageRoute _fromState(GoRouterState state) =>
       const AppStartupPageRoute();
 
-  String get location => GoRouteData.$location(
-        '/startup',
-      );
+  String get location => GoRouteData.$location('/startup');
 
   void go(BuildContext context) => context.go(location);
 

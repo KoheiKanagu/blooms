@@ -8,30 +8,27 @@ part of 'process_condition_content_image_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProcessConditionContentImageResponseImpl
-    _$$ProcessConditionContentImageResponseImplFromJson(
-            Map<String, dynamic> json) =>
-        $checkedCreate(
-          r'_$ProcessConditionContentImageResponseImpl',
-          json,
-          ($checkedConvert) {
-            final val = _$ProcessConditionContentImageResponseImpl(
-              gsFilePath: $checkedConvert('gsFilePath', (v) => v as String),
-              blurHash: $checkedConvert('blurHash', (v) => v as String),
-              width: $checkedConvert('width', (v) => (v as num).toInt()),
-              height: $checkedConvert('height', (v) => (v as num).toInt()),
-              mimeType: $checkedConvert('mimeType', (v) => v as String),
-            );
-            return val;
-          },
-        );
+_ProcessConditionContentImageResponse
+_$ProcessConditionContentImageResponseFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_ProcessConditionContentImageResponse', json, (
+      $checkedConvert,
+    ) {
+      final val = _ProcessConditionContentImageResponse(
+        gsFilePath: $checkedConvert('gsFilePath', (v) => v as String),
+        blurHash: $checkedConvert('blurHash', (v) => v as String),
+        width: $checkedConvert('width', (v) => (v as num).toInt()),
+        height: $checkedConvert('height', (v) => (v as num).toInt()),
+        mimeType: $checkedConvert('mimeType', (v) => v as String),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$ProcessConditionContentImageResponseImplToJson(
-        _$ProcessConditionContentImageResponseImpl instance) =>
-    <String, dynamic>{
-      'gsFilePath': instance.gsFilePath,
-      'blurHash': instance.blurHash,
-      'width': instance.width,
-      'height': instance.height,
-      'mimeType': instance.mimeType,
-    };
+Map<String, dynamic> _$ProcessConditionContentImageResponseToJson(
+  _ProcessConditionContentImageResponse instance,
+) => <String, dynamic>{
+  'gsFilePath': instance.gsFilePath,
+  'blurHash': instance.blurHash,
+  'width': instance.width,
+  'height': instance.height,
+  'mimeType': instance.mimeType,
+};

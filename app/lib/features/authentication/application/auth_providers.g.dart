@@ -54,14 +54,15 @@ String _$authSignOutWhenFirstRunHash() =>
 @ProviderFor(authSignOutWhenFirstRun)
 final authSignOutWhenFirstRunProvider =
     AutoDisposeFutureProvider<void>.internal(
-  authSignOutWhenFirstRun,
-  name: r'authSignOutWhenFirstRunProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$authSignOutWhenFirstRunHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      authSignOutWhenFirstRun,
+      name: r'authSignOutWhenFirstRunProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$authSignOutWhenFirstRunHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

@@ -8,27 +8,31 @@ part of 'highlight.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HighlightImpl _$$HighlightImplFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      r'_$HighlightImpl',
-      json,
-      ($checkedConvert) {
-        final val = _$HighlightImpl(
-          subjectUid: $checkedConvert('subjectUid', (v) => v as String),
-          content: $checkedConvert('content',
-              (v) => HighlightContent.fromJson(v as Map<String, dynamic>)),
-          createdAt: $checkedConvert(
-              'createdAt', (v) => const TimestampConverter().fromJson(v)),
-          updatedAt: $checkedConvert(
-              'updatedAt', (v) => const TimestampConverter().fromJson(v)),
-          deletedAt: $checkedConvert(
-              'deletedAt', (v) => const TimestampConverter().fromJson(v)),
-        );
-        return val;
-      },
-    );
+_Highlight _$HighlightFromJson(Map<String, dynamic> json) =>
+    $checkedCreate('_Highlight', json, ($checkedConvert) {
+      final val = _Highlight(
+        subjectUid: $checkedConvert('subjectUid', (v) => v as String),
+        content: $checkedConvert(
+          'content',
+          (v) => HighlightContent.fromJson(v as Map<String, dynamic>),
+        ),
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+        deletedAt: $checkedConvert(
+          'deletedAt',
+          (v) => const TimestampConverter().fromJson(v),
+        ),
+      );
+      return val;
+    });
 
-Map<String, dynamic> _$$HighlightImplToJson(_$HighlightImpl instance) =>
+Map<String, dynamic> _$HighlightToJson(_Highlight instance) =>
     <String, dynamic>{
       'subjectUid': instance.subjectUid,
       'content': instance.content.toJson(),

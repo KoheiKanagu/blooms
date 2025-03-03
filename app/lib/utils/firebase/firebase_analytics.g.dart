@@ -14,14 +14,15 @@ String _$firebaseAnalyticsHash() => r'a8039134efd65fe5f2b3009d3685423d7eefe2dd';
 @ProviderFor(firebaseAnalytics)
 final firebaseAnalyticsProvider =
     AutoDisposeProvider<FirebaseAnalytics>.internal(
-  firebaseAnalytics,
-  name: r'firebaseAnalyticsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseAnalyticsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      firebaseAnalytics,
+      name: r'firebaseAnalyticsProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$firebaseAnalyticsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -32,12 +33,15 @@ String _$firebaseAnalyticsControllerHash() =>
 /// See also [FirebaseAnalyticsController].
 @ProviderFor(FirebaseAnalyticsController)
 final firebaseAnalyticsControllerProvider = AutoDisposeNotifierProvider<
-    FirebaseAnalyticsController, FirebaseAnalytics>.internal(
+  FirebaseAnalyticsController,
+  FirebaseAnalytics
+>.internal(
   FirebaseAnalyticsController.new,
   name: r'firebaseAnalyticsControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseAnalyticsControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseAnalyticsControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

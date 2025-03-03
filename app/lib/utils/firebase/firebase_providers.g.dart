@@ -15,9 +15,10 @@ String _$firebaseFirestoreHash() => r'211c9d7cd91051da8adfacbf85a09b8bad1d41e8';
 final firebaseFirestoreProvider = Provider<FirebaseFirestore>.internal(
   firebaseFirestore,
   name: r'firebaseFirestoreProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseFirestoreHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseFirestoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -33,9 +34,10 @@ String _$firebaseCrashlyticsHash() =>
 final firebaseCrashlyticsProvider = Provider<FirebaseCrashlytics>.internal(
   firebaseCrashlytics,
   name: r'firebaseCrashlyticsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseCrashlyticsHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseCrashlyticsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -66,9 +68,10 @@ String _$firebaseStorageHash() => r'4d34fbbd82ac849c74805e19a05079afa5e20cad';
 final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
   firebaseStorage,
   name: r'firebaseStorageProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseStorageHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseStorageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -112,21 +115,15 @@ class FirebaseStorageGsFileDownloadUrlFamily
   const FirebaseStorageGsFileDownloadUrlFamily();
 
   /// See also [firebaseStorageGsFileDownloadUrl].
-  FirebaseStorageGsFileDownloadUrlProvider call({
-    required String fileUri,
-  }) {
-    return FirebaseStorageGsFileDownloadUrlProvider(
-      fileUri: fileUri,
-    );
+  FirebaseStorageGsFileDownloadUrlProvider call({required String fileUri}) {
+    return FirebaseStorageGsFileDownloadUrlProvider(fileUri: fileUri);
   }
 
   @override
   FirebaseStorageGsFileDownloadUrlProvider getProviderOverride(
     covariant FirebaseStorageGsFileDownloadUrlProvider provider,
   ) {
-    return call(
-      fileUri: provider.fileUri,
-    );
+    return call(fileUri: provider.fileUri);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -148,24 +145,23 @@ class FirebaseStorageGsFileDownloadUrlFamily
 class FirebaseStorageGsFileDownloadUrlProvider
     extends AutoDisposeFutureProvider<String> {
   /// See also [firebaseStorageGsFileDownloadUrl].
-  FirebaseStorageGsFileDownloadUrlProvider({
-    required String fileUri,
-  }) : this._internal(
-          (ref) => firebaseStorageGsFileDownloadUrl(
-            ref as FirebaseStorageGsFileDownloadUrlRef,
-            fileUri: fileUri,
-          ),
-          from: firebaseStorageGsFileDownloadUrlProvider,
-          name: r'firebaseStorageGsFileDownloadUrlProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$firebaseStorageGsFileDownloadUrlHash,
-          dependencies: FirebaseStorageGsFileDownloadUrlFamily._dependencies,
-          allTransitiveDependencies:
-              FirebaseStorageGsFileDownloadUrlFamily._allTransitiveDependencies,
+  FirebaseStorageGsFileDownloadUrlProvider({required String fileUri})
+    : this._internal(
+        (ref) => firebaseStorageGsFileDownloadUrl(
+          ref as FirebaseStorageGsFileDownloadUrlRef,
           fileUri: fileUri,
-        );
+        ),
+        from: firebaseStorageGsFileDownloadUrlProvider,
+        name: r'firebaseStorageGsFileDownloadUrlProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$firebaseStorageGsFileDownloadUrlHash,
+        dependencies: FirebaseStorageGsFileDownloadUrlFamily._dependencies,
+        allTransitiveDependencies:
+            FirebaseStorageGsFileDownloadUrlFamily._allTransitiveDependencies,
+        fileUri: fileUri,
+      );
 
   FirebaseStorageGsFileDownloadUrlProvider._internal(
     super._createNotifier, {
@@ -182,7 +178,7 @@ class FirebaseStorageGsFileDownloadUrlProvider
   @override
   Override overrideWith(
     FutureOr<String> Function(FirebaseStorageGsFileDownloadUrlRef provider)
-        create,
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -243,9 +239,10 @@ String _$firebaseFunctionsHash() => r'097fd9df60c1e156f273cabdfd9196deb30b9f18';
 final firebaseFunctionsProvider = Provider<FirebaseFunctions>.internal(
   firebaseFunctions,
   name: r'firebaseFunctionsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseFunctionsHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseFunctionsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

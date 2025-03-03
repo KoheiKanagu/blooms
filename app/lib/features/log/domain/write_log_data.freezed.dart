@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,182 +10,148 @@ part of 'write_log_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-WriteLogData _$WriteLogDataFromJson(Map<String, dynamic> json) {
-  return _WriteLogData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$WriteLogData {
-  LogLevel get level => throw _privateConstructorUsedError;
-  Map<String, dynamic> get log => throw _privateConstructorUsedError;
+
+ LogLevel get level; Json get log;
+/// Create a copy of WriteLogData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WriteLogDataCopyWith<WriteLogData> get copyWith => _$WriteLogDataCopyWithImpl<WriteLogData>(this as WriteLogData, _$identity);
 
   /// Serializes this WriteLogData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of WriteLogData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WriteLogDataCopyWith<WriteLogData> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WriteLogData&&(identical(other.level, level) || other.level == level)&&const DeepCollectionEquality().equals(other.log, log));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,level,const DeepCollectionEquality().hash(log));
+
+@override
+String toString() {
+  return 'WriteLogData(level: $level, log: $log)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $WriteLogDataCopyWith<$Res> {
-  factory $WriteLogDataCopyWith(
-          WriteLogData value, $Res Function(WriteLogData) then) =
-      _$WriteLogDataCopyWithImpl<$Res, WriteLogData>;
-  @useResult
-  $Res call({LogLevel level, Map<String, dynamic> log});
-}
+abstract mixin class $WriteLogDataCopyWith<$Res>  {
+  factory $WriteLogDataCopyWith(WriteLogData value, $Res Function(WriteLogData) _then) = _$WriteLogDataCopyWithImpl;
+@useResult
+$Res call({
+ LogLevel level, Map<String, dynamic> log
+});
 
+
+
+
+}
 /// @nodoc
-class _$WriteLogDataCopyWithImpl<$Res, $Val extends WriteLogData>
+class _$WriteLogDataCopyWithImpl<$Res>
     implements $WriteLogDataCopyWith<$Res> {
-  _$WriteLogDataCopyWithImpl(this._value, this._then);
+  _$WriteLogDataCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WriteLogData _self;
+  final $Res Function(WriteLogData) _then;
 
-  /// Create a copy of WriteLogData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? level = null,
-    Object? log = null,
-  }) {
-    return _then(_value.copyWith(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as LogLevel,
-      log: null == log
-          ? _value.log
-          : log // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ) as $Val);
-  }
+/// Create a copy of WriteLogData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? level = null,Object? log = null,}) {
+  return _then(_self.copyWith(
+level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
+as LogLevel,log: null == log ? _self.log! : log // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$WriteLogDataImplCopyWith<$Res>
-    implements $WriteLogDataCopyWith<$Res> {
-  factory _$$WriteLogDataImplCopyWith(
-          _$WriteLogDataImpl value, $Res Function(_$WriteLogDataImpl) then) =
-      __$$WriteLogDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({LogLevel level, Map<String, dynamic> log});
 }
 
-/// @nodoc
-class __$$WriteLogDataImplCopyWithImpl<$Res>
-    extends _$WriteLogDataCopyWithImpl<$Res, _$WriteLogDataImpl>
-    implements _$$WriteLogDataImplCopyWith<$Res> {
-  __$$WriteLogDataImplCopyWithImpl(
-      _$WriteLogDataImpl _value, $Res Function(_$WriteLogDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WriteLogData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? level = null,
-    Object? log = null,
-  }) {
-    return _then(_$WriteLogDataImpl(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as LogLevel,
-      log: null == log
-          ? _value._log
-          : log // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$WriteLogDataImpl implements _WriteLogData {
-  const _$WriteLogDataImpl(
-      {required this.level, required final Map<String, dynamic> log})
-      : _log = log;
 
-  factory _$WriteLogDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WriteLogDataImplFromJson(json);
+class _WriteLogData implements WriteLogData {
+  const _WriteLogData({required this.level, required final  Map<String, dynamic> log}): _log = log;
+  factory _WriteLogData.fromJson(Map<String, dynamic> json) => _$WriteLogDataFromJson(json);
 
-  @override
-  final LogLevel level;
-  final Map<String, dynamic> _log;
-  @override
-  Map<String, dynamic> get log {
-    if (_log is EqualUnmodifiableMapView) return _log;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_log);
-  }
-
-  @override
-  String toString() {
-    return 'WriteLogData(level: $level, log: $log)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WriteLogDataImpl &&
-            (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(other._log, _log));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, level, const DeepCollectionEquality().hash(_log));
-
-  /// Create a copy of WriteLogData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WriteLogDataImplCopyWith<_$WriteLogDataImpl> get copyWith =>
-      __$$WriteLogDataImplCopyWithImpl<_$WriteLogDataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WriteLogDataImplToJson(
-      this,
-    );
-  }
+@override final  LogLevel level;
+ final  Map<String, dynamic> _log;
+@override Map<String, dynamic> get log {
+  if (_log is EqualUnmodifiableMapView) return _log;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_log);
 }
 
-abstract class _WriteLogData implements WriteLogData {
-  const factory _WriteLogData(
-      {required final LogLevel level,
-      required final Map<String, dynamic> log}) = _$WriteLogDataImpl;
 
-  factory _WriteLogData.fromJson(Map<String, dynamic> json) =
-      _$WriteLogDataImpl.fromJson;
+/// Create a copy of WriteLogData
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$WriteLogDataCopyWith<_WriteLogData> get copyWith => __$WriteLogDataCopyWithImpl<_WriteLogData>(this, _$identity);
 
-  @override
-  LogLevel get level;
-  @override
-  Map<String, dynamic> get log;
-
-  /// Create a copy of WriteLogData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WriteLogDataImplCopyWith<_$WriteLogDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$WriteLogDataToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WriteLogData&&(identical(other.level, level) || other.level == level)&&const DeepCollectionEquality().equals(other._log, _log));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,level,const DeepCollectionEquality().hash(_log));
+
+@override
+String toString() {
+  return 'WriteLogData(level: $level, log: $log)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$WriteLogDataCopyWith<$Res> implements $WriteLogDataCopyWith<$Res> {
+  factory _$WriteLogDataCopyWith(_WriteLogData value, $Res Function(_WriteLogData) _then) = __$WriteLogDataCopyWithImpl;
+@override @useResult
+$Res call({
+ LogLevel level, Map<String, dynamic> log
+});
+
+
+
+
+}
+/// @nodoc
+class __$WriteLogDataCopyWithImpl<$Res>
+    implements _$WriteLogDataCopyWith<$Res> {
+  __$WriteLogDataCopyWithImpl(this._self, this._then);
+
+  final _WriteLogData _self;
+  final $Res Function(_WriteLogData) _then;
+
+/// Create a copy of WriteLogData
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? level = null,Object? log = null,}) {
+  return _then(_WriteLogData(
+level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
+as LogLevel,log: null == log ? _self._log : log // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,
+  ));
+}
+
+
+}
+
+// dart format on

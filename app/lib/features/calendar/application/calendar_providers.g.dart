@@ -16,9 +16,10 @@ String _$calendarSelectedDateHash() =>
 final calendarSelectedDateProvider = AutoDisposeProvider<DateTime>.internal(
   calendarSelectedDate,
   name: r'calendarSelectedDateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$calendarSelectedDateHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$calendarSelectedDateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

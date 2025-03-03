@@ -15,14 +15,15 @@ String _$userCollectionReferenceHash() =>
 @ProviderFor(userCollectionReference)
 final userCollectionReferenceProvider =
     Provider<CollectionReference<User>>.internal(
-  userCollectionReference,
-  name: r'userCollectionReferenceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userCollectionReferenceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      userCollectionReference,
+      name: r'userCollectionReferenceProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$userCollectionReferenceHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -62,21 +63,15 @@ class UserDocumentSnapshotFamily
   const UserDocumentSnapshotFamily();
 
   /// See also [userDocumentSnapshot].
-  UserDocumentSnapshotProvider call(
-    String uid,
-  ) {
-    return UserDocumentSnapshotProvider(
-      uid,
-    );
+  UserDocumentSnapshotProvider call(String uid) {
+    return UserDocumentSnapshotProvider(uid);
   }
 
   @override
   UserDocumentSnapshotProvider getProviderOverride(
     covariant UserDocumentSnapshotProvider provider,
   ) {
-    return call(
-      provider.uid,
-    );
+    return call(provider.uid);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -98,24 +93,20 @@ class UserDocumentSnapshotFamily
 class UserDocumentSnapshotProvider
     extends AutoDisposeStreamProvider<DocumentSnapshot<User>> {
   /// See also [userDocumentSnapshot].
-  UserDocumentSnapshotProvider(
-    String uid,
-  ) : this._internal(
-          (ref) => userDocumentSnapshot(
-            ref as UserDocumentSnapshotRef,
-            uid,
-          ),
-          from: userDocumentSnapshotProvider,
-          name: r'userDocumentSnapshotProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$userDocumentSnapshotHash,
-          dependencies: UserDocumentSnapshotFamily._dependencies,
-          allTransitiveDependencies:
-              UserDocumentSnapshotFamily._allTransitiveDependencies,
-          uid: uid,
-        );
+  UserDocumentSnapshotProvider(String uid)
+    : this._internal(
+        (ref) => userDocumentSnapshot(ref as UserDocumentSnapshotRef, uid),
+        from: userDocumentSnapshotProvider,
+        name: r'userDocumentSnapshotProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$userDocumentSnapshotHash,
+        dependencies: UserDocumentSnapshotFamily._dependencies,
+        allTransitiveDependencies:
+            UserDocumentSnapshotFamily._allTransitiveDependencies,
+        uid: uid,
+      );
 
   UserDocumentSnapshotProvider._internal(
     super._createNotifier, {
@@ -132,7 +123,7 @@ class UserDocumentSnapshotProvider
   @override
   Override overrideWith(
     Stream<DocumentSnapshot<User>> Function(UserDocumentSnapshotRef provider)
-        create,
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -196,21 +187,15 @@ class UserDeleteFamily extends Family<AsyncValue<void>> {
   const UserDeleteFamily();
 
   /// See also [userDelete].
-  UserDeleteProvider call({
-    required DocumentReference<User> reference,
-  }) {
-    return UserDeleteProvider(
-      reference: reference,
-    );
+  UserDeleteProvider call({required DocumentReference<User> reference}) {
+    return UserDeleteProvider(reference: reference);
   }
 
   @override
   UserDeleteProvider getProviderOverride(
     covariant UserDeleteProvider provider,
   ) {
-    return call(
-      reference: provider.reference,
-    );
+    return call(reference: provider.reference);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -231,24 +216,19 @@ class UserDeleteFamily extends Family<AsyncValue<void>> {
 /// See also [userDelete].
 class UserDeleteProvider extends AutoDisposeFutureProvider<void> {
   /// See also [userDelete].
-  UserDeleteProvider({
-    required DocumentReference<User> reference,
-  }) : this._internal(
-          (ref) => userDelete(
-            ref as UserDeleteRef,
-            reference: reference,
-          ),
-          from: userDeleteProvider,
-          name: r'userDeleteProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$userDeleteHash,
-          dependencies: UserDeleteFamily._dependencies,
-          allTransitiveDependencies:
-              UserDeleteFamily._allTransitiveDependencies,
-          reference: reference,
-        );
+  UserDeleteProvider({required DocumentReference<User> reference})
+    : this._internal(
+        (ref) => userDelete(ref as UserDeleteRef, reference: reference),
+        from: userDeleteProvider,
+        name: r'userDeleteProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$userDeleteHash,
+        dependencies: UserDeleteFamily._dependencies,
+        allTransitiveDependencies: UserDeleteFamily._allTransitiveDependencies,
+        reference: reference,
+      );
 
   UserDeleteProvider._internal(
     super._createNotifier, {
