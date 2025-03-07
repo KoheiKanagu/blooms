@@ -1,7 +1,7 @@
 import { Content, FileDataPart, Part } from '@google-cloud/vertexai';
 import { FieldValue } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { outSensitiveLog } from '../../../utils/sensitive_log';
+import { outSensitiveLog, outSensitiveLogWithJsonStringify } from '../../../utils/sensitive_log';
 import { Condition } from '../domain/condition';
 import { setupGenerativeModel } from './setupGenerativeModel';
 
@@ -9,29 +9,51 @@ function createParts(condition: Condition): Part[] {
   const date = condition.createdAtIso8601;
 
   switch (condition.content.type) {
-    case 'text':
+    case 'text': {
+      let text = condition.content.text.trim();
+      if (text.length === 0) {
+        text = 'null';
+      }
+
       switch (condition.creatorType) {
         case 'user':
           return [{
-            text: `${date} のユーザの記録: ${condition.content.text}`,
+            text: `${date}: ${text}`,
           }];
         case 'model':
           return [{
-            text: `BLOOMSの回答: ${condition.content.text}`,
+            text: `${text}`,
           }];
       }
+    }
 
-    case 'textWithSearchKeywords':
-      return [{
-        text: `BLOOMSの回答: ${condition.content.text}`,
-      }, {
-        text: `検索キーワード: ${condition.content.searchKeywords.join(', ')}`,
-      }];
+    case 'textWithSearchKeywords': {
+      let text = condition.content.text.trim();
+      if (text.length === 0) {
+        text = 'null';
+      }
+
+      const searchKeywords = condition.content.searchKeywords;
+
+      if (searchKeywords.length === 0) {
+        return [{
+          text: `${text}`,
+        }];
+      } else {
+        return [
+          {
+            text: `${text}`,
+          }, {
+            text: `${searchKeywords.join(', ')}`,
+          },
+        ];
+      }
+    }
 
     case 'image':
       return [
         {
-          text: `${date} のユーザの記録`,
+          text: `${date}`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -44,7 +66,7 @@ function createParts(condition: Condition): Part[] {
     case 'audio':
       return [
         {
-          text: `${date} のユーザの記録`,
+          text: `${date}`,
         },
         ...condition.content.attachments.map<FileDataPart>(attachment => ({
           fileData: {
@@ -87,7 +109,7 @@ export async function requestGenerativeModel(
     // 内容が無い場合はスキップ
     return null;
   }
-  outSensitiveLog(`requestContents`, requestContents);
+  outSensitiveLogWithJsonStringify(`requestContents`, requestContents);
 
   // 生成
   const generatedResult = await generativeModel.generateContent({
@@ -100,8 +122,19 @@ export async function requestGenerativeModel(
   // https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output?hl=ja#considerations
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
 
-  const reply = jsonContent['reply'] as string;
-  const searchKeywords = jsonContent['searchKeywords'] as string[];
+  const shouldReply = jsonContent['shouldReply'] as boolean;
+  if (shouldReply === false) {
+    logger.info('shouldReply is false');
+    return null;
+  }
+
+  const reply = jsonContent['reply'] as string | null;
+  // shouldReplyがtrueの場合はreplyは必ず存在するはず
+  if (reply === null) {
+    throw new Error('reply is null');
+  }
+
+  const searchKeywords = jsonContent['searchKeywords'] as string[] | null;
 
   const newCondition: Condition = {
     createdAt: FieldValue.serverTimestamp(),
@@ -113,7 +146,7 @@ export async function requestGenerativeModel(
     content: {
       type: 'textWithSearchKeywords',
       text: reply,
-      searchKeywords: searchKeywords,
+      searchKeywords: searchKeywords ?? [],
     },
 
   };

@@ -2,7 +2,7 @@ import { DocumentData, DocumentReference, FieldValue, getFirestore } from 'fireb
 import { logger } from 'firebase-functions';
 import { CollectionPath } from '../../../utils/collectionPath';
 import { outSensitiveLog } from '../../../utils/sensitive_log';
-import { conditionConverter } from '../../condition/domain/condition';
+import { conditionConverter, CreatorType } from '../../condition/domain/condition';
 import { Highlight, HighlightContentSummary, highlightConverter, HighlightPeriod } from '../domain/highlight';
 import { requestGenerativeModel } from './requestGenerativeModel';
 import { updateHighlightContentState } from './updateHighlightContentState';
@@ -34,11 +34,13 @@ export async function updateHighlightContent(
     );
 
     // 解析対象のConditionsを探す
+    const creatorType: CreatorType = 'user';
     const conditions = await getFirestore()
       .collection(CollectionPath.CONDITIONS)
       .withConverter(conditionConverter)
       .where('deletedAt', '==', null)
       .where('subjectUid', '==', highlight.subjectUid)
+      .where('creatorType', '==', creatorType)
       .orderBy('createdAt', 'desc')
       // 対象の範囲
       .where('createdAt', '>=', startDate)

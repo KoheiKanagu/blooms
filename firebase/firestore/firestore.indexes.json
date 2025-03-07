@@ -23,6 +23,28 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "creatorType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "deletedAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subjectUid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "conditions_v1",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "deletedAt",
           "order": "ASCENDING"
         },
