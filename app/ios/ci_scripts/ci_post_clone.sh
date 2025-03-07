@@ -16,8 +16,8 @@ FLUTTER_VERSION=$(cat .fvmrc | grep "flutter" | cut -d '"' -f 4)
 
 # Install Flutter using curl.
 ARCHIVE_NAME="flutter_macos_$FLUTTER_VERSION-beta.zip"
-curl -sLO "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/$ARCHIVE_NAME"
-unzip -qq "$ARCHIVE_NAME" -d "$HOME"
+curl -sLO "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/$ARCHIVE_NAME" || exit 1
+unzip -qq "$ARCHIVE_NAME" -d "$HOME" || exit 1
 
 export PATH="$PATH:$HOME/flutter/bin"
 
