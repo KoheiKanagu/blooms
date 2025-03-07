@@ -10,8 +10,15 @@ cd app                           # change working directory to the app directory
 # Extract the Flutter version from .fvmrc file
 FLUTTER_VERSION=$(cat .fvmrc | grep "flutter" | cut -d '"' -f 4)
 
-# Install Flutter using git.
-git clone https://github.com/flutter/flutter.git --depth 1 -b "$FLUTTER_VERSION" "$HOME"/flutter
+# エラーになるのでcurlで対応: https://github.com/flutter/flutter/issues/163198
+# # Install Flutter using git.
+# git clone https://github.com/flutter/flutter.git --depth 1 -b "$FLUTTER_VERSION" "$HOME"/flutter
+
+# Install Flutter using curl.
+ARCHIVE_NAME="flutter_macos_$FLUTTER_VERSION-beta.zip"
+curl -sLO "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/$ARCHIVE_NAME" || exit 1
+unzip -qq "$ARCHIVE_NAME" -d "$HOME" || exit 1
+
 export PATH="$PATH:$HOME/flutter/bin"
 
 # Print the Flutter version
