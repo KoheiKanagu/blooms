@@ -226,7 +226,6 @@ export function setupGenerativeModel(highlightType: HighlightType): GenerativeMo
         maxOutputTokens: 8192,
         responseMimeType: 'application/json',
         responseSchema: responseSchema,
-        temperature: 2.0,
       },
       systemInstruction: systemInstruction,
     });

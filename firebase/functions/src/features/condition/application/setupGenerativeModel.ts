@@ -364,6 +364,7 @@ export function setupGenerativeModel(): GenerativeModel {
         maxOutputTokens: 8192,
         responseMimeType: 'application/json',
         responseSchema: responseSchema,
+        temperature: 2.0,
       },
       systemInstruction: systemInstruction,
     });

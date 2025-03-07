@@ -13,6 +13,9 @@ export function outSensitiveLog(...args: unknown[]) {
 
 export function outSensitiveLogWithJsonStringify(...args: unknown[]) {
   if (kAppEnvStg) {
-    logger.debug('[Sensitive Log]', JSON.stringify(args, null, 2));
+    logger.debug('[Sensitive Log]',
+      ...args.map(arg => JSON.stringify(arg, null, 2),
+      ),
+    );
   }
 }
