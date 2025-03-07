@@ -102,11 +102,15 @@ export async function requestGenerativeModel(
   const jsonContent = JSON.parse(response) as Record<string, unknown>;
   const gsFileUri = await savePrompt(uid, requestContents);
 
+  const summary = jsonContent['summary'] as string;
+  const abstract = jsonContent['abstract'] as string;
+
   const newContent: HighlightContentSummary = {
     ...content,
     promptFileUri: gsFileUri,
     state: 'success',
-    ...jsonContent,
+    summary: summary,
+    abstract: abstract,
   };
   outSensitiveLog(`newContent:`, newContent);
 

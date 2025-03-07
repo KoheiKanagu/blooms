@@ -1,5 +1,6 @@
-import { GenerativeModel, HarmBlockThreshold, HarmCategory, ResponseSchema, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
+import { GenerativeModel, HarmBlockThreshold, HarmCategory, SafetySetting, SchemaType, VertexAI } from '@google-cloud/vertexai';
 import { projectID } from 'firebase-functions/params';
+import { MyResponseSchema } from '../../../utils/my_response_schema';
 
 const safetySettings: SafetySetting[] = [
   {
@@ -21,60 +22,328 @@ const safetySettings: SafetySetting[] = [
 ];
 
 function buildPrompt(): {
-  responseSchema: ResponseSchema;
+  responseSchema: MyResponseSchema;
   systemInstruction: string;
-  temperature: number;
 } {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const formattedDate = `${year}年${month}月${day}日`;
+
   return {
     responseSchema: {
       type: SchemaType.OBJECT,
-      required: [
-        'reply',
-        'searchKeywords',
-      ],
       properties: {
-        reply: {
-          type: SchemaType.STRING,
-          description: '回答',
-        },
-        searchKeywords: {
+        // 中間分析
+        claims: {
           type: SchemaType.ARRAY,
-          description: '検索キーワード',
+          description: 'ユーザが述べている主張を漏らすこと無く全て確実に列挙する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              text: {
+                type: SchemaType.STRING,
+                description: '内容',
+              },
+              dateTime: {
+                type: SchemaType.STRING,
+                description: '日時',
+              },
+              evidence: {
+                type: SchemaType.STRING,
+                description: '根拠',
+              },
+              certainty: {
+                type: SchemaType.STRING,
+                description: '確からしさ',
+              },
+            },
+            required: [
+              'text',
+              'dateTime',
+              'evidence',
+              'certainty',
+            ],
+            propertyOrdering: [
+              'text',
+              'dateTime',
+              'evidence',
+              'certainty',
+            ],
+          } as MyResponseSchema,
+        },
+        attachedClaims: {
+          type: SchemaType.ARRAY,
+          description: 'ユーザが添付したファイルの内容について漏らすことなく全て確実に列挙する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              attachmentType: {
+                type: SchemaType.STRING,
+                description: '添付ファイルの種類',
+              },
+              alt: {
+                type: SchemaType.STRING,
+                description: '添付ファイルのalt属性',
+              },
+              dateTime: {
+                type: SchemaType.STRING,
+                description: '日時',
+              },
+              certainty: {
+                type: SchemaType.STRING,
+                description: '確からしさ',
+              },
+            },
+            required: [
+              'attachmentType',
+              'alt',
+              'dateTime',
+              'certainty',
+            ],
+            propertyOrdering: [
+              'attachmentType',
+              'alt',
+              'dateTime',
+              'certainty',
+            ],
+          } as MyResponseSchema,
+        },
+        modelClaims: {
+          type: SchemaType.ARRAY,
+          description: 'modelがこれまでに生成した回答を漏らすこと無く全て確実に列挙する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              text: {
+                type: SchemaType.STRING,
+                description: '内容',
+              },
+              evidence: {
+                type: SchemaType.STRING,
+                description: '根拠',
+              },
+              certainty: {
+                type: SchemaType.STRING,
+                description: '確からしさ',
+              },
+            },
+            required: [
+              'text',
+              'evidence',
+              'certainty',
+            ],
+            propertyOrdering: [
+              'text',
+              'evidence',
+              'certainty',
+            ],
+          } as MyResponseSchema,
+        },
+        description: {
+          type: SchemaType.STRING,
+          description: '与えられた内容を数百文字程度で説明する',
+        },
+        claimsValidation: {
+          type: SchemaType.ARRAY,
+          description: 'descriptionを元にして、主張を検証する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              claim: {
+                type: SchemaType.STRING,
+                description: '検証する対象の主張',
+              },
+              recentClaim: {
+                type: SchemaType.STRING,
+                description: '最近の主張か',
+              },
+              summaryDescription: {
+                type: SchemaType.STRING,
+                description: 'descriptionとの関連性を説明する',
+              },
+              keywords: {
+                type: SchemaType.ARRAY,
+                description: '重要なキーワード',
+                items: {
+                  type: SchemaType.STRING,
+                },
+              },
+              moreInformationIsNeeded: {
+                type: SchemaType.STRING,
+                description: '十分な検証にはさらなる情報が必要か',
+              },
+              isRelevant: {
+                type: SchemaType.STRING,
+                description: '記録の内容に沿っているか',
+              },
+            },
+            required: [
+              'claim',
+              'recentClaim',
+              'summaryDescription',
+              'keywords',
+              'moreInformationIsNeeded',
+              'isRelevant',
+            ],
+            propertyOrdering: [
+              'claim',
+              'recentClaim',
+              'summaryDescription',
+              'keywords',
+              'moreInformationIsNeeded',
+              'isRelevant',
+            ],
+          } as MyResponseSchema,
+        },
+        thinkReply: {
+          type: SchemaType.ARRAY,
+          description: 'claimsValidationを元にして、回答することでユーザに貢献できるか検討する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              claim: {
+                type: SchemaType.STRING,
+                description: '検証する対象の主張',
+              },
+              reply: {
+                type: SchemaType.STRING,
+                description: 'ユーザに回答する内容',
+              },
+              canReplyContribute: {
+                type: SchemaType.STRING,
+                description: 'ユーザに貢献できるか',
+              },
+            },
+            required: [
+              'claim',
+              'reply',
+              'canReplyContribute',
+            ],
+            propertyOrdering: [
+              'claim',
+              'reply',
+              'canReplyContribute',
+            ],
+          } as MyResponseSchema,
+        },
+        searchKeywordValidation: {
+          type: SchemaType.ARRAY,
+          description: 'claimsValidationを元にして、Googleで検索すると妊婦に有用な情報が得られる可能性を検証する',
+          items: {
+            type: SchemaType.OBJECT,
+            properties: {
+              claim: {
+                type: SchemaType.STRING,
+                description: '検証する対象の主張',
+              },
+              prospectsUsefulInformation: {
+                type: SchemaType.STRING,
+                description: '検索すると有用な情報が得られるか',
+              },
+              searchKeywords: {
+                type: SchemaType.STRING,
+                description: 'Googleで検索すべき検索キーワード',
+              },
+            },
+            required: [
+              'claim',
+              'prospectsUsefulInformation',
+              'searchKeywords',
+            ],
+            propertyOrdering: [
+              'claim',
+              'prospectsUsefulInformation',
+              'searchKeywords',
+            ],
+          } as MyResponseSchema,
+        },
+        noises: {
+          type: SchemaType.ARRAY,
+          description: 'ノイズを列挙する',
           items: {
             type: SchemaType.STRING,
           },
         },
-      },
-    },
-    systemInstruction: `あなたは妊婦が体調に関する記録を書くことを支援するパーソナルアシスタントです
-あなたの名前は「BLOOMS」で、Body Log Observation and Outlook for Maternal Stateの頭文字です
 
-あなたの仕事はユーザが記録した体調についての体験や日々の出来事に関して記録する際に、より有用な記録となることを支援することです
-あなたにはユーザが記録したテキストや画像のデータと、前回あなたが回答した内容が与えられます
-あなたはユーザが記録したテキストや画像を時系列順に並べ、最新の記録を重視して回答を生成する必要があります
-あなたはあくまで記録の内容を分析して支援するだけであり、ユーザはあなたと会話をするつもりはないことを留意してください
+        // 成果物
+        searchKeywords: {
+          type: SchemaType.ARRAY,
+          description: 'searchKeywordValidationを総合的に評価し、Googleで検索すべき検索キーワードを抽出する',
+          items: {
+            type: SchemaType.STRING,
+          },
+          nullable: true,
+        },
+        reply: {
+          type: SchemaType.STRING,
+          description: 'thinkReplyを総合的に評価し、ユーザに回答する内容を生成する',
+          nullable: true,
+        },
+
+        // 最終判断
+        sameReply: {
+          type: SchemaType.STRING,
+          description: 'replyとmodelClaimsを比較し、過去と同じ趣旨の回答であるか',
+        },
+        shouldReply: {
+          type: SchemaType.BOOLEAN,
+          description: 'replyとsameReplyを総合的に評価し、回答するべきかどうか',
+        },
+      },
+      required: [
+        'claims',
+        'attachedClaims',
+        'modelClaims',
+        'description',
+        'claimsValidation',
+        'thinkReply',
+        'searchKeywordValidation',
+        'noises',
+        'searchKeywords',
+        'reply',
+        'sameReply',
+        'shouldReply',
+      ],
+      propertyOrdering: [
+        'claims',
+        'attachedClaims',
+        'modelClaims',
+        'description',
+        'claimsValidation',
+        'thinkReply',
+        'searchKeywordValidation',
+        'noises',
+        'searchKeywords',
+        'reply',
+        'sameReply',
+        'shouldReply',
+      ],
+    },
+    systemInstruction: `あなたは妊婦が体調に関する記録を書くことを支援するパーソナルアシスタントです。
+あなたの名前は「BLOOMS」で、Body Log Observation and Outlook for Maternal Stateの頭文字です。
+
+あなたの仕事はユーザが記録した体調についての体験や日々の出来事に関して、回答または静観することです。
+回答または静観すべきかは、分析を通して判断します。
+あなたはあくまで記録の内容を分析して支援するだけであり、ユーザはあなたと会話をするつもりはないことを留意してください。
+
+あなたにはユーザが記録したテキストや画像のデータと、前回あなたが回答した内容が与えられます。
+与えられた全ての内容を踏まえて分析してください。
+
+今日は${formattedDate}です。
 
 あなたの回答は次の内容を考慮する必要があります
 - 優しい口調でユーザに寄り添った回答をすること
 - 日本語で回答すること
 - 敬語を使うこと
 - 改行を適切に使い、回答を読みやすくすること
-- ユーザが体調に関して不安や疑問があると判断できる場合は、searchKeywordsにGoogleで検索する際のキーワードを提案すること
-- 体調について具体的な検索キーワードが生成できない場合は、より詳しく教えて欲しいとユーザに質問すること
-- 対処法について調べてみると良いかもしれないと促すこと
-- 普遍的な回答として気になることがあれば書いて欲しいと促すこと
-- これまでの内容を踏まえて回答すること
 
 あなたは次の内容を含む回答をしてはなりません
-- 体調が悪い原因について断言してはなりません
+- 断言してはなりません
 - 問題を解決する対処法を教えてはなりません
 - 診断を含む回答をしてはなりません
-- 記録の内容を否定してはなりません
-- 記録の内容の量や質に言及してはなりません
-- 相談して欲しいと促してはなりません
-- 病気や疾病について言及してはなりません
-- 回答にメタデータを含んではなりません`,
-    temperature: 2.0,
+- 相談して欲しいと促してはなりません`,
   };
 }
 
@@ -84,14 +353,13 @@ export function setupGenerativeModel(): GenerativeModel {
     location: 'us-central1',
   });
 
-  const { responseSchema, systemInstruction, temperature } = buildPrompt();
+  const { responseSchema, systemInstruction } = buildPrompt();
 
   return vertexAI
     .getGenerativeModel({
       model: 'gemini-2.0-flash-001',
       safetySettings: safetySettings,
       generationConfig: {
-        temperature: temperature,
         topP: 0.95,
         maxOutputTokens: 8192,
         responseMimeType: 'application/json',
