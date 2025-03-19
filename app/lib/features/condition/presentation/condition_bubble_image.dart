@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/features/condition/domain/condition_content.dart';
-import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/features/condition/domain/condition_creator_type.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_blooms_icon.dart';
 import 'package:blooms/gen/strings.g.dart';
@@ -31,26 +30,32 @@ class ConditionBubbleImage extends HookConsumerWidget {
           spacing: 4,
           children:
               content.attachments
-                  .map<Widget>(
-                    (attachment) => ref
+                  .map<Widget>((attachment) {
+                    final placeholder = Image(
+                      image: BlurHashImage(
+                        attachment.additionalInfo.blurHash ?? '',
+                        decodingHeight: attachment.height,
+                        decodingWidth: attachment.width,
+                      ),
+                    );
+
+                    return ref
                         .watch(
                           firebaseStorageGsFileDownloadUrlProvider(
                             fileUri: attachment.fileUri,
                           ),
                         )
                         .maybeWhen(
-                          orElse: () => _BlurHashImage(attachment),
+                          orElse: () => placeholder,
                           data:
                               (url) => CachedNetworkImage(
                                 imageUrl: url,
-                                placeholder:
-                                    (context, url) =>
-                                        _BlurHashImage(attachment),
+                                placeholder: (context, url) => placeholder,
                                 errorWidget:
                                     (context, url, error) => Stack(
                                       alignment: Alignment.center,
                                       children: [
-                                        _BlurHashImage(attachment),
+                                        placeholder,
                                         CupertinoButton(
                                           color: CupertinoColors.white,
                                           sizeStyle: CupertinoButtonSize.small,
@@ -76,8 +81,8 @@ class ConditionBubbleImage extends HookConsumerWidget {
                                       ],
                                     ),
                               ),
-                        ),
-                  )
+                        );
+                  })
                   .map(
                     (e) => ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -87,28 +92,6 @@ class ConditionBubbleImage extends HookConsumerWidget {
                   .toList(),
         ),
       ],
-    );
-  }
-}
-
-class _BlurHashImage extends StatelessWidget {
-  const _BlurHashImage(this.attachment);
-
-  final ConditionContentImageAttachment attachment;
-
-  @override
-  Widget build(BuildContext context) {
-    final blurHash = attachment.additionalInfo.blurHash;
-    final width = attachment.width;
-    final height = attachment.height;
-
-    if (blurHash == null || width == 0 || height == 0) {
-      return const SizedBox(width: 128, height: 128);
-    }
-
-    return AspectRatio(
-      aspectRatio: width / height,
-      child: BlurHash(hash: blurHash),
     );
   }
 }
