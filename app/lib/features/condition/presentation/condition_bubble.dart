@@ -3,7 +3,7 @@ import 'package:blooms/features/condition/domain/condition_content.dart';
 import 'package:blooms/features/condition/domain/condition_creator_type.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_audio.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_empty.dart';
-import 'package:blooms/features/condition/presentation/condition_bubble_image.dart';
+import 'package:blooms/features/condition/presentation/condition_bubble_images.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_text.dart';
 import 'package:blooms/features/condition/presentation/condition_bubble_text_with_search_keywords.dart';
 import 'package:blooms/features/disclaimer/presentation/disclaimer_label.dart';
@@ -154,7 +154,7 @@ class ConditionBubble extends HookConsumerWidget {
                           content as ConditionContentTextWithSearchKeywords,
                           creatorType: creatorType,
                         ),
-                      ConditionContentImage() => ConditionBubbleImage(
+                      ConditionContentImage() => ConditionBubbleImages(
                         content as ConditionContentImage,
                         creatorType: creatorType,
                       ),
