@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProcessConditionContentImageRequest {
 
- String get base64;
+ List<int> get blob;
 /// Create a copy of ProcessConditionContentImageRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ProcessConditionContentImageRequestCopyWith<ProcessConditionContentImageRequest
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProcessConditionContentImageRequest&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProcessConditionContentImageRequest&&const DeepCollectionEquality().equals(other.blob, blob));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,base64);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(blob));
 
 @override
 String toString() {
-  return 'ProcessConditionContentImageRequest(base64: $base64)';
+  return 'ProcessConditionContentImageRequest(blob: $blob)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ProcessConditionContentImageRequestCopyWith<$Res>  {
   factory $ProcessConditionContentImageRequestCopyWith(ProcessConditionContentImageRequest value, $Res Function(ProcessConditionContentImageRequest) _then) = _$ProcessConditionContentImageRequestCopyWithImpl;
 @useResult
 $Res call({
- String base64
+ List<int> blob
 });
 
 
@@ -66,10 +66,10 @@ class _$ProcessConditionContentImageRequestCopyWithImpl<$Res>
 
 /// Create a copy of ProcessConditionContentImageRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? base64 = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? blob = null,}) {
   return _then(_self.copyWith(
-base64: null == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String,
+blob: null == blob ? _self.blob : blob // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 
@@ -80,10 +80,16 @@ as String,
 @JsonSerializable()
 
 class _ProcessConditionContentImageRequest implements ProcessConditionContentImageRequest {
-  const _ProcessConditionContentImageRequest({required this.base64});
+  const _ProcessConditionContentImageRequest({required final  List<int> blob}): _blob = blob;
   factory _ProcessConditionContentImageRequest.fromJson(Map<String, dynamic> json) => _$ProcessConditionContentImageRequestFromJson(json);
 
-@override final  String base64;
+ final  List<int> _blob;
+@override List<int> get blob {
+  if (_blob is EqualUnmodifiableListView) return _blob;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_blob);
+}
+
 
 /// Create a copy of ProcessConditionContentImageRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +104,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProcessConditionContentImageRequest&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProcessConditionContentImageRequest&&const DeepCollectionEquality().equals(other._blob, _blob));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,base64);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_blob));
 
 @override
 String toString() {
-  return 'ProcessConditionContentImageRequest(base64: $base64)';
+  return 'ProcessConditionContentImageRequest(blob: $blob)';
 }
 
 
@@ -118,7 +124,7 @@ abstract mixin class _$ProcessConditionContentImageRequestCopyWith<$Res> impleme
   factory _$ProcessConditionContentImageRequestCopyWith(_ProcessConditionContentImageRequest value, $Res Function(_ProcessConditionContentImageRequest) _then) = __$ProcessConditionContentImageRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String base64
+ List<int> blob
 });
 
 
@@ -135,10 +141,10 @@ class __$ProcessConditionContentImageRequestCopyWithImpl<$Res>
 
 /// Create a copy of ProcessConditionContentImageRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? base64 = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? blob = null,}) {
   return _then(_ProcessConditionContentImageRequest(
-base64: null == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String,
+blob: null == blob ? _self._blob : blob // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 

@@ -14,11 +14,14 @@ _$ProcessConditionContentImageRequestFromJson(Map<String, dynamic> json) =>
       $checkedConvert,
     ) {
       final val = _ProcessConditionContentImageRequest(
-        base64: $checkedConvert('base64', (v) => v as String),
+        blob: $checkedConvert(
+          'blob',
+          (v) => (v as List<dynamic>).map((e) => (e as num).toInt()).toList(),
+        ),
       );
       return val;
     });
 
 Map<String, dynamic> _$ProcessConditionContentImageRequestToJson(
   _ProcessConditionContentImageRequest instance,
-) => <String, dynamic>{'base64': instance.base64};
+) => <String, dynamic>{'blob': instance.blob};
