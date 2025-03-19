@@ -22,10 +22,18 @@ export const processConditionContentImage = onCall({
     throw new Error('Unauthorized');
   }
 
-  const date = request.data as ProcessConditionContentImageRequest;
+  const req = request.data as ProcessConditionContentImageRequest;
 
-  // base64の画像をデコード
-  const buffer = Buffer.from(date.base64, 'base64');
+  let buffer: Buffer;
+  if (req.base64 != null) {
+    // Base64にエンコードされた画像
+    buffer = Buffer.from(req.base64, 'base64');
+  } else if (req.blob != null) {
+    // Blobの画像
+    buffer = Buffer.from(req.blob);
+  } else {
+    throw new Error('Invalid image data');
+  }
 
   // リサイズ
   const resizedImage = sharp(buffer)

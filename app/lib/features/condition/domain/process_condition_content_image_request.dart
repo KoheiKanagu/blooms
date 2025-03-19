@@ -7,7 +7,7 @@ part 'process_condition_content_image_request.g.dart';
 @freezed
 abstract class ProcessConditionContentImageRequest
     with _$ProcessConditionContentImageRequest {
-  const factory ProcessConditionContentImageRequest({required String base64}) =
+  const factory ProcessConditionContentImageRequest({required List<int> blob}) =
       _ProcessConditionContentImageRequest;
 
   factory ProcessConditionContentImageRequest.fromJson(Json json) =>

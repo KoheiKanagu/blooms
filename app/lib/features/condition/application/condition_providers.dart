@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:blooms/constants/collection_path.dart';
@@ -80,7 +79,7 @@ Future<void> conditionCreateImage(
     logger.info('Upload image: ${xFile.path}');
 
     final request = ProcessConditionContentImageRequest(
-      base64: base64.encode(await xFile.readAsBytes()),
+      blob: await xFile.readAsBytes(),
     );
 
     final response = await ref
