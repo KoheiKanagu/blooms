@@ -47,37 +47,34 @@ jobs:
         include:
           - script: build_runner-build.sh
             os: ubuntu-latest
-            execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
           - script: dart-analyze.sh
             os: ubuntu-latest
-            execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
           - script: dart-fix.sh
             os: ubuntu-latest
-            execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
           - script: dart-format.sh
             os: ubuntu-latest
-            execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
           - script: test.sh
             os: ubuntu-latest
-            execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
           - script: build-ios-config-only.sh --flavor stg
             os: macos-latest
-            execute: ${{ needs.changed-files.outputs.pubspec_any_changed == 'true' }}
+
+    env:
+      execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
 
     steps:
       - name: Collect Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@v2.0.0
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         with:
           comment_on_pr: false
 
       ### Set up ###
       - uses: actions/checkout@v4
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
 
       - name: Pods Cache
         uses: actions/cache@v4.2.2
-        if: ${{ matrix.execute == 'true' && runner.os == 'macOS' }}
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
         with:
           path: |
             */ios/Pods
@@ -87,21 +84,21 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Update CocoaPods
-        if: ${{ matrix.execute == 'true' && runner.os == 'macOS' }}
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
         run: gem update cocoapods
 
       - name: Verify CocoaPods Installation
-        if: ${{ matrix.execute == 'true' && runner.os == 'macOS' }}
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
         run: pod --version
 
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         id: fvm-config-action
         with:
           path: app/.fvmrc
 
       - name: Setup Flutter
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         uses: subosito/flutter-action@v2.18.0
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
@@ -111,26 +108,26 @@ jobs:
           pub-cache-key: "flutter-pub-:os:-:channel:-:version:-:arch:"
 
       - name: Flutter bootstrap
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         run: |
           .github/workflows/flutter_bootstrap.sh
 
       - name: Install dependencies
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         working-directory: app
         run: |
           dart pub get
 
       ### Run script ###
       - name: Configure git to ignore SPEC CHECKSUMS in Podfile.lock
-        if: ${{ matrix.execute == 'true' && runner.os == 'macOS' }}
+        if: ${{ env.execute == 'true' && runner.os == 'macOS' }}
         run: |
           # pod installが実行された時、パスの違いなどでSPEC CHECKSUMSが変わるため、差分を無視する
           git config diff.ignore_spec_checksums.textconv "sed '/SPEC CHECKSUMS:/,\$d'"
           git config diff.ignore_spec_checksums.ignore all
 
       - name: Run script
-        if: ${{ matrix.execute == 'true' }}
+        if: ${{ env.execute == 'true' }}
         working-directory: app
         run: |
           ./scripts/${{ matrix.script }}
