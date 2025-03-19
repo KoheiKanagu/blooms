@@ -26,11 +26,10 @@ class ConditionBubbleImages extends HookConsumerWidget {
           spacing: 4,
           children:
               content.attachments
-                  .map<Widget>(ConditionBubbleImage.new)
-                  .map(
-                    (e) => ClipRRect(
+                  .map<Widget>(
+                    (attachment) => ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: e,
+                      child: ConditionBubbleImage(attachment),
                     ),
                   )
                   .toList(),
