@@ -59,7 +59,12 @@ jobs:
             os: macos-latest
 
     env:
-      execute: ${{ needs.changed-files.outputs.app_any_changed == 'true' }}
+      # 実行するかどうか
+      # ubuntu-latestの場合はappディレクトリの変更がある時だけ実行
+      # macos-latestの場合はpubspecの変更がある時だけ実行
+      execute:
+        (${{ matrix.os }} == "ubuntu-latest" && needs.changed-files.outputs.app_any_changed == 'true') ||
+        (${{ matrix.os }} == "macos-latest" && needs.changed-files.outputs.pubspec_any_changed == 'true')
 
     steps:
       - name: Collect Workflow Telemetry
