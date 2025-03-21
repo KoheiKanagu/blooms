@@ -2,9 +2,9 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:blooms/features/condition/domain/condition_content_image_attachment.dart';
 import 'package:blooms/gen/strings.g.dart';
 import 'package:blooms/utils/firebase/firebase_providers.dart';
+import 'package:blooms/widgets/my_blur_hash.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConditionBubbleImage extends HookConsumerWidget {
@@ -14,12 +14,10 @@ class ConditionBubbleImage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final placeholder = Image(
-      image: BlurHashImage(
-        attachment.additionalInfo.blurHash ?? '',
-        decodingHeight: attachment.height,
-        decodingWidth: attachment.width,
-      ),
+    final placeholder = MyBlurHash(
+      blurHash: attachment.additionalInfo.blurHash ?? '',
+      width: attachment.width,
+      height: attachment.height,
     );
 
     return ref
