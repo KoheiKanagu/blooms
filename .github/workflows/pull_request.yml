@@ -173,7 +173,7 @@ jobs:
 
       - name: Setup Node.js environment
         if: ${{ env.execute == 'true' }}
-        uses: actions/setup-node@v4.2.0
+        uses: actions/setup-node@v4.3.0
         with:
           node-version-file: firebase/functions/package.json
 
@@ -218,7 +218,7 @@ jobs:
           service_account: ${{ vars.SERVICE_ACCOUNT_STG }}
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4.2.0
+        uses: actions/setup-node@v4.3.0
         with:
           node-version-file: firebase/functions/package.json
 
