@@ -14,7 +14,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@0280bf1e8772f85de85832229d6c7cbb95ab09ea # master
 
       - name: Install Linter
         run: |
