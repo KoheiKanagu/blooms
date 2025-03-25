@@ -18,11 +18,14 @@ jobs:
 
       - run: |
           actionlint
+        if: always()
 
       - run: |
           ghalint run
+        if: always()
 
       - run: |
           zizmor .
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()
