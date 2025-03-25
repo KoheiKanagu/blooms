@@ -71,8 +71,10 @@ jobs:
           .github/workflows/firebase_bootstrap.sh
 
       - run: |
-          firebase use ${{ inputs.environment }} --debug
+          firebase use "${INPUTS_ENVIRONMENT}" --debug
         working-directory: firebase
+        env:
+          INPUTS_ENVIRONMENT: ${{ inputs.environment }}
 
       - name: Install dependencies
         if: ${{ matrix.flutterBuildScript == null }}
@@ -105,10 +107,11 @@ jobs:
       - name: Flutter Build
         if: ${{ matrix.flutterBuildScript != null }}
         run: |
-          ./scripts/${{ matrix.flutterBuildScript }}
+          ./scripts/"${FLUTTER_BUILD_SCRIPT}"
         working-directory: app
         env:
           USE_FVM: false
+          FLUTTER_BUILD_SCRIPT: ${{ matrix.flutterBuildScript }}
 
       ### Deploy ###
       - name: Firebase Deploy
