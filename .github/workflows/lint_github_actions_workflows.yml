@@ -1,0 +1,35 @@
+name: Lint GitHub Actions workflows
+on:
+  - pull_request
+
+jobs:
+  lint_github_actions_workflows:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@0280bf1e8772f85de85832229d6c7cbb95ab09ea # master
+
+      - name: Install Linter
+        run: |
+          brew install actionlint suzuki-shunsuke/ghalint/ghalint zizmor
+
+      - run: |
+          actionlint
+        if: always()
+
+      - run: |
+          ghalint run
+        if: always()
+
+      - run: |
+          zizmor .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()

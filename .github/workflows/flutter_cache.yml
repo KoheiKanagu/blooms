@@ -17,22 +17,26 @@ jobs:
   cache:
     timeout-minutes: 30
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     strategy:
       matrix:
         os:
           - ubuntu-latest
           - macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
-      - uses: kuhnroyal/flutter-fvm-config-action/config@v3
+      - uses: kuhnroyal/flutter-fvm-config-action/config@0b792d004e2dfeda282a7af5c0609703658a9f8b # v3.1
         id: fvm-config-action
         with:
           path: app/.fvmrc
 
       - name: Pods Cache
         if: ${{ runner.os == 'macOS' }}
-        uses: actions/cache@v4.2.3
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: |
             */ios/Pods
@@ -42,7 +46,7 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2.18.0
+        uses: subosito/flutter-action@f2c4f6686ca8e8d6e6d0f28410eeef506ed66aff # v2.18.0
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           channel: "beta"
