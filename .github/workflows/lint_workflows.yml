@@ -1,0 +1,25 @@
+name: Lint GitHub Actions workflows
+on:
+  - pull_request
+
+jobs:
+  actionlint:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linter
+        run: |
+          brew install actionlint suzuki-shunsuke/ghalint/ghalint zizmor
+
+      - run: |
+          actionlint
+
+      - run: |
+          ghalint run
+
+      - run: |
+          zizmor .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
