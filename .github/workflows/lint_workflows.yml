@@ -9,9 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
       - name: Install Linter
         run: |
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install actionlint suzuki-shunsuke/ghalint/ghalint zizmor
 
       - run: |
