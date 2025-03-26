@@ -30,29 +30,31 @@ class OnboardingPageBodyAssistant extends HookConsumerWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: MyDecoration.dropShadow(context).boxShadow,
             ),
-            child: Column(
-              children: [
-                const Gap(8),
-                ConditionBubble(
-                  documentId: '',
-                  createdAt: DateTime(2025, 2, 10, 9, 41),
-                  content: const ConditionContentText(text: '腰が痛い'),
-                  showDateTime: true,
-                  creatorType: ConditionCreatorType.user,
-                ),
-                const Gap(8),
-                ConditionBubble(
-                  documentId: '',
-                  createdAt: clock.now(),
-                  content: const ConditionContentTextWithSearchKeywords(
-                    text: '腰が痛いのですね、つらいですね。少しでも楽になるように、調べてみると良いかもしれません。',
-                    searchKeywords: ['妊婦　腰痛', '妊婦　腰痛　対処法', '妊婦　腰痛　原因'],
+            child: MergeSemantics(
+              child: Column(
+                children: [
+                  const Gap(8),
+                  ConditionBubble(
+                    documentId: '',
+                    createdAt: DateTime(2025, 2, 10, 9, 41),
+                    content: const ConditionContentText(text: '腰が痛い'),
+                    showDateTime: true,
+                    creatorType: ConditionCreatorType.user,
                   ),
-                  showDateTime: false,
-                  creatorType: ConditionCreatorType.model,
-                ),
-                const Gap(8),
-              ],
+                  const Gap(8),
+                  ConditionBubble(
+                    documentId: '',
+                    createdAt: clock.now(),
+                    content: const ConditionContentTextWithSearchKeywords(
+                      text: '腰が痛いのですね、つらいですね。少しでも楽になるように、調べてみると良いかもしれません。',
+                      searchKeywords: ['妊婦　腰痛', '妊婦　腰痛　対処法', '妊婦　腰痛　原因'],
+                    ),
+                    showDateTime: false,
+                    creatorType: ConditionCreatorType.model,
+                  ),
+                  const Gap(8),
+                ],
+              ),
             ),
           ),
         ),

@@ -25,43 +25,48 @@ class OnboardingFooter extends HookConsumerWidget {
           const Gap(12),
           FractionallySizedBox(
             widthFactor: 1,
-            child: CupertinoButton.filled(
-              child:
-                  progress.value
-                      ? CupertinoActivityIndicator(
-                        color: CupertinoColors.systemBackground.resolveFrom(
-                          context,
-                        ),
-                      )
-                      : Text(
-                        i18n.kContinue,
-                        style: CupertinoTheme.of(
-                          context,
-                        ).textTheme.textStyle.copyWith(
+            child: Semantics(
+              identifier: 'continueButton',
+              label: i18n.kContinue,
+              button: true,
+              child: CupertinoButton.filled(
+                child:
+                    progress.value
+                        ? CupertinoActivityIndicator(
                           color: CupertinoColors.systemBackground.resolveFrom(
                             context,
                           ),
+                        )
+                        : Text(
+                          i18n.kContinue,
+                          style: CupertinoTheme.of(
+                            context,
+                          ).textTheme.textStyle.copyWith(
+                            color: CupertinoColors.systemBackground.resolveFrom(
+                              context,
+                            ),
+                          ),
                         ),
-                      ),
-              onPressed: () async {
-                if (progress.value) {
-                  return;
-                }
+                onPressed: () async {
+                  if (progress.value) {
+                    return;
+                  }
 
-                // 免責事項について
-                final agree = await showCupertinoModalPopup<bool>(
-                  context: context,
-                  builder: (context) => const DisclaimerPage(),
-                );
-                if (agree == null || !agree) {
-                  return;
-                }
+                  // 免責事項について
+                  final agree = await showCupertinoModalPopup<bool>(
+                    context: context,
+                    builder: (context) => const DisclaimerPage(),
+                  );
+                  if (agree == null || !agree) {
+                    return;
+                  }
 
-                progress.value = true;
+                  progress.value = true;
 
-                ref.read(onboardingCompleteProvider);
-                await ref.read(authSignInProvider.future);
-              },
+                  ref.read(onboardingCompleteProvider);
+                  await ref.read(authSignInProvider.future);
+                },
+              ),
             ),
           ),
           const Gap(32),
@@ -76,37 +81,39 @@ class _Terms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-      style: CupertinoTheme.of(
-        context,
-      ).textTheme.textStyle.copyWith(fontSize: 14),
-      i18n.ackTerm(
-        termOfService:
-            (text) => TextSpan(
-              text: text,
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                color: CupertinoColors.activeBlue.resolveFrom(context),
-                fontSize: 14,
+    return MergeSemantics(
+      child: Text.rich(
+        style: CupertinoTheme.of(
+          context,
+        ).textTheme.textStyle.copyWith(fontSize: 14),
+        i18n.ackTerm(
+          termOfService:
+              (text) => TextSpan(
+                text: text,
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  color: CupertinoColors.activeBlue.resolveFrom(context),
+                  fontSize: 14,
+                ),
+                recognizer:
+                    TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(MyUrl.termsOfService);
+                      },
               ),
-              recognizer:
-                  TapGestureRecognizer()
-                    ..onTap = () {
-                      launchUrl(MyUrl.termsOfService);
-                    },
-            ),
-        privacyPolicy:
-            (text) => TextSpan(
-              text: text,
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                color: CupertinoColors.activeBlue.resolveFrom(context),
-                fontSize: 14,
+          privacyPolicy:
+              (text) => TextSpan(
+                text: text,
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  color: CupertinoColors.activeBlue.resolveFrom(context),
+                  fontSize: 14,
+                ),
+                recognizer:
+                    TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(MyUrl.privacyPolicy);
+                      },
               ),
-              recognizer:
-                  TapGestureRecognizer()
-                    ..onTap = () {
-                      launchUrl(MyUrl.privacyPolicy);
-                    },
-            ),
+        ),
       ),
     );
   }

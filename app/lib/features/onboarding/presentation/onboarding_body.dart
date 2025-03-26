@@ -8,7 +8,7 @@ class OnboardingBody extends StatelessWidget {
     super.key,
   });
 
-  final List<Text> descriptions;
+  final List<Widget> descriptions;
 
   final List<Text> disclaimers;
 
