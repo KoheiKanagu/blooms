@@ -31,46 +31,48 @@ class OnboardingPageBodyImage extends HookConsumerWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: MyDecoration.dropShadow(context).boxShadow,
             ),
-            child: Column(
-              children: [
-                const Gap(8),
-                ConditionBubble(
-                  documentId: '',
-                  createdAt: DateTime(2025, 2, 10, 9, 41),
-                  content: const ConditionContentImage(
-                    attachments: [
-                      ConditionContentImageAttachment(
-                        fileUri:
-                            // blooms.kingu.dev ドメインだとCORSエラーになる
-                            'https://blooms-prod-43d74.web.app/assets/images/IMG_5176.jpg',
-                        mimeType: 'image/jpeg',
-                        width: 640,
-                        height: 480,
-                        additionalInfo:
-                            ConditionContentImageAttachmentAdditionalInfo(
-                              blurHash: r'LDJ7s_$#~U.7RjWW$%xZ?Gxu8^M{',
-                            ),
-                      ),
-                    ],
+            child: MergeSemantics(
+              child: Column(
+                children: [
+                  const Gap(8),
+                  ConditionBubble(
+                    documentId: '',
+                    createdAt: DateTime(2025, 2, 10, 9, 41),
+                    content: const ConditionContentImage(
+                      attachments: [
+                        ConditionContentImageAttachment(
+                          fileUri:
+                              // blooms.kingu.dev ドメインだとCORSエラーになる
+                              'https://blooms-prod-43d74.web.app/assets/images/IMG_5176.jpg',
+                          mimeType: 'image/jpeg',
+                          width: 640,
+                          height: 480,
+                          additionalInfo:
+                              ConditionContentImageAttachmentAdditionalInfo(
+                                blurHash: r'LDJ7s_$#~U.7RjWW$%xZ?Gxu8^M{',
+                              ),
+                        ),
+                      ],
+                    ),
+                    showDateTime: true,
+                    creatorType: ConditionCreatorType.user,
                   ),
-                  showDateTime: true,
-                  creatorType: ConditionCreatorType.user,
-                ),
-                const Gap(8),
-                ConditionBubble(
-                  documentId: '',
-                  createdAt: clock.now(),
-                  content: const ConditionContent.text(
-                    text:
-                        // too long
-                        // ignore: lines_longer_than_80_chars
-                        '美味しそうなプリンの画像ですね！甘いものは、心も体も満たしてくれますね。もし体調に変化があれば、教えていただけると嬉しいです。',
+                  const Gap(8),
+                  ConditionBubble(
+                    documentId: '',
+                    createdAt: clock.now(),
+                    content: const ConditionContent.text(
+                      text:
+                          // too long
+                          // ignore: lines_longer_than_80_chars
+                          '美味しそうなプリンの画像ですね！甘いものは、心も体も満たしてくれますね。もし体調に変化があれば、教えていただけると嬉しいです。',
+                    ),
+                    showDateTime: false,
+                    creatorType: ConditionCreatorType.model,
                   ),
-                  showDateTime: false,
-                  creatorType: ConditionCreatorType.model,
-                ),
-                const Gap(8),
-              ],
+                  const Gap(8),
+                ],
+              ),
             ),
           ),
         ),

@@ -61,6 +61,7 @@ class MyApp extends HookConsumerWidget {
             MediaQuery.of(context).platformBrightness == Brightness.light
                 ? myLightThemeData
                 : myDarkThemeData,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

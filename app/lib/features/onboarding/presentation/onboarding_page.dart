@@ -27,12 +27,43 @@ class OnboardingPage extends HookConsumerWidget {
     final enableMoveToNextButton = useState(true);
 
     final bodyItems = [
-      const OnboardingPageBodyName(),
-      const OnboardingPageBodyAssistant(),
-      const OnboardingPageBodyImage(),
-      const OnboardingPageBodyHighlight(),
-      const OnboardingPageBodyPrivacy(),
-      if (enableLetsStartPage) const OnboardingPageBodyLetsStart(),
+      Semantics(
+        identifier: 'OnboardingPageBodyName',
+        container: true,
+        explicitChildNodes: true,
+        child: const OnboardingPageBodyName(),
+      ),
+      Semantics(
+        identifier: 'OnboardingPageBodyAssistant',
+        container: true,
+        explicitChildNodes: true,
+        child: const OnboardingPageBodyAssistant(),
+      ),
+      Semantics(
+        identifier: 'OnboardingPageBodyImage',
+        container: true,
+        explicitChildNodes: true,
+        child: const OnboardingPageBodyImage(),
+      ),
+      Semantics(
+        identifier: 'OnboardingPageBodyHighlight',
+        container: true,
+        explicitChildNodes: true,
+        child: const OnboardingPageBodyHighlight(),
+      ),
+      Semantics(
+        identifier: 'OnboardingPageBodyPrivacy',
+        container: true,
+        explicitChildNodes: true,
+        child: const OnboardingPageBodyPrivacy(),
+      ),
+      if (enableLetsStartPage)
+        Semantics(
+          identifier: 'OnboardingPageBodyLetsStart',
+          container: true,
+          explicitChildNodes: true,
+          child: const OnboardingPageBodyLetsStart(),
+        ),
     ];
 
     useEffect(() {
@@ -98,34 +129,40 @@ class OnboardingPage extends HookConsumerWidget {
               child: Row(
                 children: [
                   const Gap(8),
-                  CupertinoButton.tinted(
-                    sizeStyle: CupertinoButtonSize.small,
-                    padding: EdgeInsets.zero,
-                    onPressed:
-                        enableMoveToPreviousButton.value
-                            ? () {
-                              pageController.previousPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                            : null,
-                    child: const Icon(CupertinoIcons.back),
+                  Semantics(
+                    identifier: 'previousButton',
+                    child: CupertinoButton.tinted(
+                      sizeStyle: CupertinoButtonSize.small,
+                      padding: EdgeInsets.zero,
+                      onPressed:
+                          enableMoveToPreviousButton.value
+                              ? () {
+                                pageController.previousPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                              : null,
+                      child: const Icon(CupertinoIcons.back),
+                    ),
                   ),
                   const Spacer(),
-                  CupertinoButton.tinted(
-                    sizeStyle: CupertinoButtonSize.small,
-                    padding: EdgeInsets.zero,
-                    onPressed:
-                        enableMoveToNextButton.value
-                            ? () {
-                              pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                            : null,
-                    child: const Icon(CupertinoIcons.forward),
+                  Semantics(
+                    identifier: 'nextButton',
+                    child: CupertinoButton.tinted(
+                      sizeStyle: CupertinoButtonSize.small,
+                      padding: EdgeInsets.zero,
+                      onPressed:
+                          enableMoveToNextButton.value
+                              ? () {
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                              : null,
+                      child: const Icon(CupertinoIcons.forward),
+                    ),
                   ),
                   const Gap(8),
                 ],

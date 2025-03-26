@@ -27,25 +27,28 @@ class OnboardingPageBodyPrivacy extends StatelessWidget {
             Text(i18n.onboarding.privacy.description1),
             Text(i18n.onboarding.privacy.description2),
             if (!kIsWeb)
-              Text.rich(
-                i18n.onboarding.privacy.description3(
-                  appLock:
-                      (text) => TextSpan(
-                        text: text,
-                        style: CupertinoTheme.of(
-                          context,
-                        ).textTheme.textStyle.copyWith(
-                          color: CupertinoColors.activeBlue.resolveFrom(
+              Semantics(
+                link: true,
+                child: Text.rich(
+                  i18n.onboarding.privacy.description3(
+                    appLock:
+                        (text) => TextSpan(
+                          text: text,
+                          style: CupertinoTheme.of(
                             context,
+                          ).textTheme.textStyle.copyWith(
+                            color: CupertinoColors.activeBlue.resolveFrom(
+                              context,
+                            ),
+                            fontSize: 14,
                           ),
-                          fontSize: 14,
+                          recognizer:
+                              TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(MyUrl.iphoneAppLock);
+                                },
                         ),
-                        recognizer:
-                            TapGestureRecognizer()
-                              ..onTap = () {
-                                launchUrl(MyUrl.iphoneAppLock);
-                              },
-                      ),
+                  ),
                 ),
               ),
           ],

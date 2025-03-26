@@ -94,28 +94,34 @@ class DisclaimerPage extends HookConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: CupertinoButton(
-              color: CupertinoColors.systemRed.resolveFrom(context),
-              child: Text(
-                i18n.disclaimer.understood,
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: CupertinoColors.white,
-                  fontWeight: FontWeight.bold,
+            child: Semantics(
+              button: true,
+              identifier: 'understoodButton',
+              child: CupertinoButton(
+                color: CupertinoColors.systemRed.resolveFrom(context),
+                child: Text(
+                  i18n.disclaimer.understood,
+                  style: CupertinoTheme.of(
+                    context,
+                  ).textTheme.textStyle.copyWith(
+                    color: CupertinoColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                onPressed: () {
+                  if (!agreeSearchKeyword.value) {
+                    agreeSearchKeyword.value = true;
+                    return;
+                  }
+
+                  if (!agreeGeneral.value) {
+                    agreeGeneral.value = true;
+                    return;
+                  }
+
+                  Navigator.of(context).pop(true);
+                },
               ),
-              onPressed: () {
-                if (!agreeSearchKeyword.value) {
-                  agreeSearchKeyword.value = true;
-                  return;
-                }
-
-                if (!agreeGeneral.value) {
-                  agreeGeneral.value = true;
-                  return;
-                }
-
-                Navigator.of(context).pop(true);
-              },
             ),
           ),
         ],

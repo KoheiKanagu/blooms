@@ -1,0 +1,8 @@
+appId: dev.kingu.BLOOMS.stg
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+    permissions:
+      all: unset
+- runFlow: "flows/onboarding.yml"

@@ -1,0 +1,46 @@
+appId: dev.kingu.BLOOMS.stg
+---
+- assertVisible:
+    id: "OnboardingPageBodyName"
+- takeScreenshot: "OnboardingPageBodyName"
+- tapOn:
+    id: "nextButton"
+- assertVisible:
+    id: "OnboardingPageBodyAssistant"
+- takeScreenshot: "OnboardingPageBodyAssistant"
+- tapOn:
+    id: "nextButton"
+- assertVisible:
+    id: "OnboardingPageBodyImage"
+- takeScreenshot: "OnboardingPageBodyImage"
+- tapOn:
+    id: "nextButton"
+- assertVisible:
+    id: "OnboardingPageBodyHighlight"
+- takeScreenshot: "OnboardingPageBodyHighlight"
+- tapOn:
+    id: "nextButton"
+- assertVisible:
+    id: "OnboardingPageBodyPrivacy"
+- takeScreenshot: "OnboardingPageBodyPrivacy"
+- tapOn:
+    id: "nextButton"
+- assertVisible:
+    id: "OnboardingPageBodyLetsStart"
+- takeScreenshot: "OnboardingPageBodyLetsStart"
+- tapOn:
+    id: continueButton
+- tapOn:
+    id: "understoodButton"
+- scrollUntilVisible:
+    element:
+      id: "understoodButton"
+    direction: "DOWN"
+- tapOn:
+    id: "understoodButton"
+- scrollUntilVisible:
+    element:
+      id: "understoodButton"
+    direction: "DOWN"
+- tapOn:
+    id: "understoodButton"
