@@ -67,18 +67,21 @@ class ConditionPage extends HookConsumerWidget {
           .maybeWhen(
             orElse: () => const CupertinoActivityIndicator(),
             data:
-                (query) => ConditionPageList(
-                  query,
-                  onItemDisplayed: (value) {
-                    final createdAt = value.createdAt?.toDate();
-                    if (createdAt != null) {
-                      if (DateUtils.isSameDay(clock.now(), createdAt)) {
-                        title.value = i18n.today;
-                      } else {
-                        title.value = myDateFormat(createdAt);
+                (query) => Semantics(
+                  identifier: 'conditionPageList',
+                  child: ConditionPageList(
+                    query,
+                    onItemDisplayed: (value) {
+                      final createdAt = value.createdAt?.toDate();
+                      if (createdAt != null) {
+                        if (DateUtils.isSameDay(clock.now(), createdAt)) {
+                          title.value = i18n.today;
+                        } else {
+                          title.value = myDateFormat(createdAt);
+                        }
                       }
-                    }
-                  },
+                    },
+                  ),
                 ),
           ),
     );
