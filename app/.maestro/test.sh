@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
-# You need to set "APP_CHECK_DEBUG_TOKEN" in the environment variables of the machine where you run the test in advance.
+# You need to set "APP_CHECK_DEBUG_TOKEN" in the environment variables (e.g., GitHub Actions secrets or local .env file) of the machine where you run the test in advance.
+# Example: export APP_CHECK_DEBUG_TOKEN="your_debug_token"
 export SIMCTL_CHILD_FIRAAppCheckDebugToken="$APP_CHECK_DEBUG_TOKEN"
 
 TEST_DEVICE_NAME="E2E Test"
