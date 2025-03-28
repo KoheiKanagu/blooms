@@ -44,3 +44,4 @@ appId: dev.kingu.BLOOMS.stg
     direction: "DOWN"
 - tapOn:
     id: "understoodButton"
+- assertVisible: "はじめまして、BLOOMSです。"
