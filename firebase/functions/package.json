@@ -25,7 +25,7 @@
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
     "lodash": "^4.17.21",
-    "sharp": "^0.33.5"
+    "sharp": "^0.34.1"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",
