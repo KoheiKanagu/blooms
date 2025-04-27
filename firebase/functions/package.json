@@ -31,7 +31,7 @@
     "@firebase/rules-unit-testing": "^4.0.1",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@swc/core": "^1.11.21",
-    "@swc/jest": "^0.2.37",
+    "@swc/jest": "^0.2.38",
     "@tsconfig/node20": "^20.1.5",
     "@tsconfig/strictest": "^2.0.5",
     "@types/eslint": "^9.6.1",
