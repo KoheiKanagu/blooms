@@ -28,7 +28,7 @@
     "sharp": "^0.34.1"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^4.0.1",
+    "@firebase/rules-unit-testing": "^5.0.0",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@swc/core": "^1.11.21",
     "@swc/jest": "^0.2.37",
